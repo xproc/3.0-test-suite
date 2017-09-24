@@ -1,0 +1,5 @@
+<!-- I don't know if this test should pass or not -->
+<test xmlns='http://xproc.org/ns/testsuite/3.0' expected="pass" when="false()">
+  <pipeline src="../pipelines/doc-prop-004.xpl"/>
+  <schematron src="../schematron/doc-prop.sch"/>
+</test>

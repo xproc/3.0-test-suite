@@ -1,0 +1,5 @@
+<test xmlns='http://xproc.org/ns/testsuite/3.0' expected="pass">
+  <pipeline src="../pipelines/choose-001.xpl"/>
+  <option name="match" select="'1'"/>
+  <schematron src="../schematron/choose-001.sch"/>
+</test>
