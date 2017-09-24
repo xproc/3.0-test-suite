@@ -1,7 +1,7 @@
 # XProc 3.0 test-suite
 
 The XProc 3.0 test suite contains conformance tests for
-[https://github.com/xproc/3.0-specification](XProc 3.0).
+[XProc 3.0](https://github.com/xproc/3.0-specification).
 
 This repository is organized in the following way:
 
@@ -58,7 +58,7 @@ with a `step` attribute.
 
 All tests must produce a single result document on the `result` port. The correctness
 of the result is determined by checking it with the supplied
-[http://schematron.com/](Schematron) schema.
+[Schematron](http://schematron.com/) schema.
 
 There’s no direct way to check non-XML results with Schematron, so some XML abstract
 (properties, counts, `base64` or `hexBinary` encodings, etc.) will have to be produced
@@ -95,4 +95,5 @@ error if the expression refers to the context.
 
 ## Test report format
 
-T.B.D.
+Tests should output the JUnit XML test result format.
+
