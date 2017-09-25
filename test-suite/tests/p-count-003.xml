@@ -1,4 +1,5 @@
-<test xmlns='http://xproc.org/ns/testsuite/3.0' expected="pass">
+<test xmlns='http://xproc.org/ns/testsuite/3.0' expected="pass"
+      features="p-count p-count-limit">
   <pipeline src="../pipelines/p-count-001.xpl"/>
   <option name="limit" select="'5'"/>
   <schematron>
