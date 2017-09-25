@@ -5,6 +5,6 @@
   <p:input port="source"/>
   <p:output port="result"/>
 
-  <p:identity ex:foo="foo"/>
+  <p:identity/>
 
 </p:declare-step>
