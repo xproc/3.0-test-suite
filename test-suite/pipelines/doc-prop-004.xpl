@@ -15,6 +15,6 @@
 
   <p:variable name="a" select="."/>
 
-  <cx:option-value option="{p:document-properties($a, 'a')}"/>
+  <cx:option-value option="{p:document-property($a, 'a')}"/>
 
 </p:declare-step>
