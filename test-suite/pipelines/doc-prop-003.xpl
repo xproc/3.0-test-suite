@@ -12,6 +12,6 @@
     </p:with-input>
   </p:identity>
 
-  <cx:option-value option="{p:document-properties(., 'a')}"/>
+  <cx:option-value option="{p:document-property(., 'a')}"/>
 
 </p:declare-step>

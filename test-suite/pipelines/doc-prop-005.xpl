@@ -8,6 +8,6 @@
   <p:variable name="a" select="3 + 4"/>
 
   <!-- this should fail, $a isn't a document -->
-  <cx:option-value option="{p:document-properties($a, 'a')}"/>
+  <cx:option-value option="{p:document-property($a, 'a')}"/>
 
 </p:declare-step>
