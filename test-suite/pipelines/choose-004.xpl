@@ -17,14 +17,14 @@
   </p:identity>
 
   <p:choose name="choose">
-    <p:when test="p:document-properties(., 'a') = $match">
+    <p:when test="p:document-property(., 'a') = $match">
       <p:identity>
         <p:with-input port="source">
           <p:inline><doc>one</doc></p:inline>
         </p:with-input>
       </p:identity>
     </p:when>
-    <p:when test="p:document-properties(., 'b') = $match">
+    <p:when test="p:document-property(., 'b') = $match">
       <p:identity>
         <p:with-input port="source">
           <p:inline><doc>two</doc></p:inline>
