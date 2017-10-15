@@ -1,0 +1,21 @@
+<test xmlns='http://xproc.org/ns/testsuite/3.0'
+      xmlns:xs="http://www.w3.org/2001/XMLSchema"
+      xmlns:err="http://www.w3.org/ns/xproc-error"
+      expected="fail" code="err:XD0049">
+  <pipeline>
+<p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+                xmlns:c="http://www.w3.org/ns/xproc-step"
+                name="main" version="3.0">
+  <p:output port="result" sequence="true"/>
+
+  <p:variable name="error" as="foo bar baz" select="'hello world'"/>
+
+  <p:identity name="inline">
+    <p:with-input port="source">
+      <p:inline><doc/></p:inline>
+    </p:with-input>
+  </p:identity>
+
+</p:declare-step>
+  </pipeline>
+</test>
