@@ -1,0 +1,37 @@
+<test xmlns='http://xproc.org/ns/testsuite/3.0'
+      xmlns:err="http://www.w3.org/ns/xproc-error"
+      expected="pass">
+  <pipeline>
+<p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+                xmlns:c="http://www.w3.org/ns/xproc-step"
+                name="main" version="3.0">
+  <p:output port="result" sequence="true"/>
+
+  <p:variable name="a" select="3"/>
+
+  <p:identity name="inline">
+    <p:with-input port="source">
+      <p:inline><c:result attr="{$a}"/></p:inline>
+    </p:with-input>
+  </p:identity>
+
+</p:declare-step>
+  </pipeline>
+
+  <schematron>
+    <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron"
+              xmlns:p="http://www.w3.org/ns/xproc"
+              xmlns:c="http://www.w3.org/ns/xproc-step">
+      <s:ns prefix="p" uri="http://www.w3.org/ns/xproc"/>
+      <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
+
+      <s:pattern>
+        <s:rule context="/*">
+          <s:assert test="self::c:result">The pipeline root is not c:result.</s:assert>
+          <s:assert test="@attr='3'">The @attr attribute is not ‘3’.</s:assert>
+        </s:rule>
+      </s:pattern>
+    </s:schema>
+  </schematron>
+
+</test>
