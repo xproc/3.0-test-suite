@@ -2,7 +2,7 @@
 <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
                 xmlns:cx="http://xmlcalabash.com/ns/extensions"
                 name="main"
-                version="1.0">
+                version="3.0">
   <p:option name="limit" select="0"/>
   <p:output port="result"/>
 
