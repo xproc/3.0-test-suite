@@ -3,7 +3,7 @@
                 xmlns:ex="http://xmlcalabash.com/ext/foo"
                 xmlns:exf="http://exproc.org/standard/functions"
                 name="main"
-                version="1.0">
+                version="3.0">
   <p:output port="result"/>
 
   <p:identity>

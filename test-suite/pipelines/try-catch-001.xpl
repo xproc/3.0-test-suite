@@ -4,7 +4,7 @@
                 xmlns:exf="http://exproc.org/standard/functions"
                 xmlns:cx="http://xmlcalabash.com/ns/extensions"
                 name="main"
-                version="1.0">
+                version="3.0">
   <p:option name="error"/>
   <p:output port="result"/>
 

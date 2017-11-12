@@ -2,7 +2,7 @@
 <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
                 xmlns:ex="http://xmlcalabash.com/ext/foo"
                 xmlns:c="http://www.w3.org/ns/xproc-step"
-                version="1.0">
+                version="3.0">
   <p:output port="result" sequence="true"/>
   <p:option name="blank" select="''"/>
   <p:option name="class" select="concat($blank, 'b')"/>
