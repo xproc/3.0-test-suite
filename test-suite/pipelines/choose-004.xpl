@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
-                xmlns:ex="http://xmlcalabash.com/ext/foo"
-                xmlns:exf="http://exproc.org/standard/functions"
-                xmlns:cx="http://xmlcalabash.com/ns/extensions"
                 name="main"
-                version="1.0">
+                version="3.0">
   <p:option name="match"/>
   <p:output port="result"/>
 

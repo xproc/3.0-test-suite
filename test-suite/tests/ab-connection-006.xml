@@ -1,0 +1,20 @@
+<test xmlns='http://xproc.org/ns/testsuite/3.0' expected="pass">
+  <title>Connection 006</title>
+  <description>
+    <p>Tests explicit connection between an explicit non primary output port and step in subpipeline.</p>
+  </description>
+  <pipeline>
+    <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+      <p:output port="result" primary="false">
+        <p:pipe step="producer" port="result" />
+      </p:output>
+      
+      <p:identity name="producer">
+        <p:with-input port="source">
+          <doc />
+        </p:with-input>
+      </p:identity>
+    </p:declare-step>
+  </pipeline>
+  <schematron src="../schematron/ab-doc-result.sch"/>
+</test>

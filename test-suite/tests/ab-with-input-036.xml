@@ -1,0 +1,22 @@
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0044">
+  <t:title>with-input-036</t:title>
+  <t:description>
+    <p>Tests p:with-input: Checks p:empty and p:inline are not allowed as connection.</p>
+  </t:description>
+  <t:pipeline>
+    <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+      <p:output port="result"/>
+      
+      <p:identity>
+          <p:with-input>
+            <p:empty />
+            <p:inline>
+              <doc />
+            </p:inline>
+          </p:with-input>
+      </p:identity>
+      
+    </p:declare-step>
+
+  </t:pipeline>
+</t:test>

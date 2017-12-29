@@ -1,0 +1,29 @@
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
+  <t:title>with-input-033</t:title>
+  <t:description>
+    <p>Tests p:with-input with space separated explicit targets on @pipe </p>
+  </t:description>
+  <t:pipeline>
+    <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+      <p:output port="result"/>
+      
+      <p:identity name="one">
+        <p:with-input>
+          <doc/>
+        </p:with-input>
+      </p:identity>
+      
+      <p:identity name="two">
+         <p:with-input>
+           <doc2/>
+         </p:with-input>
+      </p:identity>
+      
+      <p:wrap-sequence wrapper="wrapped">
+        <p:with-input pipe="one@result two@result" /> 
+      </p:wrap-sequence>
+    </p:declare-step>
+
+  </t:pipeline>
+  <t:schematron src="../schematron/ab-wrapped-result.sch"/>
+</t:test>

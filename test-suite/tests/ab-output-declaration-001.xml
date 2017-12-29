@@ -1,0 +1,17 @@
+<test xmlns='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0077">
+  <title>Output port declaration 001</title>
+  <description>
+    <p>Tests for error XS0077 to be raised, when @primary on p:output is not 'true' or 'false'.</p>
+  </description>
+  <pipeline>
+    <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+      <p:output port="result" primary="no"/>
+      
+      <p:identity>
+        <p:with-input port="source">
+          <doc />
+        </p:with-input>
+      </p:identity>
+    </p:declare-step>
+  </pipeline>
+</test>
