@@ -9,13 +9,13 @@
       
       <p:identity name="one">
         <p:with-input>
-          <doc/>
+          <doc xmlns=""/>
         </p:with-input>
       </p:identity>
       
       <p:identity name="two">
          <p:with-input>
-           <doc2/>
+           <doc2 xmlns=""/>
          </p:with-input>
       </p:identity>
       

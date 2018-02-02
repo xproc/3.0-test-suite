@@ -9,7 +9,7 @@
           
       <p:identity>
         <p:with-input>
-            <doc />
+          <doc xmlns=""/>
         </p:with-input>
       </p:identity>
     </p:declare-step>

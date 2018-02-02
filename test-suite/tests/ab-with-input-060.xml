@@ -1,0 +1,22 @@
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0003">
+  <t:title>with-input-060</t:title>
+  <t:description>
+    <p>Tests p:with-input: Tests non-primary input port is connected.</p>
+  </t:description>
+  <t:pipeline>
+   
+   <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+      <p:output port="result"/>
+      
+      <p:insert match="/doc" position="first-child">
+        <p:with-input>
+          <doc />
+        </p:with-input>
+        <p:with-input port="insertion">
+          <p:documentation/>
+          <p:pipeinfo/>
+        </p:with-input>
+      </p:insert>
+    </p:declare-step>
+  </t:pipeline>
+</t:test>

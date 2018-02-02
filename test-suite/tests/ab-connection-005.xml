@@ -11,7 +11,7 @@
       
       <p:identity name="producer">
         <p:with-input port="source">
-          <doc />
+          <doc xmlns=""/>
         </p:with-input>
       </p:identity>
     </p:declare-step>
