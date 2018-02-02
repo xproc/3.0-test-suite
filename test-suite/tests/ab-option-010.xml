@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XD0036">
+    <t:title>Option declaration 010</t:title>
+    <t:description>
+        <p>Checks error is raised, if value of required option does not match sequence type.</p>
+    </t:description>
+    
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:output port="result" />
+            <p:option name="option" required="true" as="xs:integer"/>
+            
+            <p:identity>
+                <p:with-input>
+                    <doc>{$option}</doc>
+                </p:with-input>
+            </p:identity>
+        </p:declare-step>
+    </t:pipeline>
+    <t:option name="option" select="'X'" />
+</t:test>

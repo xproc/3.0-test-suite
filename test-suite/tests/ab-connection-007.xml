@@ -1,0 +1,22 @@
+<test xmlns='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0005">
+  <title>Connection 007</title>
+  <description>
+    <p>Tests that the primary output port of the last step of a subpipeline is not connected to the pipelines primary output port, if the later has an explicit connection.</p>
+  </description>
+  <pipeline>
+    <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+      <p:output port="result" primary="true">
+        <p:pipe step="one" port="result" />
+      </p:output>
+      
+      <p:identity name="one">
+        <p:with-input port="source">
+          <doc />
+        </p:with-input>
+      </p:identity>
+      
+      <p:identity name="two"/>
+    </p:declare-step>
+  </pipeline>
+  
+</test>

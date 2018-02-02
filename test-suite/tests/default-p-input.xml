@@ -1,9 +1,8 @@
 <test xmlns='http://xproc.org/ns/testsuite/3.0' expected="pass">
   <pipeline>
     <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
-                    xmlns:ex="http://xmlcalabash.com/ext/foo"
                     name="main"
-                    version="1.0">
+                    version="3.0">
       <p:output port="result"/>
 
       <p:identity name="two">
