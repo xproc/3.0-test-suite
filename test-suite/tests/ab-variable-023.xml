@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
+    <t:title>Variable declaration 023</t:title>
+    <t:description>
+        <p>Check XD008 is not raised if more than one document appears as connection of p:variable and @connection is true.</p>
+    </t:description>
+    
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:output port="result" />
+            <p:variable name="var" select="5" collection="true">
+                <doc />
+                <doc />
+            </p:variable>
+            
+            <p:identity>
+                <p:with-input>
+                    <doc />
+                </p:with-input>
+            </p:identity>
+        </p:declare-step>
+    </t:pipeline>
+   
+    <t:schematron>
+        <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+            <s:pattern>
+                <s:rule context="/">
+                    <s:assert test="doc">The pipeline root is not doc.</s:assert>
+                    <s:assert test="count(doc/node())=0">The root element should have no children.</s:assert>
+                </s:rule>
+            </s:pattern>
+        </s:schema>        
+    </t:schematron>
+</t:test>
