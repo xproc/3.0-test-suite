@@ -84,11 +84,11 @@ YII=
   </p:identity>
 
   <p:cast-content-type name="cast" content-type="application/xml">
-    <p:with-input port="source" pipe="inline"/>
+    <p:with-input port="source" pipe="@inline"/>
   </p:cast-content-type>
 
   <p:wrap-sequence wrapper="c:result">
-    <p:with-input port="source" pipe="properties cast"/>
+    <p:with-input port="source" pipe="@properties @cast"/>
   </p:wrap-sequence>
 </p:declare-step>
   </pipeline>

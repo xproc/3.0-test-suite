@@ -20,7 +20,7 @@
       </p:identity>
       
       <p:wrap-sequence wrapper="wrapped">
-        <p:with-input pipe="one@result two@result" /> 
+        <p:with-input pipe="result@one result@two" /> 
       </p:wrap-sequence>
     </p:declare-step>
 

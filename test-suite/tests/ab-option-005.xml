@@ -2,7 +2,7 @@
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0077">
     <t:title>Option declaration 005</t:title>
     <t:description>
-        <p>Tests option is declared with a correct boolean value in in @required</p>
+        <p>Tests option is declared with a correct boolean value in @required</p>
     </t:description>
     
     <t:pipeline>

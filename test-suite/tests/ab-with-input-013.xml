@@ -14,7 +14,7 @@
       </p:identity>
       
       <p:identity>
-        <p:with-input  pipe="one@result"/>
+        <p:with-input  pipe="result@one"/>
       </p:identity>
     </p:declare-step>
   </t:pipeline>

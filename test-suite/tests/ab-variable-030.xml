@@ -15,7 +15,7 @@
                 </p:with-input>
             </p:identity>
             
-            <p:variable name="var" select="/doc/text()" pipe="@result" />
+            <p:variable name="var" select="/doc/text()" pipe="result" />
             
             <p:identity>
                 <p:with-input>
