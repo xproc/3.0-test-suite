@@ -1,0 +1,18 @@
+<test xmlns='http://xproc.org/ns/testsuite/3.0' expected="pass">
+  <title>with-input-001</title>
+  <description>
+    <p>Tests p:with-input with missing @port on atomic step is connection for primary input port.</p>
+  </description>
+  <pipeline>
+    <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+      <p:output port="result"/>
+          
+      <p:identity>
+        <p:with-input>
+          <doc xmlns=""/>
+        </p:with-input>
+      </p:identity>
+    </p:declare-step>
+  </pipeline>
+  <schematron src="../schematron/ab-doc-result.sch"/>
+</test>

@@ -1,0 +1,18 @@
+<test xmlns='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0014">
+  <title>Output port declaration 003</title>
+  <description>
+    <p>Tests for error XS0014 to be raised, if two output ports are declared to be primary.</p>
+  </description>
+  <pipeline>
+    <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+      <p:output port="result" primary="true"/>
+      <p:output port="secondary" primary="true"/>
+      
+      <p:identity>
+        <p:with-input port="source">
+          <doc />
+        </p:with-input>
+      </p:identity>
+    </p:declare-step>
+  </pipeline>
+</test>

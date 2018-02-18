@@ -1,0 +1,17 @@
+<test xmlns='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0010">
+  <title>with-input-003</title>
+  <description>
+    <p>Tests p:with-input with undeclared port: XS0010 to be raised.</p>
+  </description>
+  <pipeline>
+    <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+      <p:output port="result"/>
+      
+      <p:identity>
+        <p:with-input port="undeclared">
+          <doc />
+        </p:with-input>
+      </p:identity>
+    </p:declare-step>
+  </pipeline>
+</test>

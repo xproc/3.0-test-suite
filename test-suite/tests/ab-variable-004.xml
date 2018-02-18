@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0028">
+    <t:title>Variable declaration 004</t:title>
+    <t:description>
+        <p>Tests a variable does not have a name in XProc's namespace.</p>
+    </t:description>
+    
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:output port="result" />
+            <p:variable name="p:var" select="4" />
+            
+            <p:identity>
+                <p:with-input>
+                    <doc/>
+                </p:with-input>
+            </p:identity>
+        </p:declare-step>
+    </t:pipeline>
+</t:test>

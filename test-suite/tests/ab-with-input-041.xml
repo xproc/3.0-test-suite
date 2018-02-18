@@ -1,0 +1,20 @@
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0044">
+  <t:title>with-input-041</t:title>
+  <t:description>
+    <p>Tests p:with-input: p:pipeinfo and implicit inline not allowed</p>
+  </t:description>
+  <t:pipeline>
+    <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+      <p:output port="result"/>
+           
+      <p:identity>
+          <p:with-input> 
+            <p:pipeinfo>Some documentation.</p:pipeinfo>
+            <doc />
+          </p:with-input>
+      </p:identity>
+      
+    </p:declare-step>
+
+  </t:pipeline>
+</t:test>

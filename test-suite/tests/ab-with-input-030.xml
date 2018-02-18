@@ -1,0 +1,23 @@
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0022">
+  <t:title>with-input-030</t:title>
+  <t:description>
+    <p>Tests p:with-input with p:pipe (no @step) with an unknown port.</p>
+  </t:description>
+  <t:pipeline>
+    <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+      <p:output port="result"/>
+      
+      <p:identity name="one">
+        <p:with-input>
+          <doc />
+        </p:with-input>
+      </p:identity>
+      
+      <p:identity>
+        <p:with-input>
+         <p:pipe port="i-do-not-exist"/>
+        </p:with-input>
+      </p:identity>
+    </p:declare-step>
+  </t:pipeline>
+</t:test>

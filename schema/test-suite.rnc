@@ -34,8 +34,11 @@ passingTest =
       & attribute src { text }?
       & attribute step { text }?
       & attribute expected { "pass" }
-      & (input* & option* & pipeline? & schematron?)
+      & (testtitle? & description? & input* & option* & pipeline? & schematron?)
     }
+
+testtitle =
+    element t:title {text}
 
 failingTest =
     element t:test {
@@ -47,7 +50,7 @@ failingTest =
       & attribute step { text }?
       & attribute expected { "fail" }
       & attribute code { text }
-      & (input* & option* & pipeline?)
+      & (testtitle? & description? & input* & option* & pipeline?)
     }
 
 pipeline =
@@ -80,4 +83,9 @@ any =
     element * {
         attribute * { text }*
       & (text | any)*
+    }
+
+description =
+    element t:description{
+        any*
     }
