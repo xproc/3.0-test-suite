@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
-    <t:title>Variable declaration 036</t:title>
+    <t:title>Variable declaration 040</t:title>
     <t:description>
-        <p>Test a p:variable selecting implicit from container's primary input port.</p>
+        <p>Tests a p:variable is explicitly connectable to the containers primary input port (using just @step) .</p>
     </t:description>
     
     <t:pipeline>
-        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
-            <p:input port="source">
-                <doc>value</doc>
-            </p:input>
+        <p:declare-step name="pipeline" version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
             <p:output port="result" />
+            <p:input port="source" />
             
-            <p:variable name="var" select="/doc/text()" />
-            
+            <p:variable name="var" select="/doc/text()" >
+                <p:pipe step="pipeline"/>
+            </p:variable>
             <p:identity>
-                <p:with-input>
+                <p:with-input port="source">
                     <doc>{$var}</doc>
                 </p:with-input>
             </p:identity>
+
         </p:declare-step>
     </t:pipeline>
+    <t:input port="source">
+        <doc>value</doc>
+    </t:input>
     
     <t:schematron>
         <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">

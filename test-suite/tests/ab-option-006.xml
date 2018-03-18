@@ -2,7 +2,7 @@
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0017">
     <t:title>Option declaration 006</t:title>
     <t:description>
-        <p>Tests option is not required and has a default value</p>
+        <p>Tests option is required and has a default value</p>
     </t:description>
     
     <t:pipeline>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XD0049">
     <t:title>Option declaration 025</t:title>
     <t:description>
-        <p>Checks XD0049 (invalid sequence type) is not raised if option is not used.</p>
+        <p>Checks XD0049 (invalid sequence type) is raised when default value is used.</p>
     </t:description>
     
     <t:pipeline>
@@ -12,21 +12,10 @@
             
             <p:identity>
                 <p:with-input>
-                    <doc/>
+                    <doc>{$option}</doc>
                 </p:with-input>
             </p:identity>
         </p:declare-step>
     </t:pipeline>
-    
-    <t:schematron>
-        <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
-            <s:pattern>
-                <s:rule context="/">
-                    <s:assert test="doc">The pipeline root is not doc.</s:assert>
-                    <s:assert test="count(doc/node())=0">The root element should have no children.</s:assert>
-                </s:rule>
-            </s:pattern>
-        </s:schema>        
-    </t:schematron>
-    
+        
 </t:test>

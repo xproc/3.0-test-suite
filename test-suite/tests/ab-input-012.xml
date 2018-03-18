@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0081">
+    <t:title>Input 012</t:title>
+    <t:description>
+        <p>Tests that XS0081 is raised when p:input has @href and p:inline as a child.</p>
+    </t:description>
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:input port="source" href="some-thing">
+                <p:inline><doc/></p:inline>
+            </p:input>
+            
+            <p:output port="result"/>        
+            <p:identity>
+                <p:with-input port="source">
+                    <doc />
+                </p:with-input>
+            </p:identity>
+        </p:declare-step>
+    </t:pipeline>
+</t:test>

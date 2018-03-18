@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
+    <t:title>Input 019</t:title>
+    <t:description>
+        <p>Tests p:input with p:inline as child.</p>
+    </t:description>
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:input port="source">
+                <p:inline><doc/></p:inline>
+            </p:input>
+            
+            <p:output port="result"/>        
+            <p:identity />
+        </p:declare-step>
+    </t:pipeline>
+    <t:schematron src="../schematron/ab-doc-result.sch" />
+</t:test>

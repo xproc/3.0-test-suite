@@ -30,7 +30,7 @@
   </p:identity>
 
   <p:count limit="{$limit}">
-    <p:with-input port="source" pipe="id1@result id2@result id3@result"/>
+    <p:with-input port="source" pipe="result@id1 result@id2 result@id3"/>
   </p:count>
 
 </p:declare-step>

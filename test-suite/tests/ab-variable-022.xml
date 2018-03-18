@@ -2,7 +2,7 @@
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XD0008">
     <t:title>Variable declaration 022</t:title>
     <t:description>
-        <p>Check XD008 is raised if more than one document appears as connection of p:variable and @connection is false.</p>
+        <p>Checks XD0008 is raised if more than one document appears as connection of p:variable and @connection is false.</p>
     </t:description>
     
     <t:pipeline>
@@ -15,7 +15,7 @@
             
             <p:identity>
                 <p:with-input>
-                    <doc />
+                    <doc>{$var}</doc>
                 </p:with-input>
             </p:identity>
         </p:declare-step>

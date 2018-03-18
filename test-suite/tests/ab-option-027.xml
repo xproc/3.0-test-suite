@@ -1,37 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
-    <t:title>Variable declaration 036</t:title>
+    <t:title>Option declaration 027</t:title>
     <t:description>
-        <p>Test a p:variable selecting implicit from container's primary input port.</p>
+        <p>Checks XD0030 (invalid xpath expression) is not raised if option is not used.</p>
     </t:description>
     
     <t:pipeline>
         <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
-            <p:input port="source">
-                <doc>value</doc>
-            </p:input>
             <p:output port="result" />
-            
-            <p:variable name="var" select="/doc/text()" />
+            <p:option name="option" select="known-xpath-function()" />
             
             <p:identity>
                 <p:with-input>
-                    <doc>{$var}</doc>
+                    <doc>{$option}</doc>
                 </p:with-input>
             </p:identity>
         </p:declare-step>
     </t:pipeline>
+    <t:option name="option" select="'a value'" />
     
     <t:schematron>
         <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
             <s:pattern>
                 <s:rule context="/">
                     <s:assert test="doc">The pipeline root is not doc.</s:assert>
-                    <s:assert test="count(doc/node())=1">The root element does not have exactly one child.</s:assert>
-                    <s:assert test="count(doc/text())=1">The root element does not have exactly one text child.</s:assert>
-                    <s:assert test="doc/text()='value'">The root element does not have a text child 'value'.</s:assert>
+                    <s:assert test="count(doc/node())=1">The root element should have no children.</s:assert>
+                    <s:assert test="doc/text()='a value'"></s:assert>
                 </s:rule>
             </s:pattern>
         </s:schema>        
     </t:schematron>
+    
 </t:test>

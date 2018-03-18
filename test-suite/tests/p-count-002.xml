@@ -9,7 +9,7 @@
    <s:pattern>
      <s:rule context="/*">
        <s:assert test="self::c:result">The pipeline root is not c:result.</s:assert>
-       <s:assert test="string(.) = '1'">The result isn't "3"</s:assert>
+       <s:assert test="string(.) = '1'">The result isn't "1"</s:assert>
      </s:rule>
    </s:pattern>
 </s:schema>

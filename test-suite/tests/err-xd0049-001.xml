@@ -12,7 +12,7 @@
 
   <p:identity name="inline">
     <p:with-input port="source">
-      <p:inline><doc/></p:inline>
+      <p:inline><doc>{$error}</doc></p:inline>
     </p:with-input>
   </p:identity>
 

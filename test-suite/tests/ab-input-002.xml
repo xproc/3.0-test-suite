@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0077">
+    <t:title>Input 002</t:title>
+    <t:description>
+         <p>Tests that XS0077 is raised when p:input's @port is not an NCName.</p>
+    </t:description>
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:input port="p:not-allowed"/>
+            <p:output port="result"/>        
+            <p:identity>
+                <p:with-input port="source">
+                    <doc />
+                </p:with-input>
+            </p:identity>
+        </p:declare-step>
+    </t:pipeline>
+</t:test>
