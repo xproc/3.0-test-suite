@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
+    <t:title>p:document 020</t:title>
+    <t:description>
+        <p>Tests p:document with a simple text document in UTF-8 (no document-properties).</p>
+    </t:description>
+
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:output port="result"/>        
+
+            <p:identity>
+                <p:with-input>
+                    <p:document href="../documents/text-file-utf-8.txt"/>
+                </p:with-input>
+            </p:identity>
+            <p:wrap-sequence wrapper="doc" />
+            
+        </p:declare-step>
+    </t:pipeline>
+    
+    <t:schematron>
+        <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+            <s:pattern>
+                <s:rule context="/">
+                    <s:assert test="doc">The document root is not doc.</s:assert>
+                    <s:assert test="doc/text() = 'This is a simple text file in UTF-8: ä ö ü'">Text is not correct.</s:assert>
+                </s:rule>
+            </s:pattern>
+        </s:schema>     
+    </t:schematron>
+    
+</t:test>

@@ -1,6 +1,6 @@
 <test xmlns='http://xproc.org/ns/testsuite/3.0'
       xmlns:err="http://www.w3.org/ns/xproc-error"
-      expected="fail" code="err:XS0072">
+      expected="fail" code="err:XD0056">
   <pipeline>
 <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
                 xmlns:c="http://www.w3.org/ns/xproc-step"
@@ -9,7 +9,7 @@
 
   <p:identity name="inline">
     <p:with-input port="source">
-      <p:inline encoding="base64" document-properties="map { xs:QName('content-type'): 'image/png' }">
+      <p:inline encoding="base64" document-properties="map {'content-type': 'image/png' }">
 iVBORw0KGgoAAAANSUhEUgAAAIAAAAAdCAYAAABixmRWAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
 <no-markup-please/>
       </p:inline>
@@ -17,7 +17,7 @@ iVBORw0KGgoAAAANSUhEUgAAAIAAAAAdCAYAAABixmRWAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
   </p:identity>
 
   <p:cast-content-type name="cast" content-type="application/xml">
-    <p:with-input port="source" pipe="inline"/>
+    <p:with-input port="source" pipe="@inline"/>
   </p:cast-content-type>
 
   <p:wrap-sequence wrapper="c:result"/>

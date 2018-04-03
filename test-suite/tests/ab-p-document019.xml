@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:MOX001"
+    xmlns:mox="http://www.xml-project-com/morganaxproc">
+    <t:title>p:document 019</t:title>
+    <t:description>
+        <p>Tests p:document with a simple text document in an unsupported encoding.</p>
+    </t:description>
+
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:output port="result"/>        
+
+            <p:identity>
+                <p:with-input>
+                    <p:document href="../documents/text-file-iso-8859-1.txt" document-properties="map{'content-type':'text/plain; charset=unsupported'}"/>
+                </p:with-input>
+            </p:identity>
+            <p:wrap-sequence wrapper="doc" />
+            
+        </p:declare-step>
+    </t:pipeline>    
+</t:test>

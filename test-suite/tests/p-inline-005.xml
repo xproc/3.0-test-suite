@@ -1,6 +1,6 @@
 <test xmlns='http://xproc.org/ns/testsuite/3.0'
       xmlns:err="http://www.w3.org/ns/xproc-error"
-      expected="fail" code="err:XS0070">
+      expected="fail" code="err:XD0054">
   <pipeline>
 <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
                 xmlns:c="http://www.w3.org/ns/xproc-step"
@@ -16,7 +16,7 @@
   </p:identity>
 
   <p:cast-content-type name="cast" content-type="application/xml">
-    <p:with-input port="source" pipe="inline"/>
+    <p:with-input port="source" pipe="@inline"/>
   </p:cast-content-type>
 
   <p:wrap-sequence wrapper="c:result"/>
