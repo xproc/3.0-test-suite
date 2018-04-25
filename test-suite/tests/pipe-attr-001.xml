@@ -1,11 +1,8 @@
 <test xmlns='http://xproc.org/ns/testsuite/3.0' expected="pass">
   <pipeline>
 <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
-                xmlns:ex="http://xmlcalabash.com/ext/foo"
-                xmlns:exf="http://exproc.org/standard/functions"
-                xmlns:cx="http://xmlcalabash.com/ns/extensions"
                 name="main"
-                version="1.0">
+                version="3.0">
   <p:output port="result"/>
 
   <p:identity name="one">
@@ -27,7 +24,7 @@
   </p:identity>
 
   <p:identity name="combined">
-    <p:with-input port="source" pipe="three two one"/>
+    <p:with-input port="source" pipe="@three @two @one"/>
   </p:identity>
 
   <p:wrap-sequence wrapper="docs"/>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XD0049">
+    <t:title>Option declaration 025</t:title>
+    <t:description>
+        <p>Checks XD0049 (invalid sequence type) is raised when default value is used.</p>
+    </t:description>
+    
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:output port="result" />
+            <p:option name="option" as="something" />
+            
+            <p:identity>
+                <p:with-input>
+                    <doc>{$option}</doc>
+                </p:with-input>
+            </p:identity>
+        </p:declare-step>
+    </t:pipeline>
+        
+</t:test>

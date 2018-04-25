@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XD0038">
+    <t:title>Contenttypes 003</t:title>
+    <t:description>
+        <p>Tests XD0038 is raised when document does not match (default) content-types on p:input</p>
+    </t:description>
+    
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:input port="source">
+                <p:inline document-properties="map{'content-type':'text/plain'}">Some text</p:inline>
+            </p:input>
+            
+            <p:output port="result"/>        
+            <p:identity />
+        </p:declare-step>
+    </t:pipeline>
+</t:test>

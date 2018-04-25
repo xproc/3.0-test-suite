@@ -1,0 +1,23 @@
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' xmlns:err="http://www.w3.org/ns/xproc-error"
+  expected="fail" code="err:XD0039">
+  
+  <t:title>ab-inline-007</t:title>
+  <t:description>
+    <p>Tests XD0039 is raised when encoding is specified, but charset is not supported.</p>
+  </t:description>
+  
+  <t:pipeline>
+    <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+      version="3.0">
+      <p:output port="result" />
+      
+      <p:identity>
+        <p:with-input >
+          <p:inline encoding="base64" document-properties="map{'content-type':'text/plain; charset=notsupported'}">VGhpcyBpcyBhIHRlc3Qgd2l0aCDkIPYg/C4=</p:inline>
+        </p:with-input>
+      </p:identity>
+      
+      <p:wrap-sequence wrapper="result" />
+    </p:declare-step>
+  </t:pipeline>
+</t:test>

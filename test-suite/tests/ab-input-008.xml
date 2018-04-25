@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0014">
+    <t:title>Input 008</t:title>
+    <t:description>
+        <p>Tests that XS0014 is raised when two input ports are declared as primary.</p>
+    </t:description>
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:input port="source" primary="true"/>
+            <p:input port="alternate" primary="true" />
+            
+            <p:output port="result"/>        
+            <p:identity>
+                <p:with-input port="source">
+                    <doc />
+                </p:with-input>
+            </p:identity>
+        </p:declare-step>
+    </t:pipeline>
+</t:test>

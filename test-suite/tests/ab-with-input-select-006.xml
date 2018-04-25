@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
+    <t:title>with-input-select-006</t:title>
+    <t:description>
+        <p>Tests that content-type is changed to application/xml when selecting from XLST document.</p>
+    </t:description>
+    <t:pipeline>
+        <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+            xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+            version="3.0">
+            <p:output port="result" />
+            <p:identity>
+                <p:with-input select="/xsl:stylesheet/xsl:template[1]" >
+                    <p:inline document-properties="map{'content-type':'application/xslt+xml'}">
+                        <xsl:stylesheet version="2.0">
+                            <xsl:template match="/">
+                                <xsl:text>result</xsl:text>
+                            </xsl:template>
+                        </xsl:stylesheet>
+                    </p:inline>
+                </p:with-input>
+            </p:identity>
+            
+           <p:identity>
+               <p:with-input select="p:document-properties-document(.)"/>
+           </p:identity>
+        </p:declare-step>
+    </t:pipeline>
+    
+    <t:schematron>
+        <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+            <s:ns prefix="p" uri="http://www.w3.org/ns/xproc"/>
+            
+            <s:pattern>
+                <s:rule context="/">
+                    <s:assert test="count(*) = 1">Document does not have exactly one child element.</s:assert>
+                    <s:assert test="*[1]/name()='p:document-properties'">Root element is not named 'p:document-properties'.</s:assert>
+                </s:rule>
+                <s:rule context="/p:document-properties">
+                    <s:assert test="content-type ='application/xml'">Content type is not 'application/xml'.</s:assert>
+                </s:rule>
+            </s:pattern>
+        </s:schema>    
+    </t:schematron>
+</t:test>
+
+
+

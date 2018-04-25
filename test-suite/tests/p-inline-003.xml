@@ -7,8 +7,7 @@
 
   <p:identity name="inline">
     <p:with-input port="source">
-      <p:inline encoding="base64" document-properties="map { 'content-type': 'image/png' }">
-iVBORw0KGgoAAAANSUhEUgAAAIAAAAAdCAYAAABixmRWAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
+      <p:inline encoding="base64" document-properties="map {'content-type': 'image/png' }">iVBORw0KGgoAAAANSUhEUgAAAIAAAAAdCAYAAABixmRWAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
 AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAA
 CXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4QoICxwdF+yMrAAADXpJREFUaN7tW2lsFOUb/83u
 0u2W7W7psQW6bekWKAiUS8EiCgasqEEh0RBMjEGjwXgn6he/6QdRMRgUvGI8IzGeoKBcBkWwgD04
@@ -84,11 +83,11 @@ YII=
   </p:identity>
 
   <p:cast-content-type name="cast" content-type="application/xml">
-    <p:with-input port="source" pipe="inline"/>
+    <p:with-input port="source" pipe="@inline"/>
   </p:cast-content-type>
 
   <p:wrap-sequence wrapper="c:result">
-    <p:with-input port="source" pipe="properties cast"/>
+    <p:with-input port="source" pipe="@properties @cast"/>
   </p:wrap-sequence>
 </p:declare-step>
   </pipeline>

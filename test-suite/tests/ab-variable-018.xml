@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XD0036">
+    <t:title>Variable declaration 018</t:title>
+    <t:description>
+        <p>Tests a variable declaration raises an error (XD0036) if select result does not match required type.</p>
+    </t:description>
+    
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:output port="result" />
+            <p:variable name="var" select="'X'" as="xs:float" />
+            
+            <p:identity>
+                <p:with-input>
+                    <doc>{$var}</doc>
+                </p:with-input>
+            </p:identity>
+        </p:declare-step>
+    </t:pipeline>
+</t:test>

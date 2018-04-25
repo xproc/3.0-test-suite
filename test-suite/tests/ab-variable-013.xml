@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0082">
+    <t:title>Variable declaration 013</t:title>
+    <t:description>
+        <p>Tests a variable declaration does not have @pipe and an implicit inline as child.</p>
+    </t:description>
+    
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:output port="result" />
+            <p:variable name="var" select="4" pipe="step@port">
+                <doc />
+            </p:variable>
+            
+            <p:identity>
+                <p:with-input>
+                    <doc/>
+                </p:with-input>
+            </p:identity>
+        </p:declare-step>
+    </t:pipeline>
+</t:test>

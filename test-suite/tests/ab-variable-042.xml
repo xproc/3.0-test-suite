@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
+    <t:title>Variable declaration 041</t:title>
+    <t:description>
+        <p>Tests a p:variable does not change primary accessible port.</p>
+    </t:description>
+    
+    <t:pipeline>
+        <p:declare-step name="pipeline" version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:output port="result" />
+            
+            <p:identity name="producer">
+                <p:with-input>
+                    <doc />
+                </p:with-input>
+            </p:identity>
+            
+            <p:variable name="prop" select="5"/>
+            <p:identity />
+        </p:declare-step>
+    </t:pipeline>
+     
+    <t:schematron>
+        <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+            <s:pattern>
+                <s:rule context="/">
+                    <s:assert test="doc">The pipeline root is not doc.</s:assert>
+                </s:rule>
+            </s:pattern>
+        </s:schema>        
+    </t:schematron>
+</t:test>

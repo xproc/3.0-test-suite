@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
+    <t:title>Input 024</t:title>
+    <t:description>
+        <p>Tests tvt on p:input's default binding</p>
+    </t:description>
+
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:option name="option" select="'option value'" />           
+            <p:input port="source">
+                <doc>{$option}</doc>
+            </p:input>
+            
+            <p:output port="result"/>        
+            <p:identity />
+        </p:declare-step>
+    </t:pipeline>
+    <t:schematron>
+        <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+            <s:pattern>
+                <s:rule context="/">
+                    <s:assert test="doc">The root is not doc.</s:assert>
+                    <s:assert test="count(doc/node())=1">The root element does not have exactly one child.</s:assert>
+                    <s:assert test="doc/text() = 'option value'">doc-element does not contain 'option value'.</s:assert>
+                </s:rule>
+            </s:pattern>
+        </s:schema>     
+    </t:schematron>
+</t:test>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0037">
+    <t:title>Error test XS0037 002</t:title>
+    <t:description>
+        <p>Tests that XS0037 is raised, when atomic step call contains non whitespace text nodes.</p>
+    </t:description>
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:output port="result" />
+            
+            <p:identity name="identity">
+                <p:with-input><doc /></p:with-input>
+                This is illegal text
+            </p:identity>
+        </p:declare-step>
+    </t:pipeline>
+    
+ </t:test>

@@ -1,0 +1,18 @@
+<test xmlns='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0011">
+  <title>Output port declaration 004</title>
+  <description>
+    <p>Tests for error XS0011 to be raised, if two output ports are declared with the same name.</p>
+  </description>
+  <pipeline>
+    <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+      <p:output port="result"/>
+      <p:output port="result"/>
+      
+      <p:identity>
+        <p:with-input port="source">
+          <doc />
+        </p:with-input>
+      </p:identity>
+    </p:declare-step>
+  </pipeline>
+</test>

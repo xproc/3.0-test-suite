@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0077">
+    <t:title>Variable declaration 024</t:title>
+    <t:description>
+        <p>Checks XS0077 is raised @connection on p:variable is not a boolean value.</p>
+    </t:description>
+    
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:output port="result" />
+            <p:variable name="var" select="5" collection="foo">
+                <doc />
+                <doc />
+            </p:variable>
+            
+            <p:identity>
+                <p:with-input>
+                    <doc />
+                </p:with-input>
+            </p:identity>
+        </p:declare-step>
+    </t:pipeline>
+   
+  </t:test>

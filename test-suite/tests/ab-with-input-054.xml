@@ -1,0 +1,19 @@
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0079">
+  <t:title>with-input-054</t:title>
+  <t:description>
+    <p>Tests p:with-input: No non empty text nodes allowed as siblings with implicit inlines</p>
+  </t:description>
+  <t:pipeline>
+    <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+      <p:output port="result"/>
+      
+      <p:identity>
+          <p:with-input>
+            text
+            <doc />
+            more-text
+          </p:with-input>
+      </p:identity>
+    </p:declare-step>
+  </t:pipeline>
+</t:test>

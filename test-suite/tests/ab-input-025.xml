@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
+    <t:title>Input 025</t:title>
+    <t:description>
+        <p>Tests select on p:input</p>
+    </t:description>
+
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:input port="source" select="/doc/element">
+                <doc>
+                    <element>text</element>
+                    <element>text</element>
+                </doc>
+            </p:input>
+            
+            <p:output port="result"/>        
+            <p:wrap-sequence wrapper="result" />
+        </p:declare-step>
+    </t:pipeline>
+    <t:schematron>
+        <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+            <s:pattern>
+                <s:rule context="/">
+                    <s:assert test="result">The document root is not result.</s:assert>
+                    <s:assert test="count(result/node())=2">The root element does not have exactly two child.</s:assert>
+                    <s:assert test="result/node()/name()='element'"></s:assert>
+                    <s:assert test="result/element/text() = 'text'">element does not contain 'text'.</s:assert>
+                </s:rule>
+            </s:pattern>
+        </s:schema>     
+    </t:schematron>
+</t:test>

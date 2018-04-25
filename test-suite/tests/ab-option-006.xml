@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0017">
+    <t:title>Option declaration 006</t:title>
+    <t:description>
+        <p>Tests option is required and has a default value</p>
+    </t:description>
+    
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:output port="result" />
+            <p:option name="option" required="true" select="10"/>
+            
+            <p:identity>
+                <p:with-input>
+                    <doc/>
+                </p:with-input>
+            </p:identity>
+        </p:declare-step>
+    </t:pipeline>
+</t:test>

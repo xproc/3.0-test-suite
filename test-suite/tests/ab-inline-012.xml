@@ -1,0 +1,21 @@
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XD0057">
+  <t:title>ab-inline-012</t:title>
+  <t:description>
+    <p>Tests an error is raised for a defective inline json construction</p>
+  </t:description>
+  
+  <t:pipeline>
+    <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+      xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+      version="3.0">
+      <p:output port="result" />
+      
+      <p:identity>
+        <p:with-input>
+          <p:inline expand-text='false' document-properties="map{'content-type':'application/json'}">{"key":</p:inline>
+        </p:with-input>
+      </p:identity>
+      
+    </p:declare-step>
+  </t:pipeline>
+</t:test>

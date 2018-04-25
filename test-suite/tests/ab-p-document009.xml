@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XD0011">
+    <t:title>p:document 009</t:title>
+    <t:description>
+        <p>Tests p:with-input with @href to a non existing resource: XD0011 expected.</p>
+    </t:description>
+
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:output port="result"/>        
+
+            <p:identity>
+                <p:with-input href="i-do-not-exist.xml" />
+            </p:identity>
+            
+           
+        </p:declare-step>
+    </t:pipeline>
+</t:test>

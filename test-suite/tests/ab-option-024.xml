@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
+    <t:title>Option declaration 024</t:title>
+    <t:description>
+        <p>Checks no error from xpath exception is raised when value is supplied.</p>
+    </t:description>
+    
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:output port="result" />
+            <p:option name="option" required="false" select="5+false()" />
+            
+            <p:identity>
+                <p:with-input>
+                    <doc>{$option}</doc>
+                </p:with-input>
+            </p:identity>
+        </p:declare-step>
+    </t:pipeline>
+    <t:option name="option" select="'text'" />
+    
+    <t:schematron>
+        <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+            <s:pattern>
+                <s:rule context="/">
+                    <s:assert test="doc">The pipeline root is not doc.</s:assert>
+                    <s:assert test="count(doc/node())=1">The root element does not have exactly one child.</s:assert>
+                    <s:assert test="count(doc/text())=1">The root element does not have exactly one text child.</s:assert>
+                    <s:assert test="doc/text()='text'">The root element does not have a text child 'Some value'.</s:assert>
+                </s:rule>
+            </s:pattern>
+        </s:schema>        
+    </t:schematron>
+    
+</t:test>

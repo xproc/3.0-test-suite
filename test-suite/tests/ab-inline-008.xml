@@ -1,0 +1,34 @@
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
+  <t:title>ab-inline-008</t:title>
+  <t:description>
+    <p>Tests text document with tvt (expand-text='false')</p>
+  </t:description>
+  
+  <t:pipeline>
+    <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+      version="3.0">
+      <p:output port="result" />
+      <p:variable name="var" select="'test'"/>
+      <p:identity>
+        <p:with-input>
+          <p:inline expand-text="false" document-properties="map{'content-type':'text/plain'}">This is a {$var}.</p:inline>
+        </p:with-input>
+      </p:identity>
+      
+      <p:wrap-sequence wrapper="result" />
+    </p:declare-step>
+  </t:pipeline>
+  
+  <t:schematron>
+    <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+      <s:pattern>
+        <s:rule context="/">
+          <s:assert test="result">The document root is not result.</s:assert>
+        </s:rule>
+        <s:rule context="/result/text">
+          <s:assert test="starts-with(.,'This is a {{') and ends-with(.,'var}}.')">The result string is not correct.</s:assert>
+        </s:rule>
+      </s:pattern>
+    </s:schema>     
+  </t:schematron>
+</t:test>
