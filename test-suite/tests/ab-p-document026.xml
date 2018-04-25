@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XD0057">
+    <t:title>p:document 026</t:title>
+    <t:description>
+        <p>Tests p:document with a JSON-document: Error MOX002 expected for defective document and liberal=false.</p>
+    </t:description>
+
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:output port="result"/>        
+
+            <p:identity>
+                <p:with-input>
+                    <p:document href="../documents/defective-json-document.json" parameters="map{'liberal': false()}"/>
+                </p:with-input>
+            </p:identity>
+
+        </p:declare-step>
+    </t:pipeline>
+</t:test>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XD0058">
+    <t:title>p:document 023</t:title>
+    <t:description>
+        <p>Tests p:document with a JSON-document: Error MOX003 expected because 'duplicates'='reject'</p>
+    </t:description>
+
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:output port="result"/>        
+
+            <p:identity>
+                <p:with-input select="p:document-properties-document(.)">
+                    <p:document href="../documents/JSon-doc1.json" parameters="map{'duplicates':'reject'}"/>
+                </p:with-input>
+            </p:identity>
+
+        </p:declare-step>
+    </t:pipeline>
+</t:test>

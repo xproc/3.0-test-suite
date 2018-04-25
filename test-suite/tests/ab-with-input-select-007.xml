@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XD0016">
+    <t:title>with-input-select-007</t:title>
+    <t:description>
+        <p>Tests that XD0016 is raised, when @select returns value that is not a node.</p>
+    </t:description>
+    <t:pipeline>
+        <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+            xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+            version="3.0">
+            <p:output port="result" />
+            <p:identity>
+                <p:with-input select="count(/doc/@*)" >
+                    <doc att1="1" att2="3" />
+                </p:with-input>
+            </p:identity>
+        </p:declare-step>
+    </t:pipeline>
+    
+</t:test>
+
+
+

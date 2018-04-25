@@ -8,7 +8,6 @@
   
   <t:pipeline>
     <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
-      xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
       version="3.0">
       <p:output port="result" />
       

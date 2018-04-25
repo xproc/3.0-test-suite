@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XD006">
+    <t:title>Input 026</t:title>
+    <t:description>
+        <p>Tests XD006 is raised, when a non-sequence port is not externally bound.</p>
+    </t:description>
+
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:input port="source"/>
+            <p:output port="result"/>
+            
+            <p:identity />
+        </p:declare-step>
+    </t:pipeline>
+    
+</t:test>
