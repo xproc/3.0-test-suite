@@ -11,7 +11,7 @@
       <p:output port="result" />
       <p:identity>
         <p:with-input >
-          <p:inline document-properties="map{'content-type':'text/plain; charset=UTF-8'}">Dies ist ein Text.</p:inline>
+          <p:inline document-properties="map{xs:QName('content-type'):'text/plain; charset=UTF-8'}">Dies ist ein Text.</p:inline>
         </p:with-input>
       </p:identity>
     </p:declare-step>    

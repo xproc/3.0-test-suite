@@ -11,7 +11,7 @@
       
       <p:identity>
         <p:with-input select="p:document-properties-document(.)">
-          <p:inline expand-text='false' document-properties="map{'content-type':'application/json'}">{"key":"value"}</p:inline>
+          <p:inline expand-text='false' document-properties="map{xs:QName('content-type'):'application/json'}">{"key":"value"}</p:inline>
         </p:with-input>
       </p:identity>
       

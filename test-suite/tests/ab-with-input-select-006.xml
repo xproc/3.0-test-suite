@@ -11,7 +11,7 @@
             <p:output port="result" />
             <p:identity>
                 <p:with-input select="/xsl:stylesheet/xsl:template[1]" >
-                    <p:inline document-properties="map{'content-type':'application/xslt+xml'}">
+                    <p:inline document-properties="map{xs:QName('content-type'):'application/xslt+xml'}">
                         <xsl:stylesheet version="2.0">
                             <xsl:template match="/">
                                 <xsl:text>result</xsl:text>

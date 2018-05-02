@@ -11,7 +11,7 @@
 
             <p:identity>
                 <p:with-input>
-                    <p:document href="../documents/ab-doc.xml" document-properties="map{'base-uri':'http://www.w3.org'}"/>
+                    <p:document href="../documents/ab-doc.xml" document-properties="map{xs:QName('base-uri'):'http://www.w3.org'}"/>
                 </p:with-input>
             </p:identity>
         </p:declare-step>
