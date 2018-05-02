@@ -11,7 +11,7 @@
 
             <p:identity>
                 <p:with-input>
-                    <p:document href="../documents/text-file-utf-8.txt" document-properties="map{'content-type':'text/plain; charset=utf-8'}"/>
+                    <p:document href="../documents/text-file-utf-8.txt" document-properties="map{xs:QName('content-type'):'text/plain; charset=utf-8'}"/>
                 </p:with-input>
             </p:identity>
             <p:wrap-sequence wrapper="doc" />

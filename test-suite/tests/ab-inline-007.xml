@@ -13,7 +13,7 @@
       
       <p:identity>
         <p:with-input >
-          <p:inline encoding="base64" document-properties="map{'content-type':'text/plain; charset=notsupported'}">VGhpcyBpcyBhIHRlc3Qgd2l0aCDkIPYg/C4=</p:inline>
+          <p:inline encoding="base64" document-properties="map{xs:QName('content-type'):'text/plain; charset=notsupported'}">VGhpcyBpcyBhIHRlc3Qgd2l0aCDkIPYg/C4=</p:inline>
         </p:with-input>
       </p:identity>
       
