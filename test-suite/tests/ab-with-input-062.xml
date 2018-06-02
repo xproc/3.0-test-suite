@@ -1,4 +1,6 @@
-<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0086">
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XS0086">
   <t:title>with-input-062</t:title>
   <t:description>
     <p>Tests p:with-input: Tests port is not bound twice.</p>

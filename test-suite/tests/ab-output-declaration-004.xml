@@ -1,4 +1,6 @@
-<test xmlns='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0011">
+<test xmlns='http://xproc.org/ns/testsuite/3.0'
+      xmlns:err="http://www.w3.org/ns/xproc-error"
+      expected="fail" code="err:XS0011">
   <title>Output port declaration 004</title>
   <description>
     <p>Tests for error XS0011 to be raised, if two output ports are declared with the same name.</p>

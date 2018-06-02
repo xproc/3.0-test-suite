@@ -1,4 +1,6 @@
-<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0082">
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XS0082">
   <t:title>with-input-019</t:title>
   <t:description>
     <p>Tests p:with-input with @pipe and p:pipe: XS0082 to be raised</p>
