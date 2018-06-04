@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XD0049">
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XD0049">
     <t:title>Error test XD0049 006</t:title>
     <t:description>
         <p>Tests that XD0049 is raised when sequence type in @as on p:with-option is not valid: Unknown type</p>

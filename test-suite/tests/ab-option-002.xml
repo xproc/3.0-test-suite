@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0028">
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XS0028">
     <t:title>Option declaration 002</t:title>
     <t:description>
         <p>Tests option is not declared with a name in XProc's namespace.</p>

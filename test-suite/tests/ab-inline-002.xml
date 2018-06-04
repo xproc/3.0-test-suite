@@ -1,6 +1,6 @@
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
-      xmlns:err="http://www.w3.org/ns/xproc-error"
-      expected="fail" code="err:XD0055">
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XD0055">
   <t:title>ab-inline-002</t:title>
   <t:description>
     <p>Tests that XD0055 is raised when content-type contains charset and encoding is not present.</p>

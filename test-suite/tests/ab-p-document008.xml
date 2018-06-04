@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XD0011">
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XD0011">
     <t:title>p:document 008</t:title>
     <t:description>
         <p>Tests p:document with @href to a non existing resource: XD0011 expected.</p>

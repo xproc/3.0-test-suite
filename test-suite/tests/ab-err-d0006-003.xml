@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XD0006">
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XD0006">
     <t:title>Error test XD006 003</t:title>
     <t:description>
         <p>Tests that XD006 is raised when more than one document arrives on a non-sequence port</p>

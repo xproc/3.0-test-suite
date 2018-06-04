@@ -1,4 +1,6 @@
-<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0003">
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XS0003">
   <t:title>with-input-060</t:title>
   <t:description>
     <p>Tests p:with-input: Tests p:with-input: Tests error XS0003 is raised if non-primary input port is not connected.</p>

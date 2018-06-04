@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0044">
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XS0044">
     <t:title>Error test XS0044 002</t:title>
     <t:description>
         <p>Tests that XS0044 is raised, when p:with-input contains non whitespace text nodes.</p>

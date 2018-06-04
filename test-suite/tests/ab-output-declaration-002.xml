@@ -1,4 +1,6 @@
-<test xmlns='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0077">
+<test xmlns='http://xproc.org/ns/testsuite/3.0'
+      xmlns:err="http://www.w3.org/ns/xproc-error"
+      expected="fail" code="err:XS0077">
   <title>Output port declaration 002</title>
   <description>
     <p>Tests for error XS0077 to be raised, when @sequence on p:output is not 'true' or 'false'.</p>

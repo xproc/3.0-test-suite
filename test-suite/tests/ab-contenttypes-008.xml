@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XD0042">
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XD0042">
     <t:title>Contenttypes 008</t:title>
     <t:description>
         <p>Tests XD0042 is raised when document does not match explicit content-types on p:output</p>

@@ -1,4 +1,6 @@
-<test xmlns='http://xproc.org/ns/testsuite/3.0' expected="fail" code="err:XS0065">
+<test xmlns='http://xproc.org/ns/testsuite/3.0'
+      xmlns:err="http://www.w3.org/ns/xproc-error"
+      expected="fail" code="err:XS0065">
   <title>with-input-002</title>
   <description>
     <p>Tests p:with-input with missing @port on atomic step: XS0065 is raised because there is no primary input port.</p>
