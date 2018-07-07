@@ -11,7 +11,7 @@
       <p:variable name="var" select="'test'"/>
       <p:identity>
         <p:with-input>
-          <p:inline expand-text="false" document-properties="map{xs:QName('content-type'):'text/plain'}">This is a {$var}.</p:inline>
+          <p:inline expand-text="false" content-type="text/plain">This is a {$var}.</p:inline>
         </p:with-input>
       </p:identity>
       

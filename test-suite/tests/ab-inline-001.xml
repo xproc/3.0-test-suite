@@ -12,7 +12,7 @@
       <p:output port="result" />
       <p:identity>
         <p:with-input >
-          <p:inline document-properties="map{'content-type':'text/plain'}" encoding="not-supported"
+          <p:inline content-type="text/plain" encoding="not-supported"
             >Dies ist ein Text.</p:inline>
         </p:with-input>
       </p:identity>
