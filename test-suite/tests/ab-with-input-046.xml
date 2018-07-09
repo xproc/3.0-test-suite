@@ -1,9 +1,9 @@
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
         xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail" code="err:XS0044">
+        expected="pass">
   <t:title>with-input-046</t:title>
   <t:description>
-    <p>Tests p:with-input: implicit inline and p:pipeinfo not allowed</p>
+    <p>Tests p:with-input: Combinations of implicit inline and p:pipeinfo are allowed</p>
   </t:description>
   <t:pipeline>
     <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
@@ -19,4 +19,6 @@
     </p:declare-step>
 
   </t:pipeline>
+  <t:schematron src="../schematron/ab-simple-doc.sch"/>
+  
 </t:test>
