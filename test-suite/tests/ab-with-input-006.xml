@@ -3,7 +3,7 @@
         expected="fail" code="err:XS0085">
   <t:title>with-input-006</t:title>
   <t:description>
-    <p>Tests p:with-input with @href and @pipe: XS0081 to be raised</p>
+    <p>Tests p:with-input with @href and @pipe: XS0085 to be raised</p>
   </t:description>
   <t:pipeline>
     <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
