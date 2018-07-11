@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
+        expected="fail" code="err:XD0036">
+
     <t:title>Option declaration 021</t:title>
     <t:description>
         <p>Checks not required option with default value is type casted.</p>
