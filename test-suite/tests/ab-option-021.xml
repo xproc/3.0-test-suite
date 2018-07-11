@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' xmlns:err="http://www.w3.org/ns/xproc-error"
+    expected="fail" code="err:XD0036">
     <t:title>Option declaration 021</t:title>
     <t:description>
-        <p>Checks not required option with default value is type casted.</p>
+        <p>Checks not required option with default value is type checked.</p>
     </t:description>
     
     <t:pipeline>
         <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
             <p:output port="result" />
-            <p:option name="option" required="false" select="'false'" as="xs:boolean"/>
+            <p:option name="option" required="false" select="'this is not a boolean'" as="xs:boolean"/>
             
             <p:identity>
                 <p:with-input>
@@ -17,17 +18,6 @@
             </p:identity>
         </p:declare-step>
     </t:pipeline>
-    <t:option name="option" select="'true'"/>
-    <t:schematron>
-        <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
-            <s:pattern>
-                <s:rule context="/">
-                    <s:assert test="doc">The pipeline root is not doc.</s:assert>
-                    <s:assert test="count(doc/node())=1">The root element does not have exactly one child.</s:assert>
-                    <s:assert test="count(doc/text())=1">The root element does not have exactly one text child.</s:assert>
-                    <s:assert test="doc/text()='true'">The root element does not have a text child 'Some value'.</s:assert>
-                </s:rule>
-            </s:pattern>
-        </s:schema>        
-    </t:schematron>
+    <t:option name="option" select="'neither is this'"/>
+
 </t:test>
