@@ -1,7 +1,7 @@
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
         xmlns:err="http://www.w3.org/ns/xproc-error"
         expected="fail" code="err:XS0079">
-  <t:title>with-input-053</t:title>
+  <t:title>with-input-053a</t:title>
   <t:description>
     <p>Tests p:with-input: No comments, non-whitespace text nodes, and processing instructions allowed as siblings with implicit inlines.</p>
   </t:description>
@@ -11,8 +11,8 @@
       
       <p:identity>
           <p:with-input>
-            <!-- comment -->
             <doc />
+            <!-- comment -->
           </p:with-input>
       </p:identity>
     </p:declare-step>
