@@ -1,6 +1,6 @@
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
         xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail" code="err:XS0077">
+        expected="fail" code="err:XS0090">
   <t:title>with-input-032</t:title>
   <t:description>
     <p>Tests p:with-input with defective @pipe: step@</p>
