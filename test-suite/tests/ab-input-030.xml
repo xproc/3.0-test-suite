@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XS0044">
+    <t:title>Input 030</t:title>
+    <t:description>
+        <p>Tests XS0044 is raised, when p:input has a p:pipe child.</p>
+    </t:description>
+
+    <t:pipeline>
+        <p:declare-step name="main" version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:input port="source" />
+            <p:input port="secondary">
+                <p:pipe step="main" port="source" />
+            </p:input>
+            
+            <p:output port="result"/>
+            
+            <p:identity />
+        </p:declare-step>
+    </t:pipeline>
+    
+</t:test>
