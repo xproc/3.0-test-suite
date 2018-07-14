@@ -11,8 +11,8 @@
         <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
             <p:output port="result" content-types="application/xml"/>        
             <p:identity>
-                <p:with-input document-properties="map{xs:QName('content-type'):'text/plain'}">
-                    <p:inline>text</p:inline>
+                <p:with-input>
+                    <p:inline content-type="text/plain">text</p:inline>
                 </p:with-input>
             </p:identity>
         </p:declare-step>
