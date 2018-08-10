@@ -2,25 +2,21 @@
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
         xmlns:err="http://www.w3.org/ns/xproc-error"
         expected="fail" code="err:XS0077">
-    <t:title>Variable declaration 024</t:title>
+    <t:title>Option declaration 031</t:title>
     <t:description>
-        <p>Checks XS0077 is raised if @collection on p:variable is not a boolean value.</p>
+        <p>Checks XS0077 is raised, if @visibility on p:option is not (public|private).</p>
     </t:description>
     
     <t:pipeline>
         <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
             <p:output port="result" />
-            <p:variable name="var" select="5" collection="foo">
-                <doc />
-                <doc />
-            </p:variable>
+            <p:option name="option" select="5" visibility="nope"/>
             
             <p:identity>
                 <p:with-input>
-                    <doc />
+                    <doc/>
                 </p:with-input>
             </p:identity>
         </p:declare-step>
     </t:pipeline>
-   
-  </t:test>
+</t:test>

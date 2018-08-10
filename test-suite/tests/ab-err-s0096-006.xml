@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
         xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail" code="err:XD0006">
-    <t:title>Error test XD006 002</t:title>
+        expected="fail" code="err:XS0096">
+    <t:title>Error test XS0096 006</t:title>
     <t:description>
-        <p>Tests that XD0006 is raised when more than one document arrives on a non-sequence port</p>
+        <p>Tests that XS0096 is raised when sequence type in @as on p:with-option is not valid: Unknown type</p>
     </t:description>
     <t:pipeline>
         <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
             <p:output port="result"/>
             
-            <p:add-attribute match="/doc" attribute-name="att" attribute-value="val">
-                <p:with-input>
-                    <p:inline><doc /></p:inline>
-                    <p:inline><doc /></p:inline>
+            <p:add-attribute match="/" attribute-name="a">
+                <p:with-input port="source">
+                    <doc />
                 </p:with-input>
+                <p:with-option name="attribute-value" as="foo" select="5" />
             </p:add-attribute>
         </p:declare-step>
     </t:pipeline>
