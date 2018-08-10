@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
         xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail" code="err:XS0077">
-    <t:title>Variable declaration 024</t:title>
+        expected="fail" code="err:XS0095">
+    <t:title>Option declaration 030</t:title>
     <t:description>
-        <p>Checks XS0077 is raised if @collection on p:variable is not a boolean value.</p>
+        <p>Checks XS0095 is raised, if option is declared required and static.</p>
     </t:description>
     
     <t:pipeline>
         <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
             <p:output port="result" />
-            <p:variable name="var" select="5" collection="foo">
-                <doc />
-                <doc />
-            </p:variable>
+            <p:option name="option" required="true" static="true"/>
             
             <p:identity>
                 <p:with-input>
-                    <doc />
+                    <doc/>
                 </p:with-input>
             </p:identity>
         </p:declare-step>
     </t:pipeline>
-   
-  </t:test>
+</t:test>

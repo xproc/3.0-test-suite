@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
         xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail" code="err:XD0049">
-    <t:title>Error test XD0049 001</t:title>
+        expected="fail" code="err:XS0096">
+    <t:title>Error test XS0096 005</t:title>
     <t:description>
-        <p>Tests that XD0049 is raised when sequence type in @as on p:variable is not valid: Wrong quantifier</p>
+        <p>Tests that XS0096 is raised when sequence type in @as on p:option is not valid: Unknown type</p>
     </t:description>
     <t:pipeline>
         <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
             <p:output port="result"/>
-            <p:variable name="var" select="5" as="xs:integer-" />
+            <p:option name="var" select="5" as="foo" />
             
             <p:identity>
                 <p:with-input port="source">
-                    <doc>{$var}</doc>
+                    <doc >{$var}</doc>
                 </p:with-input>
             </p:identity>
         </p:declare-step>

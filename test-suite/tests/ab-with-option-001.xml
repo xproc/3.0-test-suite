@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XS0031">
+    <t:title>With-option 001</t:title>
+    <t:description>
+        <p>Tests XS0031 is raised, when step is called with an undeclared option in short-cut</p>
+    </t:description>
+
+    <t:pipeline>
+        <p:declare-step name="main" version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:input port="source" />
+            <p:output port="result"/>
+            
+            <p:identity option="not-declared" >
+                <p:with-input><doc/></p:with-input>
+            </p:identity>
+        </p:declare-step>
+    </t:pipeline>
+    
+</t:test>
