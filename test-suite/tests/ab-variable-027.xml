@@ -2,7 +2,7 @@
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
     <t:title>Variable declaration 027</t:title>
     <t:description>
-        <p>Test a p:variable selecting from default readble port.</p>
+        <p>Test a p:variable selecting from default readable port.</p>
     </t:description>
     
     <t:pipeline>

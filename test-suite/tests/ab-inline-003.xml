@@ -1,6 +1,6 @@
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
       xmlns:err="http://www.w3.org/ns/xproc-error"
-      expected="fail" code="err:XD0055">
+      expected="fail" code="err:XD0040">
   <t:title>ab-inline-003</t:title>
   <t:description>
     <p>Tests that XD0040 is raised when encoding is base64 and content is not properly encoded.</p>
