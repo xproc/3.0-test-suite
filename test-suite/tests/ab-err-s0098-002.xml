@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XS0098">
+    <t:title>Error XS0098 - 002</t:title>
+    <t:description>
+        <p>Tests XS0098 is raised if p:pipe is a child on a static variable.</p>
+    </t:description>
+    
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:output port="result" content-types="application/xml"/>
+            <p:variable static="true" name="variable" select="10">
+                <p:pipe />
+            </p:variable>
+            <p:identity>
+                <p:with-input><doc /></p:with-input>
+            </p:identity>
+        </p:declare-step>
+    </t:pipeline>
+</t:test>
