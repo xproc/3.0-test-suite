@@ -1,0 +1,37 @@
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="pass">
+  <t:title>with-input-066</t:title>
+  <t:description>
+    <p>Tests p:with-input with select and pipe</p>
+  </t:description>
+  <t:pipeline>
+   
+   <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+      <p:output port="result"/>
+      
+      <p:identity name="source">
+        <p:with-input>
+          <doc><element/></doc>
+        </p:with-input>
+      </p:identity>      
+     
+      <p:identity>
+        <p:with-input select="/doc/*" >
+          <p:pipe step="source" port="result" />
+        </p:with-input>
+      </p:identity>
+    </p:declare-step>
+  </t:pipeline>
+  
+  <t:schematron>
+    <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+      <s:pattern>
+        <s:rule context="/">
+          <s:assert test="element">The document root is not element.</s:assert>
+        </s:rule>
+      </s:pattern>
+    </s:schema>        
+  </t:schematron>
+  
+</t:test>

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
+    xmlns:err="http://www.w3.org/ns/xproc-error"
+    expected="fail" code="err:XS0096">
     <t:title>Variable declaration 006a</t:title>
     <t:description>
-        <p>Tests XD0049 is NOT raised if a variable has an incorrect sequence type, but is not used.</p>
+        <p>Tests XS0096 is raised if a variable has an incorrect sequence type, even if it is not used.</p>
     </t:description>
     
     <t:pipeline>
@@ -17,16 +19,5 @@
             </p:identity>
         </p:declare-step>
     </t:pipeline>
-    
-    <t:schematron>
-        <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
-            <s:pattern>
-                <s:rule context="/">
-                    <s:assert test="doc">The pipeline root is not doc.</s:assert>
-                    <s:assert test="count(doc/node())=0">The root element does not have exactly no children.</s:assert>
-                </s:rule>
-            </s:pattern>
-        </s:schema>            
-    </t:schematron>
     
 </t:test>
