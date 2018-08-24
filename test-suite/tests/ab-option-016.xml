@@ -8,7 +8,7 @@
     <t:pipeline>
         <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
             <p:output port="result" />
-            <p:option name="option" required="false" select="default value"/>
+            <p:option name="option" required="false" select="'default value'"/>
             
             <p:identity>
                 <p:with-input>

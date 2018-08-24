@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
         xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail" code="err:XD0030">
+        expected="fail" code="err:XS0071">
     <t:title>Option declaration 023</t:title>
     <t:description>
         <p>Checks self reference of options is not allowed.</p>
