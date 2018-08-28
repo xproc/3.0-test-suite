@@ -2,7 +2,7 @@
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
     <t:title>p:document 020</t:title>
     <t:description>
-        <p>Tests p:document with a simple text document in UTF-8 (no document-properties).</p>
+        <p>Tests p:document with a simple text document in UTF-8 (no charset!).</p>
     </t:description>
 
     <t:pipeline>
@@ -11,7 +11,7 @@
 
             <p:identity>
                 <p:with-input>
-                    <p:document href="../documents/text-file-utf-8.txt"/>
+                    <p:document href="../documents/text-file-utf-8.txt" content-type="text/plain"/>
                 </p:with-input>
             </p:identity>
             <p:wrap-sequence wrapper="doc" />
