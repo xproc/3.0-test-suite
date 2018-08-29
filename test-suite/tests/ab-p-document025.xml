@@ -13,7 +13,7 @@
 
             <p:identity>
                 <p:with-input select="p:document-properties-document(.)">
-                    <p:document href="../documents/JSon-doc1.json" parameters="map{'duplicates': 'illegal'}"/>
+                    <p:document href="../documents/JSon-doc1.json" content-type="application/json" parameters="map{'duplicates': 'illegal'}"/>
                 </p:with-input>
             </p:identity>
 

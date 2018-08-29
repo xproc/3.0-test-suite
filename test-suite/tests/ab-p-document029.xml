@@ -11,7 +11,9 @@
             <p:output port="result" />
             
             <p:cast-content-type content-type="application/xml" >
-                <p:with-input href="../documents/JSon-doc1.json"/>
+                <p:with-input>
+                    <p:document href="../documents/JSon-doc1.json" content-type="application/json" />
+                </p:with-input> 
             </p:cast-content-type>
             
         </p:declare-step>
