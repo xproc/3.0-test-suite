@@ -11,7 +11,9 @@
             <p:output port="result" />
             
             <p:identity >
-                <p:with-input select="p:document-properties-document(.)" href="../documents/ab-doc.zip" />
+                <p:with-input select="p:document-properties-document(.)">
+                    <p:document href="../documents/ab-doc.zip"  content-type="application/octet-stream" />
+                </p:with-input> 
             </p:identity>
             
         </p:declare-step>
