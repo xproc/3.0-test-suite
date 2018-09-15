@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
+    <t:title>p:document 032</t:title>
+    <t:description>
+        <p>Tests p:with-input with reference to context item in @href.</p>
+    </t:description>
+
+    <t:pipeline>
+        <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+            version="3.0">
+            <p:output port="result" />
+            <p:identity>
+                <p:with-input>
+                    <doc>../documents/ab-doc.xml</doc>
+                </p:with-input>
+            </p:identity>
+            
+            <p:identity>
+                <p:with-input href="{/doc/text()}" />
+            </p:identity>
+        </p:declare-step>
+    </t:pipeline>
+    
+    <t:schematron>
+        <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+            <s:ns uri="http://www.w3.org/ns/xproc-step" prefix="c"/>
+            <s:pattern>
+                <s:rule context="/">
+                    <s:assert test="doc">There is no root element doc.</s:assert>
+                    <s:assert test="count(doc/node())=0">Root element should not have children.</s:assert>
+                </s:rule>
+            </s:pattern>
+        </s:schema>     
+    </t:schematron>
+    
+</t:test>
