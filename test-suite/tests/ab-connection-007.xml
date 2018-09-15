@@ -1,11 +1,10 @@
-<test xmlns='http://xproc.org/ns/testsuite/3.0'
-      xmlns:err="http://www.w3.org/ns/xproc-error"
-      expected="fail" code="err:XS0005">
-  <title>Connection 007</title>
-  <description>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
+      expected="pass">
+  <t:title>Connection 007</t:title>
+  <t:description>
     <p>Tests that the primary output port of the last step of a subpipeline is not connected to the pipelines primary output port, if the later has an explicit connection.</p>
-  </description>
-  <pipeline>
+  </t:description>
+  <t:pipeline>
     <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
       <p:output port="result" primary="true">
         <p:pipe step="one" port="result" />
@@ -13,12 +12,26 @@
       
       <p:identity name="one">
         <p:with-input port="source">
-          <doc />
+          <one />
         </p:with-input>
       </p:identity>
       
-      <p:identity name="two"/>
+      <p:identity name="two">
+        <p:with-input>
+          <two />
+        </p:with-input>
+      </p:identity>
     </p:declare-step>
-  </pipeline>
+  </t:pipeline>
   
-</test>
+  <t:schematron>
+    <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+      <s:pattern>
+        <s:rule context="/">
+          <s:assert test="one">The root is not one.</s:assert>
+          <s:assert test="count(one/node())=0">The root element does not have children.</s:assert>
+        </s:rule>
+      </s:pattern>
+    </s:schema>     
+  </t:schematron>    
+</t:test>

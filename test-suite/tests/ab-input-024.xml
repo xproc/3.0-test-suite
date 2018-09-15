@@ -7,7 +7,7 @@
 
     <t:pipeline>
         <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
-            <p:option name="option" select="'option value'" />           
+            <p:option name="option" select="'option value'" static = "true"/>           
             <p:input port="source">
                 <doc>{$option}</doc>
             </p:input>

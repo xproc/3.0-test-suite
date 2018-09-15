@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
+    xmlns:err="http://www.w3.org/ns/xproc-error"
+    expected="fail" code="err:XD0006">
+    <t:title>Connection 014</t:title>
+    <t:description>
+        <p>Tests that a select on default binding to a non-sequence port raises an error, if no value is supplied.</p>
+    </t:description>
+    
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc" xmlns:test="http://test">
+            <p:output port="result"/>
+            
+            <p:declare-step type="test:step">
+                <p:output port="result" sequence="true"/>
+                <p:input port="source" select="//element">
+                   <doc>
+                       <element />
+                       <element />
+                   </doc>
+                </p:input>
+                <p:identity />
+            </p:declare-step>
+            
+            <test:step />
+            
+            <p:wrap-sequence wrapper="result" />
+        </p:declare-step>    
+    </t:pipeline>    
+</t:test>
