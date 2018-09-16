@@ -18,7 +18,7 @@
             <p:identity>
                 <p:with-input>
                     <p:inline>
-                        <result>{/doc/@value}</result>
+                        <result>{xs:string(/doc/@value)}</result>
                     </p:inline>
                 </p:with-input>
             </p:identity>
