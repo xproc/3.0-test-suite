@@ -7,7 +7,7 @@
 
     <t:pipeline>
         <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
-            <p:input port="source" select="/doc/element">
+            <p:input port="source" select="/doc/element" sequence="true">
                 <doc>
                     <element>text</element>
                     <element>text</element>

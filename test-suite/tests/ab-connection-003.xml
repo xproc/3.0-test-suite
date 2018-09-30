@@ -1,9 +1,9 @@
 <test xmlns='http://xproc.org/ns/testsuite/3.0'
       xmlns:err="http://www.w3.org/ns/xproc-error"
-      expected="fail" code="err:XS0005">
+      expected="fail" code="err:XD007">
   <title>Connection 003</title>
   <description>
-    <p>Tests that an explicit non primary output port is NOT connected to the output of the last step of the subpipeline.</p>
+    <p>Tests that an explicit non primary output port is NOT connected to the output of the last step of the subpipeline. (port empty ->D007)</p>
   </description>
   <pipeline>
     <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
