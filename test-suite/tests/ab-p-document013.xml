@@ -23,6 +23,9 @@
                 <s:rule context="/">
                     <s:assert test="doc">The document root is not doc.</s:assert>
                 </s:rule>
+                <s:rule context="/doc">
+                    <s:assert test="@default='true'">#FIXED attribute missing.</s:assert>
+                </s:rule>
             </s:pattern>
         </s:schema>     
     </t:schematron>
