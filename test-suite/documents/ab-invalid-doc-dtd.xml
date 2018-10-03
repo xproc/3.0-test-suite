@@ -3,4 +3,4 @@
     <!ELEMENT doc ANY>
     <!ATTLIST doc default CDATA #FIXED "true">
 ]>
-<doc/>
+<doc default="false"/>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
-    <t:title>p:document 013</t:title>
+    <t:title>p:document 035</t:title>
     <t:description>
-        <p>Tests p:document with dtd-validate='true' and DTD validation (dtd in doc).</p>
+        <p>Tests p:document with dtd-validate='false' and DTD error (dtd in doc).</p>
     </t:description>
 
     <t:pipeline>
@@ -11,7 +11,8 @@
 
             <p:identity>
                 <p:with-input>
-                    <p:document href="../documents/ab-doc-dtd.xml" parameters="map{'dtd-validate': true()}"/>
+                    <p:document href="../documents/ab-invalid-doc-dtd.xml"
+                                parameters="map{'dtd-validate': false()}"/>
                 </p:with-input>
             </p:identity>
         </p:declare-step>
@@ -24,7 +25,7 @@
                     <s:assert test="doc">The document root is not doc.</s:assert>
                 </s:rule>
                 <s:rule context="/doc">
-                    <s:assert test="@default='true'">#FIXED attribute missing.</s:assert>
+                    <s:assert test="@default='false'">Invalid #FIXED corrected.</s:assert>
                 </s:rule>
             </s:pattern>
         </s:schema>     
