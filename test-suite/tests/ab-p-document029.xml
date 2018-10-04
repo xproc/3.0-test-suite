@@ -21,13 +21,16 @@
     
     <t:schematron>
         <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
-            <s:ns uri="http://www.w3.org/ns/xproc-step" prefix="c"/>
+            <s:ns uri="http://www.w3.org/2005/xpath-functions" prefix="x"/>
             <s:pattern>
                 <s:rule context="/">
-                    <s:assert test="c:data">There is no root element c:data.</s:assert>
-                    <s:assert test="c:data/@content-type='application/json'">@content-type is not 'application/json'.</s:assert>
-                    <s:assert test="c:data/@encoding='base64'">@encoding is not 'base64'.</s:assert>
-                    <s:assert test="c:data/text()='eyJrZXkiOiJ2YWx1ZSJ9'">Content is not correctly encoded.</s:assert>
+                    <s:assert test="x:map">There is no root element 'map' (in xpath-functions-namespace).</s:assert>
+                    <s:assert test="count(x:map/*)=1">'map' does not have exactly one child element.</s:assert>
+                    <s:assert test="x:map/x:string">'map' does not have a child element named 'string'.</s:assert>
+                    <s:assert test="x:map/x:string/text()='value'">'map/string' does not have a text node child 'value'.</s:assert>
+                    <s:assert test="count(x:map/x:string/@*)=1">'map/string' does not have exactly one attribute.</s:assert>
+                    <s:assert test="x:map/x:string/@key">'map/string' does not have an attribute named 'key'.</s:assert>
+                    <s:assert test="x:map/x:string/@key/text()='key'">Attribute 'key' does not have the text value of 'key'.</s:assert>
                 </s:rule>
             </s:pattern>
         </s:schema>     
