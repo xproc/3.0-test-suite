@@ -1,18 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
-        xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail" code="err:XD0042">
+        expected="pass">
     <t:title>Contenttypes 006</t:title>
     <t:description>
-        <p>Tests XD0042 is raised when document does not match implicit content-types on p:output</p>
+        <p>Tests that output port with no @content-types accepts non-XML document.</p>
     </t:description>
     
     <t:pipeline>
-        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc"
+                                      xmlns:test="http://test">
             <p:output port="result"/>        
-            <p:identity>
-                <p:with-input><p:inline content-type="text/plain">text</p:inline></p:with-input>
-            </p:identity>
+            
+            <p:declare-step type="test:step">
+                <p:output port="result" />
+                <p:identity>
+                    <p:with-input><p:inline content-type="text/plain">text</p:inline></p:with-input>
+                </p:identity>
+            </p:declare-step>
+            
+            <test:step />
+            <p:wrap-sequence wrapper="result"/>
         </p:declare-step>
     </t:pipeline>
+    
+    <t:schematron>
+        <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+            <s:ns uri="http://www.w3.org/ns/xproc" prefix="p"/>
+            <s:ns uri="http://www.w3.org/ns/xproc-step" prefix="c" />
+            <s:pattern>
+                <s:rule context="/">
+                    <s:assert test="result">Root element is not result.</s:assert>
+                    <s:assert test="/result/text()='text'">The root element does not have the right text child.</s:assert>
+                </s:rule>
+            </s:pattern>
+        </s:schema>     
+    </t:schematron>
 </t:test>
