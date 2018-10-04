@@ -15,6 +15,8 @@
 
   <p:variable name="a" select="."/>
 
-  <cx:option-value option="{p:document-property($a, 'a')}"/>
+  <p:identity>
+    <p:with-input port="source" select="p:document-properties-document($a)/p:document-properties/a"/>
+  </p:identity>
 
 </p:declare-step>
