@@ -13,6 +13,8 @@
     </p:with-input>
   </p:identity>
 
-  <cx:option-value option="{p:document-property(., 'a')}"/>
+  <p:identity>
+    <p:with-input port="source" select="p:document-properties-document(.)/p:document-properties/a"/>
+  </p:identity>
 
 </p:declare-step>
