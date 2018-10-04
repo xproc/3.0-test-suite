@@ -9,7 +9,7 @@
     
     <t:pipeline>
         <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
-            <p:input port="source">
+            <p:input port="source" content-types="application/xml">
                 <p:inline content-type="text/plain">Some text</p:inline>
             </p:input>
             
