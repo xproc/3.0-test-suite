@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
-    <t:title>p:document 028</t:title>
+    <t:title>p:document 036</t:title>
     <t:description>
-        <p>Tests p:document that a binary document preserves unknown content-type.</p>
+        <p>Tests p:document @content-type overwrites system known content-type.</p>
     </t:description>
 
     <t:pipeline>
@@ -12,7 +12,7 @@
             
             <p:identity >
                 <p:with-input select="p:document-properties-document(.)">
-                    <p:document href="../documents/ab-doc.zip" />
+                    <p:document href="../documents/ab-doc.zip" content-type="some/type"/>
                 </p:with-input> 
             </p:identity>
             
@@ -25,7 +25,7 @@
             <s:pattern>
                 <s:rule context="/">
                     <s:assert test="p:document-properties">There is no root element p:document-properties.</s:assert>
-                    <s:assert test="p:document-properties/content-type = 'application/zip'">Content-type is not 'application/zip'.</s:assert>
+                    <s:assert test="p:document-properties/content-type = 'some/type'">Content-type is not 'some/type'.</s:assert>
                     <s:assert test="ends-with(/p:document-properties/base-uri,'/documents/ab-doc.zip')">Base-uri does not end with '/documents/ab-doc.zip'.</s:assert>
                 </s:rule>
             </s:pattern>
