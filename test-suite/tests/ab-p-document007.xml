@@ -27,7 +27,7 @@
                 <s:rule context="/">
                     <s:assert test="p:document-properties">The document root is not p:document-properties.</s:assert>
                     <s:assert test="string-length(p:document-properties/base-uri) != 0">Base-uri is not set.</s:assert>
-                    <s:assert test="not(starts-with(p:document-properties/base-uri,'http://www.w3.org'))">Base-uri is not set correctly</s:assert>
+                    <s:assert test="starts-with(p:document-properties/base-uri,'http://www.w3.org')">Base-uri is not set correctly</s:assert>
                 </s:rule>
             </s:pattern>
         </s:schema>     
