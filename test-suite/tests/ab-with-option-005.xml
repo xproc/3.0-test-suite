@@ -4,7 +4,7 @@
         expected="fail" code="err:XS0018">
     <t:title>With-option 005</t:title>
     <t:description>
-        <p>Tests XS0018 is raised, if a step is invoke with a required option.</p>
+        <p>Tests XS0018 is raised, if a step is invoke without a required option.</p>
     </t:description>
 
     <t:pipeline>
