@@ -30,7 +30,7 @@
                     <s:assert test="x:map/x:string/text()='value'">'map/string' does not have a text node child 'value'.</s:assert>
                     <s:assert test="count(x:map/x:string/@*)=1">'map/string' does not have exactly one attribute.</s:assert>
                     <s:assert test="x:map/x:string/@key">'map/string' does not have an attribute named 'key'.</s:assert>
-                    <s:assert test="x:map/x:string/@key/text()='key'">Attribute 'key' does not have the text value of 'key'.</s:assert>
+                    <s:assert test="x:map/x:string/@key='key'">Attribute 'key' does not have the text value of 'key'.</s:assert>
                 </s:rule>
             </s:pattern>
         </s:schema>     
