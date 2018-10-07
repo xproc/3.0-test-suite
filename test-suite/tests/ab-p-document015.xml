@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
         xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail" code="err:XD0023">
+        expected="fail" code="err:XD0011 err:XD0023">
     <t:title>p:document 015</t:title>
     <t:description>
         <p>Tests invalid p:document with dtd-validate='true'.</p>
