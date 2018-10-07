@@ -1,0 +1,8 @@
+<test xmlns='http://xproc.org/ns/testsuite/3.0' expected="pass">
+  <title>ab-doc-props-004</title>
+  <description>
+    <p>Tests document-properties with a static option in map constructor</p>
+  </description>
+  <pipeline src="../pipelines/ab-doc-prop-004.xpl"/>
+  <schematron src="../schematron/doc-prop.sch"/>
+</test>

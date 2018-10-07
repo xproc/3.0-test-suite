@@ -1,0 +1,8 @@
+<test xmlns='http://xproc.org/ns/testsuite/3.0' expected="pass">
+  <title>ab-doc-props-009</title>
+  <description>
+    <p>Tests document-properties on static evaluated documents using static variable selecting from inline</p>
+  </description>
+  <pipeline src="../pipelines/ab-doc-prop-009.xpl"/>
+  <schematron src="../schematron/doc-prop.sch"/>
+</test>
