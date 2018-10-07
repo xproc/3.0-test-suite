@@ -12,16 +12,30 @@ test-suite =
       & attribute when { text }?
       & attribute src { text }?
       & attribute version { text }?
-      & (title?, test*, test-div*)
+      & ((info|title)?, test*, test-div*)
     }
 
 test-div =
     element t:div {
-        title?, test*, test-div*
+        (info|title)?, test*, test-div*
+    }
+
+info =
+    element t:info {
+        title & author? & date? & specref?
     }
 
 title =
     element title { text }
+
+author =
+    element author { text }
+
+date =
+    element date { xsd:date|xsd:dateTime }
+
+specref =
+    element specref { text }
 
 test = passingTest | failingTest
 
@@ -34,11 +48,8 @@ passingTest =
       & attribute src { text }?
       & attribute step { text }?
       & attribute expected { "pass" }
-      & (testtitle? & description? & input* & option* & pipeline? & schematron?)
+      & ((info|title)? & description? & input* & option* & pipeline? & schematron?)
     }
-
-testtitle =
-    element t:title {text}
 
 failingTest =
     element t:test {
@@ -49,8 +60,8 @@ failingTest =
       & attribute src { text }?
       & attribute step { text }?
       & attribute expected { "fail" }
-      & attribute code { text }
-      & (testtitle? & description? & input* & option* & pipeline?)
+      & attribute code { xsd:NMTOKENS }
+      & ((info|title)? & description? & input* & option* & pipeline?)
     }
 
 pipeline =
