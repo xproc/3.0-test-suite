@@ -1,8 +1,19 @@
 <test xmlns='http://xproc.org/ns/testsuite/3.0'
+      xmlns:t='http://xproc.org/ns/testsuite/3.0'
       xmlns:xs="http://www.w3.org/2001/XMLSchema"
       xmlns:err="http://www.w3.org/ns/xproc-error"
-      expected="fail" code="err:XD0049">
-  <pipeline>
+      expected="fail" code="err:XS0096">
+<info>
+  <title>Invalid sequence type</title>
+  <author>Norman Walsh</author>
+  <date>2018-10-08</date>
+  <specref>#err.inline.S0096</specref>
+</info>
+<t:description xmlns="http://www.w3.org/1999/xhtml">
+  <p>Error err:XS0096 is raised for an invalid sequence type.</p>
+</t:description>
+
+<pipeline>
 <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
                 xmlns:c="http://www.w3.org/ns/xproc-step"
                 name="main" version="3.0">
@@ -17,5 +28,5 @@
   </p:identity>
 
 </p:declare-step>
-  </pipeline>
+</pipeline>
 </test>
