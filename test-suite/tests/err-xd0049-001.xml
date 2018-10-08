@@ -1,8 +1,16 @@
 <test xmlns='http://xproc.org/ns/testsuite/3.0'
       xmlns:xs="http://www.w3.org/2001/XMLSchema"
       xmlns:err="http://www.w3.org/ns/xproc-error"
-      expected="fail" code="err:XD0049">
-  <pipeline>
+      expected="fail" code="err:XD0096">
+<info>
+  <title>Invalid sequence type</title>
+  <author>Norman Walsh</author>
+  <date>2018-10-08</date>
+  <specref>#err.inline.S0096</specref>
+</info>
+<description>Error err:XD0096 is raised for an invalid sequence type.</description>
+
+<pipeline>
 <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
                 xmlns:c="http://www.w3.org/ns/xproc-step"
                 name="main" version="3.0">
@@ -17,5 +25,5 @@
   </p:identity>
 
 </p:declare-step>
-  </pipeline>
+</pipeline>
 </test>
