@@ -114,10 +114,10 @@ Tests can also include inputs and options:
 ```
 <t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
   <t:info>…</t:info>
-  <input port='source'>…</input>
-  <option name='optname' select='3'/>
-  <pipeline>…</pipeline>
-  <schematron>…</schematron>
+  <t:input port='source'>…</t:input>
+  <t:option name='optname' select='3'/>
+  <t:pipeline>…</t:pipeline>
+  <t:schematron>…</t:schematron>
 </test>
 ```
 
