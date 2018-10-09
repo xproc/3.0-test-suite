@@ -1,6 +1,40 @@
-<test xmlns='http://xproc.org/ns/testsuite/3.0'
-      xmlns:err="http://www.w3.org/ns/xproc-error"
-      expected="fail" code="err:XD0004">
-  <pipeline src="../pipelines/choose-004.xpl"/>
-  <option name="match" select="'3'"/>
-</test>
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail"
+        code="err:XD0004">
+   <t:info>
+      <t:title/>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2017-10-09T21:11:50-07:00</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description>
+               <p>Fixed namespace</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2017-10-09T21:10:21-07:00</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description>
+               <p>Fixed namespace</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2017-09-24T17:47:42+01:00</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description>
+               <p>Port my test suite; add documentation and schemas</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:pipeline src="../pipelines/choose-004.xpl"/>
+   <t:option name="match" select="'3'"/>
+</t:test>

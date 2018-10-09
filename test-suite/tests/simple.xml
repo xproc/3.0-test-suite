@@ -1,18 +1,33 @@
-<test xmlns='http://xproc.org/ns/testsuite/3.0' expected="pass">
-  <input port="source"><doc xmlns=""/></input>
-  <pipeline src="../pipelines/simple.xpl"/>
-  <schematron>
-    <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron"
-              xmlns:p="http://www.w3.org/ns/xproc"
-              xmlns:c="http://www.w3.org/ns/xproc-step">
-      <s:ns prefix="p" uri="http://www.w3.org/ns/xproc"/>
-      <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
-
-      <s:pattern>
-        <s:rule context="/*">
-          <s:assert test="self::doc">The pipeline root is not doc.</s:assert>
-        </s:rule>
-      </s:pattern>
-    </s:schema>
-  </schematron>
-</test>
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns="http://www.w3.org/1999/xhtml"
+        expected="pass">
+   <t:info>
+      <t:title/>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2017-09-24T17:47:42+01:00</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description>
+               <p>Port my test suite; add documentation and schemas</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:input port="source">
+      <doc xmlns=""/>
+   </t:input>
+   <t:pipeline src="../pipelines/simple.xpl"/>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:ns prefix="p" uri="http://www.w3.org/ns/xproc"/>
+         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
+         <s:pattern>
+            <s:rule context="/*">
+               <s:assert test="self::doc">The pipeline root is not doc.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
