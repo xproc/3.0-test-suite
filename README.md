@@ -99,6 +99,7 @@ be reported by a conformant processor.
 ```
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
         xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
         expected="fail"
         code="err:XS0038">
   …
