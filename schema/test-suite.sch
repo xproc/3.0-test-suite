@@ -12,6 +12,20 @@
     </s:rule>
   </s:pattern>
 
+  <s:pattern>
+    <s:title>Initials must be defined somewhere</s:title>
+    <s:rule context="t:revision[@initials]">
+      <s:assert test="//t:author[@initials=current()/@initials]">Initials must be defined</s:assert>
+    </s:rule>
+  </s:pattern>
+
+  <s:pattern>
+    <s:title>Name or initials must be provided</s:title>
+    <s:rule context="t:revision">
+      <s:assert test="@initials or t:author/t:name">Name or initials must be provided</s:assert>
+    </s:rule>
+  </s:pattern>
+
   <!-- It would be nice to test that t:test/@code contains valid error codes...
        but I can't figure out how to make that work in Schematron. I also suspect
        that XML Calabash isn't supporting Schematron perfectly, but that's a

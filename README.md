@@ -20,30 +20,99 @@ This repository is organized in the following way:
         └── …                    # Individual tests
 ```
 
-Tests must indicate whether they are expected to pass or fail. The
-simplest structure for a passing test is:
+## Test format
+
+Tests must conform to the `schema/test-suite.rnc` and
+`schema/test-suite.sch` schemas. Most of the constraints are in the
+RELAX NG grammar but a few co-constraints are enforced in the
+Schematron.
+
+The basic structure of a passing test is:
 
 ```
-<test xmlns='http://xproc.org/ns/testsuite/3.0' expected="pass">
-  <pipeline>…</pipeline>
-  <schematron>…</schematron>
-</test>
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns="http://www.w3.org/1999/xhtml"
+        expected="pass">
 ```
 
-The simplest structure for a failing test is:
+A passing test must assert that the expected result is a pass. Failing
+tests are described below.
+
+The first element in the `test` must be an `info` that includes metadata
+about the test.
 
 ```
-<test xmlns='http://xproc.org/ns/testsuite/3.0'
-      xmlns:err='http://www.w3.org/ns/xproc-error’
-      expected="fail" code=”err:code>
-  <pipeline>…</pipeline>
-</test>
+  <t:info>
+    <t:title>Test Title</t:title>
+    <t:revision-history>
+      <t:revision>
+        <t:date>2018-02-02T17:42:37+01:00</t:date>
+        <t:author>
+          <t:name>Author Name</t:name>
+        </t:author>
+        <t:description>
+          <p>Some description of this revision.</p>
+        </t:description>
+      </t:revision>
+    </t:revision-history>
+   </t:info>
 ```
+
+If there are multiple revisions, they should be in date order.
+
+Followed by a description of the test.
+
+```
+   <t:description>
+      <p>Some description of the test.</p>
+   </t:description>
+```
+
+Note that the `description` element must contain some fragment(s) of HTML.
+
+Following the metadata and description is the test pipeline followed,
+optionally, by a Schematron schema to validate the test results.
+
+```
+   <t:pipeline>
+      <p:declare-step xmlns="http://xproc.org/ns/testsuite/3.0" version="3.0">
+         <p:output port="result">
+            <p:pipe step="producer" port="result"/>
+         </p:output>
+      
+         <p:identity name="producer">
+            <p:with-input port="source">
+               <doc xmlns=""/>
+            </p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron src="../schematron/some-schema.sch"/>
+</t:test>
+```
+
+A failing test is much the same, except that it must assert that the
+expected result is a fail and provide a (list of) error codes that may
+be reported by a conformant processor.
+
+
+```
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns="http://www.w3.org/1999/xhtml"
+        expected="fail"
+        code="err:XS0038">
+  …
+</t:test>  
+```
+
+A failing test may not include a schematron schema to validate the
+test results.
 
 Tests can also include inputs and options:
 
 ```
-<test xmlns='http://xproc.org/ns/testsuite/3.0' expected="pass">
+<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0' expected="pass">
+  <t:info>…</t:info>
   <input port='source'>…</input>
   <option name='optname' select='3'/>
   <pipeline>…</pipeline>
@@ -66,6 +135,43 @@ and tested.
 
 A group of tests can be combined into a `test-suite` and tests may be divided into
 sections using `div`s.
+
+### Revision histories
+
+In the case of revisions, it is somewhat inconvenient to have to
+repeat the same author information over and over again. If the same
+author is responsible for multiple revisions, a syntacit shortcut is
+possible:
+
+1. On the first `t:author`, specify the author initials.
+2. On a subsequent revision by that author, you can use the
+   `initials` attribute on the `t:revision` as a shortcut for
+   the author.
+
+For example:
+
+```
+<t:revision-history>
+
+<t:revision>
+    <t:date>2018-02-02</t:date>
+    <t:author initials="fa">
+      <t:name>First Author</t:name>
+    </t:author>
+    <t:description>
+      <p>Some description of this revision.</p>
+    </t:description>
+  </t:revision>
+
+  <t:revision initials=”fa”>
+    <t:date>2018-03-14</t:date>
+    <t:description>
+      <p>Some description of this revision.</p>
+    </t:description>
+  </t:revision>
+
+</t:revision-history>
+```
 
 ## Executing tests
 
@@ -96,4 +202,3 @@ error if the expression refers to the context.
 ## Test report format
 
 Tests should output the JUnit XML test result format.
-
