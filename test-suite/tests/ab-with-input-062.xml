@@ -1,19 +1,46 @@
-<t:test xmlns:t='http://xproc.org/ns/testsuite/3.0'
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns="http://www.w3.org/1999/xhtml"
         xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail" code="err:XS0086">
-  <t:title>with-input-062</t:title>
-  <t:description>
-    <p>Tests p:with-input: Tests port is not bound twice.</p>
-  </t:description>
-  <t:pipeline>
-   
-   <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
-      <p:output port="result"/>
+        expected="fail"
+        code="err:XS0086">
+   <t:info>
+      <t:title>with-input-062</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2018-06-02T17:53:51-05:00</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description>
+               <p>Fix namespace declarations</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2018-02-02T17:42:37+01:00</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description>
+               <p>added new tests</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description>
+      <p>Tests p:with-input: Tests port is not bound twice.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
       
-     <p:identity>
-       <p:with-input port="source"><doc/></p:with-input>
-       <p:with-input port="source"><doc/></p:with-input>
-     </p:identity>
-    </p:declare-step>
-  </t:pipeline>
+         <p:identity>
+            <p:with-input port="source">
+               <doc xmlns=""/>
+            </p:with-input>
+            <p:with-input port="source">
+               <doc xmlns=""/>
+            </p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
 </t:test>
