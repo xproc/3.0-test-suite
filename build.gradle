@@ -183,11 +183,7 @@ task git_log_summary(type: Exec) {
   commandLine 'tools/bin/git-log-summary', '-o', 'build/git-log-summary.xml'
 }
 
-task ls_check(dependsOn: ["git_log_summary"], type: Exec) {
-  commandLine '/bin/ls', '-l', 'build'
-}
-
-task git_log_shorter(dependsOn: ["git_log_summary","ls_check"], type: XMLCalabashTask) {
+task git_log_shorter(dependsOn: ["git_log_summary"], type: XMLCalabashTask) {
   inputs.file "tools/xsl/shorter-log.xsl"
   inputs.file "build/git-log-summary.xml"
   outputs.file "build/git-log-shorter.xml"
