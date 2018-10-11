@@ -98,7 +98,7 @@ task validate_all_tests() {
   }
 }
 
-task transform_all_tests() {
+task transform_all_tests(dependsOn: [ "validate_all_tests" ]) {
   doLast {
     println("All tests transformed")
   }
