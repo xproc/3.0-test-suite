@@ -4,9 +4,15 @@
    <t:info>
       <t:title>Optional p:inline wrapper</t:title>
       <t:revision-history>
+         <t:revision initials="nw">
+            <t:date>2018-10-11</t:date>
+            <t:description>
+               <p>Fixed syntax of @parameters; maps are always expressions.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2017-09-24T17:47:42+01:00</t:date>
-            <t:author>
+            <t:author initials="nw">
                <t:name>Norman Walsh</t:name>
             </t:author>
             <t:description>
