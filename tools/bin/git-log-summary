@@ -2,9 +2,15 @@
 
 use strict;
 use English;
+use Getopt::Std;
+use vars qw($opt_o);
 
 my %MONTHS = ('Jan' => 1, 'Feb' => 2, 'Mar' => 3, 'Apr' => 4, 'May' => 5, 'Jun' => 6,
               'Jul' => 7, 'Aug' => 8, 'Sep' => 9, 'Oct' => 10, 'Nov' => 11, 'Dec' => 12);
+
+my $usage = "Usage: $0 [-o output]\n";
+
+die $usage if ! getopts('o:');
 
 my $inmsg = 0;
 my $aftermsg = 0;
@@ -15,8 +21,11 @@ my $committer_email = undef;
 my $message = undef;
 my @files = ();
 my $LOG;
+my $output = $opt_o || "-";
 
-print "<git-repo-info xmlns='http://nwalsh.com/ns/git-repo-info'>\n";
+open (OUTPUT, ">$output");
+
+print OUTPUT "<git-repo-info xmlns='http://nwalsh.com/ns/git-repo-info'>\n";
 
 open ($LOG, "git log --name-status |");
 while (<$LOG>) {
@@ -24,20 +33,20 @@ while (<$LOG>) {
 
     if (/^commit (.*)$/) {
         if (defined($hash)) {
-            print "<commit>\n";
-            print "<hash>$hash</hash>\n";
+            print OUTPUT "<commit>\n";
+            print OUTPUT "<hash>$hash</hash>\n";
             foreach my $file (@files) {
-                print "<file>$file</file>\n";
+                print OUTPUT "<file>$file</file>\n";
             }
-            print "<date>$date</date>\n";
+            print OUTPUT "<date>$date</date>\n";
             if (defined($committer_email)) {
-                print "<committer-name>", esc($committer), "</committer-name>\n";
-                print "<committer-email>", esc($committer_email), "</committer-email>\n";
+                print OUTPUT "<committer-name>", esc($committer), "</committer-name>\n";
+                print OUTPUT "<committer-email>", esc($committer_email), "</committer-email>\n";
             } else {
-                print "<committer>", esc($committer), "</committer>\n";
+                print OUTPUT "<committer>", esc($committer), "</committer>\n";
             }
-            print "<message>", esc($message), "</message>\n";
-            print "</commit>\n\n";
+            print OUTPUT "<message>", esc($message), "</message>\n";
+            print OUTPUT "</commit>\n\n";
         }
 
         $hash = $1;
@@ -100,17 +109,19 @@ while (<$LOG>) {
 }
 close ($LOG);
 
-print "<commit>\n";
-print "<hash>$hash</hash>\n";
+print OUTPUT "<commit>\n";
+print OUTPUT "<hash>$hash</hash>\n";
 foreach my $file (@files) {
-    print "<file>$file</file>\n";
+    print OUTPUT "<file>$file</file>\n";
 }
-print "<date>$date</date>\n";
-print "<committer>", esc($committer), "</committer>\n";
-print "<message>", esc($message), "</message>\n";
-print "</commit>\n\n";
+print OUTPUT "<date>$date</date>\n";
+print OUTPUT "<committer>", esc($committer), "</committer>\n";
+print OUTPUT "<message>", esc($message), "</message>\n";
+print OUTPUT "</commit>\n\n";
 
-print "</git-repo-info>\n";
+print OUTPUT "</git-repo-info>\n";
+
+close (OUTPUT);
 
 sub esc {
     local $_ = shift;

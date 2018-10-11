@@ -180,8 +180,7 @@ fileTree(dir: 'test-suite/tests').include("**/*.xml").each { file ->
 
 task git_log_summary(type: Exec) {
   outputs.file "build/git-log-summary.xml"
-  commandLine 'tools/bin/git-log-summary'
-  //standardOutput = new FileOutputStream(new File("build/git-log-summary.xml"))
+  commandLine 'tools/bin/git-log-summary', '-o', 'build/git-log-summary.xml'
 }
 
 task ls_check(dependsOn: ["git_log_summary"], type: Exec) {
