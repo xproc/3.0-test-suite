@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta charset="utf-8"/><title>Input 025</title><link href="../css/testsuite.css" rel="stylesheet" type="text/css"/></head><body><nav><a href="../">↑</a> / <a href="ab-input-024.html">←</a> / <a href="ab-input-026.html">→</a></nav><h1>Input 025</h1><div class="description">
+      <p>Tests select on p:input</p>
+   </div><p class="expected">Test <a class="testuri" href="../test-suite/tests/ab-input-025.xml">ab-input-025.xml</a> is expected to pass.</p><div class="pipeline"><h2>The pipeline</h2><pre><code>
+      <span class="pelement"><span class="stag"><span class="sto">&lt;</span><span class="gi">p:declare-step</span> <span class="attr nsattr"><span class="aname">xmlns:p</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">http://www.w3.org/ns/xproc</span><span class="aq">"</span></span> <span class="attr"><span class="aname">version</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">3.0</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
+            <span class="pelement"><span class="stag"><span class="sto">&lt;</span><span class="gi">p:input</span> <span class="attr"><span class="aname">port</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">source</span><span class="aq">"</span></span> <span class="attr"><span class="aname">select</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">/doc/element</span><span class="aq">"</span></span> <span class="attr"><span class="aname">sequence</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">true</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
+                <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">doc</span> <span class="attr nsattr"><span class="aname">xmlns</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue"/><span class="aq">"</span></span><span class="stc">&gt;</span></span>
+               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">element</span><span class="stc">&gt;</span></span>text<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">element</span><span class="etc">&gt;</span></span></span>
+               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">element</span><span class="stc">&gt;</span></span>text<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">element</span><span class="etc">&gt;</span></span></span>
+            <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">doc</span><span class="etc">&gt;</span></span></span>
+            <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:input</span><span class="etc">&gt;</span></span></span>
+            
+            <span class="pelement"><span class="stag"><span class="sto">&lt;</span><span class="gi">p:output</span> <span class="attr"><span class="aname">port</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result</span><span class="aq">"</span></span><span class="stc">/&gt;</span></span></span>        
+            <span class="pelement"><span class="stag"><span class="sto">&lt;</span><span class="gi">p:wrap-sequence</span> <span class="attr"><span class="aname">wrapper</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result</span><span class="aq">"</span></span><span class="stc">/&gt;</span></span></span>
+        <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:declare-step</span><span class="etc">&gt;</span></span></span>
+   </code></pre></div><div class="schematron"><h2>Schematron validation</h2><pre><code>
+      <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:schema</span> <span class="attr nsattr"><span class="aname">xmlns:s</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">http://purl.oclc.org/dsdl/schematron</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
+         <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:pattern</span><span class="stc">&gt;</span></span>
+            <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:rule</span> <span class="attr"><span class="aname">context</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">/</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
+               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>The document root is not result.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
+               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">count(result/node())=2</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>The root element does not have exactly two child.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
+               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result/node()/name()='element'</span><span class="aq">"</span></span><span class="stc">/&gt;</span></span></span>
+               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result/element/text() = 'text'</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>element does not contain 'text'.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
+            <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:rule</span><span class="etc">&gt;</span></span></span>
+         <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:pattern</span><span class="etc">&gt;</span></span></span>
+      <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:schema</span><span class="etc">&gt;</span></span></span>
+   </code></pre></div><dl class="revision-history"><h2>Revision history</h2>
+         <dt>15 Sep 2018 11:06, 
+               <span class="name">Achim Berndzen</span>
+            </dt><dd><div class="description">
+               <p>Some tests changed and new tests</p>
+            </div></dd>
+         <dt>18 Mar 2018 07:41, 
+               <span class="name">Achim Berndzen</span>
+            </dt><dd><div class="description">
+               <p>New tests. Some tests changed to new order in p:pipe</p>
+            </div></dd>
+      </dl></body></html>

@@ -1,0 +1,90 @@
+a, a:visited, a:link {
+    color: blue;
+}
+
+nav {
+    position: fixed;
+    top: 4px;
+    right: 12px;
+    min-width: 1in;
+    padding: 4px;
+    background-color: #c0c0c0;
+}
+
+nav a,
+nav a:visited,
+nav a:link {
+    text-decoration: none;
+    color: black;
+}
+
+pre {
+    font-size: 120%;
+}
+
+.sto, .stc, .eto, .etc, .aq {
+    color: #777777;
+}
+
+.pelement .aname {
+    color: blue;
+}
+
+.element .aname {
+    color: green;
+}
+
+.element .paname {
+    color: blue;
+}
+
+.nsattr, .nsattr .aname {
+    color: #777777;
+}
+
+.pelement .gi { color: blue; }
+
+.element .gi { color: green; }
+
+th {
+    text-align: left;
+}
+
+tr:nth-child(odd) {
+    background-color: #f0f0f0;
+}
+
+tr:first-child th,
+tr:first-child td {
+    border-top: 1px solid black;
+}
+
+td:first-child,
+th:first-child {
+    border-right: 1px solid black;
+}
+
+td.pass {
+    background-color: #ccffcc;
+}
+
+td.fail {
+    background-color: #ffcccc;
+}
+
+tbody tr:nth-child(odd) td.pass {
+    background-color: #c0f0c0;
+}
+
+tbody tr:nth-child(odd) td.fail {
+    background-color: #f0c0c0;
+}
+
+.buildinfo {
+    border: 1px solid #777777;
+    font-family: sans-serif;
+    padding: 4px;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+}

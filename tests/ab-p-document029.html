@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta charset="utf-8"/><title>p:document 029</title><link href="../css/testsuite.css" rel="stylesheet" type="text/css"/></head><body><nav><a href="../">↑</a> / <a href="ab-p-document028.html">←</a> / <a href="ab-p-document030.html">→</a></nav><h1>p:document 029</h1><div class="description">
+      <p>Tests p:document with json document is correctly loaded.</p>
+   </div><p class="expected">Test <a class="testuri" href="../test-suite/tests/ab-p-document029.xml">ab-p-document029.xml</a> is expected to pass.</p><div class="pipeline"><h2>The pipeline</h2><pre><code>
+      <span class="pelement"><span class="stag"><span class="sto">&lt;</span><span class="gi">p:declare-step</span> <span class="attr nsattr"><span class="aname">xmlns:p</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">http://www.w3.org/ns/xproc</span><span class="aq">"</span></span> <span class="attr"><span class="aname">version</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">3.0</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
+            <span class="pelement"><span class="stag"><span class="sto">&lt;</span><span class="gi">p:output</span> <span class="attr"><span class="aname">port</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result</span><span class="aq">"</span></span><span class="stc">/&gt;</span></span></span>
+            
+            <span class="pelement"><span class="stag"><span class="sto">&lt;</span><span class="gi">p:cast-content-type</span> <span class="attr"><span class="aname">content-type</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">application/xml</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
+                <span class="pelement"><span class="stag"><span class="sto">&lt;</span><span class="gi">p:with-input</span><span class="stc">&gt;</span></span>
+                    <span class="pelement"><span class="stag"><span class="sto">&lt;</span><span class="gi">p:document</span> <span class="attr"><span class="aname">href</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">../documents/JSon-doc1.json</span><span class="aq">"</span></span> <span class="attr"><span class="aname">content-type</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">application/json</span><span class="aq">"</span></span><span class="stc">/&gt;</span></span></span>
+                <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:with-input</span><span class="etc">&gt;</span></span></span> 
+            <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:cast-content-type</span><span class="etc">&gt;</span></span></span>
+            
+        <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:declare-step</span><span class="etc">&gt;</span></span></span>
+   </code></pre></div><div class="schematron"><h2>Schematron validation</h2><pre><code>
+      <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:schema</span> <span class="attr nsattr"><span class="aname">xmlns:s</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">http://purl.oclc.org/dsdl/schematron</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
+         <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:ns</span> <span class="attr"><span class="aname">uri</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">http://www.w3.org/2005/xpath-functions</span><span class="aq">"</span></span> <span class="attr"><span class="aname">prefix</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">x</span><span class="aq">"</span></span><span class="stc">/&gt;</span></span></span>
+         <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:pattern</span><span class="stc">&gt;</span></span>
+            <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:rule</span> <span class="attr"><span class="aname">context</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">/</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
+               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">x:map</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>There is no root element 'map' (in xpath-functions-namespace).<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
+               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">count(x:map/*)=1</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>'map' does not have exactly one child element.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
+               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">x:map/x:string</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>'map' does not have a child element named 'string'.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
+               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">x:map/x:string/text()='value'</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>'map/string' does not have a text node child 'value'.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
+               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">count(x:map/x:string/@*)=1</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>'map/string' does not have exactly one attribute.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
+               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">x:map/x:string/@key</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>'map/string' does not have an attribute named 'key'.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
+               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">x:map/x:string/@key='key'</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>Attribute 'key' does not have the text value of 'key'.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
+            <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:rule</span><span class="etc">&gt;</span></span></span>
+         <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:pattern</span><span class="etc">&gt;</span></span></span>
+      <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:schema</span><span class="etc">&gt;</span></span></span>
+   </code></pre></div><dl class="revision-history"><h2>Revision history</h2>
+         <dt>05 Oct 2018 08:21, 
+               <span class="name">Norman Walsh</span>
+            </dt><dd><div class="description">
+               <p>Fix ab-p-document029.xml</p>
+            </div></dd>
+         <dt>04 Oct 2018 18:13, 
+               <span class="name">Achim Berndzen</span>
+            </dt><dd><div class="description">
+               <p>One new and one corrected test.</p>
+            </div></dd>
+         <dt>29 Aug 2018 15:54, 
+               <span class="name">Achim Berndzen</span>
+            </dt><dd><div class="description">
+               <p>Now I have all tests where p:document needs a content-type according to the new specs</p>
+            </div></dd>
+         <dt>25 Apr 2018 18:11, 
+               <span class="name">Achim Berndzen</span>
+            </dt><dd><div class="description">
+               <p>More tests.</p>
+            </div></dd>
+      </dl></body></html>
