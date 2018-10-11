@@ -12,6 +12,10 @@ buildscript {
   }
 }
 
+plugins {
+  id "de.undercouch.download" version "2.0.0"
+}
+
 repositories {
   mavenLocal()
   mavenCentral()
@@ -35,6 +39,7 @@ defaultTasks 'website'
 apply plugin: 'com.xmlcalabash.task'
 apply plugin: 'groovy'
 
+import de.undercouch.gradle.tasks.download.Download
 import com.xmlcalabash.XMLCalabashTask
 
 // ======================================================================
@@ -136,7 +141,7 @@ tests.each { fn ->
 
   def taskname = "tests_" + fn
 
-  task "xform_$taskname"(type: XMLCalabashTask) {
+  task "xform_$taskname"(dependsOn: ["get_specs"], type: XMLCalabashTask) {
     inputs.file "test-suite/tests/" + fn + ".xml"
     inputs.file "tools/xsl/format-test.xsl"
     outputs.file "build/html/tests/" + fn + ".html"
@@ -144,6 +149,10 @@ tests.each { fn ->
     output("result", "build/html/tests/" + fn + ".html")
     param("prev", prev)
     param("next", next)
+    param("xproc-spec", new File("build/xproc.html").getAbsolutePath())
+    param("steps-spec", new File("build/xproc.html").getAbsolutePath())
+    param("xproc-link", "https://spec.xproc.org/master/head/xproc/")
+    param("steps-link", "https://spec.xproc.org/master/head/steps/")
     option("stylesheet", new File("tools/xsl/format-test.xsl").getAbsolutePath())
     pipeline "tools/xpl/run-xslt.xpl"
     doFirst {
@@ -228,3 +237,21 @@ task make_index(dependsOn: ["copy_rsrcs"], type: XMLCalabashTask) {
     mkdir("build/html")
   }
 }
+
+task get_specs(dependsOn: [ "get_xproc", "get_steps" ]) {
+  doFirst {
+    mkdir("build")
+  }
+}
+
+task get_xproc(type: Download) {
+  src "https://spec.xproc.org/master/head/xproc/"
+  dest "build/xproc.html"
+}
+get_xproc.onlyIf { !file("build/xproc.html").exists() }
+
+task get_steps(type: Download) {
+  src "https://spec.xproc.org/master/head/steps/"
+  dest "build/steps.html"
+}
+get_steps.onlyIf { !file("build/steps.html").exists() }
