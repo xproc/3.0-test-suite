@@ -10,6 +10,6 @@
     </p:with-input>
   </p:identity>
 
-  <p:parameters parameters="{ map {{ 'p': count(//p) }} }"/>
+  <p:parameters parameters="map { 'p': count(//p) }"/>
 
 </p:declare-step>

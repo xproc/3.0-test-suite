@@ -4,6 +4,6 @@
                 version="3.0">
   <p:output port="result"/>
 
-  <p:parameters parameters="{ map {{ 'a': 1, 'b': 2 }} }"/>
+  <p:parameters parameters="map { 'a': 1, 'b': 2 }"/>
 
 </p:declare-step>
