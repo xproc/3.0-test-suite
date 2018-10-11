@@ -44,7 +44,7 @@ info =
     element t:info {
         title
         & revision-history
-        & specref?
+        & specref*
     }
 
 author =
@@ -79,7 +79,11 @@ date =
     element t:date { xsd:date|xsd:dateTime }
 
 specref =
-    element t:specref { text }
+    element t:specref {
+        attribute spec { "xproc" | "steps" }?
+      & attribute linkend { xsd:NMTOKEN }
+      & empty
+    }
 
 test = passingTest | failingTest
 
