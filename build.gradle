@@ -108,7 +108,6 @@ task test_indexes(dependsOn: ["transform_all_tests","git_log_shorter"], type: XM
   inputs.file "build/git-log-shorter.xml"
   inputs.file "tools/xsl/test-indexes.xsl"
   inputs.file "tools/xsl/merge-git-log.xsl"
-  inputs.file "tools/xpl/test-indexes.xpl"
   outputs.file "build/html/alphabetical.html"
   pipeline "tools/xpl/test-indexes.xpl"
   doFirst {
@@ -140,13 +139,13 @@ tests.each { fn ->
   task "xform_$taskname"(type: XMLCalabashTask) {
     inputs.file "test-suite/tests/" + fn + ".xml"
     inputs.file "tools/xsl/format-test.xsl"
-    inputs.file "tools/xpl/format-test.xpl"
     outputs.file "build/html/tests/" + fn + ".html"
     input("source", "test-suite/tests/" + fn + ".xml")
     output("result", "build/html/tests/" + fn + ".html")
-    option("prev", prev)
-    option("next", next)
-    pipeline "tools/xpl/format-test.xpl"
+    param("prev", prev)
+    param("next", next)
+    option("stylesheet", new File("tools/xsl/format-test.xsl").getAbsolutePath())
+    pipeline "tools/xpl/run-xslt.xpl"
     doFirst {
       mkdir("build/tests")
     }
@@ -189,7 +188,8 @@ task git_log_shorter(dependsOn: ["git_log_summary"], type: XMLCalabashTask) {
   outputs.file "build/git-log-shorter.xml"
   input("source", "build/git-log-summary.xml")
   output("result", "build/git-log-shorter.xml")
-  pipeline "tools/xpl/shorter-log.xpl"
+  pipeline "tools/xpl/run-xslt.xpl"
+  option("stylesheet", new File("tools/xsl/shorter-log.xsl").getAbsolutePath())
   doFirst {
     mkdir("build")
   }
@@ -197,7 +197,7 @@ task git_log_shorter(dependsOn: ["git_log_summary"], type: XMLCalabashTask) {
 
 // ======================================================================
 
-task website(dependsOn: [ "validate_all_tests", "test_indexes", "copy_tests", "copy_rsrcs" ]) {
+task website(dependsOn: [ "validate_all_tests", "test_indexes", "copy_tests", "make_index" ]) {
   doFirst {
     mkdir("build")
   }
@@ -210,7 +210,21 @@ task copy_tests(type: Copy) {
 
 task copy_rsrcs(type: Copy) {
   from "src/main/resources"
+  exclude "index.html"
   into "build/html/"
 }
 
-
+task make_index(dependsOn: ["copy_rsrcs"], type: XMLCalabashTask) {
+  inputs.file "tools/xsl/travis-patch.xsl"
+  inputs.file "tools/xpl/run-xslt.xpl"
+  input("source", "src/main/resources/index.html")
+  output("result", "build/html/index.html")
+  pipeline "tools/xpl/run-xslt.xpl"
+  option("stylesheet", new File("tools/xsl/travis-patch.xsl").getAbsolutePath())
+  param("travis", getenv('TRAVIS'))
+  param("travis-build", getenv('TRAVIS_BUILD_NUMBER'))
+  param("travis-commit", getenv('TRAVIS_COMMIT'))
+  doFirst {
+    mkdir("build/html")
+  }
+}

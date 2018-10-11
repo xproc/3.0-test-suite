@@ -2,6 +2,15 @@ a, a:visited, a:link {
     color: blue;
 }
 
+nav {
+    position: fixed;
+    top: 4px;
+    right: 12px;
+    min-width: 1in;
+    padding: 4px;
+    background-color: #c0c0c0;
+}
+
 nav a,
 nav a:visited,
 nav a:link {
@@ -37,16 +46,21 @@ pre {
 
 .element .gi { color: green; }
 
-tbody tr:nth-child(odd) {
+th {
+    text-align: left;
+}
+
+tr:nth-child(odd) {
     background-color: #f0f0f0;
 }
 
-tbody tr:first-child th,
-tbody tr:first-child td {
+tr:first-child th,
+tr:first-child td {
     border-top: 1px solid black;
 }
 
-td:first-child {
+td:first-child,
+th:first-child {
     border-right: 1px solid black;
 }
 
@@ -64,4 +78,13 @@ tbody tr:nth-child(odd) td.pass {
 
 tbody tr:nth-child(odd) td.fail {
     background-color: #f0c0c0;
+}
+
+.buildinfo {
+    border: 1px solid #777777;
+    font-family: sans-serif;
+    padding: 4px;
+    position: absolute;
+    top: 4px;
+    right: 4px;
 }

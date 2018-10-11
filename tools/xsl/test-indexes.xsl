@@ -11,6 +11,8 @@
 
 <xsl:output method="xml" encoding="utf-8" omit-xml-declaration="yes"/>
 
+<xsl:variable name="Z" select="xs:dayTimeDuration('PT0H')"/>
+
 <xsl:template match="/">
   <xsl:apply-templates mode="alphabetical"/>
   <xsl:apply-templates mode="expected"/>
@@ -181,32 +183,51 @@
         </nav>
         <h1>Implementation index</h1>
 
+        <p>
+          <xsl:variable name="time" select="adjust-dateTime-to-timezone(current-dateTime(), $Z)"/>
+          <xsl:text>Report formatted on </xsl:text>
+          <time datetime="{$time}" title="{$time}">
+            <xsl:value-of select='format-dateTime($time, "[D01] [MNn,*-3] [Y0001] at [H01]:[m01] GMT")'/>
+          </time>.</p>
+
         <table cellspacing="0" cellpadding="5">
           <thead>
             <tr>
-              <th rowspan="2">Test</th>
+              <th>Implementation</th>
               <xsl:for-each select="$impl">
-                <th>
+                <td>
                   <xsl:value-of select="$impl/properties/property[@name='processor']/@value"/>
-                </th>
+                </td>
               </xsl:for-each>
             </tr>
             <tr>
+              <th>Version</th>
               <xsl:for-each select="$impl">
-                <th>
+                <td>
                   <xsl:value-of select="$impl/properties/property[@name='version']/@value"/>
-                </th>
+                </td>
               </xsl:for-each>
             </tr>
             <tr>
-              <td>Listed on
-                <xsl:value-of select='format-dateTime(current-dateTime(),
-                                     "[D01] [MNn,*-3] [Y0001] at [H01]:[m01]")'/>
-              </td>
+              <th>Date</th>
               <xsl:for-each select="$impl">
-                <td>Run on
-                <xsl:value-of select='format-dateTime(xs:dateTime($impl/@timestamp),
-                                     "[D01] [MNn,*-3] [Y0001] at [H01]:[m01]")'/>
+                <xsl:variable name="time"
+                              select="adjust-dateTime-to-timezone(xs:dateTime($impl/@timestamp), $Z)"/>
+                <td>
+                  <time datetime="{$time}" title="{$time}">
+                    <xsl:value-of
+                        select='format-dateTime($time, "[D01] [MNn,*-3] [Y0001] at [H01]:[m01] GMT")'/>
+                  </time>
+                </td>
+              </xsl:for-each>
+            </tr>              
+            <tr>
+              <th>Status</th>
+              <xsl:for-each select="$impl">
+                <td>Passing <xsl:value-of select="$impl/@tests - $impl/@errors"/>
+                of <xsl:value-of select="$impl/@tests"/>
+                (<xsl:value-of select="format-number(($impl/@tests - $impl/@errors)
+                                                      div $impl/@tests * 100.0, '#.00')"/>%)
                 </td>
               </xsl:for-each>
             </tr>              
