@@ -7,8 +7,10 @@ This repository is organized in the following way:
 
 ```
 ├── README.md
-├── schema
-│   └── …                        # Schemas for the test suite itself
+├── src/main/schema
+│            └── …               # Schemas for the test suite itself
+├── src/main/resources
+│            └── …               # Site index, CSS, etc.
 └── test-suite
     ├── documents
     │   └── …                    # Ancillary documents used by tests
@@ -22,10 +24,15 @@ This repository is organized in the following way:
 
 ## Test format
 
-Tests must conform to the `schema/test-suite.rnc` and
-`schema/test-suite.sch` schemas. Most of the constraints are in the
+Tests must conform to the `src/main/test-suite.rnc` and
+`src/main/test-suite.sch` schemas. Most of the constraints are in the
 RELAX NG grammar but a few co-constraints are enforced in the
 Schematron.
+
+Note that the build process copies/converts them to
+`build/test-suite.rng` and `build/test-suite.sch`. It’s probably
+better to rely on those versions for testing because the sources may
+be converted in more interesting ways in the future.
 
 The basic structure of a passing test is:
 
