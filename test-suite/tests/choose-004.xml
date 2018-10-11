@@ -4,7 +4,7 @@
         expected="fail"
         code="err:XD0004">
    <t:info>
-      <t:title/>
+      <t:title>Choose 004</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2017-10-09T21:11:50-07:00</t:date>

@@ -2,7 +2,7 @@
         xmlns="http://www.w3.org/1999/xhtml"
         expected="pass">
    <t:info>
-      <t:title/>
+      <t:title>p:inline 003</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2018-07-07T17:01:39+02:00</t:date>

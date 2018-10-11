@@ -3,7 +3,7 @@
         expected="pass"
         when="false()">
    <t:info>
-      <t:title/>
+      <t:title>Document properties 004</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2017-09-24T17:47:42+01:00</t:date>

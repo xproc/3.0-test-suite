@@ -4,7 +4,7 @@
         expected="fail"
         code="err:XD0036">
    <t:info>
-      <t:title/>
+      <t:title>Error XD0036</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2018-03-18T07:41:36+01:00</t:date>
