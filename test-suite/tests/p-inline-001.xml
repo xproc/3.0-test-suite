@@ -22,15 +22,6 @@
                <p>New tests for p:inline</p>
             </t:description>
          </t:revision>
-         <t:revision>
-            <t:date>2017-10-09T08:08:13-07:00</t:date>
-            <t:author>
-               <t:name>Norman Walsh</t:name>
-            </t:author>
-            <t:description>
-               <p>New tests for p:inline</p>
-            </t:description>
-         </t:revision>
       </t:revision-history>
    </t:info>
    <t:pipeline>

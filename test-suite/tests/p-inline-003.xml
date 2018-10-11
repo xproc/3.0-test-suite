@@ -58,15 +58,6 @@
                <p>New p:inline tests</p>
             </t:description>
          </t:revision>
-         <t:revision>
-            <t:date>2017-10-09T21:10:34-07:00</t:date>
-            <t:author>
-               <t:name>Norman Walsh</t:name>
-            </t:author>
-            <t:description>
-               <p>New p:inline tests</p>
-            </t:description>
-         </t:revision>
       </t:revision-history>
    </t:info>
    <t:pipeline>
