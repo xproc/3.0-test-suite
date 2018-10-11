@@ -1,4 +1,4 @@
 dist: trusty
 language: java
 install: true
-script: ./gradlew --stacktrace
+script: ./gradlew --stacktrace --debug --info
