@@ -12,6 +12,16 @@
 
 <xsl:param name="prev" select="''"/>
 <xsl:param name="next" select="''"/>
+<xsl:param name="xproc-spec" select="''"/>
+<xsl:param name="steps-spec" select="''"/>
+<xsl:param name="xproc-link" select="''"/>
+<xsl:param name="steps-link" select="''"/>
+
+<xsl:variable name="xproc" select="if ($xproc-spec = '') then () else doc($xproc-spec)"/>
+<xsl:variable name="steps" select="if ($steps-spec = '') then () else doc($steps-spec)"/>
+
+<xsl:key name="id" match="*" use="@id"/>
+<xsl:key name="href" match="h:a" use="@href"/>
 
 <xsl:template match="t:test">
   <xsl:variable name="basename" select="substring-after(base-uri(.), '/test-suite/tests/')"/>
@@ -48,7 +58,17 @@
       </nav>
 
       <h1><xsl:value-of select="(t:info/t:title|t:title)[1]"/></h1>
+
       <xsl:apply-templates select="t:description"/>
+
+      <xsl:if test="t:info/t:specref">
+        <p class="seealso">
+          <xsl:text>See also </xsl:text>
+          <xsl:apply-templates select="t:info/t:specref"/>
+          <xsl:text>.</xsl:text>
+        </p>
+      </xsl:if>
+
       <p class="expected">
         <xsl:text>Test </xsl:text>
         <a class="testuri" href="../test-suite/tests/{$basename}">
@@ -191,6 +211,65 @@
   <xsl:element name="{local-name(.)}" namespace="http://www.w3.org/1999/xhtml">
     <xsl:apply-templates select="@*,node()"/>
   </xsl:element>
+</xsl:template>
+
+<xsl:template match="t:specref">
+  <xsl:if test="preceding-sibling::t:specref">
+    <xsl:if test="count(../t:specref) gt 2">, </xsl:if>
+    <xsl:if test="empty(following-sibling::t:specref)"> and </xsl:if>
+  </xsl:if>
+
+  <xsl:variable name="tocref" as="node()*">
+    <xsl:choose>
+      <xsl:when test="@spec = 'steps'">
+        <xsl:sequence select="key('href', concat('#', @linkend), $steps)[ancestor::h:div[@class='toc']]"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="key('href', concat('#', @linkend), $xproc)[ancestor::h:div[@class='toc']]"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:variable>
+
+  <xsl:variable name="ref" as="node()*">
+    <xsl:choose>
+      <xsl:when test="@spec = 'steps'">
+        <xsl:sequence select="key('id', @linkend, $steps)"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="key('id', @linkend, $xproc)"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:variable>
+
+  <xsl:variable name="base" as="xs:string">
+    <xsl:choose>
+      <xsl:when test="@spec = 'steps'">
+        <xsl:value-of select="$steps-link"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$xproc-link"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:variable>
+
+  <span class="specref">
+    <xsl:choose>
+      <xsl:when test="$tocref">
+        <a href="{$base}#{@linkend}"><xsl:value-of select="$tocref"/></a>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>[[</xsl:text>
+        <xsl:value-of select="@linkend"/>
+        <xsl:text>]]</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
+    <sup class="specid">
+      <xsl:choose>
+        <xsl:when test="@spec = 'steps'">[XS]</xsl:when>
+        <xsl:otherwise>[XP]</xsl:otherwise>
+      </xsl:choose>
+    </sup>
+  </span>
 </xsl:template>
 
 <xsl:template match="t:pipeline">
