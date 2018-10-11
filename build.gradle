@@ -105,7 +105,6 @@ task transform_all_tests() {
 }
 
 task test_indexes(dependsOn: ["transform_all_tests","git_log_shorter"], type: XMLCalabashTask) {
-  inputs.files fileTree(dir: 'test-suite/tests').include("**/*.xml")
   inputs.file "build/git-log-shorter.xml"
   inputs.file "tools/xsl/test-indexes.xsl"
   inputs.file "tools/xsl/merge-git-log.xsl"
@@ -185,7 +184,11 @@ task git_log_summary(type: Exec) {
   standardOutput = new FileOutputStream(new File("build/git-log-summary.xml"))
 }
 
-task git_log_shorter(dependsOn: ["git_log_summary"], type: XMLCalabashTask) {
+task ls_check(dependsOn: ["git_log_summary"], type: Exec) {
+  commandLine '/bin/ls', '-l', 'build'
+}
+
+task git_log_shorter(dependsOn: ["git_log_summary","ls_check"], type: XMLCalabashTask) {
   inputs.file "tools/xsl/shorter-log.xsl"
   inputs.file "build/git-log-summary.xml"
   outputs.file "build/git-log-shorter.xml"
