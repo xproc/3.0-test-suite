@@ -65,7 +65,7 @@ about the test.
    </t:info>
 ```
 
-If there are multiple revisions, they should be in date order.
+If there are multiple revisions, they must occur in descending date order.
 
 Followed by a description of the test.
 
@@ -151,7 +151,7 @@ repeat the same author information over and over again. If the same
 author is responsible for multiple revisions, a syntacit shortcut is
 possible:
 
-1. On the first `t:author`, specify the author initials.
+1. The first time you add an `t:author`, specify the author initials.
 2. On a subsequent revision by that author, you can use the
    `initials` attribute on the `t:revision` as a shortcut for
    the author.
@@ -161,18 +161,18 @@ For example:
 ```
 <t:revision-history>
 
-<t:revision>
-    <t:date>2018-02-02</t:date>
-    <t:author initials="fa">
-      <t:name>First Author</t:name>
-    </t:author>
+  <t:revision initials=”fa”>
+    <t:date>2018-03-14</t:date>
     <t:description>
       <p>Some description of this revision.</p>
     </t:description>
   </t:revision>
 
-  <t:revision initials=”fa”>
-    <t:date>2018-03-14</t:date>
+  <t:revision>
+    <t:date>2018-02-02</t:date>
+    <t:author initials="fa">
+      <t:name>First Author</t:name>
+    </t:author>
     <t:description>
       <p>Some description of this revision.</p>
     </t:description>
