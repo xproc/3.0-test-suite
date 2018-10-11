@@ -2,6 +2,15 @@ a, a:visited, a:link {
     color: blue;
 }
 
+nav {
+    position: fixed;
+    top: 4px;
+    right: 12px;
+    min-width: 1in;
+    padding: 4px;
+    background-color: #c0c0c0;
+}
+
 nav a,
 nav a:visited,
 nav a:link {
@@ -64,4 +73,13 @@ tbody tr:nth-child(odd) td.pass {
 
 tbody tr:nth-child(odd) td.fail {
     background-color: #f0c0c0;
+}
+
+.buildinfo {
+    border: 1px solid #777777;
+    font-family: sans-serif;
+    padding: 4px;
+    position: absolute;
+    top: 4px;
+    right: 4px;
 }

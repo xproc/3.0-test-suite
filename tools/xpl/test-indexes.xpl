@@ -12,31 +12,6 @@
   </p:input>
 </p:xslt>
 
-<!--
-<p:for-each>
-  <p:iteration-source select="/*/c:file"/>
-
-  <p:variable name="baseuri" select="resolve-uri(/*/@name, base-uri(.))"/>
-  <p:load>
-    <p:with-option name="href" select="$baseuri"/>
-  </p:load>
-  <p:add-attribute attribute-name="xml:base" match="/*">
-    <p:with-option name="attribute-value" select="$baseuri"/>
-  </p:add-attribute>
-  <p:xslt>
-    <p:input port="stylesheet">
-      <p:document href="../xsl/format-test.xsl"/>
-    </p:input>
-  </p:xslt>
-  <p:store method="html">
-    <p:with-option name="href" select="replace(
-                                          concat('../../build/html/',
-                                                 substring-after($baseuri, '/test-suite/tests/')),
-                                          '.xml', '.html')"/>
-  </p:store>
-</p:for-each>
--->
-
 <p:viewport match="c:file">
   <p:viewport-source>
     <p:pipe step="dirlist" port="result"/>
