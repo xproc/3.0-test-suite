@@ -12,7 +12,7 @@
 <xsl:variable name="Z" select="xs:dayTimeDuration('PT0H')"/>
 
 <xsl:template match="*[@x-travis]">
-  <xsl:if test="not(@x-travis = 'true') or ($travis != '')">
+  <xsl:if test="not(@x-travis = 'true') or ($travis = 'true')">
     <xsl:copy>
       <xsl:apply-templates select="@* except @x-travis"/>
       <xsl:apply-templates select="node()"/>

@@ -222,8 +222,8 @@ task make_index(dependsOn: ["copy_rsrcs"], type: XMLCalabashTask) {
   pipeline "tools/xpl/run-xslt.xpl"
   option("stylesheet", new File("tools/xsl/travis-patch.xsl").getAbsolutePath())
   param("travis", getenv('TRAVIS'))
-  param("travis-build", getenv('TRAVIS-BUILD'))
-  param("travis-commit", getenv('TRAVIS-COMMIT'))
+  param("travis-build", getenv('TRAVIS_BUILD_NUMBER'))
+  param("travis-commit", getenv('TRAVIS_COMMIT'))
   doFirst {
     mkdir("build/html")
   }
