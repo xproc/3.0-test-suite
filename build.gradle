@@ -30,7 +30,7 @@ dependencies {
   )
 }
 
-defaultTasks 'validate_all_tests'
+defaultTasks 'website'
 
 apply plugin: 'com.xmlcalabash.task'
 apply plugin: 'groovy'
@@ -48,28 +48,43 @@ def getenv(String name) {
 }
 
 // ======================================================================
+
+// Make sure this happens during the configure phase or the
+// call to git-log-summary will fail.
+mkdir("build")
+
+// ======================================================================
 // schemas
 
-task schemas(dependsOn: ["test_suite_rng", "test_suite_sch"]) {
+task schemas(dependsOn: ["test_suite_rng", "test_suite_sch", "junit_xsd"]) {
   // nop
 }
 
 task test_suite_rng(type: JavaExec) {
-  inputs.file "schema/test-suite.rnc"
+  inputs.file "src/main/schema/test-suite.rnc"
   outputs.file "build/test-suite.rng"
 
   classpath = configurations.tools
   main = 'com.thaiopensource.relaxng.translate.Driver'
-  args = ["schema/test-suite.rnc", "build/test-suite.rng"]
+  args = ["src/main/schema/test-suite.rnc", "build/test-suite.rng"]
   doFirst {
     mkdir("build")
   }
 }
 
 task test_suite_sch(type: Copy) {
-  from "schema/"
+  from "src/main/schema/"
   into "build/"
   include "*.sch"
+  doFirst {
+    mkdir("build")
+  }
+}
+
+task junit_xsd(type: Copy) {
+  from "src/main/schema/"
+  into "build/"
+  include "*.xsd"
   doFirst {
     mkdir("build")
   }
@@ -81,6 +96,64 @@ task validate_all_tests() {
   doLast {
     println("All tests valid")
   }
+}
+
+task transform_all_tests(dependsOn: [ "validate_all_tests" ]) {
+  doLast {
+    println("All tests transformed")
+  }
+}
+
+task test_indexes(dependsOn: ["transform_all_tests","git_log_shorter"], type: XMLCalabashTask) {
+  inputs.file "build/git-log-shorter.xml"
+  inputs.file "tools/xsl/test-indexes.xsl"
+  inputs.file "tools/xsl/merge-git-log.xsl"
+  inputs.file "tools/xpl/test-indexes.xpl"
+  outputs.file "build/html/alphabetical.html"
+  pipeline "tools/xpl/test-indexes.xpl"
+  doFirst {
+    mkdir("build/html")
+  }
+}
+
+def tests = []
+fileTree(dir: 'test-suite/tests').include("**/*.xml").visit {
+  FileVisitDetails details ->
+    def fn = details.file.name
+    tests << fn.replace(".xml","")
+}
+tests = tests.sort()
+
+def count = 0
+tests.each { fn ->
+  def prev = ""
+  def next = ""
+  if (count > 0) {
+    prev = tests[count - 1]
+  }
+  if (count + 1 < tests.size) {
+    next = tests[count + 1]
+  }
+
+  def taskname = "tests_" + fn
+
+  task "xform_$taskname"(type: XMLCalabashTask) {
+    inputs.file "test-suite/tests/" + fn + ".xml"
+    inputs.file "tools/xsl/format-test.xsl"
+    inputs.file "tools/xpl/format-test.xpl"
+    outputs.file "build/html/tests/" + fn + ".html"
+    input("source", "test-suite/tests/" + fn + ".xml")
+    output("result", "build/html/tests/" + fn + ".html")
+    option("prev", prev)
+    option("next", next)
+    pipeline "tools/xpl/format-test.xpl"
+    doFirst {
+      mkdir("build/tests")
+    }
+  }
+  transform_all_tests.dependsOn "xform_$taskname"
+
+  count = count + 1
 }
 
 fileTree(dir: 'test-suite/tests').include("**/*.xml").each { file ->
@@ -100,15 +173,44 @@ fileTree(dir: 'test-suite/tests').include("**/*.xml").each { file ->
     }
   }
   validate_all_tests.dependsOn "process_$name"
+
 }
 
-task validate(dependsOn: [ "schemas" ], type: XMLCalabashTask) {
-  inputs.files fileTree(dir: "test-suite")
-  outputs.file "build/tests/p-inline-007.xml"
-  input("source", "test-suite/tests/p-inline-007.xml")
-  output("result", "build/tests/p-inline-007.xml")
-  pipeline "tools/xpl/validate.xpl"
+// ======================================================================
+
+task git_log_summary(type: Exec) {
+  outputs.file "build/git-log-summary.xml"
+  commandLine 'tools/bin/git-log-summary', '-o', 'build/git-log-summary.xml'
+}
+
+task git_log_shorter(dependsOn: ["git_log_summary"], type: XMLCalabashTask) {
+  inputs.file "tools/xsl/shorter-log.xsl"
+  inputs.file "build/git-log-summary.xml"
+  outputs.file "build/git-log-shorter.xml"
+  input("source", "build/git-log-summary.xml")
+  output("result", "build/git-log-shorter.xml")
+  pipeline "tools/xpl/shorter-log.xpl"
   doFirst {
-    mkdir("build/tests")
+    mkdir("build")
   }
 }
+
+// ======================================================================
+
+task website(dependsOn: [ "validate_all_tests", "test_indexes", "copy_tests", "copy_rsrcs" ]) {
+  doFirst {
+    mkdir("build")
+  }
+}
+
+task copy_tests(type: Copy) {
+  from "test-suite/"
+  into "build/html/test-suite/"
+}
+
+task copy_rsrcs(type: Copy) {
+  from "src/main/resources"
+  into "build/html/"
+}
+
+

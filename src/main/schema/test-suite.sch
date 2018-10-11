@@ -26,6 +26,27 @@
     </s:rule>
   </s:pattern>
 
+  <s:pattern>
+    <s:title>A title must be provided</s:title>
+    <s:rule context="t:test">
+      <s:assert test="exists(.//t:title)">Title is required</s:assert>
+    </s:rule>
+  </s:pattern>
+
+  <s:pattern>
+    <s:title>A title must not be empty</s:title>
+    <s:rule context="t:title">
+      <s:assert test="normalize-space(.) != ''">Title must not be empty</s:assert>
+    </s:rule>
+  </s:pattern>
+
+  <s:pattern>
+    <s:title>Descending dates</s:title>
+    <s:rule context="t:revision[preceding-sibling::t:revision]">
+      <s:assert test="preceding-sibling::t:revision[1]/t:date ge t:date">Dates must be in descending order</s:assert>
+    </s:rule>
+  </s:pattern>
+
   <!-- It would be nice to test that t:test/@code contains valid error codes...
        but I can't figure out how to make that work in Schematron. I also suspect
        that XML Calabash isn't supporting Schematron perfectly, but that's a

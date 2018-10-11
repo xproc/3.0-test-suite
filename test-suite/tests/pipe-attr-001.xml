@@ -2,7 +2,7 @@
         xmlns="http://www.w3.org/1999/xhtml"
         expected="pass">
    <t:info>
-      <t:title/>
+      <t:title>Pipe attributes 001</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2018-02-18T08:23:14+01:00</t:date>

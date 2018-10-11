@@ -2,7 +2,7 @@
         xmlns="http://www.w3.org/1999/xhtml"
         expected="pass">
    <t:info>
-      <t:title/>
+      <t:title>Try/catch 006</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2017-09-24T17:47:42+01:00</t:date>

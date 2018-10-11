@@ -2,3 +2,6 @@ dist: trusty
 language: java
 install: true
 script: ./gradlew --stacktrace
+
+after_success:
+  - tools/travis-publish.sh

@@ -3,7 +3,7 @@
         expected="pass"
         features="p-count">
    <t:info>
-      <t:title/>
+      <t:title>p:count 001</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2017-09-25T17:42:39+01:00</t:date>
