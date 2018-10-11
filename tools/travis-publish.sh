@@ -11,7 +11,7 @@ if [ "$TRAVIS_REPO_SLUG" == "$GIT_PUB_REPO" ]; then
     cd $HOME
     git config --global user.email ${GIT_EMAIL}
     git config --global user.name ${GIT_NAME}
-    git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/${GIT_PUB_REPO} gh-pages > /dev/null
+    git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/${GIT_PUB_REPO} gh-pages
 
     if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
         echo -e "Publishing test-suite...\n"
@@ -19,7 +19,7 @@ if [ "$TRAVIS_REPO_SLUG" == "$GIT_PUB_REPO" ]; then
         TIP=${TRAVIS_TAG:="head"}
 
         cd gh-pages
-        rsync -var --delete $HOME/pubroot/ ./
+        rsync -var --exclude .git --delete $HOME/pubroot/ ./
 
         if [ "$GITHUB_CNAME" != "" ]; then
             echo $GITHUB_CNAME > CNAME
