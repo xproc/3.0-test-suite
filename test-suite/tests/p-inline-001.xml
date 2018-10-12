@@ -5,6 +5,15 @@
       <t:title>p:inline 001</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2018-10-12</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description>
+               <p>Fixing broken test (namespace removed)</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2018-02-18T08:23:14+01:00</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -25,7 +34,8 @@
       </t:revision-history>
    </t:info>
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="main" version="3.0">
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+         xmlns:c=""http://www.w3.org/ns/xproc-step" name="main" version="3.0">
          <p:output port="result" sequence="true"/>
 
          <p:identity name="inline">
