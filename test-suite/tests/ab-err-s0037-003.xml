@@ -2,13 +2,22 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:err="http://www.w3.org/ns/xproc-error"
         expected="fail"
-        code="err:XS0044">
+        code="err:XS0037">
    <t:info>
-      <t:title>Error test XS0044 002</t:title>
+      <t:title>Error test XS0037 003</t:title>
       <t:revision-history>
+         <t:revision initials="nw">
+            <t:date>2018-10-12</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description>
+               <p>Corrected the error code.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2018-06-02T17:53:51-05:00</t:date>
-            <t:author>
+            <t:author initials="nw">
                <t:name>Norman Walsh</t:name>
             </t:author>
             <t:description>
@@ -27,15 +36,15 @@
       </t:revision-history>
    </t:info>
    <t:description>
-      <p>Tests that XS0044 is raised, when p:with-input contains non whitespace text nodes.</p>
+      <p>Tests that <code>err:XS0037</code> is raised when <code>p:input</code>
+      contains non whitespace text nodes.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
             <p:output port="result"/>
-
-            <p:identity>
-                <p:with-input>This is non whitespace text</p:with-input>
-            </p:identity>
+            <p:input port="source">This is non whitespace text</p:input>
+            
+            <p:identity/>
         </p:declare-step>
    </t:pipeline>
 </t:test>
