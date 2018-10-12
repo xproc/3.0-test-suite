@@ -19,6 +19,7 @@
 
 <xsl:variable name="xproc" select="if ($xproc-spec = '') then () else doc($xproc-spec)"/>
 <xsl:variable name="steps" select="if ($steps-spec = '') then () else doc($steps-spec)"/>
+<xsl:variable name="calabash" select="doc('../../reports/xml-calabash.xml')/*"/>
 
 <xsl:key name="id" match="*" use="@id"/>
 <xsl:key name="href" match="h:a" use="@href"/>
@@ -32,29 +33,36 @@
       <title>
         <xsl:value-of select="(t:info/t:title|t:title)[1]"/>
       </title>
+      <link href="../css/prism.css" rel="stylesheet" type="text/css" />
+      <link href="../css/db-prism.css" rel="stylesheet" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../css/base.css" />
+      <link rel="stylesheet" type="text/css" href="../css/xproc.css" />
+      <link rel="stylesheet" type="text/css" href="../css/base.css" />
+      <link href="../css/all.css" rel="stylesheet" type="text/css" />
       <link href="../css/testsuite.css" rel="stylesheet" type="text/css" />
+      <script type="text/javascript" src="../js/dbmodnizr.js"></script>
     </head>
     <body>
       <nav>
-        <a href="../">↑</a>
-        <xsl:text> / </xsl:text>
         <xsl:choose>
           <xsl:when test="$prev eq ''">
             <xsl:text> </xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            <a href="{$prev}.html">←</a>
+            <a href="{$prev}.html"><i class="fas fa-chevron-circle-left"></i></a>
           </xsl:otherwise>
         </xsl:choose>
-        <xsl:text> / </xsl:text>
+        <xsl:text> </xsl:text>
         <xsl:choose>
           <xsl:when test="$next eq ''">
             <xsl:text> </xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            <a href="{$next}.html">→</a>
+            <a href="{$next}.html"><i class="fas fa-chevron-circle-right"></i></a>
           </xsl:otherwise>
         </xsl:choose>
+        <xsl:text> </xsl:text>
+        <a href="../"><i class="fa fa-chevron-circle-up"></i></a>
       </nav>
 
       <h1><xsl:value-of select="(t:info/t:title|t:title)[1]"/></h1>
@@ -86,20 +94,28 @@
           <xsl:choose>
             <xsl:when test="count($codes) = 1">
               <xsl:text> with error code </xsl:text>
-              <xsl:sequence select="t:error-code($codes)"/>
+              <code>
+                <xsl:sequence select="t:error-code($codes)"/>
+              </code>
             </xsl:when>
             <xsl:otherwise>
               <xsl:text> with one of the following error codes: </xsl:text>
               <xsl:choose>
                 <xsl:when test="count($codes) = 2">
-                  <xsl:sequence select="t:error-code($codes[1])"/>
+                  <code>
+                    <xsl:sequence select="t:error-code($codes[1])"/>
+                  </code>
                   <xsl:text> or </xsl:text>
-                  <xsl:sequence select="t:error-code($codes[2])"/>
+                  <code>
+                    <xsl:sequence select="t:error-code($codes[2])"/>
+                  </code>
                 </xsl:when>
                 <xsl:otherwise>
                   <xsl:for-each select="$codes">
                     <xsl:if test="position() gt 1">, </xsl:if>
-                    <xsl:sequence select="t:error-code(.)"/>
+                    <code>
+                      <xsl:sequence select="t:error-code(.)"/>
+                    </code>
                     <xsl:if test="position() eq last() - 1"> or </xsl:if>
                   </xsl:for-each>
                 </xsl:otherwise>
@@ -142,6 +158,8 @@
 
       <xsl:apply-templates select="(t:pipeline, t:input, t:option, t:schematron,
                                     t:info/t:revision-history)"/>
+
+      <script src="../js/prism.js"></script>
     </body>
   </html>
 </xsl:template>
@@ -206,6 +224,21 @@
 </xsl:template>
 
 <xsl:template match="t:author/t:email|t:author/t:uri"/>
+
+<xsl:template match="h:code">
+  <xsl:element name="{local-name(.)}" namespace="http://www.w3.org/1999/xhtml">
+    <xsl:apply-templates select="@*"/>
+
+    <xsl:choose>
+      <xsl:when test="not(contains(., ' ')) and starts-with(., 'err:')">
+        <xsl:sequence select="t:error-code(.)"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates select="node()"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:element>
+</xsl:template>
 
 <xsl:template match="h:*">
   <xsl:element name="{local-name(.)}" namespace="http://www.w3.org/1999/xhtml">
@@ -275,7 +308,27 @@
 <xsl:template match="t:pipeline">
   <div class="pipeline">
     <h2>The pipeline</h2>
+
     <xsl:call-template name="insert-content"/>
+
+    <xsl:variable name="basename" select="substring-after(base-uri(/*), '/test-suite/tests/')"/>
+    <xsl:variable name="i1" select="($calabash/testcase[@name=$basename])[1]"/>
+    <xsl:if test="$i1">
+      <div class="implbanners">
+        <div class="xmlcalabash">
+          <a href="../implementation.html#{substring-before($basename, '.xml')}">
+            <xsl:choose>
+              <xsl:when test="$i1/failure">
+                <img src="../img/xc-fail.svg" alt="XML Calabash failing"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <img src="../img/xc-pass.svg" alt="XML Calabash passing"/>
+              </xsl:otherwise>
+            </xsl:choose>
+          </a>
+        </div>
+      </div>
+    </xsl:if>
   </div>
 </xsl:template>
 
@@ -330,7 +383,7 @@
 </xsl:template>
 
 <xsl:template name="insert-content">
-  <pre>
+  <pre class="programlisting line-numbers language-markup" data-language="Markup">
     <code>
       <xsl:choose>
         <xsl:when test="@src">
@@ -373,7 +426,7 @@
         <span class="stag">
           <span class="sto">&lt;</span>
           <span class="gi">
-            <xsl:value-of select="node-name(.)"/>
+            <xsl:sequence select="t:gi(.)"/>
           </span>
           <xsl:call-template name="attributes"/>
           <span class="stc">/&gt;</span>
@@ -385,7 +438,7 @@
         <span class="stag">
           <span class="sto">&lt;</span>
           <span class="gi">
-            <xsl:value-of select="node-name(.)"/>
+            <xsl:sequence select="t:gi(.)"/>
           </span>
           <xsl:call-template name="attributes"/>
           <span class="stc">&gt;</span>
@@ -580,10 +633,17 @@
 
 <xsl:function name="t:error-code">
   <xsl:param name="code" as="xs:string"/>
+  <xsl:variable name="name" select="substring($code, 6)"/>
 
   <xsl:choose>
-    <xsl:when test="starts-with($code, 'err:XS') or starts-with($code, 'err:XD')">
-      <a href="http://spec.xproc.org/master/head/xproc/#err.{substring($code, 6)}">
+    <xsl:when test="starts-with($code, 'err:XS') or starts-with($code, 'err:XD')
+                    and key('id', concat('err.',$name), $xproc)">
+      <a href="{$xproc-link}#err.{$name}">
+        <xsl:value-of select="$code"/>
+      </a>
+    </xsl:when>
+    <xsl:when test="starts-with($code, 'err:XC') and key('id', concat('err.',$name), $steps)">
+      <a href="{$steps-link}#err.{$name}">
         <xsl:value-of select="$code"/>
       </a>
     </xsl:when>
@@ -597,6 +657,34 @@
   <xsl:param name="code" as="xs:string"/>
 
   <xsl:value-of select="$code"/>
+</xsl:function>
+
+<xsl:function name="t:gi">
+  <xsl:param name="node" as="element()"/>
+
+  <xsl:choose>
+    <xsl:when test="namespace-uri($node) = 'http://www.w3.org/ns/xproc'">
+      <xsl:variable name="name" select="local-name($node)"/>
+      <xsl:choose>
+        <xsl:when test="key('id', concat('p.',$name), $xproc)">
+          <a href="{$xproc-link}#p.{$name}">
+            <xsl:value-of select="node-name($node)"/>
+          </a>
+        </xsl:when>
+        <xsl:when test="key('id', concat('c.',$name), $steps)">
+          <a href="{$steps-link}#c.{$name}">
+            <xsl:value-of select="node-name($node)"/>
+          </a>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="node-name($node)"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:value-of select="node-name($node)"/>
+    </xsl:otherwise>
+  </xsl:choose>
 </xsl:function>
 
 </xsl:stylesheet>
