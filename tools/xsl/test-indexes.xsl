@@ -27,13 +27,11 @@
   <xsl:result-document href="/fakeroot/alphabetical.html">
     <html>
       <head>
-        <meta charset="utf-8"/>
-        <title>Alphabetical index</title>
-        <link href="css/testsuite.css" rel="stylesheet" type="text/css" />
+        <xsl:sequence select="t:head('Alphabetical index')"/>
      </head>
       <body>
         <nav>
-          <a href="index.html">↑</a>
+          <a href="index.html"><i class="fa fa-chevron-circle-up"></i></a>
         </nav>
         <h1>Alphabetical index</h1>
         <ul>
@@ -46,6 +44,7 @@
             </li>
           </xsl:for-each>
         </ul>
+        <script src="js/prism.js"></script>
       </body>
     </html>
   </xsl:result-document>
@@ -57,13 +56,11 @@
   <xsl:result-document href="/fakeroot/expected.html">
     <html>
       <head>
-        <meta charset="utf-8"/>
-        <title>Expectation index</title>
-        <link href="css/testsuite.css" rel="stylesheet" type="text/css" />
+        <xsl:sequence select="t:head('Expectation index')"/>
       </head>
       <body>
         <nav>
-          <a href="index.html">↑</a>
+          <a href="index.html"><i class="fa fa-chevron-circle-up"></i></a>
         </nav>
         <h1>Expectation index</h1>
         <h2>Expected to pass</h2>
@@ -84,6 +81,7 @@
             </li>
           </xsl:for-each>
         </ul>
+        <script src="js/prism.js"></script>
       </body>
     </html>
   </xsl:result-document>
@@ -95,13 +93,11 @@
   <xsl:result-document href="/fakeroot/element.html">
     <html>
       <head>
-        <meta charset="utf-8"/>
-        <title>Element index</title>
-        <link href="css/testsuite.css" rel="stylesheet" type="text/css" />
+        <xsl:sequence select="t:head('Element index')"/>
       </head>
       <body>
         <nav>
-          <a href="index.html">↑</a>
+          <a href="index.html"><i class="fa fa-chevron-circle-up"></i></a>
         </nav>
         <h1>Element index</h1>
 
@@ -158,8 +154,8 @@
               </ul>
             </li>
           </xsl:for-each>
-
         </ul>
+        <script src="js/prism.js"></script>
       </body>
     </html>
   </xsl:result-document>
@@ -173,13 +169,11 @@
   <xsl:result-document href="/fakeroot/implementation.html">
     <html>
       <head>
-        <meta charset="utf-8"/>
-        <title>Implementation index</title>
-        <link href="css/testsuite.css" rel="stylesheet" type="text/css" />
+        <xsl:sequence select="t:head('Implementation index')"/>
       </head>
       <body>
         <nav>
-          <a href="index.html">↑</a>
+          <a href="index.html"><i class="fa fa-chevron-circle-up"></i></a>
         </nav>
         <h1>Implementation index</h1>
 
@@ -257,6 +251,7 @@
             </xsl:for-each>
           </tbody>
         </table>
+        <script src="js/prism.js"></script>
       </body>
     </html>
   </xsl:result-document>
@@ -268,13 +263,11 @@
   <xsl:result-document href="/fakeroot/date.html">
     <html>
       <head>
-        <meta charset="utf-8"/>
-        <title>Date index</title>
-        <link href="css/testsuite.css" rel="stylesheet" type="text/css" />
+        <xsl:sequence select="t:head('Date index')"/>
       </head>
       <body>
         <nav>
-          <a href="index.html">↑</a>
+          <a href="index.html"><i class="fa fa-chevron-circle-up"></i></a>
         </nav>
         <h1>Date index</h1>
         <dl>
@@ -311,6 +304,7 @@
             </dd>
           </xsl:for-each-group>
         </dl>
+        <script src="js/prism.js"></script>
       </body>
     </html>
   </xsl:result-document>
@@ -322,9 +316,24 @@
   <xsl:param name="xml"/>
   <xsl:variable name="name" select="substring-before($xml, '.xml')"/>
 
-  <a href="tests/{$name}.html">
+  <a href="tests/{$name}.html" id="#{$name}">
     <xsl:value-of select="$name"/>
   </a>
+</xsl:function>
+
+<xsl:function name="t:head">
+  <xsl:param name="title" required="true"/>
+  
+  <meta charset="utf-8"/>
+  <title><xsl:value-of select="$title"/></title>
+  <link href="css/prism.css" rel="stylesheet" type="text/css" />
+  <link href="css/db-prism.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="css/base.css" />
+  <link rel="stylesheet" type="text/css" href="css/xproc.css" />
+  <link rel="stylesheet" type="text/css" href="css/base.css" />
+  <link href="css/all.css" rel="stylesheet" type="text/css" />
+  <link href="css/testsuite.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="js/dbmodnizr.js"></script>
 </xsl:function>
 
 </xsl:stylesheet>

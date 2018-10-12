@@ -6,9 +6,7 @@ nav {
     position: fixed;
     top: 4px;
     right: 12px;
-    min-width: 1in;
     padding: 4px;
-    background-color: #c0c0c0;
 }
 
 nav a,
@@ -18,8 +16,21 @@ nav a:link {
     color: black;
 }
 
-pre {
-    font-size: 120%;
+.implbanner {
+    position: fixed;
+    top: 24px;
+    right: 12px;
+    padding: 4px;
+}
+
+pre a,
+pre a:visited,
+pre a:link {
+    text-decoration: none;
+    color: inherit;
+}
+
+code {
 }
 
 .sto, .stc, .eto, .etc, .aq {

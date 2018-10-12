@@ -150,11 +150,11 @@ tests.each { fn ->
     param("prev", prev)
     param("next", next)
     param("xproc-spec", new File("build/xproc.html").getAbsolutePath())
-    param("steps-spec", new File("build/xproc.html").getAbsolutePath())
+    param("steps-spec", new File("build/steps.html").getAbsolutePath())
     param("xproc-link", "https://spec.xproc.org/master/head/xproc/")
     param("steps-link", "https://spec.xproc.org/master/head/steps/")
     option("stylesheet", new File("tools/xsl/format-test.xsl").getAbsolutePath())
-    pipeline "tools/xpl/run-xslt.xpl"
+    pipeline "tools/xpl/run-xslt-html.xpl"
     doFirst {
       mkdir("build/tests")
     }
@@ -225,10 +225,10 @@ task copy_rsrcs(type: Copy) {
 
 task make_index(dependsOn: ["copy_rsrcs"], type: XMLCalabashTask) {
   inputs.file "tools/xsl/travis-patch.xsl"
-  inputs.file "tools/xpl/run-xslt.xpl"
+  inputs.file "tools/xpl/run-xslt-html.xpl"
   input("source", "src/main/resources/index.html")
   output("result", "build/html/index.html")
-  pipeline "tools/xpl/run-xslt.xpl"
+  pipeline "tools/xpl/run-xslt-html.xpl"
   option("stylesheet", new File("tools/xsl/travis-patch.xsl").getAbsolutePath())
   param("travis", getenv('TRAVIS'))
   param("travis-build", getenv('TRAVIS_BUILD_NUMBER'))
