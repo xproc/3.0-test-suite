@@ -48,7 +48,7 @@
   <p:iteration-source>
     <p:pipe step="indexes" port="secondary"/>
   </p:iteration-source>
-  <p:store method="xml" indent="true">
+  <p:store method="html" version="5">
     <p:with-option name="href" select="concat('../../build/html/',
                                               substring-after(base-uri(.), '/fakeroot/'))"/>
   </p:store>
