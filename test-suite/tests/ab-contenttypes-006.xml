@@ -5,6 +5,15 @@
       <t:title>Contenttypes 006</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2018-10-12</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description>
+               <p>Fixing broken test (namespace removed)</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2018-10-03T16:59:51+02:00</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -55,7 +64,8 @@
       <p>Tests that output port with no @content-types accepts non-XML document.</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+         xmlns:test="http://test" version="3.0">
             <p:output port="result"/>        
             
             <p:declare-step type="test:step">
@@ -67,7 +77,7 @@
                 </p:identity>
             </p:declare-step>
             
-            <test:step xmlns:test="http://test"/>
+            <test:step />
             <p:wrap-sequence wrapper="result"/>
         </p:declare-step>
    </t:pipeline>
