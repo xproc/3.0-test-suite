@@ -179,50 +179,81 @@
 
         <xsl:variable name="tests" select="."/>
 
-        <xsl:variable name="all-errors" as="xs:string*">
+        <xsl:variable name="all-test-errors" as="xs:string*">
           <xsl:for-each select="t:test[@code]">
             <xsl:sequence select="tokenize(@code, '\s+')"/>
           </xsl:for-each>
         </xsl:variable>
 
-        <xsl:variable name="errors" as="xs:string*">
-          <xsl:for-each select="distinct-values($all-errors)">
+        <xsl:variable name="test-errors" as="xs:string*">
+          <xsl:for-each select="distinct-values($all-test-errors)">
             <xsl:sort select="."/>
             <xsl:sequence select="."/>
           </xsl:for-each>
         </xsl:variable>
 
-        <ul>
-          <xsl:for-each select="$errors">
-            <xsl:variable name="name" select="."/>
-            <li>
-              <code class="index-item"><xsl:sequence select="t:error-code($name)"/></code>
+        <xsl:variable name="all-spec-errors" as="xs:string*">
+          <xsl:sequence select="$xproc//*/@id[starts-with(., 'err.S') or starts-with(., 'err.D')
+                                              or starts-with(., 'err.C')]"/>
+          <xsl:sequence select="$steps//*/@id[starts-with(., 'err.S') or starts-with(., 'err.D')
+                                              or starts-with(., 'err.C')]"/>
+        </xsl:variable>
 
-              <ul>
-                <xsl:for-each select="$tests/t:test[contains(@code, $name)]">
-                  <xsl:sort select="@xml:base"/>
-                  <xsl:variable name="href" select="substring-after(@xml:base, '/tests/')"/>
-                  <li>
-                    <xsl:sequence select="t:test-link($href)"/>
-                  </li>
-                </xsl:for-each>
-              </ul>
-            </li>
+        <xsl:variable name="spec-errors" as="xs:string*">
+          <xsl:for-each select="distinct-values($all-spec-errors)">
+            <xsl:sort select="."/>
+            <xsl:value-of select="concat('err:X', substring-after(., 'err.'))"/>
           </xsl:for-each>
+        </xsl:variable>
 
-          <li>
-            <xsl:text>None</xsl:text>
-            <ul>
-              <xsl:for-each select="$tests/t:test[not(@code)]">
-                <xsl:sort select="@xml:base"/>
-                <xsl:variable name="href" select="substring-after(@xml:base, '/tests/')"/>
+        <xsl:for-each select="('err:XS', 'err:XD', 'err:XC')">
+          <xsl:choose>
+            <xsl:when test=". = 'err:XS'"><h2>Static errors</h2></xsl:when>
+            <xsl:when test=". = 'err:XD'"><h2>Dynamic errors</h2></xsl:when>
+            <xsl:when test=". = 'err:XC'"><h2>Step errors</h2></xsl:when>
+          </xsl:choose>
+
+          <xsl:variable name="errtype" select="."/>
+
+          <ul>
+            <xsl:for-each select="$spec-errors[starts-with(., $errtype)]">
+              <xsl:variable name="name" select="."/>
+              <li>
+                <code class="index-item"><xsl:sequence select="t:error-code($name)"/></code>
+                <xsl:variable name="etests" select="$tests/t:test[contains(@code, $name)]"/>
+                <ul>
+                  <xsl:for-each select="$etests">
+                    <xsl:sort select="@xml:base"/>
+                    <xsl:variable name="href" select="substring-after(@xml:base, '/tests/')"/>
+                    <li>
+                      <xsl:sequence select="t:test-link($href)"/>
+                    </li>
+                  </xsl:for-each>
+                </ul>
+              </li>
+            </xsl:for-each>
+
+            <xsl:for-each select="$test-errors[starts-with(., $errtype)]">
+              <xsl:variable name="name" select="."/>
+              <xsl:if test="empty($spec-errors[. = $name])">
                 <li>
-                  <xsl:sequence select="t:test-link($href)"/>
+                  <code class="index-item"><xsl:sequence select="t:error-code($name)"/></code>
+                  <xsl:text> (This error is not defined in the specs.)</xsl:text>
+                  <xsl:variable name="etests" select="$tests/t:test[contains(@code, $name)]"/>
+                  <ul>
+                    <xsl:for-each select="$etests">
+                      <xsl:sort select="@xml:base"/>
+                      <xsl:variable name="href" select="substring-after(@xml:base, '/tests/')"/>
+                      <li>
+                        <xsl:sequence select="t:test-link($href)"/>
+                      </li>
+                    </xsl:for-each>
+                  </ul>
                 </li>
-              </xsl:for-each>
-            </ul>
-          </li>
-        </ul>
+              </xsl:if>
+            </xsl:for-each>
+          </ul>
+        </xsl:for-each>
         <script src="js/prism.js"></script>
       </body>
     </html>
