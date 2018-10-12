@@ -30,6 +30,13 @@ pre a:link {
     color: inherit;
 }
 
+.index-item a,
+.index-item a:visited,
+.index-item a:link {
+    text-decoration: none;
+    color: inherit;
+}
+
 code {
 }
 

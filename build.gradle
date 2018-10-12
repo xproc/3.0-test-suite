@@ -112,8 +112,13 @@ task transform_all_tests(dependsOn: [ "validate_all_tests" ]) {
 task test_indexes(dependsOn: ["transform_all_tests","git_log_shorter"], type: XMLCalabashTask) {
   inputs.file "build/git-log-shorter.xml"
   inputs.file "tools/xsl/test-indexes.xsl"
+  inputs.file "tools/xsl/functions.xsl"
   inputs.file "tools/xsl/merge-git-log.xsl"
   outputs.file "build/html/alphabetical.html"
+  param("xproc-spec", new File("build/xproc.html").getAbsolutePath())
+  param("steps-spec", new File("build/steps.html").getAbsolutePath())
+  param("xproc-link", "https://spec.xproc.org/master/head/xproc/")
+  param("steps-link", "https://spec.xproc.org/master/head/steps/")
   pipeline "tools/xpl/test-indexes.xpl"
   doFirst {
     mkdir("build/html")
@@ -144,6 +149,7 @@ tests.each { fn ->
   task "xform_$taskname"(dependsOn: ["get_specs"], type: XMLCalabashTask) {
     inputs.file "test-suite/tests/" + fn + ".xml"
     inputs.file "tools/xsl/format-test.xsl"
+    inputs.file "tools/xsl/functions.xsl"
     outputs.file "build/html/tests/" + fn + ".html"
     input("source", "test-suite/tests/" + fn + ".xml")
     output("result", "build/html/tests/" + fn + ".html")
