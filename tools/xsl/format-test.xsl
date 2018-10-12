@@ -8,21 +8,12 @@
 		exclude-result-prefixes="h p t xs"
                 version="2.0">
 
+<xsl:import href="functions.xsl"/>
+
 <xsl:output method="html" encoding="utf-8" omit-xml-declaration="yes"/>
 
 <xsl:param name="prev" select="''"/>
 <xsl:param name="next" select="''"/>
-<xsl:param name="xproc-spec" select="''"/>
-<xsl:param name="steps-spec" select="''"/>
-<xsl:param name="xproc-link" select="''"/>
-<xsl:param name="steps-link" select="''"/>
-
-<xsl:variable name="xproc" select="if ($xproc-spec = '') then () else doc($xproc-spec)"/>
-<xsl:variable name="steps" select="if ($steps-spec = '') then () else doc($steps-spec)"/>
-<xsl:variable name="calabash" select="doc('../../reports/xml-calabash.xml')/*"/>
-
-<xsl:key name="id" match="*" use="@id"/>
-<xsl:key name="href" match="h:a" use="@href"/>
 
 <xsl:template match="t:test">
   <xsl:variable name="basename" select="substring-after(base-uri(.), '/test-suite/tests/')"/>
@@ -627,62 +618,6 @@
     <xsl:otherwise>
       <xsl:variable name="rest" select="subsequence($ancestors, 1, count($ancestors) - 1)"/>
       <xsl:sequence select="t:ancestor-namespace($rest, $namespace)"/>
-    </xsl:otherwise>
-  </xsl:choose>
-</xsl:function>
-
-<xsl:function name="t:error-code">
-  <xsl:param name="code" as="xs:string"/>
-  <xsl:variable name="name" select="substring($code, 6)"/>
-
-  <xsl:choose>
-    <xsl:when test="starts-with($code, 'err:XS') or starts-with($code, 'err:XD')
-                    and key('id', concat('err.',$name), $xproc)">
-      <a href="{$xproc-link}#err.{$name}">
-        <xsl:value-of select="$code"/>
-      </a>
-    </xsl:when>
-    <xsl:when test="starts-with($code, 'err:XC') and key('id', concat('err.',$name), $steps)">
-      <a href="{$steps-link}#err.{$name}">
-        <xsl:value-of select="$code"/>
-      </a>
-    </xsl:when>
-    <xsl:otherwise>
-      <xsl:value-of select="$code"/>
-    </xsl:otherwise>
-  </xsl:choose>
-</xsl:function>
-
-<xsl:function name="t:feature-code">
-  <xsl:param name="code" as="xs:string"/>
-
-  <xsl:value-of select="$code"/>
-</xsl:function>
-
-<xsl:function name="t:gi">
-  <xsl:param name="node" as="element()"/>
-
-  <xsl:choose>
-    <xsl:when test="namespace-uri($node) = 'http://www.w3.org/ns/xproc'">
-      <xsl:variable name="name" select="local-name($node)"/>
-      <xsl:choose>
-        <xsl:when test="key('id', concat('p.',$name), $xproc)">
-          <a href="{$xproc-link}#p.{$name}">
-            <xsl:value-of select="node-name($node)"/>
-          </a>
-        </xsl:when>
-        <xsl:when test="key('id', concat('c.',$name), $steps)">
-          <a href="{$steps-link}#c.{$name}">
-            <xsl:value-of select="node-name($node)"/>
-          </a>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="node-name($node)"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:when>
-    <xsl:otherwise>
-      <xsl:value-of select="node-name($node)"/>
     </xsl:otherwise>
   </xsl:choose>
 </xsl:function>

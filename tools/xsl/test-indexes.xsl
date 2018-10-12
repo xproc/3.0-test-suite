@@ -9,6 +9,8 @@
 		exclude-result-prefixes="c h p t xs"
                 version="2.0">
 
+<xsl:import href="functions.xsl"/>
+
 <xsl:output method="xml" encoding="utf-8" omit-xml-declaration="yes"/>
 
 <xsl:variable name="Z" select="xs:dayTimeDuration('PT0H')"/>
@@ -19,6 +21,7 @@
   <xsl:apply-templates mode="element"/>
   <xsl:apply-templates mode="implementation"/>
   <xsl:apply-templates mode="bydate"/>
+  <xsl:apply-templates mode="byerror"/>
 </xsl:template>
 
 <!-- ============================================================ -->
@@ -120,8 +123,7 @@
           <xsl:for-each select="$elements[namespace-uri-from-QName(.)='http://www.w3.org/ns/xproc']">
             <xsl:variable name="name" select="."/>
             <li>
-              <xsl:text>p:</xsl:text>
-              <xsl:value-of select="local-name-from-QName(.)"/>
+              <span class="index-item"><xsl:sequence select="t:gi-from-QName($name)"/></span>
 
               <ul>
                 <xsl:for-each select="$tests/t:test[t:pipeline//*[node-name(.) = $name]]">
@@ -154,6 +156,72 @@
               </ul>
             </li>
           </xsl:for-each>
+        </ul>
+        <script src="js/prism.js"></script>
+      </body>
+    </html>
+  </xsl:result-document>
+</xsl:template>
+
+<!-- ============================================================ -->
+
+<xsl:template match="c:directory" mode="byerror">
+  <xsl:result-document href="/fakeroot/errors.html">
+    <html>
+      <head>
+        <xsl:sequence select="t:head('Error index')"/>
+      </head>
+      <body>
+        <nav>
+          <a href="index.html"><i class="fa fa-chevron-circle-up"></i></a>
+        </nav>
+        <h1>Error index</h1>
+
+        <xsl:variable name="tests" select="."/>
+
+        <xsl:variable name="all-errors" as="xs:string*">
+          <xsl:for-each select="t:test[@code]">
+            <xsl:sequence select="tokenize(@code, '\s+')"/>
+          </xsl:for-each>
+        </xsl:variable>
+
+        <xsl:variable name="errors" as="xs:string*">
+          <xsl:for-each select="distinct-values($all-errors)">
+            <xsl:sort select="."/>
+            <xsl:sequence select="."/>
+          </xsl:for-each>
+        </xsl:variable>
+
+        <ul>
+          <xsl:for-each select="$errors">
+            <xsl:variable name="name" select="."/>
+            <li>
+              <code class="index-item"><xsl:sequence select="t:error-code($name)"/></code>
+
+              <ul>
+                <xsl:for-each select="$tests/t:test[contains(@code, $name)]">
+                  <xsl:sort select="@xml:base"/>
+                  <xsl:variable name="href" select="substring-after(@xml:base, '/tests/')"/>
+                  <li>
+                    <xsl:sequence select="t:test-link($href)"/>
+                  </li>
+                </xsl:for-each>
+              </ul>
+            </li>
+          </xsl:for-each>
+
+          <li>
+            <xsl:text>None</xsl:text>
+            <ul>
+              <xsl:for-each select="$tests/t:test[not(@code)]">
+                <xsl:sort select="@xml:base"/>
+                <xsl:variable name="href" select="substring-after(@xml:base, '/tests/')"/>
+                <li>
+                  <xsl:sequence select="t:test-link($href)"/>
+                </li>
+              </xsl:for-each>
+            </ul>
+          </li>
         </ul>
         <script src="js/prism.js"></script>
       </body>
