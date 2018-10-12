@@ -5,6 +5,15 @@
       <t:title>Connection 010</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2018-10-12</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description>
+               <p>Fixing broken test (namespace removed)</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2018-09-15T11:06:16+02:00</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -19,7 +28,7 @@
       <p>Tests a default connection on inner step is NOT used, when explicitly bound to empty.</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0" xmlns:test="http://test">
             <p:output port="result"/>
             
             <p:declare-step type="test:step">
@@ -30,11 +39,11 @@
                 <p:identity/>
             </p:declare-step>
             
-            <test:step xmlns:test="http://test">
-            <p:with-input>
-               <p:empty/>
-            </p:with-input>
-         </test:step>
+            <test:step >
+               <p:with-input>
+                  <p:empty/>
+               </p:with-input>
+            </test:step>
             
             <p:wrap-sequence wrapper="result"/>
         </p:declare-step>
