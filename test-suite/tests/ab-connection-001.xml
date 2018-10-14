@@ -1,6 +1,4 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns="http://www.w3.org/1999/xhtml"
-        expected="pass">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
    <t:info>
       <t:title>Connections 001</t:title>
       <t:revision-history>
@@ -9,7 +7,7 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>added new tests</p>
             </t:description>
          </t:revision>
@@ -18,13 +16,13 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Creating new tests, extending rng and corrected xproc's test</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
-   <t:description>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Tests that an implicit primary output port is auto connected to the output of the last step of the subpipeline.</p>
    </t:description>
    <t:pipeline>
@@ -33,7 +31,7 @@
       
          <p:identity>
             <p:with-input port="source">
-               <doc xmlns=""/>
+               <doc/>
             </p:with-input>
          </p:identity>
       </p:declare-step>

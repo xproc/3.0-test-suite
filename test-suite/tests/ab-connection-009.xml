@@ -1,6 +1,4 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns="http://www.w3.org/1999/xhtml"
-        expected="pass">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
    <t:info>
       <t:title>Connection 009</t:title>
       <t:revision-history>
@@ -9,7 +7,7 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Fixing broken test (namespace removed)</p>
             </t:description>
          </t:revision>
@@ -18,13 +16,13 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Some tests changed and new tests</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
-   <t:description>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Tests a default connection on inner step is NOT used, when binding is supplied.</p>
    </t:description>
    <t:pipeline>
@@ -34,20 +32,20 @@
             <p:declare-step type="test:step">
                 <p:output port="result"/>
                 <p:input port="source">
-                    <doc xmlns=""/>
+                    <doc/>
                 </p:input>
                 <p:identity/>
             </p:declare-step>
             
             <test:step>
                <p:with-input>
-                  <doc2 xmlns=""/>
+                  <doc2/>
                </p:with-input>
             </test:step>
         </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
          <s:pattern>
             <s:rule context="/">
                <s:assert test="doc2">The root is not doc2.</s:assert>

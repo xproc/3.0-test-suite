@@ -1,6 +1,4 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns="http://www.w3.org/1999/xhtml"
-        expected="pass">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
    <t:info>
       <t:title>Connection 010</t:title>
       <t:revision-history>
@@ -9,7 +7,7 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Fixing broken test (namespace removed)</p>
             </t:description>
          </t:revision>
@@ -18,28 +16,28 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Some tests changed and new tests</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
-   <t:description>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Tests a default connection on inner step is NOT used, when explicitly bound to empty.</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0" xmlns:test="http://test">
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" xmlns:test="http://test" version="3.0">
             <p:output port="result"/>
             
             <p:declare-step type="test:step">
                 <p:output port="result" sequence="true"/>
                 <p:input port="source" sequence="true">
-                    <doc xmlns=""/>
+                    <doc/>
                 </p:input>
                 <p:identity/>
             </p:declare-step>
             
-            <test:step >
+            <test:step>
                <p:with-input>
                   <p:empty/>
                </p:with-input>
@@ -49,7 +47,7 @@
         </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
          <s:pattern>
             <s:rule context="/">
                <s:assert test="result">The root is not result.</s:assert>

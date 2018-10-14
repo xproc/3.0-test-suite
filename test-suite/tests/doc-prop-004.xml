@@ -1,7 +1,4 @@
-<!-- I don't know if this test should pass or not --><t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns="http://www.w3.org/1999/xhtml"
-        expected="pass"
-        when="false()">
+<!-- I don't know if this test should pass or not --><t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" when="false()">
    <t:info>
       <t:title>Document properties 004</t:title>
       <t:revision-history>
@@ -10,7 +7,7 @@
             <t:author>
                <t:name>Norman Walsh</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Port my test suite; add documentation and schemas</p>
             </t:description>
          </t:revision>
