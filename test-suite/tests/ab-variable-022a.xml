@@ -1,6 +1,6 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
    <t:info>
-      <t:title>Variable declaration 022</t:title>
+      <t:title>Variable declaration 022a</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2018-03-18T07:41:36+01:00</t:date>
