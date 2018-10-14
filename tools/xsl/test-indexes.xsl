@@ -16,6 +16,25 @@
 <xsl:variable name="Z" select="xs:dayTimeDuration('PT0H')"/>
 
 <xsl:template match="/">
+  <xsl:for-each select="/c:directory/t:test">
+    <xsl:variable name="title" select="string(t:info/t:title)"/>
+    <xsl:variable name="tests" select="/c:directory/t:test[t:info/t:title = $title]"/>
+    <xsl:if test="count($tests) gt 1 and . is $tests[1]">
+      <xsl:message terminate="yes">
+        <xsl:text>There are </xsl:text>
+        <xsl:value-of select="count ($tests)"/>
+        <xsl:text> tests with the title: </xsl:text>
+        <xsl:value-of select="$title"/>
+      </xsl:message>
+      <xsl:for-each select="$tests">
+        <xsl:message>
+          <xsl:text>   …/test-suite/</xsl:text>
+          <xsl:value-of select="substring-after(@xml:base, '/test-suite/')"/>
+        </xsl:message>
+      </xsl:for-each>
+    </xsl:if>
+  </xsl:for-each>
+
   <xsl:apply-templates mode="alphabetical"/>
   <xsl:apply-templates mode="expected"/>
   <xsl:apply-templates mode="element"/>
