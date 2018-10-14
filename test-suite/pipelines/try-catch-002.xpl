@@ -42,8 +42,10 @@
       </p:identity>
     </p:catch>
     <p:finally>
-      <p:output port="finally" primary="false"/>
-      <p:identity>
+      <p:output port="finally" primary="false">
+        <p:pipe step="fident" port="result"/>
+      </p:output>
+      <p:identity name="fident">
         <p:with-input port="source">
           <p:inline><doc>finally</doc></p:inline>
         </p:with-input>
