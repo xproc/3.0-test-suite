@@ -1,8 +1,4 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail"
-        code="err:XS0079">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0079">
    <t:info>
       <t:title>with-input-053</t:title>
       <t:revision-history>
@@ -11,7 +7,7 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>More tests for XS0079: Splitting ab-with-input-053 is several tests to have a better diagnostic.</p>
             </t:description>
          </t:revision>
@@ -20,7 +16,7 @@
             <t:author>
                <t:name>Norman Walsh</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Fix namespace declarations</p>
             </t:description>
          </t:revision>
@@ -29,13 +25,13 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Creating new tests, extending rng and corrected xproc's test</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
-   <t:description>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Tests p:with-input: No comments, non-whitespace text nodes, and processing instructions allowed as siblings with implicit inlines.</p>
    </t:description>
    <t:pipeline>
@@ -45,7 +41,7 @@
          <p:identity>
             <p:with-input>
             <!-- comment -->
-               <doc xmlns=""/>
+               <doc/>
             </p:with-input>
          </p:identity>
       </p:declare-step>

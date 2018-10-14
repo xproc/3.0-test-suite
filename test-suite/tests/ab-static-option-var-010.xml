@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns="http://www.w3.org/1999/xhtml"
-    expected="pass">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
     <t:info>
         <t:title>Static variables/option 010</t:title>
         <t:revision-history>
@@ -9,24 +7,24 @@
                 <t:author>
                     <t:name>Achim Berndzen</t:name>
                 </t:author>
-                <t:description>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
                     <p>Initial test</p>
                 </t:description>
             </t:revision>
         </t:revision-history>
     </t:info>
-    <t:description>
+    <t:description xmlns="http://www.w3.org/1999/xhtml">
         <p>Tests that a static option can be used in p:with-option.</p>
     </t:description>
     <t:pipeline>
-        <p:declare-step name="main" version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+        <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="main" version="3.0">
             <p:output port="result"/>
             <p:option static="true" name="static-option" select="18"/>
 
             <p:add-attribute match="/doc" attribute-name="a">
                 <p:with-option name="attribute-value" select="$static-option"/>
                 <p:with-input>
-                    <doc xmlns=""/>
+                    <doc/>
                 </p:with-input>
             </p:add-attribute>
 
@@ -34,7 +32,7 @@
     </t:pipeline>
 
     <t:schematron>
-        <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+        <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
             <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
 
             <s:pattern>

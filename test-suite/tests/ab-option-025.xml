@@ -1,8 +1,4 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail"
-        code="err:XS0096">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0096">
    <t:info>
       <t:title>Option declaration 025</t:title>
       <t:revision-history>
@@ -11,7 +7,7 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>New tests and some previous texts adapted to recent development</p>
             </t:description>
          </t:revision>
@@ -20,7 +16,7 @@
             <t:author>
                <t:name>Norman Walsh</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Fix namespace declarations</p>
             </t:description>
          </t:revision>
@@ -29,7 +25,7 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>New tests. Some tests changed to new order in p:pipe</p>
             </t:description>
          </t:revision>
@@ -38,13 +34,13 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>added new tests</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
-   <t:description>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Checks XS0096 (invalid sequence type) is raised when default value is used.</p>
    </t:description>
    <t:pipeline>
@@ -54,7 +50,7 @@
             
             <p:identity>
                 <p:with-input>
-                    <doc xmlns="">{$option}</doc>
+                    <doc>{$option}</doc>
                 </p:with-input>
             </p:identity>
         </p:declare-step>

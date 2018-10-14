@@ -1,8 +1,4 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail"
-        code="err:XS0071">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0071">
    <t:info>
       <t:title>Option declaration 026</t:title>
       <t:revision-history>
@@ -11,7 +7,7 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>New tests and some previous texts adapted to recent development</p>
             </t:description>
          </t:revision>
@@ -20,13 +16,13 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>New tests. Some tests changed to new order in p:pipe</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
-   <t:description>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Checks XS0071 is raised for a static invalid XPath expression, even if it is never used. (See #506)</p>
    </t:description>
    <t:pipeline>
@@ -36,7 +32,7 @@
             
             <p:identity>
                 <p:with-input>
-                    <doc xmlns=""/>
+                    <doc/>
                 </p:with-input>
             </p:identity>
         </p:declare-step>

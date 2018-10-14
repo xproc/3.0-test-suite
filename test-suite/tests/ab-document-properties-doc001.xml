@@ -1,6 +1,4 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns="http://www.w3.org/1999/xhtml"
-        expected="pass">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
    <t:info>
       <t:title>ab-document-properties-document-001</t:title>
       <t:revision-history>
@@ -9,13 +7,13 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>More tests.</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
-   <t:description>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Tests document-properties-document for created xml document</p>
    </t:description>
    <t:pipeline>
@@ -25,7 +23,7 @@
          <p:identity>
             <p:with-input select="p:document-properties-document(.)">
                <p:inline>
-                  <doc xmlns=""/>
+                  <doc/>
                </p:inline>
             </p:with-input>
          </p:identity>
@@ -33,7 +31,7 @@
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
          <s:ns prefix="p" uri="http://www.w3.org/ns/xproc"/>
          <s:pattern>
             <s:rule context="/">
