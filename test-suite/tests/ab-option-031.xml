@@ -1,8 +1,4 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail"
-        code="err:XS0077">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0077">
    <t:info>
       <t:title>Option declaration 031</t:title>
       <t:revision-history>
@@ -11,13 +7,13 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Some new and some changed tests</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
-   <t:description>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Checks XS0077 is raised, if @visibility on p:option is not (public|private).</p>
    </t:description>
    <t:pipeline>
@@ -27,7 +23,7 @@
             
             <p:identity>
                 <p:with-input>
-                    <doc xmlns=""/>
+                    <doc/>
                 </p:with-input>
             </p:identity>
         </p:declare-step>

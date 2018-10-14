@@ -1,8 +1,4 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail"
-        code="err:XD0060">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XD0060">
    <t:info>
       <t:title>p:document 019</t:title>
       <t:revision-history>
@@ -11,7 +7,7 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>adding @content-type on p:document</p>
             </t:description>
          </t:revision>
@@ -20,7 +16,7 @@
             <t:author>
                <t:name>Norman Walsh</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Fix namespace declarations</p>
             </t:description>
          </t:revision>
@@ -29,7 +25,7 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Change test with document-properties to map{xs:QName, item()}</p>
             </t:description>
          </t:revision>
@@ -38,7 +34,7 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>More tests.</p>
             </t:description>
          </t:revision>
@@ -47,13 +43,13 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Some new tests.</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
-   <t:description>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Tests p:document with a simple text document in an unsupported encoding.</p>
    </t:description>
    <t:pipeline>
@@ -62,8 +58,7 @@
 
             <p:identity>
                 <p:with-input>
-                    <p:document href="../documents/text-file-iso-8859-1.txt"
-                           content-type="text/plain; charset=unsupported"/>
+                    <p:document href="../documents/text-file-iso-8859-1.txt" content-type="text/plain; charset=unsupported"/>
                 </p:with-input>
             </p:identity>
             <p:wrap-sequence wrapper="doc"/>

@@ -1,6 +1,4 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns="http://www.w3.org/1999/xhtml"
-        expected="pass">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
    <t:info>
       <t:title>Connection 022</t:title>
       <t:revision-history>
@@ -9,13 +7,13 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Some tests changed and new tests</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
-   <t:description>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Checks that DRP counts a connection for AVT in @href on p:document.</p>
    </t:description>
    <t:pipeline>
@@ -24,7 +22,7 @@
             
             <p:identity>
                 <p:with-input>
-                    <doc xmlns="" file="../documents/ab-doc.xml"/>
+                    <doc file="../documents/ab-doc.xml"/>
                 </p:with-input>
             </p:identity>
            
@@ -37,7 +35,7 @@
         </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
          <s:pattern>
             <s:rule context="/">
                <s:assert test="doc">The root is not doc.</s:assert>

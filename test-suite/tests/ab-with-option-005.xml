@@ -1,8 +1,4 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail"
-        code="err:XS0018">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0018">
    <t:info>
       <t:title>With-option 005</t:title>
       <t:revision-history>
@@ -11,7 +7,7 @@
             <t:author>
                <t:name>Norman Walsh</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Fix typo in description</p>
             </t:description>
          </t:revision>
@@ -20,13 +16,13 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Some new and some changed tests</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
-   <t:description>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Tests XS0018 is raised, if a step is invoke without a required option.</p>
    </t:description>
    <t:pipeline>
@@ -36,10 +32,10 @@
             
             <p:insert>
                 <p:with-input>
-               <doc xmlns=""/>
+               <doc/>
             </p:with-input>
                 <p:with-input port="insertion">
-               <insert xmlns=""/>
+               <insert/>
             </p:with-input>
             </p:insert>
         </p:declare-step>

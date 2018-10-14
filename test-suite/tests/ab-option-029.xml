@@ -1,8 +1,4 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail"
-        code="err:XD0036">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XD0036">
    <t:info>
       <t:title>Option declaration 029</t:title>
       <t:revision-history>
@@ -11,7 +7,7 @@
             <t:author>
                <t:name>Norman Walsh</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Fix namespace declarations</p>
             </t:description>
          </t:revision>
@@ -20,13 +16,13 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>New tests. Some tests changed to new order in p:pipe</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
-   <t:description>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Checks non required option with no default value and no value supplied (= ()) is type checked.</p>
    </t:description>
    <t:pipeline>
@@ -36,7 +32,7 @@
            
             <p:identity>
                 <p:with-input>
-                    <doc xmlns="">{count($option)}</doc>
+                    <doc>{count($option)}</doc>
                 </p:with-input>
             </p:identity>
         </p:declare-step>

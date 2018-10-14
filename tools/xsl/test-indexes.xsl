@@ -384,7 +384,8 @@
                     <xsl:sequence select="t:test-link($href)"/>
 
                     <!-- there was a massive refactor on 2018-10-09 and 2018-10-10 -->
-                    <xsl:variable name="cutoff" select="xs:date('2018-10-10')"/>
+                    <!-- there was another massive refactor on 2018-10-14 -->
+                    <xsl:variable name="cutoff" select="xs:date('2018-10-14')"/>
                     <xsl:variable name="fuzz" select="xs:dayTimeDuration('P1D')"/>
                     <xsl:variable name="log-date" select="xs:date(current-grouping-key())"/>
                     <xsl:variable name="rev-date"

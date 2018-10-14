@@ -1,6 +1,4 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns="http://www.w3.org/1999/xhtml"
-        expected="pass">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
    <t:info>
       <t:title>Connection 019</t:title>
       <t:revision-history>
@@ -9,13 +7,13 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Some tests changed and new tests</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
-   <t:description>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Checks that DRP counts a connection for short-cut AVT.</p>
    </t:description>
    <t:pipeline>
@@ -24,18 +22,18 @@
             
             <p:identity>
                 <p:with-input>
-                    <doc xmlns="">4</doc>
+                    <doc>4</doc>
                 </p:with-input>
             </p:identity>
             <p:add-attribute attribute-name="att" attribute-value="{/doc}">
                 <p:with-input>
-                    <result xmlns=""/>
+                    <result/>
                 </p:with-input>
             </p:add-attribute>
         </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
          <s:pattern>
             <s:rule context="/">
                <s:assert test="result">The root is not result.</s:assert>

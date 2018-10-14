@@ -1,6 +1,4 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns="http://www.w3.org/1999/xhtml"
-        expected="pass">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
    <t:info>
       <t:title>Option declaration 016</t:title>
       <t:revision-history>
@@ -9,7 +7,7 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>New tests and some previous texts adapted to recent development</p>
             </t:description>
          </t:revision>
@@ -18,13 +16,13 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>added new tests</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
-   <t:description>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Checks not required option with default value is treated right.</p>
    </t:description>
    <t:pipeline>
@@ -34,14 +32,14 @@
             
             <p:identity>
                 <p:with-input>
-                    <doc xmlns="">{$option}</doc>
+                    <doc>{$option}</doc>
                 </p:with-input>
             </p:identity>
         </p:declare-step>
    </t:pipeline>
    <t:option name="option" select="'Some value'"/>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
          <s:pattern>
             <s:rule context="/">
                <s:assert test="doc">The pipeline root is not doc.</s:assert>

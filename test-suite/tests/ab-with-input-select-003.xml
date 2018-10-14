@@ -1,6 +1,4 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns="http://www.w3.org/1999/xhtml"
-        expected="pass">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
    <t:info>
       <t:title>with-input-select-003</t:title>
       <t:revision-history>
@@ -9,7 +7,7 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Fixing broken test (namespace removed)</p>
             </t:description>
          </t:revision>
@@ -18,22 +16,21 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>added new tests</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
-   <t:description>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Test select on p:with-input select="processing-instruction()"</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
-         xmlns:c="http://www.w3.org/ns/xproc-step" version="3.0">
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" xmlns:c="http://www.w3.org/ns/xproc-step" version="3.0">
             <p:output port="result"/>
             <p:identity>
                 <p:with-input select="*/processing-instruction()">
-                    <doc xmlns=""><!-- A comment -->
+                    <doc><!-- A comment -->
                   <element1 att="att"/>
                   <?pi target?>
                         A text node
@@ -46,7 +43,7 @@
         </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
          <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
          <s:pattern>
             <s:rule context="/">

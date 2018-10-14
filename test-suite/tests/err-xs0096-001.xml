@@ -1,8 +1,4 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail"
-        code="err:XS0096">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0096">
    <t:info>
      <t:title>Invalid sequence type</t:title>
      <t:revision-history>
@@ -11,14 +7,14 @@
          <t:author>
            <t:name>Norman Walsh</t:name>
          </t:author>
-         <t:description>
+         <t:description xmlns="http://www.w3.org/1999/xhtml">
            <p>Updated to correct error code; renamed test file.</p>
          </t:description>
        </t:revision>
      </t:revision-history>
      <t:specref linkend="err.inline.S0096"/>
    </t:info>
-   <t:description>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Error <code>err:XS0096</code> is raised for an invalid sequence type.</p>
    </t:description>
    <t:pipeline>

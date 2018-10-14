@@ -1,6 +1,4 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns="http://www.w3.org/1999/xhtml"
-        expected="pass">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
    <t:info>
       <t:title>Connection 023</t:title>
       <t:revision-history>
@@ -9,7 +7,7 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Fixed two tests</p>
             </t:description>
          </t:revision>
@@ -18,13 +16,13 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Some tests changed and new tests</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
-   <t:description>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Checks that DRP counts a connection for TVT as child of p:inline.</p>
    </t:description>
    <t:pipeline>
@@ -33,14 +31,14 @@
             
             <p:identity>
                 <p:with-input>
-                    <doc xmlns="" value="4"/>
+                    <doc value="4"/>
                 </p:with-input>
             </p:identity>
            
             <p:identity>
                 <p:with-input>
                     <p:inline>
-                        <result xmlns="">{xs:string(/doc/@value)}</result>
+                        <result>{xs:string(/doc/@value)}</result>
                     </p:inline>
                 </p:with-input>
             </p:identity>
@@ -48,7 +46,7 @@
         </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
          <s:pattern>
             <s:rule context="/">
                <s:assert test="result">The root is not result.</s:assert>

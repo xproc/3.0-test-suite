@@ -1,7 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
-        xmlns="http://www.w3.org/1999/xhtml"
-        expected="pass">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
     <t:info>
         <t:title>Static variables/option 004</t:title>
         <t:revision-history>
@@ -10,32 +7,32 @@
                 <t:author>
                     <t:name>Achim Berndzen</t:name>
                 </t:author>
-                <t:description>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
                     <p>Initial test</p>
                 </t:description>
             </t:revision>
         </t:revision-history>
     </t:info>
-    <t:description>
+    <t:description xmlns="http://www.w3.org/1999/xhtml">
         <p>Tests that a static option can be used in @select of static options.</p>
     </t:description>
     <t:pipeline>
-        <p:declare-step name="main" version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
-            <p:output port="result" />
-            <p:option static="true" name="static-option" select="18" />
-            <p:option static="true" name="another-static" select="$static-option" />
+        <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="main" version="3.0">
+            <p:output port="result"/>
+            <p:option static="true" name="static-option" select="18"/>
+            <p:option static="true" name="another-static" select="$static-option"/>
             
             <p:input port="source">
-                <doc  xmlns="">{$another-static}</doc>
+                <doc>{$another-static}</doc>
             </p:input>            
             
-            <p:identity />
+            <p:identity/>
         
         </p:declare-step>
     </t:pipeline>
     
     <t:schematron>
-        <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+        <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
             <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
             
             <s:pattern>

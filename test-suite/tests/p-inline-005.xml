@@ -1,8 +1,4 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail"
-        code="err:XD0054">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XD0054">
    <t:info>
       <t:title>p:inline 005</t:title>
       <t:revision-history>
@@ -11,7 +7,7 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Fixing broken test (namespace removed)</p>
             </t:description>
          </t:revision>
@@ -20,7 +16,7 @@
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Some new tests.</p>
             </t:description>
          </t:revision>
@@ -29,7 +25,7 @@
             <t:author>
                <t:name>Norman Walsh</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>New p:inline tests</p>
             </t:description>
          </t:revision>
@@ -38,15 +34,14 @@
             <t:author>
                <t:name>Norman Walsh</t:name>
             </t:author>
-            <t:description>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>New p:inline tests</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
-         xmlns:c="http://www.w3.org/ns/xproc-step" name="main" version="3.0">
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" xmlns:c="http://www.w3.org/ns/xproc-step" name="main" version="3.0">
          <p:output port="result" sequence="true"/>
 
          <p:identity name="inline">
