@@ -8,13 +8,8 @@
 		exclude-result-prefixes="h p t xs"
                 version="2.0">
 
-<xsl:param name="xproc-spec" select="''"/>
-<xsl:param name="steps-spec" select="''"/>
-<xsl:param name="xproc-link" select="''"/>
-<xsl:param name="steps-link" select="''"/>
+<xsl:param name="specs" as="element()" required="true"/>
 
-<xsl:variable name="xproc" select="if ($xproc-spec = '') then () else doc($xproc-spec)"/>
-<xsl:variable name="steps" select="if ($steps-spec = '') then () else doc($steps-spec)"/>
 <xsl:variable name="calabash" select="doc('../../reports/xml-calabash.xml')/*"/>
 
 <xsl:key name="id" match="*" use="@id"/>
@@ -24,20 +19,54 @@
   <xsl:param name="code" as="xs:string"/>
   <xsl:variable name="name" select="substring($code, 6)"/>
 
+  <xsl:variable name="links" select="key('id', concat('err.',$name), $specs)"/>
+
   <xsl:choose>
-    <xsl:when test="starts-with($code, 'err:XS') or starts-with($code, 'err:XD')
-                    and key('id', concat('err.',$name), $xproc)">
-      <a href="{$xproc-link}#err.{$name}">
+    <xsl:when test="count($links) = 1">
+      <xsl:variable name="basename"
+                    select="substring-before(substring-after(base-uri($links),'/build/specs/'),'.html')"/>
+      <a href="{t:spec-link($basename)}#err.{$name}">
         <xsl:value-of select="$code"/>
       </a>
     </xsl:when>
-    <xsl:when test="starts-with($code, 'err:XC') and key('id', concat('err.',$name), $steps)">
-      <a href="{$steps-link}#err.{$name}">
-        <xsl:value-of select="$code"/>
-      </a>
+    <xsl:when test="$links">
+      <xsl:value-of select="$code"/>
+      <xsl:text> [</xsl:text>
+      <xsl:for-each select="$links">
+        <xsl:variable name="basename"
+                      select="substring-before(substring-after(base-uri(.), '/build/specs/'), '.html')"/>
+        <xsl:if test="position() gt 1">, </xsl:if>
+        <a href="{t:spec-link($basename)}#err.{$name}">
+          <xsl:value-of select="t:spec-name($basename)"/>
+        </a>
+      </xsl:for-each>
+      <xsl:text>]</xsl:text>
     </xsl:when>
     <xsl:otherwise>
       <xsl:value-of select="$code"/>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:function>
+
+<xsl:function name="t:spec-link">
+  <xsl:param name="shortname"/>
+  <xsl:value-of select="concat('http://spec.xproc.org/master/head/', $shortname, '/')"/>
+</xsl:function>
+
+<xsl:function name="t:spec-name">
+  <xsl:param name="shortname"/>
+  <xsl:choose>
+    <xsl:when test="$shortname = 'exec'">Exec step</xsl:when>
+    <xsl:when test="$shortname = 'run'">Run step</xsl:when>
+    <xsl:when test="$shortname = 'steps-intro'">Steps inroduction</xsl:when>
+    <xsl:when test="$shortname = 'steps'">Core steps</xsl:when>
+    <xsl:when test="$shortname = 'validation'">Validation steps</xsl:when>
+    <xsl:when test="$shortname = 'xquery'">XQuery step</xsl:when>
+    <xsl:when test="$shortname = 'xsl-formatter'">XSL formatter step</xsl:when>
+    <xsl:when test="$shortname = 'xproc'">XProc</xsl:when>
+    <xsl:otherwise>
+      <xsl:message>Unrecognized spec: <xsl:value-of select="$shortname"/></xsl:message>
+      <xsl:value-of select="$shortname"/>
     </xsl:otherwise>
   </xsl:choose>
 </xsl:function>
@@ -60,14 +89,22 @@
     <xsl:when test="namespace-uri-from-QName($name) = 'http://www.w3.org/ns/xproc'">
       <xsl:variable name="name" select="local-name-from-QName($name)"/>
       <xsl:choose>
-        <xsl:when test="key('id', concat('p.',$name), $xproc)">
-          <a href="{$xproc-link}#p.{$name}">
-            <xsl:value-of select="$name"/>
+        <xsl:when test="key('id', concat('p.',$name), $specs)">
+          <xsl:variable name="links" select="key('id', concat('p.',$name), $specs)[1]"/>
+          <xsl:variable name="basename"
+                        select="substring-before(substring-after(base-uri($links),
+                                                                 '/build/specs/'),'.html')"/>
+          <a href="{t:spec-link($basename)}#p.{$name}">
+            <xsl:value-of select="concat('p:',$name)"/>
           </a>
         </xsl:when>
-        <xsl:when test="key('id', concat('c.',$name), $steps)">
-          <a href="{$steps-link}#c.{$name}">
-            <xsl:value-of select="$name"/>
+        <xsl:when test="key('id', concat('c.',$name), $specs)">
+          <xsl:variable name="links" select="key('id', concat('c.',$name), $specs)[1]"/>
+          <xsl:variable name="basename"
+                        select="substring-before(substring-after(base-uri($links),
+                                                                 '/build/specs/'),'.html')"/>
+          <a href="{t:spec-link($basename)}#c.{$name}">
+            <xsl:value-of select="concat('p:', $name)"/>
           </a>
         </xsl:when>
         <xsl:otherwise>

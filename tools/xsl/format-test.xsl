@@ -246,10 +246,10 @@
   <xsl:variable name="tocref" as="node()*">
     <xsl:choose>
       <xsl:when test="@spec = 'steps'">
-        <xsl:sequence select="key('href', concat('#', @linkend), $steps)[ancestor::h:div[@class='toc']]"/>
+        <xsl:sequence select="key('href', concat('#', @linkend), $specs)[ancestor::h:div[@class='toc']]"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:sequence select="key('href', concat('#', @linkend), $xproc)[ancestor::h:div[@class='toc']]"/>
+        <xsl:sequence select="key('href', concat('#', @linkend), $specs)[ancestor::h:div[@class='toc']]"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:variable>
@@ -257,10 +257,10 @@
   <xsl:variable name="ref" as="node()*">
     <xsl:choose>
       <xsl:when test="@spec = 'steps'">
-        <xsl:sequence select="key('id', @linkend, $steps)"/>
+        <xsl:sequence select="key('id', @linkend, $specs)"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:sequence select="key('id', @linkend, $xproc)"/>
+        <xsl:sequence select="key('id', @linkend, $specs)"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:variable>
@@ -268,10 +268,10 @@
   <xsl:variable name="base" as="xs:string">
     <xsl:choose>
       <xsl:when test="@spec = 'steps'">
-        <xsl:value-of select="$steps-link"/>
+        <xsl:value-of select="'XXX'"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:value-of select="$xproc-link"/>
+        <xsl:value-of select="'XXX'"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:variable>
