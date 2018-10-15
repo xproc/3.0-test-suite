@@ -1,6 +1,6 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0091">
     <t:info>
-        <t:title>Static variables/option 017</t:title>
+        <t:title>Static variables/option 018</t:title>
         <t:revision-history>
             <t:revision>
                 <t:date>2018-10-11T18:16:00+02:00</t:date>

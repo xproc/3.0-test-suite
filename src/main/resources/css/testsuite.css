@@ -37,7 +37,9 @@ pre a:link {
     color: inherit;
 }
 
-code {
+p code,
+li code {
+    font-size: 120%;
 }
 
 .sto, .stc, .eto, .etc, .aq {
@@ -78,11 +80,14 @@ tr:nth-child(odd) {
     background-color: #f0f0f0;
 }
 
+tr.footnote td,
 tr:first-child th,
 tr:first-child td {
     border-top: 1px solid black;
 }
 
+td.boxhack,
+th.boxhack,
 td:first-child,
 th:first-child {
     border-right: 1px solid black;

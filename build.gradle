@@ -109,16 +109,15 @@ task transform_all_tests(dependsOn: [ "validate_all_tests" ]) {
   }
 }
 
-task test_indexes(dependsOn: ["transform_all_tests","git_log_shorter"], type: XMLCalabashTask) {
+task test_indexes(dependsOn: ["transform_all_tests","git_log_shorter","get_specs"],
+                  type: XMLCalabashTask) {
   inputs.file "build/git-log-shorter.xml"
   inputs.file "tools/xsl/test-indexes.xsl"
   inputs.file "tools/xsl/functions.xsl"
   inputs.file "tools/xsl/merge-git-log.xsl"
-  outputs.file "build/html/alphabetical.html"
-  param("xproc-spec", new File("build/xproc.html").getAbsolutePath())
-  param("steps-spec", new File("build/steps.html").getAbsolutePath())
-  param("xproc-link", "https://spec.xproc.org/master/head/xproc/")
-  param("steps-link", "https://spec.xproc.org/master/head/steps/")
+  outputs.file "build/html/errors.html"
+  extensionValues true
+  option("spec-dir", new File("build/specs").getAbsolutePath())
   pipeline "tools/xpl/test-indexes.xpl"
   doFirst {
     mkdir("build/html")
@@ -155,10 +154,7 @@ tests.each { fn ->
     output("result", "build/html/tests/" + fn + ".html")
     param("prev", prev)
     param("next", next)
-    param("xproc-spec", new File("build/xproc.html").getAbsolutePath())
-    param("steps-spec", new File("build/steps.html").getAbsolutePath())
-    param("xproc-link", "https://spec.xproc.org/master/head/xproc/")
-    param("steps-link", "https://spec.xproc.org/master/head/steps/")
+    extensionValues true
     option("stylesheet", new File("tools/xsl/format-test.xsl").getAbsolutePath())
     pipeline "tools/xpl/run-xslt-html.xpl"
     doFirst {
@@ -229,7 +225,7 @@ task copy_rsrcs(type: Copy) {
   into "build/html/"
 }
 
-task make_index(dependsOn: ["copy_rsrcs"], type: XMLCalabashTask) {
+task make_index(dependsOn: ["copy_rsrcs","get_specs"], type: XMLCalabashTask) {
   inputs.file "tools/xsl/travis-patch.xsl"
   inputs.file "tools/xpl/run-xslt-html.xpl"
   input("source", "src/main/resources/index.html")
@@ -244,20 +240,35 @@ task make_index(dependsOn: ["copy_rsrcs"], type: XMLCalabashTask) {
   }
 }
 
-task get_specs(dependsOn: [ "get_xproc", "get_steps" ]) {
+task get_specs(type: XMLCalabashTask) {
+  output("result", "build/specs.xml")
+  pipeline "tools/xpl/specs.xpl"
+  option("spec-dir", new File("build/specs").getAbsolutePath())
   doFirst {
     mkdir("build")
   }
 }
 
-task get_xproc(type: Download) {
-  src "https://spec.xproc.org/master/head/xproc/"
-  dest "build/xproc.html"
+["exec", "run", "steps-intro", "steps", "validation", "xquery", "xsl-formatter", "xproc"].each { name ->
+  File target = new File("build/specs/" + name + ".html")
+  Task t = task "download_$name"(type: Download) {
+    src "https://spec.xproc.org/master/head/" + name + "/"
+    dest target
+    doFirst {
+      mkdir("build/specs")
+    }
+  }
+  t.onlyIf { !target.exists() }
+  get_specs.dependsOn "download_$name"
 }
-get_xproc.onlyIf { !file("build/xproc.html").exists() }
 
-task get_steps(type: Download) {
-  src "https://spec.xproc.org/master/head/steps/"
-  dest "build/steps.html"
+task list_test(type: XMLCalabashTask, dependsOn: [ "get_specs" ]) {
+  inputs.file "tools/xsl/list-test.xsl"
+  option("spec-dir", new File("build/specs").getAbsolutePath())
+  pipeline "tools/xpl/list-test.xpl"
+  output("result", "build/out.html")
+  extensionValues true
+  doFirst {
+    mkdir("build")
+  }
 }
-get_steps.onlyIf { !file("build/steps.html").exists() }

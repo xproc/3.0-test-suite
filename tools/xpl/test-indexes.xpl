@@ -6,17 +6,13 @@
 
 <p:directory-list path="../../test-suite/tests"/>
 
-<p:xslt name="dirlist">
+<p:xslt>
   <p:input port="stylesheet">
     <p:document href="../xsl/sort-files.xsl"/>
   </p:input>
 </p:xslt>
 
-<p:viewport match="c:file">
-  <p:viewport-source>
-    <p:pipe step="dirlist" port="result"/>
-  </p:viewport-source>
-
+<p:viewport name="tests" match="c:file">
   <p:variable name="baseuri" select="resolve-uri(/*/@name, base-uri(.))"/>
   <p:load>
     <p:with-option name="href" select="$baseuri"/>
@@ -37,9 +33,15 @@
 </p:viewport>
 
 <p:xslt name="indexes">
+  <p:input port="source">
+    <p:pipe step="tests" port="result"/>
+  </p:input>
   <p:input port="stylesheet">
     <p:document href="../xsl/test-indexes.xsl"/>
   </p:input>
+  <p:with-param name="specs" select="/*">
+    <p:document href="../../build/specs.xml"/>
+  </p:with-param>
 </p:xslt>
 
 <p:sink/>
