@@ -671,7 +671,7 @@
                       <td class="pass" align="center">pass</td>
                     </xsl:when>
                     <xsl:otherwise>
-                      <td align="center">???</td>
+                      <td align="center">(no report)</td>
                     </xsl:otherwise>
                   </xsl:choose>
                 </xsl:for-each>
