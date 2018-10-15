@@ -111,6 +111,7 @@ task transform_all_tests(dependsOn: [ "validate_all_tests" ]) {
 
 task test_indexes(dependsOn: ["transform_all_tests","git_log_shorter","get_specs"],
                   type: XMLCalabashTask) {
+  inputs.file "reports/xml-calabash.xml"
   inputs.file "build/git-log-shorter.xml"
   inputs.file "tools/xsl/test-indexes.xsl"
   inputs.file "tools/xsl/functions.xsl"
