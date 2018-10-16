@@ -7,6 +7,8 @@
       <t:date>TODAY’S DATE HERE</t:date>
       <t:author>
         <t:name>YOUR NAME</t:name>
+        <t:email>YOU@EXAMPLE.COM</t:email>
+        <t:uri>HTTP://EXAMPLE.COM</t:uri>
       </t:author>
       <t:description xmlns="http://www.w3.org/1999/xhtml">
         <p>DESCRIBE THIS REVISION.</p>
@@ -19,14 +21,18 @@
   <p>DESCRIBE YOUR TEST HERE.</p>
 </t:description>
 
+<t:input port="source">
+  <doc/>
+</t:input>
+
+<t:option name="ignored" select="3"/>
+
 <t:pipeline>
   <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+    <p:input port="source"/>
     <p:output port="result"/>
-    <p:identity>
-      <p:with-input>
-        <doc/>
-      </p:with-input>
-    </p:identity>
+    <p:option name="ignored" required="true"/>
+    <p:identity/>
   </p:declare-step>
 </t:pipeline>
 
