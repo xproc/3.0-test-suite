@@ -152,7 +152,7 @@ of errors in the pipeline or the runtime configuration).
 Both passing and failing tests begin with a metadata section,
 `t:info`:
 
-```
+```xml
 <t:info>
   <t:title>Test Title</t:title>
   <t:revision-history>
@@ -191,14 +191,14 @@ errors and element names (e.g. `<code>err:XD0007</code>`
 and `<code>p:identity</code>`).
 
 Ideally, the description provides a brief synopsis of what is being
-tested. It needed recapitulate the test, but it should focus the reader’s
+tested. It should not recapitulate the test, but it should focus the reader’s
 attention to what’s important.
 
 ### Passing tests
 
 The basic structure of a passing test is:
 
-```
+```xml
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
         expected="pass">
 ```
@@ -207,7 +207,7 @@ A passing test must assert that the expected result is a pass.
 
 Following the metadata and description is the test pipeline:
 
-```
+```xml
 <t:pipeline>
   <p:declare-step xmlns="http://xproc.org/ns/testsuite/3.0" version="3.0">
     <!-- … -->
@@ -233,7 +233,7 @@ expected result is a failure and provide a (list of) error codes that
 may be reported by a conformant processor.
 
 
-```
+```xml
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:err="http://www.w3.org/ns/xproc-error"
@@ -296,7 +296,7 @@ revisions, a syntactic shortcut is possible:
 
 For example:
 
-```
+```xml
 <t:revision-history>
 
   <t:revision initials="fa">
