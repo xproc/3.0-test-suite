@@ -1,4 +1,6 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XD0007">
 
 <t:info>
   <t:title>YOUR TITLE HERE</t:title>
@@ -21,26 +23,13 @@
 
 <t:pipeline>
   <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
-    <p:output port="result"/>
+    <p:output port="result" primary="false"/>
+      
     <p:identity>
-      <p:with-input>
+      <p:with-input port="source">
         <doc/>
       </p:with-input>
     </p:identity>
   </p:declare-step>
 </t:pipeline>
-
-<t:schematron>
-  <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron"
-            xmlns:p="http://www.w3.org/ns/xproc"
-            xmlns:rng="http://relaxng.org/ns/structure/1.0">
-     <s:ns prefix="p" uri="http://www.w3.org/ns/xproc"/>
-
-     <s:pattern>
-       <s:rule context="/*">
-         <s:assert test="self::doc">The pipeline root is not doc.</s:assert>
-       </s:rule>
-     </s:pattern>
-  </s:schema>
-</t:schematron>
 </t:test>
