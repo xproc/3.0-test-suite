@@ -274,16 +274,6 @@ and reused:
   <t:pipeline src="../pipelines/a-complex-pipeline.xpl"/>
 ```
 
-## Test results
-
-All tests must produce a single result document on the `result` port.
-The correctness of the result is determined by checking it with the
-supplied [Schematron](http://schematron.com/) schema.
-
-There’s no direct way to check non-XML results with Schematron, so
-some XML abstract (properties, counts, `base64` or `hexBinary`
-encodings, etc.) will have to be produced and tested.
-
 ## Revision history shortcuts
 
 Often the same author makes several revisions to a test. In this case,
@@ -348,6 +338,16 @@ test suite will run. Otherwise, it will be skipped.
 
 The context item for the `when` expression is undefined. It is an
 error if the expression refers to the context.
+
+## Test results
+
+All tests must produce a single result document on the `result` port.
+The correctness of the result is determined by checking it with the
+supplied [Schematron](http://schematron.com/) schema.
+
+There’s no direct way to check non-XML results with Schematron, so
+some XML abstract (properties, counts, `base64` or `hexBinary`
+encodings, etc.) will have to be produced and tested.
 
 ## Test report format
 
