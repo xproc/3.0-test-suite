@@ -274,6 +274,8 @@ and reused:
   <t:pipeline src="../pipelines/a-complex-pipeline.xpl"/>
 ```
 
+## Test results
+
 All tests must produce a single result document on the `result` port.
 The correctness of the result is determined by checking it with the
 supplied [Schematron](http://schematron.com/) schema.
