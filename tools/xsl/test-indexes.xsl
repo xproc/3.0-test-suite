@@ -646,10 +646,22 @@
             <tr>
               <th>Status</th>
               <xsl:for-each select="$impl">
-                <td>Passing <xsl:value-of select="$impl/@tests - $impl/@errors"/>
-                of <xsl:value-of select="$impl/@tests"/>
-                (<xsl:value-of select="format-number(($impl/@tests - $impl/@errors)
-                                                      div $impl/@tests * 100.0, '#.00')"/>%)
+                <xsl:variable name="tot" select="$impl/@tests"/>
+                <xsl:variable name="skip" select="$impl/@skipped"/>
+                <xsl:variable name="errs" select="$impl/@errors"/>
+                <td>
+                  <xsl:text>Passing </xsl:text>
+                  <xsl:value-of select="$tot - $errs"/>
+                  <xsl:text> of </xsl:text>
+                  <xsl:value-of select="$tot"/>
+                  <xsl:text> (</xsl:text>
+                  <xsl:value-of select="format-number(($impl/@tests - $impl/@errors)
+                                                      div $impl/@tests * 100.0, '#.00')"/>
+                  <xsl:text>%; </xsl:text>
+                  <xsl:value-of select="$errs"/>
+                  <xsl:text> failed; </xsl:text>
+                  <xsl:value-of select="$skip"/>
+                  <xsl:text> skipped)</xsl:text>
                 </td>
               </xsl:for-each>
             </tr>              
@@ -666,6 +678,9 @@
                   <xsl:choose>
                     <xsl:when test="$report/failure">
                       <td class="fail" align="center">fail</td>
+                    </xsl:when>
+                    <xsl:when test="$report/skipped">
+                      <td class="skip" align="center">skip: <xsl:value-of select="$report/skipped"/></td>
                     </xsl:when>
                     <xsl:when test="exists($report)">
                       <td class="pass" align="center">pass</td>
