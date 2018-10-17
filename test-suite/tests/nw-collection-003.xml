@@ -3,7 +3,16 @@
         expected="fail" code="err:XD0008">
    <t:info>
       <t:title>Collection 003</t:title>
-      <t:revision-history>
+        <t:revision-history>
+          <t:revision>
+            <t:date>2018-10-17</t:date>
+            <t:author initials="ab">
+              <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+              <p>Fixed error in XPath expression for variable 'a': Missing ')'</p>
+            </t:description>
+        </t:revision>
          <t:revision>
             <t:date>2018-10-14</t:date>
             <t:author initials="ndw">
@@ -46,7 +55,7 @@
         <p:variable name="a" select="count(collection())" collection="true"/>
 
         <p:wrap-sequence>
-          <p:with-option name="wrapper" select="concat('wrapper', count(collection())"/>
+          <p:with-option name="wrapper" select="concat('wrapper', count(collection()))"/>
           <p:with-input>
             <doc>{$a}</doc>
           </p:with-input>
