@@ -37,7 +37,7 @@
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
             <p:output port="result"/>
-            <p:variable name="var" select="5" collection="false">
+            <p:variable name="var" select="count(.)" collection="false">
                 <doc/>
                 <doc/>
             </p:variable>
