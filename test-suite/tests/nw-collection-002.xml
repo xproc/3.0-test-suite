@@ -43,7 +43,7 @@
           <p:with-input port="source" pipe="@id1 @id2"/>
         </p:identity>
 
-        <p:variable name="a" select="count(collection())"/>
+        <p:variable name="a" select="count(.)"/>
 
         <p:identity>
           <p:with-input>
