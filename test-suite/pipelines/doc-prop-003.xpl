@@ -12,7 +12,7 @@
   </p:identity>
 
   <p:identity>
-    <p:with-input port="source" select="p:document-properties-document(.)/p:document-properties/a"/>
+    <p:with-input port="source" select="p:document-properties-document(.)/c:document-properties/a"/>
   </p:identity>
 
 </p:declare-step>
