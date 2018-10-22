@@ -95,14 +95,14 @@ YII=
          <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:pattern</span><span class="stc">&gt;</span></span>
             <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:rule</span> <span class="attr"><span class="aname">context</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">/*</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
                <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">self::c:result</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>The pipeline root is not c:result<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
-               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">p:document-properties</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
-            The result does not include p:document-properties
+               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">c:document-properties</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
+            The result does not include c:document-properties
           <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
                <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">c:data</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
             The result does not include c:data
           <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
             <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:rule</span><span class="etc">&gt;</span></span></span>
-            <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:rule</span> <span class="attr"><span class="aname">context</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">/c:result/p:document-properties</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
+            <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:rule</span> <span class="attr"><span class="aname">context</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">/c:result/c:document-properties</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
                <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">empty(*:content-length) or (*:content-length = 3764)</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
             The wrong content-length is reported
           <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
@@ -121,6 +121,12 @@ YII=
          <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:pattern</span><span class="etc">&gt;</span></span></span>
       <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:schema</span><span class="etc">&gt;</span></span></span>
    </code></pre></div><dl class="revision-history"><h2>Revision history</h2>
+        <dt>22 Oct 2018, 
+            <span class="name">Norman Walsh</span>
+          </dt><dd><div class="description">
+            <p>Fixed result document
+            (<code>c:document-properties</code>, not <code>p:document-properties</code>)</p>
+          </div></dd>
          <dt>12 Oct 2018, 
                <span class="name">Achim Berndzen</span>
             </dt><dd><div class="description">
