@@ -1,7 +1,16 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0044">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0100">
    <t:info>
       <t:title>Input 030</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2018-11-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed expected error code from XS0044 to XS0100.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2018-07-13T16:06:43+02:00</t:date>
             <t:author>
@@ -14,7 +23,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests XS0044 is raised, when p:input has a p:pipe child.</p>
+      <p>Tests XS0100 is raised, when p:input has a p:pipe child.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="main" version="3.0">
