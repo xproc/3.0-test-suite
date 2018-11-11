@@ -250,7 +250,7 @@ task get_specs(type: XMLCalabashTask) {
   }
 }
 
-["exec", "run", "steps-intro", "steps", "validation", "xquery", "xsl-formatter", "xproc"].each { name ->
+["exec", "run", "steps", "validation", "xquery", "xsl-formatter", "xproc"].each { name ->
   File target = new File("build/specs/" + name + ".html")
   Task t = task "download_$name"(type: Download) {
     src "https://spec.xproc.org/master/head/" + name + "/"
