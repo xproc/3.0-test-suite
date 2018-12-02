@@ -29,5 +29,6 @@
       </p:identity>
     </p:when>
   </p:choose>
-
+  
+  <p:wrap-sequence wrapper="result" />
 </p:declare-step>
