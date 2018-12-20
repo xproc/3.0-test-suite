@@ -1,7 +1,16 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XD0036">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XD0061">
    <t:info>
-      <t:title>Error XD0036</t:title>
+      <t:title>Error XD0061</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2018-12-20</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Error should now be XS0061, since we now have a more specific code. (Was originally name 'err-xd0036-001.xml')</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2018-03-18T07:41:36+01:00</t:date>
             <t:author>
