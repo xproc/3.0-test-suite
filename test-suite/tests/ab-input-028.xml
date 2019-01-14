@@ -3,6 +3,15 @@
       <t:title>Input 028</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-01-12</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test because an atomic result of select is not an error anymore, but an attribute is.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2018-06-02T17:53:51-05:00</t:date>
             <t:author>
                <t:name>Norman Walsh</t:name>
@@ -23,11 +32,11 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests XD0016 is raised, when @select return something, that is not a node.</p>
+      <p>Tests XD0016 is raised, when @select returns an attribute.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
-            <p:input port="source" select="count(/doc/@*)">
+            <p:input port="source" select="/doc/@att1">
                 <doc att1="1" att2="2"/>
             </p:input>
             <p:output port="result"/>
