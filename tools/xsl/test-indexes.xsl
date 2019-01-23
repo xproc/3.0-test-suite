@@ -618,7 +618,7 @@
               <th>Implementation</th>
               <xsl:for-each select="$impl">
                 <td>
-                  <xsl:value-of select="$impl/properties/property[@name='processor']/@value"/>
+                  <xsl:value-of select="./properties/property[@name='processor']/@value"/>
                 </td>
               </xsl:for-each>
             </tr>
@@ -626,7 +626,7 @@
               <th>Version</th>
               <xsl:for-each select="$impl">
                 <td>
-                  <xsl:value-of select="$impl/properties/property[@name='version']/@value"/>
+                  <xsl:value-of select="$./properties/property[@name='version']/@value"/>
                 </td>
               </xsl:for-each>
             </tr>
@@ -634,7 +634,7 @@
               <th>Date</th>
               <xsl:for-each select="$impl">
                 <xsl:variable name="time"
-                              select="adjust-dateTime-to-timezone(xs:dateTime($impl/@timestamp), $Z)"/>
+                              select="adjust-dateTime-to-timezone(xs:dateTime(./@timestamp), $Z)"/>
                 <td>
                   <time datetime="{$time}" title="{$time}">
                     <xsl:value-of
@@ -646,9 +646,9 @@
             <tr>
               <th>Status</th>
               <xsl:for-each select="$impl">
-                <xsl:variable name="tot" select="$impl/@tests"/>
-                <xsl:variable name="skip" select="$impl/@skipped"/>
-                <xsl:variable name="errs" select="$impl/@errors"/>
+                <xsl:variable name="tot" select="./@tests"/>
+                <xsl:variable name="skip" select="./@skipped"/>
+                <xsl:variable name="errs" select="./@errors"/>
                 <td>
                   <xsl:text>Passing </xsl:text>
                   <xsl:value-of select="$tot - $errs"/>
@@ -674,7 +674,7 @@
                   <xsl:sequence select="t:test-link($href)"/>
                 </td>
                 <xsl:for-each select="$impl">
-                  <xsl:variable name="report" select="$impl/testcase[@name=$href]"/>
+                  <xsl:variable name="report" select="./testcase[@name=$href]"/>
                   <xsl:choose>
                     <xsl:when test="$report/failure">
                       <td class="fail" align="center">fail</td>
