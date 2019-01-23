@@ -626,7 +626,7 @@
               <th>Version</th>
               <xsl:for-each select="$impl">
                 <td>
-                  <xsl:value-of select="$./properties/property[@name='version']/@value"/>
+                  <xsl:value-of select="./properties/property[@name='version']/@value"/>
                 </td>
               </xsl:for-each>
             </tr>
