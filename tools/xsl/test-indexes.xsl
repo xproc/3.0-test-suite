@@ -655,8 +655,8 @@
                   <xsl:text> of </xsl:text>
                   <xsl:value-of select="$tot"/>
                   <xsl:text> (</xsl:text>
-                  <xsl:value-of select="format-number(($impl/@tests - $impl/@errors)
-                                                      div $impl/@tests * 100.0, '#.00')"/>
+                  <xsl:value-of select="format-number((./@tests - ./@errors)
+                                                      div ./@tests * 100.0, '#.00')"/>
                   <xsl:text>%; </xsl:text>
                   <xsl:value-of select="$errs"/>
                   <xsl:text> failed; </xsl:text>
