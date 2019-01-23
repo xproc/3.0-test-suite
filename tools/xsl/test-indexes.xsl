@@ -588,7 +588,7 @@
 <!-- ============================================================ -->
 
 <xsl:template match="c:directory" mode="implementation">
-  <xsl:variable name="impl" select="(doc('../../reports/xml-calabash.xml')/*)"/>
+  <xsl:variable name="impl" select="(doc('../../reports/xml-calabash.xml')/* , doc('../../reports/MorganaXProc-III.xml')/*)"/>
 
   <xsl:result-document href="/fakeroot/implementation.html">
     <html>
