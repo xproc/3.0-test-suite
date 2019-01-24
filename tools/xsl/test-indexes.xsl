@@ -588,7 +588,9 @@
 <!-- ============================================================ -->
 
 <xsl:template match="c:directory" mode="implementation">
-  <xsl:variable name="impl" select="(doc('../../reports/xml-calabash.xml')/* , doc('../../reports/MorganaXProc-III.xml')/*)"/>
+  <xsl:variable name="impl"
+                select="(doc('../../reports/MorganaXProc-III.xml')/*,
+                         doc('../../reports/xml-calabash.xml')/*)"/>
 
   <xsl:result-document href="/fakeroot/implementation.html">
     <html>
@@ -778,7 +780,7 @@
   <xsl:param name="xml"/>
   <xsl:variable name="name" select="substring-before($xml, '.xml')"/>
 
-  <a href="tests/{$name}.html" id="#{$name}">
+  <a href="tests/{$name}.html" id="{$name}">
     <xsl:value-of select="$name"/>
   </a>
 </xsl:function>

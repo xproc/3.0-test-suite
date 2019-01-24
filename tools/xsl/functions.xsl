@@ -11,6 +11,7 @@
 <xsl:param name="specs" as="element()" required="true"/>
 
 <xsl:variable name="calabash" select="doc('../../reports/xml-calabash.xml')/*"/>
+<xsl:variable name="morganaxproc" select="doc('../../reports/MorganaXProc-III.xml')/*"/>
 
 <xsl:key name="id" match="*" use="@id"/>
 <xsl:key name="href" match="h:a" use="@href"/>
