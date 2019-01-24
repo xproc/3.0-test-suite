@@ -304,20 +304,41 @@
 
     <xsl:variable name="basename" select="substring-after(base-uri(/*), '/test-suite/tests/')"/>
     <xsl:variable name="i1" select="($calabash/testcase[@name=$basename])[1]"/>
-    <xsl:if test="$i1">
+    <xsl:variable name="i2" select="($morganaxproc/testcase[@name=$basename])[1]"/>
+    <xsl:if test="$i1 or $i2">
       <div class="implbanners">
-        <div class="xmlcalabash">
-          <a href="../implementation.html#{substring-before($basename, '.xml')}">
-            <xsl:choose>
-              <xsl:when test="$i1/failure">
-                <img src="../img/xc-fail.svg" alt="XML Calabash failing"/>
-              </xsl:when>
-              <xsl:otherwise>
-                <img src="../img/xc-pass.svg" alt="XML Calabash passing"/>
-              </xsl:otherwise>
-            </xsl:choose>
-          </a>
-        </div>
+        <xsl:if test="$i2">
+          <span class="morganaxproc">
+            <a href="../implementation.html#{substring-before($basename, '.xml')}">
+              <xsl:choose>
+                <xsl:when test="$i2/failure">
+                  <img src="../img/mx-fail.svg" alt="MorganaXProc failing"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <img src="../img/mx-pass.svg" alt="MorganaXProc passing"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </a>
+          </span>
+          <xsl:text> </xsl:text>
+        </xsl:if>
+        <xsl:if test="$i1">
+          <span class="xmlcalabash">
+            <a href="../implementation.html#{substring-before($basename, '.xml')}">
+              <xsl:choose>
+                <xsl:when test="$i1/failure">
+                  <img src="../img/xc-fail.svg" alt="XML Calabash failing"/>
+                </xsl:when>
+                <xsl:when test="$i1/failure">
+                  <img src="../img/xc-fail.svg" alt="XML Calabash failing"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <img src="../img/xc-pass.svg" alt="XML Calabash passing"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </a>
+          </span>
+        </xsl:if>
       </div>
     </xsl:if>
   </div>
