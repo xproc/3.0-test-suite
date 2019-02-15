@@ -57,14 +57,15 @@
 <xsl:function name="t:spec-name">
   <xsl:param name="shortname"/>
   <xsl:choose>
-    <xsl:when test="$shortname = 'exec'">Exec step</xsl:when>
-    <xsl:when test="$shortname = 'run'">Run step</xsl:when>
-    <xsl:when test="$shortname = 'steps-intro'">Steps inroduction</xsl:when>
-    <xsl:when test="$shortname = 'steps'">Core steps</xsl:when>
-    <xsl:when test="$shortname = 'validation'">Validation steps</xsl:when>
-    <xsl:when test="$shortname = 'xquery'">XQuery step</xsl:when>
-    <xsl:when test="$shortname = 'xsl-formatter'">XSL formatter step</xsl:when>
     <xsl:when test="$shortname = 'xproc'">XProc</xsl:when>
+    <xsl:when test="$shortname = 'steps'">Core steps</xsl:when>
+    <xsl:when test="$shortname = 'file'">File steps</xsl:when>
+    <xsl:when test="$shortname = 'json'">JSON steps</xsl:when>
+    <xsl:when test="$shortname = 'os'">Operating system steps</xsl:when>
+    <xsl:when test="$shortname = 'paged-media'">Paged-media steps</xsl:when>
+    <xsl:when test="$shortname = 'run'">Run step</xsl:when>
+    <xsl:when test="$shortname = 'text'">Text steps</xsl:when>
+    <xsl:when test="$shortname = 'validation'">Validation steps</xsl:when>
     <xsl:otherwise>
       <xsl:message>Unrecognized spec: <xsl:value-of select="$shortname"/></xsl:message>
       <xsl:value-of select="$shortname"/>
