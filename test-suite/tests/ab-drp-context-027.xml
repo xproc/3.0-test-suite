@@ -2,6 +2,15 @@
     <t:info>
         <t:title>DRP as context for TVT 015</t:title>
         <t:revision-history>
+            <t:revision>
+                <t:date>2019-02-16</t:date>
+                <t:author>
+                    <t:name>Achim Berndzen</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>Fixed error in test by adding p:declare-step/@version</p>
+                </t:description>
+             </t:revision>
              <t:revision>
                 <t:date>2018-12-31</t:date>
                 <t:author>
@@ -17,7 +26,7 @@
         <p>Tests DRP is context sequence for TVT in p:inline with no reference to context.</p>
     </t:description>
     <t:pipeline>
-        <p:declare-step xmlns:p="http://www.w3.org/ns/xproc">
+        <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
             <p:output port="result"/>
             
             <p:identity>
