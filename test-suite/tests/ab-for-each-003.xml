@@ -63,11 +63,11 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="wrapper">The document root is not wrapper.</s:assert>
-               <s:assert test="wrapper/*[1]='first'">First child of wrapper is not 'first'.</s:assert>
-               <s:assert test="wrapper/*[2]='para'">Second child of wrapper is not 'para'.</s:assert>
-               <s:assert test="wrapper/*[3]='para'">Third child of wrapper is not 'para'.</s:assert>
-               <s:assert test="wrapper/*[4]='para'">Fourth child of wrapper is not 'para'.</s:assert>
-               <s:assert test="wrapper/*[5]='last'">Fifth child of wrapper is not 'last'.</s:assert>
+               <s:assert test="wrapper/*[1]/name()='first'">First child of wrapper is not 'first'.</s:assert>
+               <s:assert test="wrapper/*[2]/name()='para'">Second child of wrapper is not 'para'.</s:assert>
+               <s:assert test="wrapper/*[3]/name()='para'">Third child of wrapper is not 'para'.</s:assert>
+               <s:assert test="wrapper/*[4]/name()='para'">Fourth child of wrapper is not 'para'.</s:assert>
+               <s:assert test="wrapper/*[5]/name()='last'">Fifth child of wrapper is not 'last'.</s:assert>
                
                <s:assert test="count(wrapper/*)=5">Wrapper does not have five children.</s:assert>
                
