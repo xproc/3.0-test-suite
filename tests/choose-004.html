@@ -36,11 +36,17 @@
          <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:pattern</span><span class="stc">&gt;</span></span>
             <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:rule</span> <span class="attr"><span class="aname">context</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">/*</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
                <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">self::result</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>The pipeline root is not result.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
-               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">count(self::result/*)=0</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>The result document should not have children.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
+               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">count(self::result/*)=1</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>The result document should not have one child.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
+               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">self::result/doc</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>The child's name should be doc.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
             <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:rule</span><span class="etc">&gt;</span></span></span>
          <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:pattern</span><span class="etc">&gt;</span></span></span>
       <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:schema</span><span class="etc">&gt;</span></span></span>
    </code></pre></div><dl class="revision-history"><h2>Revision history</h2>
+         <dt>03 Apr 2019, 
+               <span class="name">Achim Berndzen</span>
+            </dt><dd><div class="description">
+               <p>Changed test because a missing p:otherwise is now an implicit identity.</p>
+            </div></dd>
          <dt>02 Dec 2018, 
                <span class="name">Achim Berndzen</span>
             </dt><dd><div class="description">
