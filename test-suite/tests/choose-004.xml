@@ -3,6 +3,15 @@
       <t:title>Choose 004</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-04-03</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test because a missing p:otherwise is now an implicit identity.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2018-12-02</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -49,7 +58,8 @@
          <s:pattern>
             <s:rule context="/*">
                <s:assert test="self::result">The pipeline root is not result.</s:assert>
-               <s:assert test="count(self::result/*)=0">The result document should not have children.</s:assert>
+               <s:assert test="count(self::result/*)=1">The result document should not have one child.</s:assert>
+               <s:assert test="self::result/doc">The child's name should be doc.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
