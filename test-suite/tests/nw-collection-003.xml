@@ -5,6 +5,15 @@
       <t:title>Collection 003</t:title>
         <t:revision-history>
           <t:revision>
+            <t:date>2019-04-04</t:date>
+            <t:author initials="ab">
+              <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+              <p>Changed XPath expression on p:wrap-sequence/p:with-option so context item is used and XD0008 has to be raised.</p>
+            </t:description>
+          </t:revision>
+          <t:revision>
             <t:date>2018-10-17</t:date>
             <t:author initials="ab">
               <t:name>Achim Berndzen</t:name>
@@ -55,7 +64,7 @@
         <p:variable name="a" select="count(collection())" collection="true"/>
 
         <p:wrap-sequence>
-          <p:with-option name="wrapper" select="concat('wrapper', count(collection()))"/>
+          <p:with-option name="wrapper" select="concat('wrapper', *[1]/name())"/>
           <p:with-input>
             <doc>{$a}</doc>
           </p:with-input>
