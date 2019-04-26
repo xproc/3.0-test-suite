@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="XProc Test Suite"
-           tests="655"
-           errors="11"
+           tests="731"
+           errors="9"
            failures="0"
            skipped="8"
-           timestamp="2019-03-23T18:56:45">
+           timestamp="2019-04-26T17:40:16">
    <properties>
       <property name="processor" value="MorganaXProc-III"/>
-      <property name="version" value="0.8.8-alpha"/>
+      <property name="version" value="0.8.10-alpha"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.0"/>
@@ -58,6 +58,60 @@
    <testcase name="ab-att-version-015.xml"/>
    <testcase name="ab-att-version-016.xml"/>
    <testcase name="ab-att-version-017.xml"/>
+   <testcase name="ab-choose-001.xml"/>
+   <testcase name="ab-choose-002.xml"/>
+   <testcase name="ab-choose-003.xml"/>
+   <testcase name="ab-choose-004.xml"/>
+   <testcase name="ab-choose-005.xml"/>
+   <testcase name="ab-choose-006.xml"/>
+   <testcase name="ab-choose-007.xml"/>
+   <testcase name="ab-choose-008.xml"/>
+   <testcase name="ab-choose-009.xml"/>
+   <testcase name="ab-choose-010.xml"/>
+   <testcase name="ab-choose-011.xml"/>
+   <testcase name="ab-choose-012.xml"/>
+   <testcase name="ab-choose-013.xml"/>
+   <testcase name="ab-choose-014.xml"/>
+   <testcase name="ab-choose-015.xml"/>
+   <testcase name="ab-choose-016.xml"/>
+   <testcase name="ab-choose-017.xml"/>
+   <testcase name="ab-choose-018.xml"/>
+   <testcase name="ab-choose-019.xml"/>
+   <testcase name="ab-choose-020.xml"/>
+   <testcase name="ab-choose-021.xml"/>
+   <testcase name="ab-choose-022.xml"/>
+   <testcase name="ab-choose-023.xml"/>
+   <testcase name="ab-choose-024.xml"/>
+   <testcase name="ab-choose-025.xml"/>
+   <testcase name="ab-choose-026.xml"/>
+   <testcase name="ab-choose-027.xml"/>
+   <testcase name="ab-choose-028.xml"/>
+   <testcase name="ab-choose-029.xml"/>
+   <testcase name="ab-choose-030.xml"/>
+   <testcase name="ab-choose-031.xml"/>
+   <testcase name="ab-choose-032.xml"/>
+   <testcase name="ab-choose-033.xml"/>
+   <testcase name="ab-choose-034.xml"/>
+   <testcase name="ab-choose-035.xml"/>
+   <testcase name="ab-choose-036.xml"/>
+   <testcase name="ab-choose-037.xml"/>
+   <testcase name="ab-choose-038.xml">
+      <failure>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;failure/&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+      &lt;svrl:schematron-output title="" schemaVersion="" xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+      &lt;!--       --&gt;
+      &lt;svrl:active-pattern document="file:/Users/berndzen/Documents/GIT/3.0-test-suite/test-suite/tests/ab-choose-038.xml"/&gt;
+      &lt;svrl:fired-rule context="/"/&gt;
+      &lt;svrl:failed-assert test="/success" location="/failure"&gt;
+      &lt;svrl:text&gt;Root element is not 'success'.&lt;/svrl:text&gt;
+      &lt;/svrl:failed-assert&gt;
+      &lt;/svrl:schematron-output&gt;
+      </failure>
+   </testcase>
+   <testcase name="ab-choose-039.xml"/>
+   <testcase name="ab-choose-040.xml"/>
+   <testcase name="ab-choose-041.xml"/>
+   <testcase name="ab-choose-042.xml"/>
+   <testcase name="ab-choose-043.xml"/>
    <testcase name="ab-connection-001.xml"/>
    <testcase name="ab-connection-002.xml"/>
    <testcase name="ab-connection-003.xml"/>
@@ -92,6 +146,25 @@
    <testcase name="ab-contenttypes-008.xml"/>
    <testcase name="ab-contenttypes-009.xml"/>
    <testcase name="ab-contenttypes-010xml.xml"/>
+   <testcase name="ab-contenttypes-011.xml"/>
+   <testcase name="ab-contenttypes-012.xml"/>
+   <testcase name="ab-contenttypes-013.xml"/>
+   <testcase name="ab-contenttypes-014.xml"/>
+   <testcase name="ab-contenttypes-015.xml"/>
+   <testcase name="ab-contenttypes-016.xml"/>
+   <testcase name="ab-contenttypes-017.xml"/>
+   <testcase name="ab-contenttypes-018.xml"/>
+   <testcase name="ab-contenttypes-019.xml"/>
+   <testcase name="ab-contenttypes-020.xml"/>
+   <testcase name="ab-contenttypes-021.xml"/>
+   <testcase name="ab-contenttypes-022.xml"/>
+   <testcase name="ab-contenttypes-023.xml"/>
+   <testcase name="ab-contenttypes-024.xml"/>
+   <testcase name="ab-contenttypes-025.xml"/>
+   <testcase name="ab-contenttypes-026.xml"/>
+   <testcase name="ab-contenttypes-027.xml"/>
+   <testcase name="ab-contenttypes-028.xml"/>
+   <testcase name="ab-contenttypes-029.xml"/>
    <testcase name="ab-declare-step-001.xml"/>
    <testcase name="ab-declare-step-002.xml"/>
    <testcase name="ab-declare-step-003.xml"/>
@@ -197,6 +270,20 @@
    <testcase name="ab-for-each-010.xml"/>
    <testcase name="ab-for-each-011.xml"/>
    <testcase name="ab-for-each-012.xml"/>
+   <testcase name="ab-if-001.xml"/>
+   <testcase name="ab-if-002.xml"/>
+   <testcase name="ab-if-003.xml"/>
+   <testcase name="ab-if-004.xml"/>
+   <testcase name="ab-if-005.xml"/>
+   <testcase name="ab-if-006.xml"/>
+   <testcase name="ab-if-007.xml"/>
+   <testcase name="ab-if-008.xml"/>
+   <testcase name="ab-if-009.xml"/>
+   <testcase name="ab-if-010.xml"/>
+   <testcase name="ab-if-011.xml"/>
+   <testcase name="ab-if-012.xml"/>
+   <testcase name="ab-if-013.xml"/>
+   <testcase name="ab-if-014.xml"/>
    <testcase name="ab-import-001.xml"/>
    <testcase name="ab-import-002.xml"/>
    <testcase name="ab-import-003.xml"/>
@@ -487,9 +574,7 @@
    <testcase name="ab-variable-022.xml"/>
    <testcase name="ab-variable-022a.xml"/>
    <testcase name="ab-variable-023.xml"/>
-   <testcase name="ab-variable-024.xml">
-      <failure>Test should fail with 'err:XS0077', but passes.</failure>
-   </testcase>
+   <testcase name="ab-variable-024.xml"/>
    <testcase name="ab-variable-025.xml"/>
    <testcase name="ab-variable-026.xml"/>
    <testcase name="ab-variable-027.xml"/>
@@ -618,22 +703,9 @@
    <testcase name="err-xs0096-001.xml"/>
    <testcase name="inline-avt.xml"/>
    <testcase name="inline-tvt.xml"/>
-   <testcase name="nw-collection-001.xml">
-      <failure>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;doc&gt;0&lt;/doc&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-      &lt;svrl:schematron-output title="" schemaVersion="" xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
-      &lt;!--       --&gt;
-      &lt;svrl:active-pattern document="file:/Users/berndzen/Documents/GIT/3.0-test-suite/test-suite/tests/nw-collection-001.xml"/&gt;
-      &lt;svrl:fired-rule context="/"/&gt;
-      &lt;svrl:failed-assert test="doc = '2'" location="/doc"&gt;
-      &lt;svrl:text&gt;Text collection length isn’t correct.&lt;/svrl:text&gt;
-      &lt;/svrl:failed-assert&gt;
-      &lt;/svrl:schematron-output&gt;
-      </failure>
-   </testcase>
+   <testcase name="nw-collection-001.xml"/>
    <testcase name="nw-collection-002.xml"/>
-   <testcase name="nw-collection-003.xml">
-      <failure>Test should fail with 'err:XD0008', but passes.</failure>
-   </testcase>
+   <testcase name="nw-collection-003.xml"/>
    <testcase name="nw-dup-input-port-001.xml"/>
    <testcase name="nw-dup-input-port-002.xml"/>
    <testcase name="nw-dup-input-port-003.xml"/>
