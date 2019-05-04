@@ -1,7 +1,7 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
    xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XC0091">
    <t:info>
-      <t:title>hash 014 (AB)</t:title>
+      <t:title>hash 017 (AB)</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2019-05-04</t:date>
@@ -9,30 +9,25 @@
                <t:name>Achim Berndzen</t:name>
             </t:author>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>Changed error code to newly introduced XC0091.</p>
-            </t:description>
-         </t:revision>
-         <t:revision>
-            <t:date>2019-05-01</t:date>
-            <t:author>
-               <t:name>Achim Berndzen</t:name>
-            </t:author>
-            <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>New tests for p:hash</p>
+               <p>New test for p:hash</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Testing p:hash raises XC0091 if document-node is selected.</p>
+      <p>Testing p:hash raises XC0091 if result is all text.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result" />
          
-         <p:hash value="XML Processing Model Working Group" algorithm="crc" match="/">
+         <p:hash value="XML Processing Model Working Group" algorithm="crc" match="comment()">
             <p:with-input>
-               <doc att="wrong" />
+               <p:inline>
+                  This is a text.
+                  <!-- a comment -->
+                  This is a text.
+               </p:inline>
             </p:with-input>
          </p:hash>
         
