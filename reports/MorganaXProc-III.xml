@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="XProc Test Suite"
-           tests="731"
+           tests="762"
            errors="9"
            failures="0"
            skipped="8"
-           timestamp="2019-04-26T17:40:16">
+           timestamp="2019-05-05T18:16:13">
    <properties>
       <property name="processor" value="MorganaXProc-III"/>
-      <property name="version" value="0.8.10-alpha"/>
+      <property name="version" value="0.8.11-alpha"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.0"/>
@@ -41,6 +41,7 @@
    <testcase name="ab-add-attribute-025.xml"/>
    <testcase name="ab-add-attribute-026.xml"/>
    <testcase name="ab-add-attribute-027.xml"/>
+   <testcase name="ab-add-attribute-028.xml"/>
    <testcase name="ab-att-version-001.xml"/>
    <testcase name="ab-att-version-002.xml"/>
    <testcase name="ab-att-version-003.xml"/>
@@ -270,6 +271,24 @@
    <testcase name="ab-for-each-010.xml"/>
    <testcase name="ab-for-each-011.xml"/>
    <testcase name="ab-for-each-012.xml"/>
+   <testcase name="ab-hash-001.xml"/>
+   <testcase name="ab-hash-002.xml"/>
+   <testcase name="ab-hash-003.xml"/>
+   <testcase name="ab-hash-004.xml"/>
+   <testcase name="ab-hash-005.xml"/>
+   <testcase name="ab-hash-006.xml"/>
+   <testcase name="ab-hash-007.xml"/>
+   <testcase name="ab-hash-008.xml"/>
+   <testcase name="ab-hash-009.xml"/>
+   <testcase name="ab-hash-010.xml"/>
+   <testcase name="ab-hash-011.xml"/>
+   <testcase name="ab-hash-012.xml"/>
+   <testcase name="ab-hash-013.xml"/>
+   <testcase name="ab-hash-014.xml"/>
+   <testcase name="ab-hash-015.xml"/>
+   <testcase name="ab-hash-016.xml"/>
+   <testcase name="ab-hash-017.xml"/>
+   <testcase name="ab-hash-018.xml"/>
    <testcase name="ab-if-001.xml"/>
    <testcase name="ab-if-002.xml"/>
    <testcase name="ab-if-003.xml"/>
@@ -362,6 +381,18 @@
    <testcase name="ab-insert-023.xml"/>
    <testcase name="ab-insert-024.xml"/>
    <testcase name="ab-insert-025.xml"/>
+   <testcase name="ab-label-elements-001.xml"/>
+   <testcase name="ab-label-elements-002.xml"/>
+   <testcase name="ab-label-elements-003.xml"/>
+   <testcase name="ab-label-elements-004.xml"/>
+   <testcase name="ab-label-elements-005.xml"/>
+   <testcase name="ab-label-elements-006.xml"/>
+   <testcase name="ab-label-elements-007.xml"/>
+   <testcase name="ab-label-elements-008.xml"/>
+   <testcase name="ab-label-elements-009.xml"/>
+   <testcase name="ab-label-elements-010.xml"/>
+   <testcase name="ab-label-elements-011.xml"/>
+   <testcase name="ab-label-elements-012.xml"/>
    <testcase name="ab-library-001.xml"/>
    <testcase name="ab-library-002.xml"/>
    <testcase name="ab-library-003.xml"/>
