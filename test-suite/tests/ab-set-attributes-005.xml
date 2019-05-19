@@ -1,6 +1,6 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
    <t:info>
-      <t:title>p:replace-005 (AB)</t:title>
+      <t:title>p:set-attributes-005 (AB)</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2019-05-19</t:date>
