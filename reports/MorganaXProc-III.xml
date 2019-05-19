@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="XProc Test Suite"
-           tests="762"
-           errors="9"
+           tests="849"
+           errors="10"
            failures="0"
            skipped="8"
-           timestamp="2019-05-05T18:16:13">
+           timestamp="2019-05-19T17:37:19">
    <properties>
       <property name="processor" value="MorganaXProc-III"/>
-      <property name="version" value="0.8.11-alpha"/>
+      <property name="version" value="0.8.12-alpha"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.0"/>
@@ -428,6 +428,26 @@
    <testcase name="ab-library-033.xml"/>
    <testcase name="ab-library-034.xml"/>
    <testcase name="ab-library-035.xml"/>
+   <testcase name="ab-namespace-rename-001.xml"/>
+   <testcase name="ab-namespace-rename-002.xml"/>
+   <testcase name="ab-namespace-rename-003.xml"/>
+   <testcase name="ab-namespace-rename-004.xml"/>
+   <testcase name="ab-namespace-rename-005.xml"/>
+   <testcase name="ab-namespace-rename-006.xml"/>
+   <testcase name="ab-namespace-rename-007.xml"/>
+   <testcase name="ab-namespace-rename-008.xml"/>
+   <testcase name="ab-namespace-rename-009.xml"/>
+   <testcase name="ab-namespace-rename-010.xml"/>
+   <testcase name="ab-namespace-rename-011.xml"/>
+   <testcase name="ab-namespace-rename-012.xml"/>
+   <testcase name="ab-namespace-rename-013.xml"/>
+   <testcase name="ab-namespace-rename-014.xml"/>
+   <testcase name="ab-namespace-rename-015.xml"/>
+   <testcase name="ab-namespace-rename-016.xml"/>
+   <testcase name="ab-namespace-rename-017.xml"/>
+   <testcase name="ab-namespace-rename-018.xml"/>
+   <testcase name="ab-namespace-rename-019.xml"/>
+   <testcase name="ab-namespace-rename-020.xml"/>
    <testcase name="ab-option-001.xml"/>
    <testcase name="ab-option-002.xml"/>
    <testcase name="ab-option-003.xml"/>
@@ -501,6 +521,85 @@
    <testcase name="ab-p-document034.xml"/>
    <testcase name="ab-p-document035.xml"/>
    <testcase name="ab-p-document036.xml"/>
+   <testcase name="ab-pack-001.xml"/>
+   <testcase name="ab-pack-002.xml"/>
+   <testcase name="ab-pack-003.xml"/>
+   <testcase name="ab-pack-004.xml"/>
+   <testcase name="ab-pack-005.xml"/>
+   <testcase name="ab-pack-006.xml"/>
+   <testcase name="ab-pack-007.xml"/>
+   <testcase name="ab-rename-001.xml"/>
+   <testcase name="ab-rename-002.xml"/>
+   <testcase name="ab-rename-003.xml">
+      <failure>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;doc test2:foo="value2" xmlns:test2="http://test2.com"/&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+      &lt;svrl:schematron-output title="" schemaVersion="" xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:test2="http://test2.com"&gt;
+      &lt;!--       --&gt;
+      &lt;svrl:ns-prefix-in-attribute-values uri="http://test2.com" prefix="test2"/&gt;
+      &lt;svrl:active-pattern document="file:///Users/berndzen/Documents/Software/workspace/XProc30Testsuite/1558280280921"/&gt;
+      &lt;svrl:fired-rule context="/"/&gt;
+      &lt;svrl:failed-assert test="doc/@test2:foo='value'" location="/doc"&gt;
+      &lt;svrl:text&gt;Attribute's value is not 'value'.&lt;/svrl:text&gt;
+      &lt;/svrl:failed-assert&gt;
+      &lt;/svrl:schematron-output&gt;
+      </failure>
+   </testcase>
+   <testcase name="ab-rename-003a.xml"/>
+   <testcase name="ab-rename-004.xml"/>
+   <testcase name="ab-rename-005.xml"/>
+   <testcase name="ab-rename-005a.xml"/>
+   <testcase name="ab-rename-005b.xml"/>
+   <testcase name="ab-rename-006.xml"/>
+   <testcase name="ab-rename-006a.xml"/>
+   <testcase name="ab-rename-007.xml"/>
+   <testcase name="ab-rename-007a.xml"/>
+   <testcase name="ab-rename-008.xml"/>
+   <testcase name="ab-rename-009.xml"/>
+   <testcase name="ab-rename-010.xml"/>
+   <testcase name="ab-rename-011.xml"/>
+   <testcase name="ab-rename-012.xml"/>
+   <testcase name="ab-rename-013.xml"/>
+   <testcase name="ab-replace-001.xml"/>
+   <testcase name="ab-replace-002.xml"/>
+   <testcase name="ab-replace-003.xml"/>
+   <testcase name="ab-replace-004.xml"/>
+   <testcase name="ab-replace-005.xml"/>
+   <testcase name="ab-replace-006.xml"/>
+   <testcase name="ab-replace-007.xml"/>
+   <testcase name="ab-replace-008.xml"/>
+   <testcase name="ab-set-attributes-001.xml"/>
+   <testcase name="ab-set-attributes-002.xml"/>
+   <testcase name="ab-set-attributes-003.xml"/>
+   <testcase name="ab-set-attributes-004.xml"/>
+   <testcase name="ab-set-attributes-005.xml"/>
+   <testcase name="ab-set-attributes-006.xml"/>
+   <testcase name="ab-set-attributes-007.xml"/>
+   <testcase name="ab-set-attributes-008.xml"/>
+   <testcase name="ab-set-attributes-009.xml"/>
+   <testcase name="ab-set-attributes-010.xml"/>
+   <testcase name="ab-set-attributes-011.xml"/>
+   <testcase name="ab-set-attributes-012.xml"/>
+   <testcase name="ab-set-attributes-013.xml"/>
+   <testcase name="ab-set-properties-001.xml"/>
+   <testcase name="ab-set-properties-002.xml"/>
+   <testcase name="ab-set-properties-003.xml"/>
+   <testcase name="ab-set-properties-004.xml"/>
+   <testcase name="ab-set-properties-005.xml"/>
+   <testcase name="ab-set-properties-006.xml"/>
+   <testcase name="ab-set-properties-007.xml"/>
+   <testcase name="ab-set-properties-008.xml"/>
+   <testcase name="ab-set-properties-009.xml"/>
+   <testcase name="ab-set-properties-010.xml"/>
+   <testcase name="ab-set-properties-011.xml"/>
+   <testcase name="ab-set-properties-012.xml"/>
+   <testcase name="ab-set-properties-013.xml"/>
+   <testcase name="ab-set-properties-014.xml"/>
+   <testcase name="ab-set-properties-015.xml"/>
+   <testcase name="ab-set-properties-016.xml"/>
+   <testcase name="ab-set-properties-017.xml"/>
+   <testcase name="ab-set-properties-018.xml"/>
+   <testcase name="ab-set-properties-019.xml"/>
+   <testcase name="ab-set-properties-020.xml"/>
+   <testcase name="ab-set-properties-021.xml"/>
    <testcase name="ab-static-option-var-001.xml"/>
    <testcase name="ab-static-option-var-002.xml"/>
    <testcase name="ab-static-option-var-003.xml"/>
