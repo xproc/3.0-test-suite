@@ -15,7 +15,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests p:text-replace (ported from XQuery tests on fn-replace.</p>
+      <p>Tests p:text-replace (ported from XQuery tests on fn-replace).</p>
    </t:description>
    
    <t:pipeline>
