@@ -1,7 +1,8 @@
-dist: trusty
+dist: xenial
 language: java
+jdk: oraclejdk11
 install: true
-script: ./gradlew --stacktrace
+script: ./gradlew website --no-daemon --stacktrace
 
 after_success:
   - tools/travis-publish.sh
