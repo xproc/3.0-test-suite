@@ -1,3 +1,14 @@
+// Note: when this script is run by Travis on a modern OS, the current
+// directory is not available. If you use getAbsolutePath(), what you
+// get back is something like this: /home/travis/build/[secure]/
+// and that's not useful. Consequently, all of the paths in this project
+// have been made relative.
+//
+// Note also: relative paths are tricky because options to XSL stylesheets
+// and pipelines will be resolved *relative to the stylesheet or pipeline*.
+//
+// You have been warned.
+
 buildscript {
   repositories {
     mavenLocal()
@@ -109,20 +120,39 @@ task transform_all_tests(dependsOn: [ "validate_all_tests" ]) {
   }
 }
 
-task test_indexes(dependsOn: ["transform_all_tests","git_log_shorter","get_specs"],
-                  type: XMLCalabashTask) {
+task test_index_setup(dependsOn: ["transform_all_tests","git_log_shorter","get_specs"],
+                      type: XMLCalabashTask) {
   inputs.file "reports/xml-calabash.xml"
   inputs.file "build/git-log-shorter.xml"
-  inputs.file "tools/xsl/test-indexes.xsl"
+  inputs.file "tools/xsl/test-index.xsl"
   inputs.file "tools/xsl/functions.xsl"
   inputs.file "tools/xsl/merge-git-log.xsl"
-  outputs.file "build/html/errors.html"
+  output("result", "build/indexing.xml")
   extensionValues true
-  option("spec-dir", new File("build/specs").getAbsolutePath())
-  pipeline "tools/xpl/test-indexes.xpl"
+  option("spec-dir", "build/specs")
+  pipeline "tools/xpl/test-index-setup.xpl"
   doFirst {
     mkdir("build/html")
   }
+}
+
+task test_indexes() {
+  // nop
+}
+
+["alphabetical", "date", "element", "errors", "expected",
+ "implementation"].each { itype ->
+  def taskname = "test_" + itype + "_index"
+
+  task "idx_$taskname"(dependsOn: ["test_index_setup"], type: XMLCalabashTask) {
+    input("source", "build/indexing.xml")
+    output("result", "build/html/" + itype + ".html")
+    param("index-type", itype)
+    extensionValues true
+    option("stylesheet", "../xsl/test-index.xsl")
+    pipeline "tools/xpl/run-xslt-html.xpl"
+  }
+  test_indexes.dependsOn "idx_$taskname"
 }
 
 def tests = []
@@ -156,7 +186,7 @@ tests.each { fn ->
     param("prev", prev)
     param("next", next)
     extensionValues true
-    option("stylesheet", new File("tools/xsl/format-test.xsl").getAbsolutePath())
+    option("stylesheet", "../xsl/format-test.xsl")
     pipeline "tools/xpl/run-xslt-html.xpl"
     doFirst {
       mkdir("build/tests")
@@ -168,7 +198,7 @@ tests.each { fn ->
 }
 
 fileTree(dir: 'test-suite/tests').include("**/*.xml").each { file ->
-  def fn = file.getAbsolutePath()
+  def fn = file.toString()
   def pos = fn.indexOf("/test-suite/tests/")
   def base = fn.substring(pos+12)
   def name = base.replace("/","_")
@@ -201,7 +231,7 @@ task git_log_shorter(dependsOn: ["git_log_summary"], type: XMLCalabashTask) {
   input("source", "build/git-log-summary.xml")
   output("result", "build/git-log-shorter.xml")
   pipeline "tools/xpl/run-xslt.xpl"
-  option("stylesheet", new File("tools/xsl/shorter-log.xsl").getAbsolutePath())
+  option("stylesheet", "../xsl/shorter-log.xsl")
   doFirst {
     mkdir("build")
   }
@@ -232,7 +262,7 @@ task make_index(dependsOn: ["copy_rsrcs","get_specs"], type: XMLCalabashTask) {
   input("source", "src/main/resources/index.html")
   output("result", "build/html/index.html")
   pipeline "tools/xpl/run-xslt-html.xpl"
-  option("stylesheet", new File("tools/xsl/travis-patch.xsl").getAbsolutePath())
+  option("stylesheet", "../xsl/travis-patch.xsl")
   param("travis", getenv('TRAVIS'))
   param("travis-build", getenv('TRAVIS_BUILD_NUMBER'))
   param("travis-commit", getenv('TRAVIS_COMMIT'))
@@ -244,10 +274,7 @@ task make_index(dependsOn: ["copy_rsrcs","get_specs"], type: XMLCalabashTask) {
 task get_specs(type: XMLCalabashTask) {
   output("result", "build/specs.xml")
   pipeline "tools/xpl/specs.xpl"
-  option("spec-dir", new File("build/specs").getAbsolutePath())
-  doFirst {
-    mkdir("build")
-  }
+  option("spec-dir", "../../build/specs")
 }
 
 ["xproc", "steps", "file", "json", "os", "paged-media", "run", "text", "validation"].each { name ->
@@ -265,7 +292,7 @@ task get_specs(type: XMLCalabashTask) {
 
 task list_test(type: XMLCalabashTask, dependsOn: [ "get_specs" ]) {
   inputs.file "tools/xsl/list-test.xsl"
-  option("spec-dir", new File("build/specs").getAbsolutePath())
+  option("spec-dir", "../../build/specs")
   pipeline "tools/xpl/list-test.xpl"
   output("result", "build/out.html")
   extensionValues true
