@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="XProc Test Suite"
-           tests="866"
+           tests="997"
            errors="10"
            failures="0"
            skipped="8"
-           timestamp="2019-05-26T16:50:19">
+           timestamp="2019-06-02T16:38:19">
    <properties>
       <property name="processor" value="MorganaXProc-III"/>
-      <property name="version" value="0.8.13-alpha"/>
+      <property name="version" value="0.8.14-alpha"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.0"/>
@@ -533,6 +533,24 @@
    <testcase name="ab-pack-005.xml"/>
    <testcase name="ab-pack-006.xml"/>
    <testcase name="ab-pack-007.xml"/>
+   <testcase name="ab-pipe-001.xml"/>
+   <testcase name="ab-pipe-002.xml"/>
+   <testcase name="ab-pipe-003.xml"/>
+   <testcase name="ab-pipe-004.xml"/>
+   <testcase name="ab-pipe-005.xml"/>
+   <testcase name="ab-pipe-006.xml"/>
+   <testcase name="ab-pipe-007.xml"/>
+   <testcase name="ab-pipe-008.xml"/>
+   <testcase name="ab-pipe-009.xml"/>
+   <testcase name="ab-pipe-010.xml"/>
+   <testcase name="ab-pipe-011.xml"/>
+   <testcase name="ab-pipe-012.xml"/>
+   <testcase name="ab-pipe-013.xml"/>
+   <testcase name="ab-pipe-014.xml"/>
+   <testcase name="ab-pipe-015.xml"/>
+   <testcase name="ab-pipe-016.xml"/>
+   <testcase name="ab-pipe-017.xml"/>
+   <testcase name="ab-pipe-018.xml"/>
    <testcase name="ab-rename-001.xml"/>
    <testcase name="ab-rename-002.xml"/>
    <testcase name="ab-rename-003.xml">
@@ -540,7 +558,7 @@
       &lt;svrl:schematron-output title="" schemaVersion="" xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:test2="http://test2.com"&gt;
       &lt;!--       --&gt;
       &lt;svrl:ns-prefix-in-attribute-values uri="http://test2.com" prefix="test2"/&gt;
-      &lt;svrl:active-pattern document="file:///Users/berndzen/Documents/Software/workspace/XProc30Testsuite/1558882261601"/&gt;
+      &lt;svrl:active-pattern document="file:///Users/berndzen/Documents/Software/workspace/XProc30Testsuite/1559486347094"/&gt;
       &lt;svrl:fired-rule context="/"/&gt;
       &lt;svrl:failed-assert test="doc/@test2:foo='value'" location="/doc"&gt;
       &lt;svrl:text&gt;Attribute's value is not 'value'.&lt;/svrl:text&gt;
@@ -673,7 +691,106 @@
    <testcase name="ab-static-option-var-056.xml"/>
    <testcase name="ab-static-option-var-057.xml"/>
    <testcase name="ab-static-option-var-058.xml"/>
+   <testcase name="ab-string-replace-001.xml"/>
+   <testcase name="ab-string-replace-002.xml"/>
+   <testcase name="ab-string-replace-003.xml"/>
+   <testcase name="ab-string-replace-004.xml"/>
+   <testcase name="ab-string-replace-005.xml"/>
    <testcase name="ab-subpipeline-001.xml"/>
+   <testcase name="ab-text-count-001.xml"/>
+   <testcase name="ab-text-count-002.xml"/>
+   <testcase name="ab-text-count-003.xml"/>
+   <testcase name="ab-text-count-004.xml"/>
+   <testcase name="ab-text-count-005.xml"/>
+   <testcase name="ab-text-count-006.xml"/>
+   <testcase name="ab-text-head-001.xml"/>
+   <testcase name="ab-text-head-002.xml"/>
+   <testcase name="ab-text-head-003.xml"/>
+   <testcase name="ab-text-head-004.xml"/>
+   <testcase name="ab-text-head-005.xml"/>
+   <testcase name="ab-text-head-006.xml"/>
+   <testcase name="ab-text-head-007.xml"/>
+   <testcase name="ab-text-head-008.xml"/>
+   <testcase name="ab-text-head-009.xml"/>
+   <testcase name="ab-text-join-001.xml"/>
+   <testcase name="ab-text-join-002.xml"/>
+   <testcase name="ab-text-join-003.xml"/>
+   <testcase name="ab-text-join-004.xml"/>
+   <testcase name="ab-text-join-005.xml"/>
+   <testcase name="ab-text-join-006.xml"/>
+   <testcase name="ab-text-join-007.xml"/>
+   <testcase name="ab-text-join-008.xml"/>
+   <testcase name="ab-text-join-009.xml"/>
+   <testcase name="ab-text-replace-001.xml"/>
+   <testcase name="ab-text-replace-002.xml"/>
+   <testcase name="ab-text-replace-003.xml"/>
+   <testcase name="ab-text-replace-004.xml"/>
+   <testcase name="ab-text-replace-005.xml"/>
+   <testcase name="ab-text-replace-006.xml"/>
+   <testcase name="ab-text-replace-007.xml"/>
+   <testcase name="ab-text-replace-008.xml"/>
+   <testcase name="ab-text-replace-009.xml"/>
+   <testcase name="ab-text-replace-010.xml"/>
+   <testcase name="ab-text-replace-011.xml"/>
+   <testcase name="ab-text-replace-012.xml"/>
+   <testcase name="ab-text-replace-013.xml"/>
+   <testcase name="ab-text-replace-014.xml"/>
+   <testcase name="ab-text-replace-015.xml"/>
+   <testcase name="ab-text-replace-016.xml"/>
+   <testcase name="ab-text-replace-017.xml"/>
+   <testcase name="ab-text-replace-018.xml"/>
+   <testcase name="ab-text-replace-019.xml"/>
+   <testcase name="ab-text-replace-020.xml"/>
+   <testcase name="ab-text-replace-021.xml"/>
+   <testcase name="ab-text-replace-022.xml"/>
+   <testcase name="ab-text-replace-023.xml"/>
+   <testcase name="ab-text-replace-024.xml"/>
+   <testcase name="ab-text-replace-025.xml"/>
+   <testcase name="ab-text-replace-026.xml"/>
+   <testcase name="ab-text-replace-027.xml"/>
+   <testcase name="ab-text-replace-028.xml"/>
+   <testcase name="ab-text-replace-029.xml"/>
+   <testcase name="ab-text-replace-030.xml"/>
+   <testcase name="ab-text-replace-031.xml"/>
+   <testcase name="ab-text-replace-032.xml"/>
+   <testcase name="ab-text-replace-033.xml"/>
+   <testcase name="ab-text-replace-034.xml"/>
+   <testcase name="ab-text-replace-035.xml"/>
+   <testcase name="ab-text-replace-036.xml"/>
+   <testcase name="ab-text-replace-037.xml"/>
+   <testcase name="ab-text-replace-038.xml"/>
+   <testcase name="ab-text-replace-039.xml"/>
+   <testcase name="ab-text-replace-040.xml"/>
+   <testcase name="ab-text-replace-041.xml"/>
+   <testcase name="ab-text-replace-042.xml"/>
+   <testcase name="ab-text-replace-043.xml"/>
+   <testcase name="ab-text-replace-044.xml"/>
+   <testcase name="ab-text-replace-045.xml"/>
+   <testcase name="ab-text-replace-046.xml"/>
+   <testcase name="ab-text-replace-047.xml"/>
+   <testcase name="ab-text-replace-048.xml"/>
+   <testcase name="ab-text-replace-049.xml"/>
+   <testcase name="ab-text-replace-050.xml"/>
+   <testcase name="ab-text-replace-051.xml"/>
+   <testcase name="ab-text-replace-052.xml"/>
+   <testcase name="ab-text-replace-053.xml"/>
+   <testcase name="ab-text-replace-054.xml"/>
+   <testcase name="ab-text-replace-055.xml"/>
+   <testcase name="ab-text-replace-056.xml"/>
+   <testcase name="ab-text-replace-057.xml"/>
+   <testcase name="ab-text-replace-058.xml"/>
+   <testcase name="ab-text-replace-059.xml"/>
+   <testcase name="ab-text-replace-060.xml"/>
+   <testcase name="ab-text-replace-061.xml"/>
+   <testcase name="ab-text-tail-001.xml"/>
+   <testcase name="ab-text-tail-002.xml"/>
+   <testcase name="ab-text-tail-003.xml"/>
+   <testcase name="ab-text-tail-004.xml"/>
+   <testcase name="ab-text-tail-005.xml"/>
+   <testcase name="ab-text-tail-006.xml"/>
+   <testcase name="ab-text-tail-007.xml"/>
+   <testcase name="ab-text-tail-008.xml"/>
+   <testcase name="ab-text-tail-009.xml"/>
    <testcase name="ab-try-001.xml"/>
    <testcase name="ab-try-002.xml"/>
    <testcase name="ab-try-003.xml"/>
@@ -836,6 +953,20 @@
    <testcase name="ab-with-option-007.xml"/>
    <testcase name="ab-with-option-008.xml"/>
    <testcase name="ab-with-option-009.xml"/>
+   <testcase name="ab-wrap-sequence-001.xml"/>
+   <testcase name="ab-wrap-sequence-002.xml"/>
+   <testcase name="ab-wrap-sequence-003.xml"/>
+   <testcase name="ab-wrap-sequence-004.xml"/>
+   <testcase name="ab-wrap-sequence-005.xml"/>
+   <testcase name="ab-wrap-sequence-006.xml"/>
+   <testcase name="ab-wrap-sequence-007.xml"/>
+   <testcase name="ab-wrap-sequence-008.xml"/>
+   <testcase name="ab-wrap-sequence-009.xml"/>
+   <testcase name="ab-wrap-sequence-010.xml"/>
+   <testcase name="ab-wrap-sequence-011.xml"/>
+   <testcase name="ab-wrap-sequence-012.xml"/>
+   <testcase name="ab-wrap-sequence-013.xml"/>
+   <testcase name="ab-wrap-sequence-014.xml"/>
    <testcase name="choose-001.xml"/>
    <testcase name="choose-002.xml"/>
    <testcase name="choose-003.xml"/>
