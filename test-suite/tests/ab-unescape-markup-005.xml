@@ -1,0 +1,49 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:unescape-markup 005 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-06-23</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:unescape-markup (ported from 1.0 test suite)</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:unescape-markup</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+         <p:output port="result"/>
+         <p:unescape-markup namespace="http://www.example.org/ns/">
+            <p:with-input port="source">
+               <p:inline><wrapper>&lt;doc>&lt;p>foo&lt;/p>&lt;/doc>&lt;doc>&lt;p>foo&lt;/p>&lt;/doc></wrapper></p:inline>
+            </p:with-input>
+         </p:unescape-markup>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns uri="http://www.example.org/ns/" prefix="ex"/>
+         <s:ns uri="http://www.w3.org/ns/xproc-step" prefix="c" />
+         <s:pattern>
+             <s:rule context="/">
+                <s:assert test="wrapper">Document element is not "wrapper".</s:assert>
+                <s:assert test="count(wrapper/ex:doc)=2">There should be two ex:doc elements in wrapper.</s:assert>
+                <s:assert test="empty(prefix-from-QName(wrapper/ex:doc[1]/node-name()))">Element 'doc'[1] should not have a prefix.</s:assert>
+                <s:assert test="empty(prefix-from-QName(wrapper/ex:doc[2]/node-name()))">Element 'doc'[2] should not have a prefix.</s:assert>
+                <s:assert test="count(wrapper/ex:doc/ex:p)=2">There should be two ex:p elements in ex:doc.</s:assert>
+                <s:assert test="empty(prefix-from-QName(wrapper/ex:doc/ex:p[1]/node-name()))">Element 'p'[1] should not have a prefix.</s:assert>
+                <s:assert test="empty(prefix-from-QName(wrapper/ex:doc/ex:p[2]/node-name()))">Element 'p'[2] should not have a prefix.</s:assert>
+                <s:assert test="wrapper/ex:doc[1]/ex:p='foo'">First 'p' does not have text 'foo'.</s:assert>
+                <s:assert test="wrapper/ex:doc[2]/ex:p='foo'">Second 'p' does not have text 'foo'.</s:assert>
+             </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
