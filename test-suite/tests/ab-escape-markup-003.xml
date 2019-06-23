@@ -1,0 +1,46 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:escape-markup 003</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-06-23</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:escape-markup</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:escape-markup: Attributes preserved on surrounding element.</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+         <p:output port="result"/>
+         <p:escape-markup>
+            <p:with-input>
+               <p:inline>
+                  <body-wrapper a="1"><doc><p>foo&amp;bar;</p></doc></body-wrapper>
+               </p:inline>
+            </p:with-input>
+         </p:escape-markup>
+         
+         <p:wrap-sequence wrapper="wrapper" />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+             <s:rule context="/">
+                <s:assert test="wrapper">Document element is not wrapper.</s:assert>
+                <s:assert test="wrapper/body-wrapper/text()='&lt;doc>&lt;p>foo&amp;amp;bar;&lt;/p>&lt;/doc>'">Text child is not '&lt;doc>&lt;p>foo&amp;amp;bar;&lt;/p>&lt;/doc>'.</s:assert>
+                <s:assert test="wrapper/body-wrapper/@a='1'">Value of @a on body-wrapper is not '1'.</s:assert>
+                <s:assert test="count(wrapper/body-wrapper/@*)=1">Element 'body-wrapper' should have exactly one attribute.</s:assert>
+              </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

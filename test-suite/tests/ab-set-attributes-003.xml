@@ -3,6 +3,15 @@
       <t:title>p:set-attributes-003 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-06-23</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test to new step signature.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-05-19</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -24,15 +33,7 @@
          <p:input port="source" />
          <p:output port="result"/>
             
-         <p:set-attributes match="*">
-            <p:with-input port="attributes">
-               <p:inline>
-                  <attributes att="1" a:att="2" xmlns:a="http://xproc.org/ns/testsuite/attributes">
-                     <a:foo test="this attribute should not show up"/>
-                  </attributes>  
-               </p:inline>
-            </p:with-input>
-         </p:set-attributes>
+         <p:set-attributes match="*" attributes="map{'att':1, 'a:att':2}" xmlns:a="http://xproc.org/ns/testsuite/attributes" />
       </p:declare-step>
    </t:pipeline>
    <t:schematron>

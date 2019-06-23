@@ -1,0 +1,62 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:unescape-markup 004 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-06-23</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:unescape-markup (ported from 1.0 test suite)</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:unescape-markup</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+         <p:output port="result"/>
+         <p:unescape-markup namespace="http://www.w3.org/1999/xhtml"
+            encoding="base64" content-type="text/html"
+            charset="UTF-8">
+            <p:with-input port="source" xmlns:c="http://www.w3.org/ns/xproc-step">
+               <p:inline><c:body content-type="text/html" encoding="base64">PGh0bWw+CjxoZWFkPgo8dGl0bGU+QW4gSFRNTCBEb2N1bWVudDwvdGl0bGU+CjwvaGVhZD4KPGJv
+ZHk+CjxwPldpdGggPGVtPjxiPmJyb2tlbjwvZW0+PC9iPiBtYXJrdXAuCjwvYm9keT4KPC9odG1s
+Pgo=</c:body></p:inline>
+            </p:with-input>
+         </p:unescape-markup>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns uri="http://www.w3.org/1999/xhtml" prefix="html"/>
+         <s:ns uri="http://www.w3.org/ns/xproc-step" prefix="c" />
+         <s:pattern>
+             <s:rule context="/">
+                <s:assert test="c:body">Document element is not "c:body".</s:assert>
+                <s:assert test="c:body/html:html">There is no html:html element in c:body.</s:assert>
+                <s:assert test="empty(prefix-from-QName(c:body/html:html/node-name()))">Element 'html' should not have a prefix.</s:assert>
+                <s:assert test="c:body/html:html/html:head">There is no html:head element in html.</s:assert>
+                <s:assert test="empty(prefix-from-QName(c:body/html:html/html:head/node-name()))">Element 'head' should not have a prefix.</s:assert>
+                <s:assert test="c:body/html:html/html:head/html:title">There is no html:tile element in head.</s:assert>
+                <s:assert test="empty(prefix-from-QName(c:body/html:html/html:head/html:title/node-name()))">Element 'title' should not have a prefix.</s:assert>
+                <s:assert test="c:body/html:html/html:head/html:title/text()='An HTML Document'">There is no text 'An HTML Document' in html:title.</s:assert>
+                <s:assert test="c:body/html:html/html:body">There is no html:body element in html.</s:assert>
+                <s:assert test="empty(prefix-from-QName(c:body/html:html/html:body/node-name()))">Element 'body' should not have a prefix.</s:assert>
+                <s:assert test="c:body/html:html/html:body/html:p">There is no html:p element in body.</s:assert>
+                <s:assert test="empty(prefix-from-QName(c:body/html:html/html:body/html:p/node-name()))">Element 'p' should not have a prefix.</s:assert>
+                <s:assert test="c:body/html:html/html:body/html:p/text()[1]='With '">First text child of p is not 'With '.</s:assert>
+                <s:assert test="normalize-space(c:body/html:html/html:body/html:p/text()[2])='markup.'">Second text child of p is not ' markup.'.</s:assert>
+                <s:assert test="c:body/html:html/html:body/html:p/html:em">Element 'p' should have an 'em' child.</s:assert>
+                <s:assert test="c:body/html:html/html:body/html:p/html:em/html:b">Element 'em' should have an 'b' child.</s:assert>
+                <s:assert test="c:body/html:html/html:body/html:p/html:em/html:b/text()='broken'">Element 'b' should have text 'broken'.</s:assert>
+                <s:assert test="c:body/html:html/html:body/html:p/html:b">Element 'p' should have child 'b'.</s:assert>
+             </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
