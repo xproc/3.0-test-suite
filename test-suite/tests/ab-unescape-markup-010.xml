@@ -3,6 +3,15 @@
       <t:title>p:unescape-markup 010 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-06-30</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed test by removing whitespace around comment.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-06-23</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -22,9 +31,7 @@
          <p:output port="result"/>
          <p:unescape-markup namespace="http://www.example.org/ns/">
             <p:with-input port="source">
-               <p:inline>
-                  <!-- comment -->
-               </p:inline>
+               <p:inline><!-- comment --></p:inline>
             </p:with-input>
          </p:unescape-markup>
          <p:wrap-sequence wrapper="wrapper" />

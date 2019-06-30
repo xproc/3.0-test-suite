@@ -3,6 +3,15 @@
       <t:title>hash 007 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-06-30</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed test by taking care of whitespace in schema.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-05-01</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -35,7 +44,8 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="doc">The document root is not doc.</s:assert>
-               <s:assert test="doc/text()='852b1f51'">Value of doc/text() is not '852b1f51'.</s:assert>
+               <s:assert test="not(doc/text()='852b1f51')">Whitespace around element 'p' is not correctly handled.</s:assert>
+               <s:assert test="normalize-space(doc/text())='852b1f51'">Normalized text of doc is not '852b1f51'.</s:assert>
                <s:assert test="count(doc/*)=0">doc must not have child elements.</s:assert>
             </s:rule>
          </s:pattern>
