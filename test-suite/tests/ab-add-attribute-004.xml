@@ -3,6 +3,15 @@
       <t:title>Add-attribute-004 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-06-28</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fix tests by removing AVT</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-02-16</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -20,8 +29,9 @@
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result" />
          
-         <p:add-attribute match="/doc" attribute-name="{QName('http://attribute-namespace','att')}" attribute-value="5">
+         <p:add-attribute match="/doc" attribute-value="5">
             <p:with-input><doc /></p:with-input>
+            <p:with-option name="attribute-name" select="QName('http://attribute-namespace','att')" />
          </p:add-attribute>
       </p:declare-step>
    </t:pipeline>

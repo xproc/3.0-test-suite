@@ -3,6 +3,15 @@
       <t:title>pack 007 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-06-30</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed test to cover whitespace correctly.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-05-06</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -14,7 +23,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Testing correct handling of non element noded by p:pack.</p>
+      <p>Testing correct handling of non element nodes by p:pack.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
@@ -46,14 +55,16 @@
           <s:pattern>
             <s:rule context="/">
                <s:assert test="doc">The document root is not doc.</s:assert>
-               <s:assert test="doc/wrap/child::node()[1] instance of comment()">First child of wrap should be a comment.</s:assert>
-               <s:assert test="doc/wrap/child::node()[2] instance of element()">Second child of wrap should be an element.</s:assert>
-               <s:assert test="doc/wrap/child::node()[3] instance of processing-instruction()">Third child of wrap should be a pi.</s:assert>
-               <s:assert test="doc/wrap/child::node()[4] instance of processing-instruction()">Fourth child of wrap should be an pi.</s:assert>
-               <s:assert test="doc/wrap/child::node()[5] instance of element()">Fifth child of wrap should be an element.</s:assert>
-               <s:assert test="doc/wrap/child::node()[6] instance of comment()">Sixth child of wrap should be a comment.</s:assert>
+               <s:assert test="doc/wrap/child::node()[1] instance of text()">First child of wrap should be a text.</s:assert>               
+               <s:assert test="doc/wrap/child::node()[2] instance of comment()">Second child of wrap should be a comment.</s:assert>
+               <s:assert test="doc/wrap/child::node()[3] instance of text()">Third child of wrap should be a text.</s:assert>               
+               <s:assert test="doc/wrap/child::node()[4] instance of element()">Forth child of wrap should be an element.</s:assert>
+               <s:assert test="doc/wrap/child::node()[6] instance of processing-instruction()">Sixth child of wrap should be a pi.</s:assert>
+               <s:assert test="doc/wrap/child::node()[8] instance of processing-instruction()">Eight child of wrap should be an pi.</s:assert>
+               <s:assert test="doc/wrap/child::node()[10] instance of element()">Tenth child of wrap should be an element.</s:assert>
+               <s:assert test="doc/wrap/child::node()[12] instance of comment()">Twelfth child of wrap should be a comment.</s:assert>
                
-               <s:assert test="count(doc/wrap/child::node())=6">Element 'wrap' should have 6 children.</s:assert>              
+               <s:assert test="count(doc/wrap/child::node())=13">Element 'wrap' should have 13 children.</s:assert>              
             </s:rule>
          </s:pattern>
       </s:schema>
