@@ -20,6 +20,15 @@
                <p>Creating new tests, extending rng and corrected xproc's test</p>
             </t:description>
          </t:revision>
+         <t:revision>
+            <t:date>2019-06-30T14:36:00Z</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added href attribute so that err:XS0018 is not an equally valid error.</p>
+            </t:description>
+         </t:revision>
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
@@ -28,8 +37,8 @@
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
          <p:output port="result"/>
-      
-         <p:load>
+
+         <p:load href="irrelevant">
             <p:with-input/>
          </p:load>
       </p:declare-step>
