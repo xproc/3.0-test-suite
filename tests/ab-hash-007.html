@@ -18,12 +18,18 @@
          <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:pattern</span><span class="stc">&gt;</span></span>
             <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:rule</span> <span class="attr"><span class="aname">context</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">/</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
                <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">doc</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>The document root is not doc.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
-               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">doc/text()='852b1f51'</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>Value of doc/text() is not '852b1f51'.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
+               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">not(doc/text()='852b1f51')</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>Whitespace around element 'p' is not correctly handled.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
+               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">normalize-space(doc/text())='852b1f51'</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>Normalized text of doc is not '852b1f51'.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
                <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">count(doc/*)=0</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>doc must not have child elements.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
             <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:rule</span><span class="etc">&gt;</span></span></span>
          <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:pattern</span><span class="etc">&gt;</span></span></span>
       <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:schema</span><span class="etc">&gt;</span></span></span>
    </code></pre></div><dl class="revision-history"><h2>Revision history</h2>
+         <dt>30 Jun 2019, 
+               <span class="name">Achim Berndzen</span>
+            </dt><dd><div class="description">
+               <p>Fixed test by taking care of whitespace in schema.</p>
+            </div></dd>
          <dt>01 May 2019, 
                <span class="name">Achim Berndzen</span>
             </dt><dd><div class="description">

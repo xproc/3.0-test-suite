@@ -3,6 +3,15 @@
       <t:title>p:rename-007a (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-06-28</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fix tests by removing AVT</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-05-18</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -28,7 +37,9 @@
          <p:input port="source" />
          <p:output port="result"/>
             
-         <p:rename match="element/@attr" new-name="{QName('http://bar2.com/','bar:attr')}" />
+         <p:rename match="element/@attr" >
+            <p:with-option name="new-name" select="QName('http://bar2.com/','bar:attr')" />
+         </p:rename>
       </p:declare-step>
    </t:pipeline>
    <t:schematron>

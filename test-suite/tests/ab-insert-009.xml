@@ -3,6 +3,15 @@
         <t:title>Test for p:insert 009 (AB)</t:title>
         <t:revision-history>
             <t:revision>
+                <t:date>2019-06-30</t:date>
+                <t:author>
+                    <t:name>Achim Berndzen</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>Fixed schematron to cover trailing whitespace node.</p>
+                </t:description>
+            </t:revision>
+            <t:revision>
                 <t:date>2019-03-22</t:date>
                 <t:author>
                     <t:name>Achim Berndzen</t:name>
@@ -46,7 +55,8 @@
             <s:pattern>
                 <s:rule context="/">
                     <s:assert test="root">The root element is not 'root'.</s:assert>
-                    <s:assert test="root/child::node()[1] instance of processing-instruction('that')">First child is not PI.</s:assert>
+                    <s:assert test="root/child::node()[1] instance of text()">First child is not text().</s:assert>
+                    <s:assert test="root/child::node()[2] instance of processing-instruction('that')">Second child is not PI.</s:assert>
                     <s:assert test="root/*[1]/name()='root1'">Name of the first element of root is not 'root1'.</s:assert>
                     <s:assert test="root/*[2]/name()='root2'">Name of the second element of root is not 'root2'.</s:assert>
                 </s:rule>
