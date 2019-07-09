@@ -1,0 +1,7 @@
+<doc xmlns="http://example.com/sample">
+  <title>Some Title</title>
+  <p>A paragraph.</p>
+  <note xml:id='note'>
+    <p>A paragraph in note.</p>
+  </note>
+</doc>
