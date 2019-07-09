@@ -1,7 +1,18 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="fail" code="err:XD0019">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+    xmlns:err="http://www.w3.org/ns/xproc-error"
+    expected="fail" code="err:XD0019">
     <t:info>
         <t:title>Test for p:insert 025 (AB)</t:title>
         <t:revision-history>
+            <t:revision>
+                <t:date>2019-07-09</t:date>
+                <t:author>
+                    <t:name>Achim Berndzen</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>Fixed error namespace in test.</p>
+                </t:description>
+            </t:revision>
             <t:revision>
                 <t:date>2019-03-23</t:date>
                 <t:author>
