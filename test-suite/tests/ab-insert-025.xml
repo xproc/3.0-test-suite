@@ -1,4 +1,6 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="fail" code="err:XD0019">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+    xmlns:err="http://www.w3.org/ns/xproc-error"
+    expected="fail" code="err:XD0019">
     <t:info>
         <t:title>Test for p:insert 025 (AB)</t:title>
         <t:revision-history>

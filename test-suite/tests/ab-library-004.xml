@@ -1,5 +1,6 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
-        xmlns:err="http://w3.org/ns/xproc-error" expected="fail" code="err:XS0062">
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XS0062">
    <t:info>
       <t:title>Library import 004 (AB)</t:title>
       <t:revision-history>
