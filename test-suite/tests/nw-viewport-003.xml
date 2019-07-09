@@ -1,0 +1,48 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+  <t:info>
+    <t:title>Viewport 003</t:title>
+    <t:revision-history>
+      <t:revision>
+        <t:date>2019-07-08</t:date>
+        <t:author initials="ndw">
+          <t:name>Norman Walsh</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Initial publication</p>
+        </t:description>
+      </t:revision>
+    </t:revision-history>
+  </t:info>
+  <t:description xmlns="http://www.w3.org/1999/xhtml">
+    <p>Test that the match attribute can be an AVT with a variable reference.</p>
+  </t:description>
+  <t:input port="source" src="../documents/sample.xml"/>
+  <t:pipeline>
+    <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+      <p:output port="result"/>
+      <p:input port="source"/>
+
+      <p:variable name="gi" select="'p'"/>
+
+      <p:viewport match="{concat('ex:', $gi)}" xmlns:ex="http://example.com/sample">
+        <p:add-attribute attribute-name="v" attribute-value="true" match="/*"/>
+      </p:viewport>
+    </p:declare-step>
+  </t:pipeline>
+  <t:schematron>
+    <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+      <s:ns prefix="ex" uri="http://example.com/sample"/>
+      <s:pattern>
+        <s:rule context="/">
+          <s:assert test="ex:doc">The pipeline root is not “doc”.</s:assert>
+        </s:rule>
+        <s:rule context="p">
+          <s:assert test=".[@v='true']">The ‘p’ elements don’t have the correct ‘v’ attributes.</s:assert>
+        </s:rule>
+        <s:rule context="*[not(self::ex:p)]">
+          <s:assert test=".[not(@v)]">The ‘v’ attribute appears on the wrong element(s).</s:assert>
+        </s:rule>
+      </s:pattern>
+    </s:schema>
+  </t:schematron>
+</t:test>
