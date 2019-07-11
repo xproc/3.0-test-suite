@@ -18,13 +18,14 @@
   </t:description>
   <t:input port="source" src="../documents/sample.xml"/>
   <t:pipeline>
-    <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+    <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+                    xmlns:ex="http://example.com/sample" version="3.0">
       <p:output port="result"/>
       <p:input port="source"/>
 
-      <p:variable name="gi" select="'p'"/>
+      <p:variable name="gi" select="xs:QName('ex:p')"/>
 
-      <p:viewport match="{concat('ex:', $gi)}" xmlns:ex="http://example.com/sample">
+      <p:viewport match="*[node-name(.) = $gi]">
         <p:add-attribute attribute-name="v" attribute-value="true" match="/*"/>
       </p:viewport>
     </p:declare-step>
