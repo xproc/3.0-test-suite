@@ -22,7 +22,7 @@
       <p:output port="result"/>
       <p:input port="source"/>
 
-      <p:viewport match="{concat('ex:', 'p')}" xmlns:ex="http://example.com/sample">
+      <p:viewport match="ex:p" xmlns:ex="http://example.com/sample">
         <p:add-attribute attribute-name="v" attribute-value="true" match="/*"/>
       </p:viewport>
     </p:declare-step>
