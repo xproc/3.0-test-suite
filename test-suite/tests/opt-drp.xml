@@ -4,6 +4,9 @@
       <t:revision-history>
          <t:revision>
             <t:date>2019-07-13</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Reconstructed test without obsolete step p:parameters.</p>
             </t:description>
