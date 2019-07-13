@@ -1,0 +1,43 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>AB use-when-002</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-07-13</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Ported tests for @use-when from 1.0 test suite.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests that use-when is not applied in the descendants of p:inline.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="pipeline" xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result" />
+         <p:identity>
+            <p:with-input port="source">
+               <p:inline>
+                  <p:empty use-when="false()" xmlns:p="http://www.w3.org/ns/xproc"/>
+               </p:inline>
+            </p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+   
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns uri="http://www.w3.org/ns/xproc" prefix="p" />
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="p:empty">The document root is not 'p:empty'.</s:assert>
+               <s:assert test="p:empty/@use-when='false()'">Document root does not have an attribute @use-when with 'false'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

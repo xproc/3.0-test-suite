@@ -1,0 +1,40 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>AB use-when-005</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-07-13</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Adapted test for @use-when from 1.0 test suite.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests that use-when is not applied in the descendants of implicit p:inline.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="pipeline" xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result" />
+         <p:identity>
+            <p:with-input port="source">
+              <doc use-when="false()" />
+            </p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+   
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="doc">The document root is not 'doc'.</s:assert>
+               <s:assert test="doc/@use-when='false()'">Document root does not have an attribute @use-when with 'false'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
