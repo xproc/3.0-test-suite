@@ -3,6 +3,15 @@
       <t:title>with-input-select-011</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-07-13</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test: Atomic values are now JSON documents.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-01-12</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -14,7 +23,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests select on p:with-input/@select resulting in an atomic value is "text/plain"</p>
+      <p>Tests select on p:with-input/@select resulting in an atomic value is "application/json"</p>
    </t:description>
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
@@ -37,7 +46,7 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="result">Document root is not 'result'.</s:assert>
-               <s:assert test="result/text()='text/plain'">'result' does not a text child with value 'text/plain'.</s:assert>
+               <s:assert test="result/text()='application/json'">'result' does not a text child with value 'application/json'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
