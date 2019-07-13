@@ -2,6 +2,12 @@
    <t:info>
       <t:title>Optional p:inline wrapper</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2019-07-13</t:date>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Reconstructed test without obsolete step p:parameters.</p>
+            </t:description>
+         </t:revision>
          <t:revision initials="nw">
             <t:date>2018-10-11</t:date>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
@@ -22,23 +28,10 @@
    <t:pipeline src="../pipelines/opt-drp.xpl"/>
    <t:schematron>
       <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
-         <s:ns prefix="p" uri="http://www.w3.org/ns/xproc"/>
-         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
          <s:pattern>
-            <s:rule context="/*">
-               <s:assert test="self::c:param-set">The pipeline root is not c:param-set.</s:assert>
-            </s:rule>
-            <s:rule context="c:param-set">
-               <s:assert test="empty(*[not(self::c:param)])">
-            The c:param-set element contains illegal children.</s:assert>
-            </s:rule>
-            <s:rule context="c:param-set">
-               <s:assert test="count(c:param) = 1">
-            The c:param-set element has the wrong number of c:params.</s:assert>
-            </s:rule>
-            <s:rule context="c:param">
-               <s:assert test="(@name = 'p' and @value = '3')">
-            The c:param is incorrect.</s:assert>
+            <s:rule context="/">
+               <s:assert test="result">The pipeline root is not result.</s:assert>
+               <s:assert test="result/text()='3'">The text content of result is not '3'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>

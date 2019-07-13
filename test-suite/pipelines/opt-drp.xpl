@@ -9,7 +9,9 @@
       <doc><p/><p/><p/></doc>
     </p:with-input>
   </p:identity>
-
-  <p:parameters parameters="map { 'p': count(//p) }"/>
+  
+  <p:identity>
+    <p:with-input><result>{count(//p)}</result></p:with-input>
+  </p:identity>
 
 </p:declare-step>
