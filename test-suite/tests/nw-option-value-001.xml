@@ -1,0 +1,64 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>nw-option-value-001</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-07-12T18:51:00-05:00</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Test that option values passed to steps override
+               the default values.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Test that an option value passed to a step overrides its
+      default value.</p>
+   </t:description>
+   <t:pipeline>
+<p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc"
+                xmlns:x="http://dummy">
+  <p:output port="result" />
+  <p:option name="top-level" select="'top'"/>
+
+  <p:declare-step type="x:inner">
+    <p:output port="result"/>
+    <p:option name="inner" select="'fail'"/>
+    <p:identity>
+      <p:with-input><inner>{$inner}</inner></p:with-input>
+    </p:identity>
+  </p:declare-step>
+
+  <p:identity name="two">
+    <p:with-input><top>{$top-level}</top></p:with-input>
+  </p:identity>
+
+  <x:inner name="one" inner="pass"/>
+
+  <p:wrap-sequence wrapper="wrapper">
+    <p:with-input>
+      <p:pipe step="one"/>
+      <p:pipe step="two"/>
+    </p:with-input>
+  </p:wrap-sequence>
+
+</p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="p" uri="http://www.w3.org/ns/xproc"/>
+         <s:pattern>
+            <s:rule context="/*">
+               <s:assert test="self::wrapper">The pipeline root is not wrapper.</s:assert>
+            </s:rule>
+            <s:rule context="/wrapper">
+               <s:assert test="inner[.='pass']">Inner has the wrong value.</s:assert>
+               <s:assert test="top[.='top']">Top has the wrong value.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

@@ -1,0 +1,46 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+  <t:info>
+    <t:title>nw-mport-001</t:title>
+    <t:revision-history>
+      <t:revision>
+        <t:date>2019-07-13</t:date>
+        <t:author initials="ndw">
+          <t:name>Norman Walsh</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Initial publication</p>
+        </t:description>
+      </t:revision>
+    </t:revision-history>
+  </t:info>
+  <t:description xmlns="http://www.w3.org/1999/xhtml">
+    <p>Test circular imports.</p>
+  </t:description>
+  <t:pipeline>
+<p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+                xmlns:test="http://test" version="3.0">
+  <p:import href="../pipelines/nw-import-001-lib1.xpl"/>
+  <p:output port="result" />
+  <test:join1/>
+  <p:wrap-sequence wrapper="wrapper"/>
+</p:declare-step>
+  </t:pipeline>
+  <t:schematron>
+    <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+      <s:ns prefix="ex" uri="http://example.com/sample"/>
+      <s:pattern>
+        <s:rule context="/">
+          <s:assert test="wrapper">The pipeline root is not “wrapper”.</s:assert>
+        </s:rule>
+        <s:rule context="wrapper">
+          <s:assert test="one">There’s no “one” element.</s:assert>
+          <s:assert test="two">There’s no “two” element.</s:assert>
+          <s:assert test="two/preceding-sibling::one">The “two” document precedes the “one” document.</s:assert>
+          <s:assert test="count(one)=1">There’s more than one “one”.</s:assert>
+          <s:assert test="count(two)=1">There’s more than one “two”.</s:assert>
+        </s:rule>
+      </s:pattern>
+    </s:schema>
+  </t:schematron>
+</t:test>
+
