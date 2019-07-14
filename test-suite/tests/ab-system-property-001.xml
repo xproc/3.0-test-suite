@@ -1,0 +1,60 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>ab-system-property-001</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-07-14</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests for p:system-property</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:system-property().</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:identity>
+            <p:with-input>
+               <result>
+                  <episode>{p:system-property('p:episode')}</episode>
+                  <locale>{p:system-property('p:locale')}</locale>
+                  <product-name>{p:system-property('p:product-name')}</product-name>
+                  <product-version>{p:system-property('p:product-version')}</product-version>
+                  <vendor>{p:system-property('p:vendor')}</vendor>
+                  <vendor-uri>{p:system-property('p:vendor-uri')}</vendor-uri>
+                  <version>{p:system-property('p:version')}</version>
+                  <xpath-version>{p:system-property('p:xpath-version')}</xpath-version>
+                  <psvi-supported>{p:system-property('p:psvi-supported')}</psvi-supported>
+               </result>
+            </p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+   
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The document root is not result.</s:assert>
+               <s:assert test="string-length(result/episode/text()) !=0">Text node of result/episode is empty string.</s:assert>
+               <s:assert test="string-length(result/locale/text()) !=0">Text node of result/locale is empty string.</s:assert>
+               <s:assert test="string-length(result/product-name/text()) !=0">Text node of result/product-name is empty string.</s:assert>
+               <s:assert test="string-length(result/product-version/text()) !=0">Text node of result/product-version is empty string.</s:assert>
+               <s:assert test="string-length(result/vendor/text()) !=0">Text node of result/vendor is empty string.</s:assert>
+               <s:assert test="string-length(result/vendor-uri/text()) !=0">Text node of result/vendor-uri is empty string.</s:assert>
+               <s:assert test="string-length(result/version/text()) !=0">Text node of result/version is empty string.</s:assert>
+               <s:assert test="string-length(result/xpath-version/text()) !=0">Text node of result/xpath-version is empty string.</s:assert>
+               <s:assert test="string-length(result/psvi-supported/text()) !=0">Text node of result/psvi-supported is empty string.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
