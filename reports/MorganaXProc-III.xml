@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="XProc Test Suite"
-           tests="1051"
-           errors="10"
+           tests="1082"
+           errors="9"
            failures="0"
-           skipped="8"
-           timestamp="2019-06-23T15:53:28">
+           skipped="7"
+           timestamp="2019-07-14T17:14:06">
    <properties>
       <property name="processor" value="MorganaXProc-III"/>
-      <property name="version" value="0.8.16-alpha"/>
+      <property name="version" value="0.8.18-alpha"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.0"/>
@@ -215,6 +215,13 @@
    <testcase name="ab-doc-prop-010.xml"/>
    <testcase name="ab-doc-prop-011.xml"/>
    <testcase name="ab-doc-prop-012.xml"/>
+   <testcase name="ab-doc-prop-013.xml"/>
+   <testcase name="ab-doc-prop-014.xml"/>
+   <testcase name="ab-doc-prop-015.xml"/>
+   <testcase name="ab-doc-prop-016.xml"/>
+   <testcase name="ab-doc-prop-017.xml"/>
+   <testcase name="ab-doc-prop-018.xml"/>
+   <testcase name="ab-doc-prop-019.xml"/>
    <testcase name="ab-document-properties-doc001.xml"/>
    <testcase name="ab-document-properties-doc002.xml"/>
    <testcase name="ab-document-properties-doc003.xml"/>
@@ -565,19 +572,7 @@
    <testcase name="ab-pipe-019.xml"/>
    <testcase name="ab-rename-001.xml"/>
    <testcase name="ab-rename-002.xml"/>
-   <testcase name="ab-rename-003.xml">
-      <failure>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;doc test2:foo="value2" xmlns:test2="http://test2.com"/&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-      &lt;svrl:schematron-output title="" schemaVersion="" xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:test2="http://test2.com"&gt;
-      &lt;!--       --&gt;
-      &lt;svrl:ns-prefix-in-attribute-values uri="http://test2.com" prefix="test2"/&gt;
-      &lt;svrl:active-pattern document="file:///Users/berndzen/Documents/Software/workspace/XProc30Testsuite/1561298060540"/&gt;
-      &lt;svrl:fired-rule context="/"/&gt;
-      &lt;svrl:failed-assert test="doc/@test2:foo='value'" location="/doc"&gt;
-      &lt;svrl:text&gt;Attribute's value is not 'value'.&lt;/svrl:text&gt;
-      &lt;/svrl:failed-assert&gt;
-      &lt;/svrl:schematron-output&gt;
-      </failure>
-   </testcase>
+   <testcase name="ab-rename-003.xml"/>
    <testcase name="ab-rename-003a.xml"/>
    <testcase name="ab-rename-004.xml"/>
    <testcase name="ab-rename-005.xml"/>
@@ -713,6 +708,17 @@
    <testcase name="ab-string-replace-006.xml"/>
    <testcase name="ab-string-replace-007.xml"/>
    <testcase name="ab-subpipeline-001.xml"/>
+   <testcase name="ab-system-property-001.xml"/>
+   <testcase name="ab-system-property-002.xml"/>
+   <testcase name="ab-system-property-003.xml"/>
+   <testcase name="ab-system-property-004.xml"/>
+   <testcase name="ab-system-property-005.xml"/>
+   <testcase name="ab-system-property-006.xml"/>
+   <testcase name="ab-system-property-007.xml"/>
+   <testcase name="ab-system-property-008.xml"/>
+   <testcase name="ab-system-property-009.xml"/>
+   <testcase name="ab-system-property-010.xml"/>
+   <testcase name="ab-system-property-011.xml"/>
    <testcase name="ab-text-count-001.xml"/>
    <testcase name="ab-text-count-002.xml"/>
    <testcase name="ab-text-count-003.xml"/>
@@ -829,6 +835,10 @@
    <testcase name="ab-try-017.xml"/>
    <testcase name="ab-try-018.xml"/>
    <testcase name="ab-try-019.xml"/>
+   <testcase name="ab-try-020.xml"/>
+   <testcase name="ab-try-021.xml"/>
+   <testcase name="ab-try-022.xml"/>
+   <testcase name="ab-try-023.xml"/>
    <testcase name="ab-unescape-markup-001.xml"/>
    <testcase name="ab-unescape-markup-002.xml"/>
    <testcase name="ab-unescape-markup-003.xml"/>
@@ -850,6 +860,12 @@
    <testcase name="ab-unwrap-009.xml"/>
    <testcase name="ab-unwrap-010.xml"/>
    <testcase name="ab-unwrap-011.xml"/>
+   <testcase name="ab-use-when-001.xml"/>
+   <testcase name="ab-use-when-002.xml"/>
+   <testcase name="ab-use-when-003.xml"/>
+   <testcase name="ab-use-when-004.xml"/>
+   <testcase name="ab-use-when-005.xml"/>
+   <testcase name="ab-use-when-006.xml"/>
    <testcase name="ab-uuid-001.xml"/>
    <testcase name="ab-uuid-002.xml"/>
    <testcase name="ab-uuid-003.xml"/>
@@ -1048,9 +1064,7 @@
    <testcase name="nw-err-xs0001-003.xml">
       <skipped/>
    </testcase>
-   <testcase name="nw-err-xs0001-004.xml">
-      <skipped/>
-   </testcase>
+   <testcase name="nw-err-xs0001-004.xml"/>
    <testcase name="nw-err-xs0001-005.xml">
       <skipped/>
    </testcase>
@@ -1067,6 +1081,7 @@
    <testcase name="nw-err-xs0001-010.xml">
       <skipped/>
    </testcase>
+   <testcase name="nw-import-001.xml"/>
    <testcase name="nw-inline-expand-text-001.xml"/>
    <testcase name="nw-inline-expand-text-002.xml"/>
    <testcase name="nw-inline-expand-text-003.xml">
@@ -1087,7 +1102,7 @@
       </failure>
    </testcase>
    <testcase name="nw-inline-expand-text-004.xml">
-      <failure>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;doc&gt;3=&lt;answer p:inline-expand-text="false" xmlns:p="http://www.w3.org/ns/xproc"&gt;3&lt;/answer&gt;&lt;/doc&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+      <failure>&lt;?xml version="1.0" encoding="UTF-8"?&gt; &lt;doc&gt;3=&lt;answer p:inline-expand-text="false" xmlns:p="http://www.w3.org/ns/xproc"&gt;3&lt;/answer&gt;&lt;/doc&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
       &lt;svrl:schematron-output title="" schemaVersion="" xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:p="http://www.w3.org/ns/xproc"&gt;
       &lt;!--       --&gt;
       &lt;svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/xproc" prefix="p"/&gt;
@@ -1121,7 +1136,7 @@
       </failure>
    </testcase>
    <testcase name="nw-inline-expand-text-006.xml">
-      <failure>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;p:doc xmlns:p="http://www.w3.org/ns/xproc"&gt;3=&lt;p:answer inline-expand-text="false"&gt;3&lt;/p:answer&gt;&lt;/p:doc&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+      <failure>&lt;?xml version="1.0" encoding="UTF-8"?&gt; &lt;p:doc xmlns:p="http://www.w3.org/ns/xproc"&gt;3=&lt;p:answer inline-expand-text="false"&gt;3&lt;/p:answer&gt;&lt;/p:doc&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
       &lt;svrl:schematron-output title="" schemaVersion="" xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:p="http://www.w3.org/ns/xproc"&gt;
       &lt;!--       --&gt;
       &lt;svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/xproc" prefix="p"/&gt;
@@ -1137,21 +1152,21 @@
       &lt;/svrl:schematron-output&gt;
       </failure>
    </testcase>
+   <testcase name="nw-option-value-001.xml"/>
    <testcase name="nw-optional-port-001.xml"/>
-   <testcase name="opt-drp.xml">
-      <failure>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;fake-result&gt;Step not implemented.&lt;/fake-result&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-      &lt;svrl:schematron-output title="" schemaVersion="" xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:p="http://www.w3.org/ns/xproc" xmlns:c="http://www.w3.org/ns/xproc-step"&gt;
-      &lt;!--       --&gt;
-      &lt;svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/xproc" prefix="p"/&gt;
-      &lt;svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/xproc-step" prefix="c"/&gt;
-      &lt;svrl:active-pattern document="file:///Users/berndzen/Documents/Software/workspace/XProc30Testsuite/"/&gt;
-      &lt;svrl:fired-rule context="/*"/&gt;
-      &lt;svrl:failed-assert test="self::c:param-set" location="/fake-result"&gt;
-      &lt;svrl:text&gt;The pipeline root is not c:param-set.&lt;/svrl:text&gt;
-      &lt;/svrl:failed-assert&gt;
-      &lt;/svrl:schematron-output&gt;
-      </failure>
+   <testcase name="nw-viewport-001.xml">
+      <failure>Failed with {http://www.w3.org/ns/xproc-error}XS0100, {http://www.w3.org/ns/xproc-error}XS0100, {http://www.w3.org/ns/xproc-error}XS0100, {http://www.w3.org/ns/xproc-error}XS0100, {http://www.w3.org/ns/xproc-error}XS0044</failure>
    </testcase>
+   <testcase name="nw-viewport-002.xml">
+      <failure>Failed with {http://www.w3.org/ns/xproc-error}XS0100, {http://www.w3.org/ns/xproc-error}XS0100, {http://www.w3.org/ns/xproc-error}XS0100, {http://www.w3.org/ns/xproc-error}XS0100, {http://www.w3.org/ns/xproc-error}XS0044</failure>
+   </testcase>
+   <testcase name="nw-viewport-003.xml">
+      <failure>Failed with {http://www.w3.org/ns/xproc-error}XS0100, {http://www.w3.org/ns/xproc-error}XS0100, {http://www.w3.org/ns/xproc-error}XS0100, {http://www.w3.org/ns/xproc-error}XS0100, {http://www.w3.org/ns/xproc-error}XS0044</failure>
+   </testcase>
+   <testcase name="nw-viewport-004.xml">
+      <failure>Failed with {http://www.w3.org/ns/xproc-error}XS0100, {http://www.w3.org/ns/xproc-error}XS0100, {http://www.w3.org/ns/xproc-error}XS0100, {http://www.w3.org/ns/xproc-error}XS0100, {http://www.w3.org/ns/xproc-error}XS0044</failure>
+   </testcase>
+   <testcase name="opt-drp.xml"/>
    <testcase name="p-count-001.xml"/>
    <testcase name="p-count-002.xml"/>
    <testcase name="p-count-003.xml"/>
@@ -1163,48 +1178,6 @@
    <testcase name="p-inline-006.xml"/>
    <testcase name="p-inline-007.xml"/>
    <testcase name="p-inline-008.xml"/>
-   <testcase name="parameters-001.xml">
-      <failure>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;fake-result&gt;Step not implemented.&lt;/fake-result&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-      &lt;svrl:schematron-output title="" schemaVersion="" xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:p="http://www.w3.org/ns/xproc" xmlns:c="http://www.w3.org/ns/xproc-step"&gt;
-      &lt;!--       --&gt;
-      &lt;svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/xproc" prefix="p"/&gt;
-      &lt;svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/xproc-step" prefix="c"/&gt;
-      &lt;svrl:active-pattern document="file:///Users/berndzen/Documents/Software/workspace/XProc30Testsuite/"/&gt;
-      &lt;svrl:fired-rule context="/*"/&gt;
-      &lt;svrl:failed-assert test="self::c:param-set" location="/fake-result"&gt;
-      &lt;svrl:text&gt;The pipeline root is not c:param-set.&lt;/svrl:text&gt;
-      &lt;/svrl:failed-assert&gt;
-      &lt;/svrl:schematron-output&gt;
-      </failure>
-   </testcase>
-   <testcase name="parameters-002.xml">
-      <failure>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;fake-result&gt;Step not implemented.&lt;/fake-result&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-      &lt;svrl:schematron-output title="" schemaVersion="" xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:p="http://www.w3.org/ns/xproc" xmlns:c="http://www.w3.org/ns/xproc-step"&gt;
-      &lt;!--       --&gt;
-      &lt;svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/xproc" prefix="p"/&gt;
-      &lt;svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/xproc-step" prefix="c"/&gt;
-      &lt;svrl:active-pattern document="file:///Users/berndzen/Documents/Software/workspace/XProc30Testsuite/"/&gt;
-      &lt;svrl:fired-rule context="/*"/&gt;
-      &lt;svrl:failed-assert test="self::c:param-set" location="/fake-result"&gt;
-      &lt;svrl:text&gt;The pipeline root is not c:param-set.&lt;/svrl:text&gt;
-      &lt;/svrl:failed-assert&gt;
-      &lt;/svrl:schematron-output&gt;
-      </failure>
-   </testcase>
-   <testcase name="parameters-003.xml">
-      <failure>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;fake-result&gt;Step not implemented.&lt;/fake-result&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-      &lt;svrl:schematron-output title="" schemaVersion="" xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:p="http://www.w3.org/ns/xproc" xmlns:c="http://www.w3.org/ns/xproc-step"&gt;
-      &lt;!--       --&gt;
-      &lt;svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/xproc" prefix="p"/&gt;
-      &lt;svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/xproc-step" prefix="c"/&gt;
-      &lt;svrl:active-pattern document="file:///Users/berndzen/Documents/Software/workspace/XProc30Testsuite/"/&gt;
-      &lt;svrl:fired-rule context="/*"/&gt;
-      &lt;svrl:failed-assert test="self::c:param-set" location="/fake-result"&gt;
-      &lt;svrl:text&gt;The pipeline root is not c:param-set.&lt;/svrl:text&gt;
-      &lt;/svrl:failed-assert&gt;
-      &lt;/svrl:schematron-output&gt;
-      </failure>
-   </testcase>
    <testcase name="pipe-attr-001.xml"/>
    <testcase name="pipe-attr-002.xml"/>
    <testcase name="simple.xml"/>
