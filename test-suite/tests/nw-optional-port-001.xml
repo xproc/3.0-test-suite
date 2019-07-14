@@ -1,6 +1,6 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
    <t:info>
-      <t:title>optoinal-port-001</t:title>
+      <t:title>optional-port-001</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2018-06-25T17:34:51+01:00</t:date>
