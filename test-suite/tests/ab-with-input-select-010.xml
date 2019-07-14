@@ -3,6 +3,15 @@
       <t:title>with-input-select-010</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-07-13</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test: Atomic values are now JSON documents.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-01-12</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -20,11 +29,15 @@
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
             <p:output port="result"/>
             
-            <p:wrap-sequence wrapper="result">
-               <p:with-input select="4" >
-                  <p:empty />
-               </p:with-input>
-            </p:wrap-sequence>
+         <p:identity>
+            <p:with-input select="32">
+               <p:empty />
+            </p:with-input>
+         </p:identity>
+         
+         <p:identity>
+            <p:with-input><result>{if (. instance of xs:integer) then .+10 else 0}</result></p:with-input>
+         </p:identity>
             
         </p:declare-step>
    </t:pipeline>
@@ -34,7 +47,7 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="result">Document root is not 'result'.</s:assert>
-               <s:assert test="result/text()='4'">'result' does not a text child with value '4'.</s:assert>
+               <s:assert test="result/text()='42'">'result' does not a text child with value '42'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
