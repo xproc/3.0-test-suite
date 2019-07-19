@@ -75,7 +75,7 @@
             <p:with-input port="source">
                <p:inline encoding="base64" content-type="image/png">
 iVBORw0KGgoAAAANSUhEUgAAAIAAAAAdCAYAAABixmRWAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
-<t:no-markup-please/>
+<c:no-markup-please/>
                </p:inline>
             </p:with-input>
          </p:identity>
