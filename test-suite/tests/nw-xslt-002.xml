@@ -1,6 +1,6 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
   <t:info>
-    <t:title>nw-xslt-001</t:title>
+    <t:title>nw-xslt-002</t:title>
     <t:revision-history>
       <t:revision>
         <t:date>2019-07-20</t:date>
@@ -14,7 +14,7 @@
     </t:revision-history>
   </t:info>
   <t:description xmlns="http://www.w3.org/1999/xhtml">
-    <p>Tests a simple XSLT transformation.</p>
+    <p>Tests secondary result documents.</p>
   </t:description>
   <t:pipeline>
 <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="main" version="3.0">
