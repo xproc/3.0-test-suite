@@ -1,0 +1,103 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+  <t:info>
+    <t:title>nw-xslt-001</t:title>
+    <t:revision-history>
+      <t:revision>
+        <t:date>2019-07-20</t:date>
+        <t:author initials="ndw">
+          <t:name>Norman Walsh</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Initial publication</p>
+        </t:description>
+      </t:revision>
+    </t:revision-history>
+  </t:info>
+  <t:description xmlns="http://www.w3.org/1999/xhtml">
+    <p>Tests a simple XSLT transformation.</p>
+  </t:description>
+  <t:pipeline>
+<p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="main" version="3.0">
+  <p:output port="result"/>
+
+  <!-- XSLT smoke test -->
+  <p:xslt>
+    <p:with-input port="source">
+<document>
+<title>Some Title</title>
+<para>Some paragraph.</para>
+</document>
+    </p:with-input>
+    <p:with-input port="stylesheet">
+
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                exclude-result-prefixes="xs"
+                version="2.0">
+
+<xsl:output method="xml" encoding="utf-8" omit-xml-declaration="yes"/>
+
+<xsl:template match="document">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+      <title><xsl:value-of select="title"/></title>
+    </head>
+    <body>
+      <xsl:apply-templates/>
+    </body>
+  </html>
+</xsl:template>
+
+<xsl:template match="document/title">
+  <h1 xmlns="http://www.w3.org/1999/xhtml">
+    <xsl:apply-templates/>
+  </h1>
+</xsl:template>
+
+<xsl:template match="para">
+  <p xmlns="http://www.w3.org/1999/xhtml">
+    <xsl:apply-templates/>
+  </p>
+</xsl:template>
+
+<xsl:template match="element()">
+  <xsl:copy>
+    <xsl:apply-templates select="@*,node()"/>
+  </xsl:copy>
+</xsl:template>
+
+<xsl:template match="attribute()|text()|comment()|processing-instruction()">
+  <xsl:copy/>
+</xsl:template>
+
+</xsl:stylesheet>
+    </p:with-input>
+  </p:xslt>
+
+</p:declare-step>
+  </t:pipeline>
+  <t:schematron>
+    <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+      <s:ns prefix="h" uri="http://www.w3.org/1999/xhtml"/>
+      <s:pattern>
+        <s:rule context="/">
+          <s:assert test="h:html">The pipeline root is not “html”.</s:assert>
+        </s:rule>
+        <s:rule context="h:html">
+          <s:assert test="h:head">There’s no “head” element.</s:assert>
+          <s:assert test="h:body">There’s no “body” element.</s:assert>
+        </s:rule>
+        <s:rule context="h:head">
+          <s:assert test="h:title">There’s no “title” element.</s:assert>
+          <s:assert test="h:title[. = 'Some Title']">The title is wrong.</s:assert>
+        </s:rule>
+        <s:rule context="h:body">
+          <s:assert test="h:h1">There’s no “h1” element.</s:assert>
+          <s:assert test="h:h1[. = 'Some Title']">The h1 is wrong.</s:assert>
+          <s:assert test="h:p">There’s no “p” element.</s:assert>
+        </s:rule>
+      </s:pattern>
+    </s:schema>
+  </t:schematron>
+</t:test>
+
