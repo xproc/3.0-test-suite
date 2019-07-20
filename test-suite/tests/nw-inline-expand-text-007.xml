@@ -1,0 +1,42 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="pass">
+   <t:info>
+      <t:title>TVT elements in text</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-07-19</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Test that elements are handled correctly in TVTs when the content-type is text.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:pipeline>
+     <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+       <p:output port="result"/>
+
+       <p:variable name="var" select=".">
+         <p:inline><element>test</element></p:inline>
+       </p:variable>
+
+       <p:identity>
+         <p:with-input port="source">
+           <p:inline content-type="text/plain">{$var}</p:inline>
+         </p:with-input>
+       </p:identity>
+     </p:declare-step>
+   </t:pipeline>
+
+<t:schematron>
+  <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+    <s:pattern>
+      <s:rule context="/">
+        <s:assert test=". = 'test'">The pipeline produced incorrect output.</s:assert>
+     </s:rule>
+    </s:pattern>
+  </s:schema>
+</t:schematron>
+
+</t:test>
