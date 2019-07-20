@@ -3,6 +3,15 @@
       <t:title>Error XD0061</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-07-20</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed test by declaring xs-namespace.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2018-12-20</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -32,7 +41,8 @@
       </t:revision-history>
    </t:info>
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="main" version="3.0">
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+                      xmlns:xs="http://www.w3.org/2001/XMLSchema" name="main" version="3.0">
          <p:output port="result" sequence="true"/>
 
          <p:variable name="error" as="xs:QName" select="'hello world'"/>

@@ -4,6 +4,15 @@
         <t:title>p:choose-040 (AB)</t:title>
         <t:revision-history>
             <t:revision>
+                <t:date>2019-07-20</t:date>
+                <t:author>
+                    <t:name>Achim Berndzen</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>Fixed test by declaring xs-namespace.</p>
+                </t:description>
+            </t:revision>
+            <t:revision>
                 <t:date>2019-04-05</t:date>
                 <t:author>
                     <t:name>Achim Berndzen</t:name>
@@ -18,7 +27,8 @@
         <p>Test @collection="{XPath-expression}" on p:choose/p:when</p>
     </t:description>
     <t:pipeline>
-        <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+        <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+                        xmlns:xs="http://www.w3.org/2001/XMLSchema" version="3.0">
             <p:output port="result"/>
             <p:variable name="selector" select="false()" as="xs:boolean" />
             <p:identity>
