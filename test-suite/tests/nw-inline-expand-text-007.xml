@@ -2,6 +2,15 @@
    <t:info>
       <t:title>TVT elements in text</t:title>
       <t:revision-history>
+        <t:revision>
+          <t:date>2019-07-20</t:date>
+          <t:author>
+            <t:name>Achim Berndzen</t:name>
+          </t:author>
+          <t:description xmlns="http://www.w3.org/1999/xhtml">
+            <p>Wrapped text document in an element to make schematron test possible.</p>
+          </t:description>
+        </t:revision>
          <t:revision>
             <t:date>2019-07-19</t:date>
             <t:author>
@@ -26,6 +35,8 @@
            <p:inline content-type="text/plain">{$var}</p:inline>
          </p:with-input>
        </p:identity>
+       
+       <p:wrap-sequence wrapper="result" />
      </p:declare-step>
    </t:pipeline>
 
@@ -33,7 +44,8 @@
   <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
     <s:pattern>
       <s:rule context="/">
-        <s:assert test=". = 'test'">The pipeline produced incorrect output.</s:assert>
+        <s:assert test="result">The root element is not result.</s:assert>
+        <s:assert test="result/text() = 'test'">The text child of root element is not 'test'.</s:assert>
      </s:rule>
     </s:pattern>
   </s:schema>
