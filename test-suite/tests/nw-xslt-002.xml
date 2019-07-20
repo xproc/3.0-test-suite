@@ -1,0 +1,116 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+  <t:info>
+    <t:title>nw-xslt-002</t:title>
+    <t:revision-history>
+      <t:revision>
+        <t:date>2019-07-20</t:date>
+        <t:author initials="ndw">
+          <t:name>Norman Walsh</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Initial publication</p>
+        </t:description>
+      </t:revision>
+    </t:revision-history>
+  </t:info>
+  <t:description xmlns="http://www.w3.org/1999/xhtml">
+    <p>Tests secondary result documents.</p>
+  </t:description>
+  <t:pipeline>
+<p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="main" version="3.0">
+  <p:output port="result"/>
+
+  <!-- XSLT with secondary result documents -->
+  <p:xslt name="xslt">
+    <p:with-input port="source">
+<document>
+<primary>Primary</primary>
+<secondary>Secondary 1</secondary>
+<secondary>Secondary 2</secondary>
+</document>
+    </p:with-input>
+    <p:with-input port="stylesheet">
+      <p:inline expand-text="false">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                exclude-result-prefixes="xs"
+                version="2.0">
+
+<xsl:output method="xml" encoding="utf-8" omit-xml-declaration="yes"/>
+
+<xsl:template match="secondary">
+  <xsl:result-document href="http://example.com/{count(preceding-sibling::secondary)+1}">
+    <xsl:copy>
+      <xsl:apply-templates select="@*,node()"/>
+    </xsl:copy>
+  </xsl:result-document>
+</xsl:template>
+
+<xsl:template match="element()">
+  <xsl:copy>
+    <xsl:apply-templates select="@*,node()"/>
+  </xsl:copy>
+</xsl:template>
+
+<xsl:template match="attribute()|text()|comment()|processing-instruction()">
+  <xsl:copy/>
+</xsl:template>
+
+</xsl:stylesheet>
+      </p:inline>
+    </p:with-input>
+  </p:xslt>
+
+  <p:for-each name="add-base">
+    <p:with-input pipe="secondary"/>
+    <p:add-attribute attribute-name="uri" attribute-value="{base-uri(.)}"/>
+  </p:for-each>
+
+  <p:wrap-sequence name="primary" wrapper="primary-document">
+    <p:with-input pipe="@xslt"/>
+  </p:wrap-sequence>
+
+  <p:wrap-sequence name="secondary" wrapper="secondary-documents">
+    <p:with-input pipe="@add-base"/>
+  </p:wrap-sequence>
+
+  <p:wrap-sequence wrapper="documents">
+    <p:with-input>
+      <p:pipe step="primary"/>
+      <p:pipe step="secondary"/>
+    </p:with-input>
+  </p:wrap-sequence>
+</p:declare-step>
+  </t:pipeline>
+
+  <t:schematron>
+    <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+      <s:pattern>
+        <s:rule context="/">
+          <s:assert test="documents">The output root is not “documents”.</s:assert>
+        </s:rule>
+        <s:rule context="documents">
+          <s:assert test="primary-document">There’s no “primary-document” element.</s:assert>
+          <s:assert test="secondary-documents">There’s no “secondary-documents” element.</s:assert>
+        </s:rule>
+        <s:rule context="primary-document">
+          <s:assert test="document">There’s no “document” element.</s:assert>
+          <s:assert test="document/primary">There’s no “document/primary” element.</s:assert>
+          <s:assert test="document/primary[.='Primary']">The “primary” element has the wrong content.</s:assert>
+        </s:rule>
+        <s:rule context="secondary-documents">
+          <s:assert test="secondary">There’s no “secondary” element.</s:assert>
+          <s:assert test="count(secondary)=2">There’s aren’t the right number of “secondary” elements.</s:assert>
+          <s:assert test="(secondary[1] = 'Secondary 1' and secondary[2] = 'Secondary 2')
+                          or (secondary[1] = 'Secondary 2' and secondary[2] = 'Secondary 1')">The “secondary”
+elements have the wrong content.</s:assert>
+        </s:rule>
+        <s:rule context="secondary">
+          <s:assert test="(. = 'Secondary 1' and @uri='http://example.com/1')
+                          or (. = 'Secondary 2' and @uri='http://example.com/2')">The URIs are wrong.</s:assert>
+        </s:rule>
+      </s:pattern>
+    </s:schema>
+  </t:schematron>
+</t:test>
+
