@@ -65,7 +65,7 @@ the `result` port. (This limitation may complicate some tests, but
 it reduces the complexity of the test harness greatly.)
 
 You’ll find a slightly longer example demonstrating a few more features
-in from [examples/passing2.xml](blob/master/examples/passing2.xml).
+in from [examples/passing2.xml](examples/passing2.xml).
 
 To write a test that’s expected to fail, use this template
 from [examples/fail.xml](blob/master/examples/fail.xml]).
