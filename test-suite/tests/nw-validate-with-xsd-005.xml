@@ -1,0 +1,46 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass"
+        features="p-validate-with-xsd">
+  <t:info>
+    <t:title>nw-validate-with-xsd-005</t:title>
+    <t:revision-history>
+      <t:revision>
+        <t:date>2019-07-21</t:date>
+        <t:author initials="ndw">
+          <t:name>Norman Walsh</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Initial publication</p>
+        </t:description>
+      </t:revision>
+    </t:revision-history>
+  </t:info>
+  <t:description xmlns="http://www.w3.org/1999/xhtml">
+    <p>Check that a report is generated.</p>
+  </t:description>
+  <t:pipeline>
+<p:declare-step name="pipeline" xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+  <p:output port="result">
+    <p:pipe step="validate" port="report"/>
+  </p:output>
+
+  <p:validate-with-xml-schema name="validate">
+    <p:with-input port="source"
+                  href="../documents/xsd-document.xml"/>
+    <p:with-input port="schema"
+                  href="../documents/document.xsd"/>
+  </p:validate-with-xml-schema>
+
+</p:declare-step>
+</t:pipeline>
+
+  <t:schematron>
+    <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+      <s:pattern>
+        <s:rule context="/">
+          <!-- we've no consensus on what the report should be, just check for an element -->
+          <s:assert test="*">No report output created</s:assert>
+        </s:rule>
+      </s:pattern>
+    </s:schema>
+  </t:schematron>
+</t:test>
