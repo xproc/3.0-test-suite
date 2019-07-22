@@ -108,12 +108,6 @@ task junit_xsd(type: Copy) {
 
 // ======================================================================
 
-task validate_all_tests() {
-  doLast {
-    println("All tests valid")
-  }
-}
-
 task transform_all_tests(dependsOn: [ "validate_all_tests" ]) {
   doLast {
     println("All tests transformed")
@@ -197,24 +191,29 @@ tests.each { fn ->
   count = count + 1
 }
 
+def test_sources = []
+def valid_test_sources = []
+
 fileTree(dir: 'test-suite/tests').include("**/*.xml").each { file ->
   def fn = file.toString()
   def pos = fn.indexOf("/test-suite/tests/")
   def base = fn.substring(pos+12)
   def name = base.replace("/","_")
 
-  task "process_$name"(dependsOn: [ "schemas" ], type: XMLCalabashTask) {
-    inputs.file "test-suite/" + base
-    outputs.file "build/" + base
-    input("source", "test-suite/" + base)
-    output("result", "build/" + base)
-    pipeline "tools/xpl/validate.xpl"
-    doFirst {
-      mkdir("build/tests")
-    }
-  }
-  validate_all_tests.dependsOn "process_$name"
+  test_sources << "test-suite/" + base
+  valid_test_sources << "build/" + base
+}
 
+task validate_all_tests(dependsOn: [ "schemas" ], type: XMLCalabashTask) {
+  inputs.files test_sources
+  outputs.files valid_test_sources
+  pipeline "tools/xpl/validate-all.xpl"
+  doFirst {
+    mkdir("build/tests")
+  }
+  doLast {
+    println("All tests valid")
+  }
 }
 
 // ======================================================================
