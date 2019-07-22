@@ -1,0 +1,66 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass"
+        features="p-validate-with-xsd">
+  <t:info>
+    <t:title>nw-validate-with-xsd-001</t:title>
+    <t:revision-history>
+      <t:revision>
+        <t:date>2019-07-21</t:date>
+        <t:author initials="ndw">
+          <t:name>Norman Walsh</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Initial publication</p>
+        </t:description>
+      </t:revision>
+    </t:revision-history>
+  </t:info>
+  <t:description xmlns="http://www.w3.org/1999/xhtml">
+    <p>A simple validation with XSD test.</p>
+  </t:description>
+  <t:pipeline>
+<p:declare-step name="pipeline" xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+<p:output port="result"/>
+
+<p:validate-with-xml-schema>
+  <p:with-input port="source">
+    <doc>
+      <title>Title</title>
+      <p>Some paragraph.</p>
+    </doc>
+  </p:with-input>
+  <p:with-input port="schema">
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	       elementFormDefault="qualified">
+      <xs:element name="doc">
+	<xs:complexType>
+	  <xs:sequence>
+	    <xs:element minOccurs="0" ref="title"/>
+	    <xs:element minOccurs="0" maxOccurs="unbounded" ref="p"/>
+	  </xs:sequence>
+	</xs:complexType>
+      </xs:element>
+      <xs:element name="title" type="xs:string"/>
+      <xs:element name="p" type="xs:string"/>
+    </xs:schema>
+  </p:with-input>
+</p:validate-with-xml-schema>
+
+</p:declare-step>
+  </t:pipeline>
+  <t:schematron>
+    <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+      <s:pattern>
+        <s:rule context="/">
+          <s:assert test="doc">The pipeline root is not “doc”.</s:assert>
+        </s:rule>
+        <s:rule context="doc">
+          <s:assert test="title">There’s no “title” element.</s:assert>
+          <s:assert test="p">There’s no “p” element.</s:assert>
+          <s:assert test="title[.='Title']">The title is incorrect.</s:assert>
+          <s:assert test="p[.='Some paragraph.']">The paragraph is incorrect.</s:assert>
+        </s:rule>
+      </s:pattern>
+    </s:schema>
+  </t:schematron>
+</t:test>
+

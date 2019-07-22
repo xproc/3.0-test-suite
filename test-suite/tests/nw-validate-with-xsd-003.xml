@@ -1,0 +1,43 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass"
+        features="p-validate-with-xsd">
+  <t:info>
+    <t:title>nw-validate-with-xsd-003</t:title>
+    <t:revision-history>
+      <t:revision>
+        <t:date>2019-07-21</t:date>
+        <t:author initials="ndw">
+          <t:name>Norman Walsh</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Initial publication</p>
+        </t:description>
+      </t:revision>
+    </t:revision-history>
+  </t:info>
+  <t:description xmlns="http://www.w3.org/1999/xhtml">
+    <p>Schema location hints can be enabled.</p>
+  </t:description>
+  <t:pipeline>
+<p:declare-step name="pipeline" xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+<p:output port="result"/>
+
+<p:validate-with-xml-schema use-location-hints="true">
+  <p:with-input port="source"
+                href="../documents/xsd-document.xml"/>
+  <p:with-input port="schema">
+    <p:empty/>
+  </p:with-input>
+</p:validate-with-xml-schema>
+</p:declare-step>
+</t:pipeline>
+
+  <t:schematron>
+    <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+      <s:pattern>
+        <s:rule context="/">
+          <s:assert test="doc">The pipeline root is not “doc”.</s:assert>
+        </s:rule>
+      </s:pattern>
+    </s:schema>
+  </t:schematron>
+</t:test>
