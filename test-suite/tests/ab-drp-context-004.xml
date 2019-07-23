@@ -3,6 +3,15 @@
         <t:title>DRP as context for TVT 004</t:title>
         <t:revision-history>
              <t:revision>
+                <t:date>2019-07-22</t:date>
+                <t:author>
+                    <t:name>Norman Walsh</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>Updated to reflect that the ‘error’ port is now the DRP in p:catch.</p>
+                </t:description>
+            </t:revision>
+             <t:revision>
                 <t:date>2018-12-30</t:date>
                 <t:author>
                     <t:name>Achim Berndzen</t:name>
@@ -19,7 +28,7 @@
     <t:pipeline>
         <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
             <p:output port="result"/>
-            
+
             <p:identity>
                 <p:with-input>
                     <doc>
@@ -27,10 +36,10 @@
                     </doc>
                 </p:with-input>
             </p:identity>
-            
+
             <p:try>
                 <p:error code="error" />
-                
+
                 <p:catch>
                     <p:identity>
                         <p:with-input>
@@ -47,7 +56,7 @@
                 <s:rule context="/">
                     <s:assert test="/result">Document root is not named 'result'.</s:assert>
                     <s:assert test="count(*) = 1">Document does not have exactly one child element.</s:assert>
-                    <s:assert test="/result/text()='5'">Element 'result' does not have a text child with '5'.</s:assert>
+                    <s:assert test="empty(/result/text())">Element 'result' is not empty.</s:assert>
                 </s:rule>
             </s:pattern>
         </s:schema>
