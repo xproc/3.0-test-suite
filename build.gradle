@@ -108,12 +108,6 @@ task junit_xsd(type: Copy) {
 
 // ======================================================================
 
-task transform_all_tests(dependsOn: [ "validate_all_tests" ]) {
-  doLast {
-    println("All tests transformed")
-  }
-}
-
 task test_index_setup(dependsOn: ["transform_all_tests","git_log_shorter","get_specs"],
                       type: XMLCalabashTask) {
   inputs.file "reports/xml-calabash.xml"
@@ -149,59 +143,19 @@ task test_indexes() {
   test_indexes.dependsOn "idx_$taskname"
 }
 
-def tests = []
-fileTree(dir: 'test-suite/tests').include("**/*.xml").visit {
-  FileVisitDetails details ->
-    def fn = details.file.name
-    tests << fn.replace(".xml","")
-}
-tests = tests.sort()
-
-def count = 0
-tests.each { fn ->
-  def prev = ""
-  def next = ""
-  if (count > 0) {
-    prev = tests[count - 1]
-  }
-  if (count + 1 < tests.size) {
-    next = tests[count + 1]
-  }
-
-  def taskname = "tests_" + fn
-
-  task "xform_$taskname"(dependsOn: ["get_specs"], type: XMLCalabashTask) {
-    inputs.file "test-suite/tests/" + fn + ".xml"
-    inputs.file "tools/xsl/format-test.xsl"
-    inputs.file "tools/xsl/functions.xsl"
-    outputs.file "build/html/tests/" + fn + ".html"
-    input("source", "test-suite/tests/" + fn + ".xml")
-    output("result", "build/html/tests/" + fn + ".html")
-    param("prev", prev)
-    param("next", next)
-    extensionValues true
-    option("stylesheet", "../xsl/format-test.xsl")
-    pipeline "tools/xpl/run-xslt-html.xpl"
-    doFirst {
-      mkdir("build/tests")
-    }
-  }
-  transform_all_tests.dependsOn "xform_$taskname"
-
-  count = count + 1
-}
-
 def test_sources = []
 def valid_test_sources = []
+def xformed_tests = []
 
 fileTree(dir: 'test-suite/tests').include("**/*.xml").each { file ->
   def fn = file.toString()
   def pos = fn.indexOf("/test-suite/tests/")
   def base = fn.substring(pos+12)
-  def name = base.replace("/","_")
+  def html = base.substring(6).replace(".xml", ".html")
 
   test_sources << "test-suite/" + base
   valid_test_sources << "build/" + base
+  xformed_tests << "build/html/tests/" + html
 }
 
 task validate_all_tests(dependsOn: [ "schemas" ], type: XMLCalabashTask) {
@@ -213,6 +167,18 @@ task validate_all_tests(dependsOn: [ "schemas" ], type: XMLCalabashTask) {
   }
   doLast {
     println("All tests valid")
+  }
+}
+
+task transform_all_tests(dependsOn: [ "validate_all_tests", "get_specs" ], type: XMLCalabashTask) {
+  inputs.files valid_test_sources
+  outputs.files xformed_tests
+  pipeline "tools/xpl/xform-all.xpl"
+  doFirst {
+    mkdir("build/html/tests")
+  }
+  doLast {
+    println("All tests transformed")
   }
 }
 
@@ -299,3 +265,13 @@ task list_test(type: XMLCalabashTask, dependsOn: [ "get_specs" ]) {
     mkdir("build")
   }
 }
+
+// ======================================================================
+// Clean up
+
+clean {
+  doFirst {
+    delete("build")
+  }
+}
+
