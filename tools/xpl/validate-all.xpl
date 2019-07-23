@@ -23,6 +23,10 @@
 <p:for-each name="loop">
   <p:iteration-source select="/c:directory/c:file"/>
 
+  <cx:message>
+    <p:with-option name="message" select="concat('Validating: ', /c:file/@name)"/>
+  </cx:message>
+
   <p:load name="loader">
     <p:with-option name="href" select="resolve-uri(/c:file/@name, base-uri(/c:file))"/>
   </p:load>
@@ -79,12 +83,6 @@
     </p:validate-with-schematron>
   </p:otherwise>
 </p:choose>
-
-<cx:message>
-  <p:with-option name="message" select="concat('Validated: ', /c:file/@name)">
-    <p:pipe step="loop" port="current"/>
-  </p:with-option>
-</cx:message>
 
   <p:store>
     <p:with-option name="href"

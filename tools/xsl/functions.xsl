@@ -8,7 +8,7 @@
 		exclude-result-prefixes="h p t xs"
                 version="2.0">
 
-<xsl:param name="specs" as="element()" required="true"/>
+<xsl:variable name="specs" as="element()" select="doc('../../build/specs.xml')/*"/>
 
 <xsl:variable name="calabash" select="doc('../../reports/xml-calabash.xml')/*"/>
 <xsl:variable name="morganaxproc" select="doc('../../reports/MorganaXProc-III.xml')/*"/>
