@@ -3,6 +3,15 @@
         <t:title>DRP as context for TVT 011</t:title>
         <t:revision-history>
              <t:revision>
+                <t:date>2019-07-23</t:date>
+                <t:author>
+                    <t:name>Norman Walsh</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>Updated to reflect that the input to ‘p:error’ is passed through.</p>
+                </t:description>
+            </t:revision>
+             <t:revision>
                 <t:date>2019-07-22</t:date>
                 <t:author>
                     <t:name>Norman Walsh</t:name>
@@ -38,12 +47,15 @@
             </p:identity>
 
             <p:try>
-                <p:error code="error" />
+                <p:error code="error">
+                  <p:with-input><ERROR>failure</ERROR></p:with-input>
+                </p:error>
+
                 <p:catch>
                     <p:identity>
                         <p:with-input>
                             <p:inline>
-                                <result>{/doc/value/text()}</result>
+                                <result>{/ERROR/text()}</result>
                             </p:inline>
                         </p:with-input>
                     </p:identity>
@@ -59,7 +71,7 @@
           <s:rule context="/">
             <s:assert test="/result">Document root is not named 'result'.</s:assert>
             <s:assert test="count(*) = 1">Document does not have exactly one child element.</s:assert>
-            <s:assert test="empty(/result/text())">Element 'result' is not empty.</s:assert>
+            <s:assert test="/result/text() = 'failure'">Element 'result' has the wrong content.</s:assert>
           </s:rule>
         </s:pattern>
       </s:schema>
