@@ -51,7 +51,7 @@
     </p:with-param>
   </p:xslt>
 
-  <p:store method="html">
+  <p:store method="html" version="5">
     <p:with-option name="href"
                    select="concat('../../build/html/tests/',
                                   substring-before(/c:file/@name, '.xml'), '.html')">
