@@ -1,0 +1,53 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>AB try 024</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-07-24</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>New test</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Test port "error" on p:finally: Empty if no error occurred.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="pipeline" xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result" />
+         <p:try name="try">
+            <p:identity>
+               <p:with-input><initial /></p:with-input>
+            </p:identity>
+            <p:catch>
+               <p:identity>
+                  <p:with-input><catch /></p:with-input>
+               </p:identity>
+            </p:catch>
+            <p:finally>
+               <p:output port="finally" primary="false" pipe="@producer" />
+               <p:wrap-sequence wrapper="wrapper" name="producer"/>
+            </p:finally>
+         </p:try>
+      
+         <p:identity>
+            <p:with-input pipe="finally" />
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+   
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="wrapper">The document root is not 'wrapper'.</s:assert>
+               <s:assert test="empty(wrapper/*)">Element 'wrapper' should not have children.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
