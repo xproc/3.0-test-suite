@@ -2,6 +2,15 @@
     <t:info>
         <t:title>DRP as context for TVT 011</t:title>
         <t:revision-history>
+	        <t:revision>
+                <t:date>2019-07-24</t:date>
+                <t:author>
+                    <t:name>Achim Berndzen</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>Fixed XPath expression in TVT.</p>
+                </t:description>
+            </t:revision>
              <t:revision>
                 <t:date>2019-07-23</t:date>
                 <t:author>
@@ -35,7 +44,8 @@
         <p>Tests DRP is context node for TVT on p:inline in a p:try step (catch pipeline)</p>
     </t:description>
     <t:pipeline>
-        <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+        <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+				        xmlns:c="http://www.w3.org/ns/xproc-step" version="3.0">
             <p:output port="result"/>
 
             <p:identity>
@@ -55,7 +65,7 @@
                     <p:identity>
                         <p:with-input>
                             <p:inline>
-                                <result>{/ERROR/text()}</result>
+                                <result>{/c:errors/c:error/ERROR/text()}</result>
                             </p:inline>
                         </p:with-input>
                     </p:identity>
