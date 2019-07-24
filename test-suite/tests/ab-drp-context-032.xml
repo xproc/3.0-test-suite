@@ -1,0 +1,61 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+    <t:info>
+        <t:title>AB-context-p:finally-004</t:title>
+        <t:revision-history>
+            <t:revision>
+                <t:date>2019-07-24</t:date>
+                <t:author>
+                    <t:name>Achim Berndzen</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>New test.</p>
+                </t:description>
+            </t:revision>
+        </t:revision-history>
+    </t:info>
+    <t:description xmlns="http://www.w3.org/1999/xhtml">
+        <p>Tests port "error" is context node for p:with-input/@href in p:try/p:finally pipeline</p>
+    </t:description>
+    <t:pipeline>
+        <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+                        xmlns:c="http://www.w3.org/ns/xproc-step" version="3.0">
+            <p:output port="result"/>
+            <p:try>
+                <p:error code="error" >
+                    <p:with-input>
+                        <doc>
+                            <value>../documents/ab-doc2.xml</value>
+                        </doc>
+                    </p:with-input>
+                </p:error>
+                <p:catch>
+                    <p:identity>
+                        <p:with-input><irrelevant /></p:with-input>
+                    </p:identity>
+                </p:catch>
+                <p:finally>
+                    <p:output port="finally" primary="false" pipe="@producer" />
+                    <p:identity name="producer">
+                        <p:with-input> 
+                            <p:document href="{/c:errors/c:error/doc/value/text()}" />
+                        </p:with-input>
+                    </p:identity>
+                </p:finally>
+            </p:try>
+            
+            <p:identity>
+                <p:with-input pipe="finally" />
+            </p:identity>
+        </p:declare-step>
+    </t:pipeline>
+    <t:schematron>
+        <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+            <s:pattern>
+                <s:rule context="/">
+                    <s:assert test="/doc">Document root is not named 'doc'.</s:assert>
+                    <s:assert test="/doc/@att='1'">Attribute 'att' does not have value '1'.</s:assert>
+                </s:rule>
+            </s:pattern>
+        </s:schema>
+    </t:schematron>
+</t:test>
