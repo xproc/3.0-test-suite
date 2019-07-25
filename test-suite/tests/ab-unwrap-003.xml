@@ -16,12 +16,10 @@
    <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Tests p:unwrap</p>
    </t:description>
-   <t:input port='source'>
-      <doc><?pi target ?>
+   <t:input port='source'><doc><?pi target ?>
          <para>a</para>
          <!-- comment -->
-      </doc>
-   </t:input>
+      </doc></t:input>
    
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
@@ -36,11 +34,10 @@
       <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
          <s:pattern>
              <s:rule context="/">
-                <s:assert test="count(/node())=3">Document should have five children.</s:assert>
+                <s:assert test="count(/node())=6">Document should have six children.</s:assert>
                 <s:assert test="/node()[1] instance of processing-instruction()">First child node should be a processing instruction.</s:assert>
-                <s:assert test="/node()[2] instance of element()">First child node should be an element.</s:assert>
-                <s:assert test="/node()[3] instance of comment()">First child node should be a comment.</s:assert>
-                
+                <s:assert test="/node()[3] instance of element()">First child node should be an element.</s:assert>
+                <s:assert test="/node()[5] instance of comment()">First child node should be a comment.</s:assert>
                 <s:assert test="para">Root element should be 'para'.</s:assert>
                 <s:assert test="para/text()='a'">Element 'para' should have text a.</s:assert>
              </s:rule>
