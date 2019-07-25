@@ -49,12 +49,12 @@
          <s:pattern>
              <s:rule context="/">
                 <s:assert test="wrapper">Document element is not wrapper.</s:assert>
-                <s:assert test="count(wrapper/node())=9">Document element should have 11 children.</s:assert>
+                <s:assert test="count(wrapper/node())=9">Document element should have 9 children.</s:assert>
                 <s:assert test="wrapper/node()[1] instance of comment()">First child should be comment.</s:assert>
-                <s:assert test="wrapper/node()[3] instance of processing-instruction()">Second child should be pi.</s:assert>
-                <s:assert test="wrapper/node()[5] instance of element()">Third child should be element.</s:assert>
-                <s:assert test="wrapper/node()[7] instance of comment()">Fourth child should be comment.</s:assert>
-                <s:assert test="wrapper/node()[9] instance of processing-instruction()">Fifth child should be pi.</s:assert>
+                <s:assert test="wrapper/node()[3] instance of processing-instruction()">Third child should be pi.</s:assert>
+                <s:assert test="wrapper/node()[5] instance of element()">Fifth child should be element.</s:assert>
+                <s:assert test="wrapper/node()[7] instance of comment()">Seventh child should be comment.</s:assert>
+                <s:assert test="wrapper/node()[9] instance of processing-instruction()">Ninth child should be pi.</s:assert>
                </s:rule>
          </s:pattern>
       </s:schema>
