@@ -1,6 +1,6 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
         xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail" code="err:XS0096">
+        expected="fail" code="err:XS0096 err:XD0015">
 <t:info>
   <t:title>Test ab-err-s0096-2</t:title>
   <t:revision-history>
