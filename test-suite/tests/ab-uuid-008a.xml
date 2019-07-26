@@ -1,6 +1,6 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
    <t:info>
-      <t:title>uuid 008 (AB)</t:title>
+      <t:title>uuid 008a (AB)</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2019-07-26</t:date>
@@ -8,16 +8,7 @@
                <t:name>Achim Berndzen</t:name>
             </t:author>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>Changed test: matching / is not an error anymore.</p>
-            </t:description>
-         </t:revision>
-         <t:revision>
-            <t:date>2019-06-16</t:date>
-            <t:author>
-               <t:name>Achim Berndzen</t:name>
-            </t:author>
-            <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>Tests for p:uuid</p>
+               <p>New test matching /.</p>
             </t:description>
          </t:revision>
       </t:revision-history>
@@ -31,18 +22,26 @@
          
          <p:uuid match="/">
             <p:with-input>
-               <doc>text</doc>
+               <p:inline document-properties="map{'serialization':map{},
+               'bonus-prop':'prop',
+               'base-uri': 'http://base'}"><doc/></p:inline>
             </p:with-input>
          </p:uuid>
-         <p:wrap-sequence wrapper="result" />
+         <p:identity>
+            <p:with-input select="p:document-properties-document(.)" />
+         </p:identity>
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
       <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
          <s:pattern>
             <s:rule context="/">
-               <s:assert test="/result">Root element is not 'result'.</s:assert>
-               <s:assert test="string-length(normalize-space(/result/text()))!=0">Text child a element 'result' should not be an empty string.</s:assert>
+               <s:assert test="c:document-properties">Root element is not c:document-properties</s:assert>
+               <s:assert test="c:document-properties/base-uri/text()='http://base'">Base-uri properties is not 'http://base'.</s:assert>
+               <s:assert test="c:document-properties/bonus-prop/text()='prop'">Property 'bonus-prop' is not preserved.</s:assert>
+               <s:assert test="c:document-properties/content-type/text()='text/plain'">Content type is not 'text/plain'.</s:assert>
+               <s:assert test="not(c:document-properties/serialization)">There should be no element 'serialization'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
