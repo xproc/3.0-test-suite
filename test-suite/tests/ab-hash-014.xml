@@ -1,8 +1,16 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
-   xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XC0023">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
    <t:info>
       <t:title>hash 014 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2019-07-26</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Matching / is not an error anymore.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-06-16</t:date>
             <t:author>
@@ -33,7 +41,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Testing p:hash raises XC0023 if document-node is selected.</p>
+      <p>Testing p:hash matching / is a text result.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
@@ -41,11 +49,23 @@
          
          <p:hash value="XML Processing Model Working Group" algorithm="crc" match="/">
             <p:with-input>
-               <doc att="wrong" />
+               <doc  />
             </p:with-input>
          </p:hash>
-        
+         
+         <p:wrap-sequence wrapper="result" />
+         
       </p:declare-step>
    </t:pipeline>
-   
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="/result">Root element is not wrapper.</s:assert>
+               <s:assert test="count(/result/node())=1">Wrapper should have exactly one child.</s:assert>
+               <s:assert test="/result/text()='852b1f51'"></s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
 </t:test>

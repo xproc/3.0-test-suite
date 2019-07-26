@@ -1,0 +1,51 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>hash 014a (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-07-26</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>New test.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Testing p:hash matching / is a text result.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:hash value="XML Processing Model Working Group" algorithm="crc" match="/">
+            <p:with-input>
+               <p:inline document-properties="map{'serialization':map{'indent': true()}, 'bogus-prop':'bogus'}">
+               <doc  />
+               </p:inline>
+            </p:with-input>
+         </p:hash>
+         
+         <p:identity>
+            <p:with-input select="p:document-properties-document(.)" />
+         </p:identity>
+         
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step" />
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="/c:document-properties">Root element is not 'c:document-properties'.</s:assert>
+               <s:assert test="/c:document-properties/bogus-prop">There is no property 'bogus-prop'.</s:assert>
+               <s:assert test="/c:document-properties/bogus-prop/text()='bogus'">Value of property is not 'bogus'.</s:assert>
+               <s:assert test="not(c:document-properties/serialization)">There should be no property 'serialization'</s:assert>
+               <s:assert test="/c:document-properties/content-type='text/plain'">Property 'content-type' is not 'text/plain'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
