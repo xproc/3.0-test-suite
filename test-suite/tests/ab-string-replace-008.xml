@@ -1,6 +1,6 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
    <t:info>
-      <t:title>uuid 008 (AB)</t:title>
+      <t:title>p:string-replace 008 (AB)</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2019-07-26</t:date>
@@ -8,32 +8,24 @@
                <t:name>Achim Berndzen</t:name>
             </t:author>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>Changed test: matching / is not an error anymore.</p>
-            </t:description>
-         </t:revision>
-         <t:revision>
-            <t:date>2019-06-16</t:date>
-            <t:author>
-               <t:name>Achim Berndzen</t:name>
-            </t:author>
-            <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>Tests for p:uuid</p>
+               <p>New test matching /.</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Testing p:uuid matching document root.</p>
+      <p>Tests p:string-replace</p>
    </t:description>
+   
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
          <p:output port="result"/>
-         
-         <p:uuid match="/">
+            
+         <p:string-replace match="/" replace="'text'">
             <p:with-input>
-               <doc>text</doc>
+               <doc />
             </p:with-input>
-         </p:uuid>
+         </p:string-replace>
          <p:wrap-sequence wrapper="result" />
       </p:declare-step>
    </t:pipeline>
@@ -41,8 +33,8 @@
       <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
          <s:pattern>
             <s:rule context="/">
-               <s:assert test="/result">Root element is not 'result'.</s:assert>
-               <s:assert test="string-length(normalize-space(/result/text()))!=0">Text child a element 'result' should not be an empty string.</s:assert>
+               <s:assert test="result">The document root is not 'result'.</s:assert>
+               <s:assert test="result/text()='text'">Result is not 'text'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
