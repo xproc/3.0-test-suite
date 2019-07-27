@@ -19,6 +19,7 @@
   <t:input port="source" src="../documents/sample.xml"/>
   <t:pipeline>
     <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+                    xmlns:xs="http://www.w3.org/2001/XMLSchema"
                     xmlns:ex="http://example.com/sample" version="3.0">
       <p:output port="result"/>
       <p:input port="source"/>
