@@ -20,11 +20,17 @@
   <p:with-option name="path" select="$base-dir"/>
 </p:directory-list>
 
+<p:xslt>
+  <p:input port="stylesheet">
+    <p:document href="../xsl/augment-files.xsl"/>
+  </p:input>
+</p:xslt>
+
 <p:for-each name="loop">
   <p:iteration-source select="/c:directory/c:file"/>
 
   <cx:message>
-    <p:with-option name="message" select="concat('Validating: ', /c:file/@name)"/>
+    <p:with-option name="message" select="concat('Processing: ', /c:file/@name)"/>
   </cx:message>
 
   <p:load name="loader">
@@ -84,9 +90,22 @@
   </p:otherwise>
 </p:choose>
 
-  <p:store>
+  <p:xslt>
+    <p:input port="stylesheet">
+      <p:document href="../xsl/format-test.xsl"/>
+    </p:input>
+    <p:with-param name="prev" select="/c:file/@prev">
+      <p:pipe step="loop" port="current"/>
+    </p:with-param>
+    <p:with-param name="next" select="/c:file/@next">
+      <p:pipe step="loop" port="current"/>
+    </p:with-param>
+  </p:xslt>
+
+  <p:store method="html" version="5">
     <p:with-option name="href"
-                   select="concat('../../build/tests/', /c:file/@name)">
+                   select="concat('../../build/html/tests/',
+                                  substring-before(/c:file/@name, '.xml'), '.html')">
       <p:pipe step="loop" port="current"/>
     </p:with-option>
   </p:store>
