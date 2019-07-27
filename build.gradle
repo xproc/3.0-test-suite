@@ -124,7 +124,7 @@ task test_index_setup(dependsOn: ["process_all_tests","git_log_shorter","get_spe
   }
 }
 
-task test_indexes() {
+task test_indexes(dependsOn: ["test_index_setup"]) {
   // nop
 }
 
@@ -144,7 +144,6 @@ task test_indexes() {
 }
 
 def test_sources = []
-def valid_test_sources = []
 def xformed_tests = []
 
 fileTree(dir: 'test-suite/tests').include("**/*.xml").each { file ->
@@ -154,13 +153,12 @@ fileTree(dir: 'test-suite/tests').include("**/*.xml").each { file ->
   def html = base.substring(6).replace(".xml", ".html")
 
   test_sources << "test-suite/" + base
-  valid_test_sources << "build/" + base
   xformed_tests << "build/html/tests/" + html
 }
 
 task process_all_tests(dependsOn: [ "schemas", "get_specs" ], type: XMLCalabashTask) {
   inputs.files test_sources
-  outputs.files valid_test_sources
+  outputs.files xformed_tests
   pipeline "tools/xpl/process-all.xpl"
   doFirst {
     mkdir("build/tests")
