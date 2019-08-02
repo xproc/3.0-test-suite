@@ -1,4 +1,4 @@
 <doc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-     xmlns="http://tests.xproc.org/tests/doc/document-ns.xsd">
+     xmlns="https://test-suite.xproc.org/test-suite/documents/document-ns.xsd">
   <p>This is a test document</p>
 </doc>
