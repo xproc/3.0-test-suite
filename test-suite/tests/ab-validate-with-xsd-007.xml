@@ -32,7 +32,7 @@
 
   <t:schematron>
     <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
-      <s:ns prefix="x" uri="http://tests.xproc.org/tests/doc/document-ns.xsd" />
+      <s:ns prefix="x" uri="https://test-suite.xproc.org/test-suite/documents/document-ns.xsd" />
       <s:pattern>
         <s:rule context="/">
           <s:assert test="x:doc">The element root is not “doc”.</s:assert>
