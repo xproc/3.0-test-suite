@@ -1,0 +1,47 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" 
+  features="p-validate-with-relax-ng">
+  <t:info>
+    <t:title>ab-validate-with-relax-ng-011</t:title>
+    <t:revision-history>
+      <t:revision>
+        <t:date>2019-08-02</t:date>
+        <t:author>
+          <t:name>Achim Berndzen</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Initial publication</p>
+        </t:description>
+      </t:revision>
+    </t:revision-history>
+  </t:info>
+  <t:description xmlns="http://www.w3.org/1999/xhtml">
+    <p>Testing compact grammar is recognized on @href.</p>
+  </t:description>
+  <t:pipeline>
+<p:declare-step name="pipeline" xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+  <p:output port="result"/>
+  <p:validate-with-relax-ng>
+    <p:with-input port="source">
+      <doc>
+        <title>Some title</title>
+        <p>Some paragraph.</p>
+      </doc>
+    </p:with-input>
+    <p:with-input port="schema" href="../documents/grammar.rnc">
+    </p:with-input>
+  </p:validate-with-relax-ng>
+</p:declare-step>
+</t:pipeline>
+  
+  <t:schematron>
+    <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+      <s:pattern>
+        <s:rule context="/">
+          <s:assert test="doc">The element root is not “doc”.</s:assert>
+          <s:assert test="doc/title">The element root does not have a child 'title'.</s:assert>
+          <s:assert test="doc/p">Element root does not have child 'p'.</s:assert>
+        </s:rule>
+      </s:pattern>
+    </s:schema>
+  </t:schematron>
+</t:test>
