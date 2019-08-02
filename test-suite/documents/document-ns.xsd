@@ -1,7 +1,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="http://tests.xproc.org/tests/doc/document-ns.xsd"
+           targetNamespace="https://test-suite.xproc.org/test-suite/documents/document-ns.xsd"
 	   elementFormDefault="qualified"
-	   xmlns="http://tests.xproc.org/tests/doc/document-ns.xsd">
+	   xmlns="https://test-suite.xproc.org/test-suite/documents/document-ns.xsd">
   <xs:element name="doc">
     <xs:complexType>
       <xs:sequence>
