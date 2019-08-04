@@ -3,6 +3,15 @@
       <t:title>with-input-select-013</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-08-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test: Result of select="p:document-property..." is a JSON documents too.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-01-12</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -26,9 +35,11 @@
                </p:with-input>
             </p:identity>
             
-            <p:wrap-sequence wrapper="result">
-               <p:with-input select="p:document-property(., 'content-type')" />
-            </p:wrap-sequence>
+            <p:identity>
+               <p:with-input>
+                  <result>{p:document-property(., 'content-type')}</result>
+               </p:with-input>
+            </p:identity>
         </p:declare-step>
    </t:pipeline>
    <t:schematron>
