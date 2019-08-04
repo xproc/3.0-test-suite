@@ -1,0 +1,39 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
+        xmlns:err="http://www.w3.org/ns/xproc-error" 
+        expected="fail" code="err:XC0038">
+   <t:info>
+      <t:title>AB-xslt-001</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-08-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests XC0038 is raised for unsupported xslt version.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+      
+         <p:xslt version="999999">
+            <p:with-input port="source">
+               <doc />
+            </p:with-input>
+            <p:with-input port="stylesheet">
+               <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                  <xsl:template match="/">
+                     <test-failed />
+                  </xsl:template>
+               </xsl:stylesheet>
+            </p:with-input>
+         </p:xslt>
+      </p:declare-step>
+   </t:pipeline>
+</t:test>

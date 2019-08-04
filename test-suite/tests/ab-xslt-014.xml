@@ -1,0 +1,71 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" features="xslt-3">
+   <t:info>
+      <t:title>AB-xslt-014</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-08-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests initial match selection on p:xslt: text document (3.0)</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+         xmlns:c="http://www.w3.org/ns/xproc-step" 
+         version="3.0">
+         <p:output port="result"/>
+         
+         <p:xslt version="3.0" name="xslt">
+            <p:with-input port="source">
+               <p:inline content-type="text/plain">This </p:inline>
+               <p:inline content-type="text/plain">is a </p:inline>
+               <p:inline content-type="text/plain">text.</p:inline>
+            </p:with-input>
+            <p:with-input port="stylesheet">
+               <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                  <xsl:template match="text()">
+                     <xsl:copy-of select="." />
+                  </xsl:template>
+               </xsl:stylesheet>
+            </p:with-input>
+         </p:xslt>
+         <p:count name="counter" />
+         
+         <p:wrap-sequence wrapper="result" >
+            <p:with-input pipe="@xslt" />
+         </p:wrap-sequence>
+         
+         <p:add-attribute match="result" attribute-name="count">
+            <p:with-option name="attribute-value" select="/c:result" >
+               <p:pipe step="counter" />
+            </p:with-option>
+         </p:add-attribute>
+         
+         <p:add-attribute match="result" attribute-name="content-type">
+            <p:with-option name="attribute-value" select="p:document-property(., 'content-type')">
+               <p:pipe step="xslt" />
+            </p:with-option>
+         </p:add-attribute>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="/result">The document root is not 'result'.</s:assert>
+               <s:assert test="/result/text()='This is a text.'">The text child is not 'This is a text'.</s:assert>
+               <s:assert test="count(/result/child::node())=1">Element 'result' should have exactly one child.</s:assert>
+               <s:assert test="/result/@content-type='text/plain'">result/@content-type is not 'text/plain'.</s:assert>
+               <s:assert test="/result/@count='1'">result/@count is not '1'.</s:assert>   
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

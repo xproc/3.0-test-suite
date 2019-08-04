@@ -1,0 +1,48 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" features="xslt-3">
+   <t:info>
+      <t:title>AB-xslt-036</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-08-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests tall template invocation, inital-mode has to be ignored (3.0)</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         <p:xslt version="3.0" template-name="template" initial-mode="initial">
+            <p:with-input port="source">
+               <doc />
+            </p:with-input>
+            <p:with-input port="stylesheet">
+               <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                  <xsl:template match="/" mode="initial">
+                     <wrong />
+                  </xsl:template>
+                  <xsl:template name="template">
+                     <right />
+                  </xsl:template>
+               </xsl:stylesheet>
+            </p:with-input>
+         </p:xslt>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="/right">The document root is not 'right'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

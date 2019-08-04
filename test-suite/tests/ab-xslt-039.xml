@@ -1,0 +1,47 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" features="xslt-3">
+   <t:info>
+      <t:title>AB-xslt-039</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-08-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests tall template invocation: global-context-item (3.0)</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         <p:xslt version="3.0" template-name="template" global-context-item="42">
+            <p:with-input port="source">
+               <doc />
+            </p:with-input>
+            <p:with-input port="stylesheet">
+               <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                  <xsl:variable name="var" select="." />
+                  <xsl:template name="template">
+                     <result><xsl:value-of select="$var" /></result>
+                  </xsl:template>
+               </xsl:stylesheet>
+            </p:with-input>
+         </p:xslt>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="/result">The document root is not 'result'.</s:assert>
+               <s:assert test="/result/text()='42'">Element 'result' does not have a text child '42'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
