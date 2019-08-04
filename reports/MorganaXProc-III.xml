@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="XProc Test Suite"
-           tests="1128"
-           errors="9"
+           tests="1209"
+           errors="10"
            failures="0"
            skipped="0"
-           timestamp="2019-07-28T13:35:52">
+           timestamp="2019-08-04T17:45:08">
    <properties>
       <property name="processor" value="MorganaXProc-III"/>
-      <property name="version" value="0.8.19-alpha"/>
+      <property name="version" value="0.8.20-alpha"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.0"/>
@@ -915,6 +915,38 @@
    <testcase name="ab-uuid-010.xml"/>
    <testcase name="ab-uuid-011.xml"/>
    <testcase name="ab-uuid-012.xml"/>
+   <testcase name="ab-validate-with-relax-ng-001.xml"/>
+   <testcase name="ab-validate-with-relax-ng-002.xml"/>
+   <testcase name="ab-validate-with-relax-ng-003.xml"/>
+   <testcase name="ab-validate-with-relax-ng-004.xml"/>
+   <testcase name="ab-validate-with-relax-ng-005.xml"/>
+   <testcase name="ab-validate-with-relax-ng-006.xml"/>
+   <testcase name="ab-validate-with-relax-ng-007.xml"/>
+   <testcase name="ab-validate-with-relax-ng-008.xml">
+      <failure>Test failed with '{http://www.w3.org/ns/xproc-error}XD0038'.</failure>
+   </testcase>
+   <testcase name="ab-validate-with-relax-ng-009.xml"/>
+   <testcase name="ab-validate-with-relax-ng-010.xml"/>
+   <testcase name="ab-validate-with-relax-ng-011.xml"/>
+   <testcase name="ab-validate-with-relax-ng-012.xml"/>
+   <testcase name="ab-validate-with-relax-ng-013.xml"/>
+   <testcase name="ab-validate-with-relax-ng-014.xml"/>
+   <testcase name="ab-validate-with-relax-ng-017.xml"/>
+   <testcase name="ab-validate-with-relax-ng-018.xml"/>
+   <testcase name="ab-validate-with-xsd-001.xml"/>
+   <testcase name="ab-validate-with-xsd-002.xml"/>
+   <testcase name="ab-validate-with-xsd-003.xml"/>
+   <testcase name="ab-validate-with-xsd-004.xml"/>
+   <testcase name="ab-validate-with-xsd-005.xml"/>
+   <testcase name="ab-validate-with-xsd-006.xml"/>
+   <testcase name="ab-validate-with-xsd-007.xml"/>
+   <testcase name="ab-validate-with-xsd-008.xml"/>
+   <testcase name="ab-validate-with-xsd-009.xml"/>
+   <testcase name="ab-validate-with-xsd-010.xml"/>
+   <testcase name="ab-validate-with-xsd-011.xml"/>
+   <testcase name="ab-validate-with-xsd-012.xml"/>
+   <testcase name="ab-validate-with-xsd-013.xml"/>
+   <testcase name="ab-validate-with-xsd-014.xml"/>
    <testcase name="ab-variable-001.xml"/>
    <testcase name="ab-variable-002.xml"/>
    <testcase name="ab-variable-003.xml"/>
@@ -1074,6 +1106,57 @@
    <testcase name="ab-wrap-sequence-012.xml"/>
    <testcase name="ab-wrap-sequence-013.xml"/>
    <testcase name="ab-wrap-sequence-014.xml"/>
+   <testcase name="ab-xslt-001.xml"/>
+   <testcase name="ab-xslt-002.xml"/>
+   <testcase name="ab-xslt-003.xml"/>
+   <testcase name="ab-xslt-004.xml"/>
+   <testcase name="ab-xslt-005.xml"/>
+   <testcase name="ab-xslt-006.xml"/>
+   <testcase name="ab-xslt-007.xml"/>
+   <testcase name="ab-xslt-008.xml"/>
+   <testcase name="ab-xslt-009.xml"/>
+   <testcase name="ab-xslt-010.xml"/>
+   <testcase name="ab-xslt-011.xml"/>
+   <testcase name="ab-xslt-012.xml"/>
+   <testcase name="ab-xslt-013.xml"/>
+   <testcase name="ab-xslt-014.xml"/>
+   <testcase name="ab-xslt-015.xml"/>
+   <testcase name="ab-xslt-016.xml"/>
+   <testcase name="ab-xslt-017.xml"/>
+   <testcase name="ab-xslt-018.xml"/>
+   <testcase name="ab-xslt-019.xml"/>
+   <testcase name="ab-xslt-020.xml"/>
+   <testcase name="ab-xslt-021.xml"/>
+   <testcase name="ab-xslt-022.xml"/>
+   <testcase name="ab-xslt-023.xml"/>
+   <testcase name="ab-xslt-024.xml"/>
+   <testcase name="ab-xslt-025.xml"/>
+   <testcase name="ab-xslt-026.xml"/>
+   <testcase name="ab-xslt-027.xml"/>
+   <testcase name="ab-xslt-028.xml"/>
+   <testcase name="ab-xslt-029.xml"/>
+   <testcase name="ab-xslt-030.xml"/>
+   <testcase name="ab-xslt-031.xml"/>
+   <testcase name="ab-xslt-032.xml"/>
+   <testcase name="ab-xslt-033.xml"/>
+   <testcase name="ab-xslt-034.xml"/>
+   <testcase name="ab-xslt-035.xml"/>
+   <testcase name="ab-xslt-036.xml"/>
+   <testcase name="ab-xslt-037.xml"/>
+   <testcase name="ab-xslt-038.xml"/>
+   <testcase name="ab-xslt-039.xml"/>
+   <testcase name="ab-xslt-040.xml"/>
+   <testcase name="ab-xslt-041.xml"/>
+   <testcase name="ab-xslt-042.xml"/>
+   <testcase name="ab-xslt-043.xml"/>
+   <testcase name="ab-xslt-044.xml"/>
+   <testcase name="ab-xslt-045.xml"/>
+   <testcase name="ab-xslt-046.xml"/>
+   <testcase name="ab-xslt-047.xml"/>
+   <testcase name="ab-xslt-048.xml"/>
+   <testcase name="ab-xslt-049.xml"/>
+   <testcase name="ab-xslt-050.xml"/>
+   <testcase name="ab-xslt-051.xml"/>
    <testcase name="choose-001.xml"/>
    <testcase name="choose-002.xml"/>
    <testcase name="choose-003.xml"/>
