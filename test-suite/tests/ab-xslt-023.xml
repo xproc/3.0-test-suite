@@ -1,0 +1,76 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" features="xslt-3">
+   <t:info>
+      <t:title>AB-xslt-023</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-08-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests mixed output modes: build-tree=true on one secondary result, false on the other. (3.0)</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         <p:xslt version="3.0" name="xslt">
+            <p:with-input port="source">
+               <doc />
+            </p:with-input>
+            <p:with-input port="stylesheet">
+               <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                  <xsl:template match="/">
+                     <doc />
+                     <xsl:result-document href="secondary-true" build-tree="yes">
+                        <xsl:sequence select="1, 'a', true()" />
+                     </xsl:result-document>
+                     <xsl:result-document href="secondary-false" build-tree="false">
+                        <xsl:sequence select="2, 'b', false()" />
+                     </xsl:result-document>                   
+                  </xsl:template>
+               </xsl:stylesheet>
+            </p:with-input>
+         </p:xslt>
+         
+         <p:for-each>
+            <p:with-input pipe="secondary" select=".[ends-with(p:document-property(.,'base-uri'),'secondary-false')]"/> 
+            <p:cast-content-type content-type="application/xml" />
+         </p:for-each>
+         
+         <p:wrap-sequence name="false" wrapper="secondary-false" />
+         
+         <p:wrap-sequence name="true" wrapper="secondary-true">
+            <p:with-input select=".[ends-with(p:document-property(.,'base-uri'),'secondary-true')]">
+               <p:pipe step="xslt" port="secondary" />
+            </p:with-input>
+         </p:wrap-sequence>
+         
+         <p:wrap-sequence wrapper="result">
+            <p:with-input>
+               <p:pipe step="true" />
+               <p:pipe step="false" />
+            </p:with-input>
+         </p:wrap-sequence>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="j" uri="http://www.w3.org/2005/xpath-functions" />
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The document root is not 'result'.</s:assert>
+               <s:assert test="result/secondary-true/text()='1 a true'">Results child 'secondary-true' does not have a text child '1 a true'.</s:assert>
+               <s:assert test="result/secondary-false/j:number/text()='2'">There is no number-element with text child '2'.</s:assert>
+               <s:assert test="result/secondary-false/j:string/text()='b'">There is no string-element with text child 'b'.</s:assert>
+               <s:assert test="result/secondary-false/j:boolean/text()='false'">There is no boolean-element with text child 'false'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

@@ -1,0 +1,64 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" features="xslt-3">
+   <t:info>
+      <t:title>AB-xslt-044</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-08-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests no output-base-uri: base uri of first doc on source is used. (3.0)</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         <p:xslt version="3.0">
+            <p:with-input port="source">
+               <doc xml:base="http://xproc-test/xslt/"/>
+            </p:with-input>
+            <p:with-input port="stylesheet">
+               <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                  <xsl:template match="/">
+                     <xsl:result-document href="one.xml">
+                        <one />
+                     </xsl:result-document>
+                     <xsl:result-document href="two.xml">
+                        <two />
+                     </xsl:result-document>
+                  </xsl:template>
+               </xsl:stylesheet>
+            </p:with-input>
+         </p:xslt>
+         
+         <p:for-each>
+            <p:with-input pipe="secondary"/>
+            
+            <p:identity>
+               <p:with-input>
+                  <result>{base-uri(.)}</result>
+               </p:with-input>
+            </p:identity>
+         </p:for-each>
+         
+         <p:wrap-sequence wrapper="wrapper" />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="/wrapper">The document root is not 'wrapper'.</s:assert>
+               <s:assert test="/wrapper/result[1]/text()='http://xproc-test/xslt/one.xml'">Element 'result[1]' does not have a text child 'http://xproc-test/xslt/one.xml'.</s:assert>
+               <s:assert test="/wrapper/result[2]/text()='http://xproc-test/xslt/two.xml'">Element 'result[2]' does not have a text child 'http://xproc-test/two/one.xml'.</s:assert>               
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
