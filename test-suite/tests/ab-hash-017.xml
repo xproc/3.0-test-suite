@@ -23,7 +23,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Testing p:hash raises XC0091 if result is all text.</p>
+      <p>Testing p:hash updates document properties correctly if the result is all text.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
