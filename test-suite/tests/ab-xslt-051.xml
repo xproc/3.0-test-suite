@@ -1,7 +1,16 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" features="xslt-3">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" features="xslt-3 xslt-serialization">
    <t:info>
       <t:title>AB-xslt-051</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2019-08-05</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added feature xslt-serialization to test.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-08-04</t:date>
             <t:author>
