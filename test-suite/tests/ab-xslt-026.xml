@@ -1,9 +1,18 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
         xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail" code="err:XC0056" features="xslt-3">
+        expected="fail" code="err:XC0008" features="xslt-3">
    <t:info>
       <t:title>AB-xslt-026</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2019-08-05</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Chnaged error code according to spec changes.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-08-04</t:date>
             <t:author>
