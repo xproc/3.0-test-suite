@@ -1,0 +1,47 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" 
+  features="p-validate-with-schematron">
+  <t:info>
+    <t:title>ab-validate-with-schematron-011</t:title>
+    <t:revision-history>
+      <t:revision>
+        <t:date>2019-08-18</t:date>
+        <t:author>
+          <t:name>Achim Berndzen</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Initial publication: Test ported from 1.0 test suite</p>
+        </t:description>
+      </t:revision>
+    </t:revision-history>
+  </t:info>
+  <t:description xmlns="http://www.w3.org/1999/xhtml">
+    <p>Testing schematron validation: invalid doc, but assert-valid=false. Check report port.</p>
+  </t:description>
+  <t:pipeline>
+<p:declare-step name="pipeline" xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+  <p:output port="result"/>
+  
+  <p:validate-with-schematron assert-valid="false">
+    <p:with-input port="source" href="../documents/docbook-invalid.xml" />
+    <p:with-input port="schema" href="../documents/docbook.sch" />
+  </p:validate-with-schematron>
+  
+  <p:count limit="1">
+    <p:with-input pipe="report" select="//xvrl:report" xmlns:xvrl="http://www.xproc.org/ns/xvrl" />
+  </p:count>
+  
+</p:declare-step>
+</t:pipeline>
+  
+  <t:schematron>
+    <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+      <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step" />
+      <s:pattern>
+        <s:rule context="/">
+          <s:assert test="c:result">Document element is not 'c:result'.</s:assert>
+          <s:assert test="c:result/text() != '0'">Text child should not be '0'.</s:assert>
+        </s:rule>
+      </s:pattern>
+    </s:schema>
+  </t:schematron>
+</t:test>
