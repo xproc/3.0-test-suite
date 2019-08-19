@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="XProc Test Suite"
-           tests="1209"
-           errors="10"
+           tests="1225"
+           errors="9"
            failures="0"
            skipped="0"
-           timestamp="2019-08-04T17:45:08">
+           timestamp="2019-08-18T18:42:03">
    <properties>
       <property name="processor" value="MorganaXProc-III"/>
-      <property name="version" value="0.8.20-alpha"/>
+      <property name="version" value="0.8.21-alpha"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.0"/>
@@ -922,17 +922,30 @@
    <testcase name="ab-validate-with-relax-ng-005.xml"/>
    <testcase name="ab-validate-with-relax-ng-006.xml"/>
    <testcase name="ab-validate-with-relax-ng-007.xml"/>
-   <testcase name="ab-validate-with-relax-ng-008.xml">
-      <failure>Test failed with '{http://www.w3.org/ns/xproc-error}XD0038'.</failure>
-   </testcase>
+   <testcase name="ab-validate-with-relax-ng-008.xml"/>
    <testcase name="ab-validate-with-relax-ng-009.xml"/>
    <testcase name="ab-validate-with-relax-ng-010.xml"/>
    <testcase name="ab-validate-with-relax-ng-011.xml"/>
    <testcase name="ab-validate-with-relax-ng-012.xml"/>
    <testcase name="ab-validate-with-relax-ng-013.xml"/>
    <testcase name="ab-validate-with-relax-ng-014.xml"/>
+   <testcase name="ab-validate-with-relax-ng-015.xml"/>
+   <testcase name="ab-validate-with-relax-ng-016.xml"/>
    <testcase name="ab-validate-with-relax-ng-017.xml"/>
    <testcase name="ab-validate-with-relax-ng-018.xml"/>
+   <testcase name="ab-validate-with-schematron-001.xml"/>
+   <testcase name="ab-validate-with-schematron-002.xml"/>
+   <testcase name="ab-validate-with-schematron-003.xml"/>
+   <testcase name="ab-validate-with-schematron-004.xml"/>
+   <testcase name="ab-validate-with-schematron-005.xml"/>
+   <testcase name="ab-validate-with-schematron-006.xml"/>
+   <testcase name="ab-validate-with-schematron-007.xml"/>
+   <testcase name="ab-validate-with-schematron-008.xml"/>
+   <testcase name="ab-validate-with-schematron-009.xml"/>
+   <testcase name="ab-validate-with-schematron-010.xml"/>
+   <testcase name="ab-validate-with-schematron-011.xml"/>
+   <testcase name="ab-validate-with-schematron-012.xml"/>
+   <testcase name="ab-validate-with-schematron-013.xml"/>
    <testcase name="ab-validate-with-xsd-001.xml"/>
    <testcase name="ab-validate-with-xsd-002.xml"/>
    <testcase name="ab-validate-with-xsd-003.xml"/>
@@ -1157,6 +1170,7 @@
    <testcase name="ab-xslt-049.xml"/>
    <testcase name="ab-xslt-050.xml"/>
    <testcase name="ab-xslt-051.xml"/>
+   <testcase name="ab-xslt-052.xml"/>
    <testcase name="choose-001.xml"/>
    <testcase name="choose-002.xml"/>
    <testcase name="choose-003.xml"/>
