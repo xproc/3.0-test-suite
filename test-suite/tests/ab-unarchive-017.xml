@@ -1,0 +1,42 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:unarchive 017 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-08-25</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial tests for p:unarchive</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:unarchive: Use two exclude filter only.</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+         <p:output port="result"/>
+         
+         <p:unarchive>
+            <p:with-option name="exclude-filter" select="('folder/\S*', '\S+\.jpg')"/>
+            <p:with-input href="../documents/archive.zip" />
+         </p:unarchive>
+         <p:count />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step" />
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="c:result">Root element is not 'c:result'.</s:assert>
+               <s:assert test="c:result/text()='4'">Text child of c:result is not '4'.</s:assert>
+           </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

@@ -1,0 +1,53 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:archive-manifest 001 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-08-25</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial tests for p:archive-manifest</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:archive-manifest</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+         <p:output port="result"/>
+         
+         <p:archive-manifest>
+            <p:with-input href="../documents/archive.zip" />
+         </p:archive-manifest>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"></s:ns>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="c:archive">Root element is not 'c:archive'.</s:assert>
+               <s:assert test="count(c:archive/c:entry)=10">Element 'c:archive' does not have 10 children named 'c:entry'</s:assert>
+               <s:assert test="c:archive/c:entry/@name='doc.xml'">There is no c:entry for 'doc.xml'.</s:assert>
+               <s:assert test="c:archive/c:entry/@name='fish.jpg'">There is no c:entry for 'fish.jpg'.</s:assert>
+               <s:assert test="c:archive/c:entry/@name='html.html'">There is no c:entry for 'html.html'.</s:assert>
+               <s:assert test="c:archive/c:entry/@name='json.json'">There is no c:entry for 'json.json'.</s:assert>
+               <s:assert test="c:archive/c:entry/@name='text.txt'">There is no c:entry for 'text.txt'.</s:assert>
+
+               <s:assert test="c:archive/c:entry/@name='folder/doc.xml'">There is no c:entry for 'folder/doc.xml'.</s:assert>
+               <s:assert test="c:archive/c:entry/@name='folder/fish.jpg'">There is no c:entry for 'folder/fish.jpg'.</s:assert>
+               <s:assert test="c:archive/c:entry/@name='folder/html.html'">There is no c:entry for 'folder/html.html'.</s:assert>
+               <s:assert test="c:archive/c:entry/@name='folder/json.json'">There is no c:entry for 'folder/json.json'.</s:assert>
+               <s:assert test="c:archive/c:entry/@name='folder/text.txt'">There is no c:entry for 'folder/text.txt'.</s:assert>
+               
+               <s:assert test="count(c:archive/c:entry/@href)=10">Every c:entry must have an attribute 'href'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

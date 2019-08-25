@@ -1,0 +1,51 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:wrap 007 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-08-25</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:wrap (Partly ported from 1.0)</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:wrap</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+         <p:output port="result"/>
+         
+         <p:wrap match="comment()"
+                 group-adjacent="." wrapper="test:wrapper" xmlns:test="http://www.example.com/test">
+            <p:with-input>
+               <doc>
+                  <!-- bar -->
+                  <!-- bar -->
+                  <!-- baz -->
+                  <!-- bar -->
+               </doc>
+            </p:with-input>
+         </p:wrap>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="test" uri="http://www.example.com/test"></s:ns>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="doc">Root element is not 'doc'.</s:assert>
+               <s:assert test="count(doc/test:wrapper)=3">Root element does not have three children 'test:wrapper'.</s:assert>
+               <s:assert test="count(doc/test:wrapper[1]/comment())=2">First test:wrapper should have two comment children.</s:assert>
+               <s:assert test="count(doc/test:wrapper[2]/comment())=1">Second test:wrapper should have one comment child.</s:assert>
+               <s:assert test="count(doc/test:wrapper[3]/comment())=1">Second test:wrapper should have one comment child.</s:assert>               
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

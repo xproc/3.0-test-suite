@@ -1,0 +1,49 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:wrap 003 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-08-25</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:wrap (Partly ported from 1.0)</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:wrap</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+         <p:output port="result"/>
+         
+         <p:wrap match="p:option" wrapper="p:option-wrapper" group-adjacent="local-name()">
+            <p:with-input>
+               <p:inline>
+                  <p:wrap>
+                     <p:option name="target" value="p:option"/>
+                     <p:option name="name" value="option-wrapper"/>
+                  </p:wrap>
+               </p:inline>
+            </p:with-input>
+         </p:wrap>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="p" uri="http://www.w3.org/ns/xproc" />
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="p:wrap">Root element is not 'p:wrap'.</s:assert>
+               <s:assert test="p:wrap/p:option-wrapper">Element 'p:wrap' should have a child 'p:option-wrapper'.></s:assert>
+               <s:assert test="count(p:wrap/p:option-wrapper/p:option)=2">Element 'p:option-wrapper' does not have two children 'p:option'.</s:assert>
+               <s:assert test="count(p:wrap/*)=1"> Element 'p:wrap' should have only one child element.</s:assert>               
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

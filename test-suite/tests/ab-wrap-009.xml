@@ -1,0 +1,62 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:wrap 009 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-08-25</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:wrap (Partly ported from 1.0)</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:wrap</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+         <p:output port="result"/>
+         
+         <p:wrap match="section" wrapper="foo">
+            <p:with-input>
+               <doc>
+                  <section>
+                     <title>some title</title>
+                     <section>
+                        <title>some title</title>
+                        <section>
+                           <title>some title</title>
+                        </section>
+                        <section>
+                           <title>some title</title>
+                        </section>
+                     </section>
+                  </section>
+               </doc>
+            </p:with-input>
+         </p:wrap>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="doc">Root element is not 'doc'.</s:assert>
+               <s:assert test="doc/foo">Element 'doc' does not have a child 'foo'.</s:assert>
+               <s:assert test="doc/foo/section">Element 'doc/foo' does not have child 'section'.</s:assert>
+               <s:assert test="doc/foo/section/title">Element 'doc/foo/section' does not have child 'title'.</s:assert>
+               <s:assert test="doc/foo/section/foo">Element 'doc/foo/section' does not have child 'foo'.</s:assert>
+               <s:assert test="doc/foo/section/foo/section">Element 'doc/foo/section/foo' does not have child 'section'.</s:assert>
+               <s:assert test="doc/foo/section/foo/section/title">Element 'doc/foo/section/foo/section' does not have child 'title'.</s:assert>
+               <s:assert test="count(doc/foo/section/foo/section/foo)=2">Element 'doc/foo/section/foo/section' does not have two child elements 'foo'.</s:assert>
+               <s:assert test="count(doc/foo/section/foo/section/foo/section)=2">Element 'doc/foo/section/foo/section' does not have two child elements 'foo/section'.</s:assert>
+               <s:assert test="count(doc/foo/section/foo/section/foo/section/title)=2">Element 'doc/foo/section/foo/section' does not have two child elements 'foo/section/title'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
