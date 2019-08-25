@@ -1,0 +1,48 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:xinclude 006 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-08-25</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial tests for p:xinclude. Ported for 1.0 test suite</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:xinclude</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+         <p:output port="result"/>
+         
+         <p:xinclude>
+            <p:with-input>
+               <document>
+                  <xi:include xmlns:xi='http://www.w3.org/2001/XInclude'
+                     href="../documents/xpath-xinclude-doc.xml"
+                     xpointer="xmlns(pfx=http://example.org/ns)xpath(/doc/pfx:p)"/>
+               </document>
+            </p:with-input>
+         </p:xinclude>
+         
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="test" uri="http://example.org/ns" />
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="document">The root element is not 'document'.</s:assert>
+               <s:assert test="document/test:p">The root element does not have a child 'Q{http://example.org/ns/}p'.</s:assert>
+               <s:assert test="document/test:p/text()='Last p'">The text child of 'p' is not 'Last p'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
