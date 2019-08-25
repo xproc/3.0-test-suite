@@ -1,0 +1,89 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:wrap 008 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-08-25</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:wrap (Partly ported from 1.0)</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:wrap</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+         <p:output port="result"/>
+         
+         <p:wrap match="text()"
+                 group-adjacent="." wrapper="test:wrapper" xmlns:test="http://www.example.com/test">
+            <p:with-input>
+               <doc>
+                  <!-- foo -->
+                  text
+                  <!-- foo -->
+                  text
+                  <!-- foo -->
+                  text2
+                  <!-- foo -->
+                  text
+                  <!-- foo -->
+                  text
+                  <!-- foo -->
+               </doc>
+            </p:with-input>
+         </p:wrap>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="test" uri="http://www.example.com/test"></s:ns>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="doc">Root element is not 'doc'.</s:assert>
+               <s:assert test="count(doc/test:wrapper)=5">Element 'doc' does not have five children 'test:wrapper'.</s:assert>
+               <s:assert test="count(doc/comment())=4">Element 'doc' does not have four child comments.</s:assert>
+              
+               <s:assert test="doc/child::node()[1]/local-name()='wrapper'">First child node of 'doc' is not 'test:wrapper'.</s:assert>
+               <s:assert test="count(doc/test:wrapper[1]/child::node())=1">First child test:wrapper does not have one child node.</s:assert>
+               <s:assert test="normalize-space(doc/test:wrapper[1]/text())=''">First test:wrapper does not have a all whitespace text node as child.</s:assert>
+               
+               <s:assert test="doc/child::node()[2] instance of comment()">Second child node of 'doc' is not a comment.</s:assert>
+               
+               <s:assert test="doc/child::node()[3]/local-name()='wrapper'">Third child node of 'doc' is not 'test:wrapper'.</s:assert>
+               <s:assert test="count(doc/test:wrapper[2]/child::node())=3">Element 'test:wrapper'[2] does not have three child nodes.</s:assert>
+               <s:assert test="normalize-space(doc/test:wrapper[2]/child::node()[1])='text'">Element 'test:wrapper'[2]'s first child (normalized) is not 'text'.</s:assert>
+               <s:assert test="doc/test:wrapper[2]/child::node()[2] instance of comment()">Element 'test:wrapper'[2]'s second child is not a comment.</s:assert>
+               <s:assert test="normalize-space(doc/test:wrapper[2]/child::node()[3])='text'">Element 'test:wrapper'[2]'s third child (normalized) is not 'text'.</s:assert>
+
+               <s:assert test="doc/child::node()[4] instance of comment()">Fourth child node of 'doc' is not a comment.</s:assert>
+               
+               <s:assert test="doc/child::node()[5]/local-name()='wrapper'">Fifth child node of 'doc' is not 'test:wrapper'.</s:assert>
+               <s:assert test="count(doc/test:wrapper[3]/child::node())=1">Element 'test:wrapper[3]' does not have exactly one child.</s:assert>
+               <s:assert test="normalize-space(doc/test:wrapper[3]/text())='text2'">Element 'test:wrapper[3]' does not have a text child (normalized) with 'text2' </s:assert>
+               
+               <s:assert test="doc/child::node()[6] instance of comment()">Sixth child node of 'doc' is not a comment.</s:assert>
+               
+               <s:assert test="doc/child::node()[7]/local-name()='wrapper'">Seventh child node of 'doc' is not 'test:wrapper'.</s:assert>
+               <s:assert test="count(doc/test:wrapper[4]/child::node())=3">Element 'test:wrapper'[4] does not have three child nodes.</s:assert>
+               <s:assert test="normalize-space(doc/test:wrapper[4]/child::node()[1])='text'">Element 'test:wrapper'[4]'s first child (normalized) is not 'text'.</s:assert>
+               <s:assert test="doc/test:wrapper[4]/child::node()[2] instance of comment()">Element 'test:wrapper'[4]'s second child is not a comment.</s:assert>
+               <s:assert test="normalize-space(doc/test:wrapper[4]/child::node()[3])='text'">Element 'test:wrapper'[4]'s third child (normalized) is not 'text'.</s:assert>
+ 
+               <s:assert test="doc/child::node()[8] instance of comment()">Eight child node of 'doc' is not a comment.</s:assert>
+ 
+               <s:assert test="doc/child::node()[9]/local-name()='wrapper'">Ninth child node of 'doc' is not 'test:wrapper'.</s:assert>
+               <s:assert test="count(doc/test:wrapper[5]/child::node())=1">Fifth child test:wrapper does not have one child node.</s:assert>
+               <s:assert test="normalize-space(doc/test:wrapper[5]/text())=''">Fifth test:wrapper does not have a all whitespace text node as child.</s:assert>
+               
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

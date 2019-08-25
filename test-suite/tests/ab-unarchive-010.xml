@@ -1,0 +1,43 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:unarchive 010 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-08-25</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial tests for p:unarchive</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:unarchive with include-filter </p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+         <p:output port="result"/>
+         
+         <p:unarchive>
+            <p:with-option name="include-filter" select="('\S+\.xml', '\S+\.html')"></p:with-option>
+            <p:with-input href="../documents/archive.zip" />
+         </p:unarchive>
+         <p:wrap-sequence wrapper="result" />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">Root element is not 'result'.</s:assert>
+               <s:assert test="count(result/*)=4">Element 'result' does not have exactly four children.</s:assert>
+               <s:assert test="count(result/doc)=2">Element 'result' does not have two children 'doc'.</s:assert>
+               <s:assert test="count(result/*:html)=2">Element 'result' does not have two children 'html'.</s:assert>
+           </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

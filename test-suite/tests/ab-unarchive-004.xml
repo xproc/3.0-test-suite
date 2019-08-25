@@ -1,0 +1,81 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:unarchive 004 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-08-25</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial tests for p:unarchive</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:unarchive: Option 'format' set to xs:QName('zip').</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+         <p:output port="result"/>
+         
+         <p:unarchive>
+            <p:with-option name="format" select="xs:QName('zip')" />
+            <p:with-input href="../documents/archive.zip" />
+         </p:unarchive>
+         <p:for-each>
+            <p:identity>
+               <p:with-input select="p:document-properties-document(.)" />
+            </p:identity>
+         </p:for-each>
+         
+         <p:wrap-sequence wrapper="result" />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"></s:ns>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">Root element is not 'result'.</s:assert>
+               <s:assert test="count(result/c:document-properties)=10">Element 'c:archive' does not have 10 children named 'c:document-properties'</s:assert>
+               
+               <s:assert test="result/c:document-properties/base-uri='doc.xml'">There is no entry for 'doc.xml'.</s:assert>
+               <s:assert test="result/c:document-properties[base-uri='doc.xml']/content-type='application/xml'">Content-type of 'doc.xml' is not 'application/xml'.</s:assert>
+            
+               <s:assert test="result/c:document-properties/base-uri='text.txt'">There is no entry for 'text.txt'.</s:assert>
+               <s:assert test="result/c:document-properties[base-uri='text.txt']/content-type='text/plain'">Content-type of 'text.text' is not 'text/plain'.</s:assert>
+
+               <s:assert test="result/c:document-properties/base-uri='json.json'">There is no entry for 'json.json'.</s:assert>
+               <s:assert test="result/c:document-properties[base-uri='json.json']/content-type='application/json'">Content-type of 'json.json' is not 'application/json'.</s:assert>
+
+               <s:assert test="result/c:document-properties/base-uri='html.html'">There is no entry for 'html.html'.</s:assert>
+               <s:assert test="result/c:document-properties[base-uri='html.html']/content-type='text/html'">Content-type of 'html.html' is not 'text/html'.</s:assert>
+ 
+               <s:assert test="result/c:document-properties/base-uri='fish.jpg'">There is no entry for 'fish.jpg'.</s:assert>
+               <s:assert test="result/c:document-properties[base-uri='fish.jpg']/content-type='image/jpeg' or
+                               result/c:document-properties[base-uri='fish.jpg']/content-type='application/octet-stream'">Content-type of 'fish.jpg' is not 'image/jpg' or 'application/octet-stream'.</s:assert>
+ 
+               <s:assert test="result/c:document-properties/base-uri='folder/doc.xml'">There is no entry for 'folder/doc.xml'.</s:assert>
+               <s:assert test="result/c:document-properties[base-uri='folder/doc.xml']/content-type='application/xml'">Content-type of 'folder/doc.xml' is not 'application/xml'.</s:assert>
+               
+               <s:assert test="result/c:document-properties/base-uri='folder/text.txt'">There is no entry for 'folder/text.txt'.</s:assert>
+               <s:assert test="result/c:document-properties[base-uri='folder/text.txt']/content-type='text/plain'">Content-type of 'folder/text.text' is not 'text/plain'.</s:assert>
+               
+               <s:assert test="result/c:document-properties/base-uri='folder/json.json'">There is no entry for 'folder/json.json'.</s:assert>
+               <s:assert test="result/c:document-properties[base-uri='folder/json.json']/content-type='application/json'">Content-type of 'folder/json.json' is not 'application/json'.</s:assert>
+               
+               <s:assert test="result/c:document-properties/base-uri='folder/html.html'">There is no entry for 'folder/html.html'.</s:assert>
+               <s:assert test="result/c:document-properties[base-uri='folder/html.html']/content-type='text/html'">Content-type of 'folder/html.html' is not 'text/html'.</s:assert>
+               
+               <s:assert test="result/c:document-properties/base-uri='folder/fish.jpg'">There is no entry for 'folder/fish.jpg'.</s:assert>
+               <s:assert test="result/c:document-properties[base-uri='folder/fish.jpg']/content-type='image/jpeg' or
+                  result/c:document-properties[base-uri='folder/fish.jpg']/content-type='application/octet-stream'">Content-type of 'folder/fish.jpg' is not 'image/jpg' or 'application/octet-stream'.</s:assert>
+               
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
