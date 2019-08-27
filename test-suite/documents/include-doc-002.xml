@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doc>
+    <p>A par not to be included.</p>
+    <p xml:id="xincluded-section">This para is included.</p>
+</doc>
