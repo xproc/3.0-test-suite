@@ -4,6 +4,15 @@
       <t:title>p:document 002</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-08-31</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Change target for http-request to xproc.org.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2018-04-03T16:57:32+02:00</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -23,17 +32,17 @@
 
             <p:identity>
                 <p:with-input>
-                    <p:document href="langspec.xml" xml:base="https://www.w3.org/TR/2010/REC-xproc-20100511/"/>
+                   <p:document href="about.html" xml:base="http://xproc.org/"/>
                 </p:with-input>
             </p:identity>
         </p:declare-step>
    </t:pipeline>
    <t:schematron>
       <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
-         <s:ns uri="http://docbook.org/ns/docbook" prefix="db"/>
+         <s:ns uri="http://www.w3.org/1999/xhtml" prefix="html"/>
          <s:pattern>
             <s:rule context="/">
-               <s:assert test="db:specification">The document root is not specification.</s:assert>
+               <s:assert test="html:html/html:head/html:title='About'">Element hmtl/head/title is not 'About'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
