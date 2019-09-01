@@ -1,0 +1,46 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:pipe 022 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-09-01</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Additional tests for p:pipe</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests pipe short cut on non-primary ports.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"  version="3.0">
+         <p:output port="result"/>        
+         <p:identity name="inner">
+            <p:with-input>
+               <doc />
+            </p:with-input>
+         </p:identity>
+         
+         <p:insert match="/root" position="first-child">
+            <p:with-input port="source">
+               <root />
+            </p:with-input>
+            <p:with-input port="insertion" pipe="@inner" />
+         </p:insert>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="root">Root element is root.</s:assert>
+               <s:assert test="root/doc">Root element does not have a child 'doc'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
