@@ -1,0 +1,53 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:archive 027 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-09-01</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:archive</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:archive: Adding entries to a newly created archive. No source, but just manifest, default method='deflated'.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+                      xmlns:c="http://www.w3.org/ns/xproc-step" version="3.0">
+            <p:output port="result"/>        
+
+         <p:archive  parameters="map{'method': 'deflated'}">
+               <p:with-input port="source"><p:empty /></p:with-input>
+               <p:with-input port="manifest">
+                  <c:archive>
+                     <c:entry name="one.xml" href="../documents/ab-doc.xml" />
+                     <c:entry name="two.xml" href="../documents/ab-doc2.xml" />
+                  </c:archive>
+               </p:with-input>
+               <p:with-input port="archive"><p:empty /></p:with-input>
+            </p:archive>
+ 
+            <p:archive-manifest />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns uri="http://www.w3.org/ns/xproc-step" prefix="c"/>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="c:archive">Root element is not c:archive.</s:assert>
+               <s:assert test="count(c:archive/c:entry)=2">Root element does not have two child 'c:entry'.</s:assert>
+               <s:assert test="c:archive/c:entry/@name='one.xml'">There is no c:entry for 'one.xml'.</s:assert>
+               <s:assert test="c:archive/c:entry/@name='two.xml'">There is no c:entry for 'two.xml'.</s:assert>
+               <s:assert test="c:archive/c:entry[@name='one.xml']/@method='deflated'">Method for c:entry[one.xml] is not 'deflated'.</s:assert>
+               <s:assert test="c:archive/c:entry[@name='two.xml']/@method='deflated'">Method for c:entry[two.xml] is not 'deflated'.</s:assert>            
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
