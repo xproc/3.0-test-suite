@@ -1,0 +1,41 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XC0080">
+   <t:info>
+      <t:title>p:archive 067 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-09-01</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:archive</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:archive: XC0080 must be raised number of archives do not match expected numbers.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+                      xmlns:c="http://www.w3.org/ns/xproc-step" version="3.0">
+            <p:output port="result"/>        
+
+            <p:archive format="zip" parameters="map{'command': 'create'}">
+               <p:with-input port="source">
+                  <p:inline document-properties="map{'base-uri' : 'http:///test/a'}">
+                     <doc />
+                  </p:inline>
+               </p:with-input>
+               <p:with-input port="manifest"><p:empty /></p:with-input>
+               <p:with-input port="archive">
+                  <p:document href="../documents/ab-doc.zip" />
+                  <p:document href="../documents/ab-doc.zip" />
+               </p:with-input>
+            </p:archive>
+         
+      </p:declare-step>
+   </t:pipeline>
+</t:test>

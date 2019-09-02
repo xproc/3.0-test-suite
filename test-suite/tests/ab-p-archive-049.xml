@@ -1,0 +1,41 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XC0084">
+   <t:info>
+      <t:title>p:archive 049 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-09-01</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:archive</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:archive: XC0084 must be raised if two document on port source have the same base-uri.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+                      xmlns:c="http://www.w3.org/ns/xproc-step" version="3.0">
+            <p:output port="result" pipe="report"/>        
+
+            <p:archive>
+               <p:with-input port="source">
+                  <p:inline document-properties="map{'base-uri' : 'http://test/uri'}">
+                        <doc-a />
+                  </p:inline>
+                  <p:inline document-properties="map{'base-uri' : 'http://test/uri'}">
+                     <doc-b />
+                  </p:inline>
+               </p:with-input>
+               <p:with-input port="manifest"><p:empty /></p:with-input>
+               <p:with-input port="archive"><p:empty/></p:with-input>
+            </p:archive>
+         
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
