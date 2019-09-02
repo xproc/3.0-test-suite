@@ -1,0 +1,55 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" features="archive-order">
+   <t:info>
+      <t:title>p:archive 047 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-09-01</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:archive</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:archive: Tests port 'report' reflects implcicit manifest .</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+                      xmlns:c="http://www.w3.org/ns/xproc-step" version="3.0">
+            <p:output port="result" pipe="report"/>        
+
+            <p:archive>
+               <p:with-input port="source">
+                  <p:inline document-properties="map{'base-uri' : 'http://test/one.xml'}">
+                        <doc-a />
+                  </p:inline>
+                  <p:inline document-properties="map{'base-uri' : 'http://test/three.xml'}">
+                     <doc-c />
+                  </p:inline>
+                  <p:inline document-properties="map{'base-uri' : 'http://test/two.xml'}">
+                     <doc-b />
+                  </p:inline>
+               </p:with-input>
+               <p:with-input port="manifest"><p:empty /></p:with-input>
+               <p:with-input port="archive"><p:empty/></p:with-input>
+            </p:archive>
+         
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step" />
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="c:archive">Root element is not 'c:archive'.</s:assert>
+               <s:assert test="c:archive/c:entry[@name='one.xml']">There is no entry for 'one.xml'.</s:assert>
+               <s:assert test="c:archive/c:entry[@name='two.xml']">There is no entry for 'two.xml'.</s:assert>
+               <s:assert test="c:archive/c:entry[@name='three.xml']">There is no entry for 'three.xml'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
