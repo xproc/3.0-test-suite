@@ -1,0 +1,51 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>JSON join 002(AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-09-06</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests for p:json-join</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests simple p:JSON-join with mixed entries: Tests default value of 'flatten-to-depth'.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:json-join flatten-to-depth="0">
+            <p:with-input>
+               <p:inline content-type="application/json">[ "A", 1]</p:inline>
+               <p:inline content-type="application/json">"B"</p:inline>
+               <p:inline content-type="application/json">{{ "key" : "value"}}</p:inline>
+            </p:with-input>
+         </p:json-join>
+         
+         <p:cast-content-type content-type="application/xml" />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:ns prefix="xpath" uri="http://www.w3.org/2005/xpath-functions"/>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="xpath:array">The document root is not 'array'.</s:assert>
+               <s:assert test="count(xpath:array/*) = 3">Root element does not have 3 children.</s:assert>
+               <s:assert test="xpath:array/*[1]/name()='array'">First child is not 'array'.</s:assert>
+               <s:assert test="xpath:array/*[1]/*[1]/name()='string'">First child in first array is not 'string'.</s:assert>
+               <s:assert test="xpath:array/*[1]/*[2]/name()='number'">Second child in first array is not 'number'.</s:assert>
+               <s:assert test="xpath:array/*[2]/name()='string'">Second child is not 'string'.</s:assert>
+               <s:assert test="xpath:array/*[3]/name()='map'">Third child is not 'map'.</s:assert>
+               <s:assert test="xpath:array/*[3]/*[1]/name()='string'">First entry in 'map' is not 'string'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
