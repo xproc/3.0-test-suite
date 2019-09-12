@@ -22,8 +22,9 @@
       <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:pattern</span><span class="stc">&gt;</span></span>
         <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:rule</span> <span class="attr"><span class="aname">context</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">/</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
           <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">ex:doc</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>The pipeline root is not “doc”.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
+          <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">count(ex:doc//ex:p)=2</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>The pipeline root does not have two descendants "ex:p".<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
         <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:rule</span><span class="etc">&gt;</span></span></span>
-        <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:rule</span> <span class="attr"><span class="aname">context</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">p</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
+        <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:rule</span> <span class="attr"><span class="aname">context</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">ex:p</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
           <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">.[@v='true']</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>The ‘p’ elements don’t have the correct ‘v’ attributes.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
         <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:rule</span><span class="etc">&gt;</span></span></span>
         <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:rule</span> <span class="attr"><span class="aname">context</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">*[not(self::ex:p)]</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
@@ -32,6 +33,11 @@
       <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:pattern</span><span class="etc">&gt;</span></span></span>
     <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:schema</span><span class="etc">&gt;</span></span></span>
   </code></pre></div><dl class="revision-history"><h2>Revision history</h2>
+      <dt>07 Sep 2019, 
+          <span class="name">Achim Berndzen</span>
+        </dt><dd><div class="description">
+          <p>Fix test so it fails if there is no ex:p.</p>
+        </div></dd>
       <dt>08 Jul 2019, 
           <span class="name">Norman Walsh</span>
         </dt><dd><div class="description">
