@@ -1,0 +1,47 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:xquery 003 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-09-13</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:xquery (Partly ported from 1.0)</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:xquery</p>
+   </t:description>
+   
+   <t:input port="source">
+      <document>
+         <title>Some Title</title>
+         <para>Some paragraph.</para>
+      </document>
+   </t:input>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:input port="source" />
+         <p:output port="result"/>
+         
+         <p:xquery>
+            <p:with-input port="query" href="../documents/xquery.xq" />
+         </p:xquery>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="title">Root element is not 'title'.</s:assert>
+               <s:assert test="title/text()='Some Title'">The text of element 'title' is not 'Some Title'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

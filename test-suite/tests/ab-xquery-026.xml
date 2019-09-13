@@ -1,0 +1,50 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" features="xquery_3_1">
+   <t:info>
+      <t:title>p:xquery 026 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-09-13</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:xquery (Partly ported from 1.0)</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:xquery: JSON array can be a result in XQuery 3.1</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         
+         <p:xquery>
+            <p:with-input port="source"><p:empty/></p:with-input>
+            <p:with-input port="query">
+               <p:inline content-type="text/plain">
+                  ['one', 'two']
+               </p:inline>
+            </p:with-input>
+         </p:xquery>
+         
+         <p:cast-content-type content-type="application/xml" />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="xpath" uri="http://www.w3.org/2005/xpath-functions"/>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="xpath:array">Root element is not 'xpath:array'.</s:assert>
+               <s:assert test="xpath:array/*[1]/name()='string'">First child is not 'string'.</s:assert>
+               <s:assert test="xpath:array/*[1]/text()='one'">First child is does not have text 'one'.</s:assert>
+               <s:assert test="xpath:array/*[2]/name()='string'">Second child is not 'string'.</s:assert>
+               <s:assert test="xpath:array/*[2]/text()='two'">Second child is does not have text 'two'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

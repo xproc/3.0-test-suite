@@ -1,0 +1,71 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:xquery 006 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-09-13</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:xquery (Partly ported from 1.0)</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:xquery</p>
+   </t:description>
+   
+   <t:input port="source">
+      <document>
+         <title>Some Title</title>
+         <para>Some paragraph.</para>
+      </document>
+   </t:input>
+   <t:input port="secondary">
+      <document>
+         <title>Some Other Title</title>
+         <para>Some other paragraph.</para>
+       </document>
+   </t:input>
+   
+   <t:pipeline>
+      <p:declare-step name="pipeline" xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:input port="source" />
+         <p:input port="secondary" />
+         <p:output port="result"/>
+         
+         <p:xquery>
+            <p:with-input port="source">
+               <p:pipe step="pipeline" port="source" />
+               <p:pipe step="pipeline" port="secondary" />
+            </p:with-input>
+            <p:with-input port="query">
+               <c:query xmlns:c="http://www.w3.org/ns/xproc-step">
+                  <![CDATA[<result>{{collection()}}</result>]]>
+               </c:query>        
+            </p:with-input>
+         </p:xquery>
+         
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">Root element is not 'result'.</s:assert>
+               <s:assert test="count(result/document)=2">Root element does not have 2 children 'document'.</s:assert>
+            </s:rule>
+            <s:rule context="document[1]">
+               <s:assert test="title/text()='Some Title'">Title of document[1] is not 'Some Title'.</s:assert>
+               <s:assert test="para/text()='Some paragraph.'">Para of document[1] is not 'Some paragraph.'</s:assert>
+            </s:rule>
+            <s:rule context="document[2]">
+               <s:assert test="title/text()='Some Other Title'">Title of document[2] is not 'Some Other Title'.</s:assert>
+               <s:assert test="para/text()='Some other paragraph.'">Para of document[2] is not 'Some other paragraph.'</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
