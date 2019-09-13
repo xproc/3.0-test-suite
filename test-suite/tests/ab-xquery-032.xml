@@ -1,0 +1,38 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+         expected="fail" code="err:XC0102" features="xquery_1_0">
+   <t:info>
+      <t:title>p:xquery 032 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-09-13</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:xquery (Partly ported from 1.0)</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:xquery: Maps can not be variable values in XQuery 1.0</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         
+         <p:xquery version="1.0" parameters="map{'var' : map{'key' : 'value'}}">
+            <p:with-input port="source"><p:empty/></p:with-input>
+            <p:with-input port="query">
+               <p:inline content-type="text/plain">
+                  declare namespace map="http://www.w3.org/2005/xpath-functions/map";
+                  declare variable $var external;
+                  &lt;result&gt;{{map:get($var, 'key')}}&lt;/result&gt;
+               </p:inline>
+            </p:with-input>
+         </p:xquery>
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
