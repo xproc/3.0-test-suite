@@ -3,6 +3,15 @@
     <t:title>Viewport 004</t:title>
     <t:revision-history>
       <t:revision>
+        <t:date>2019-09-14</t:date>
+        <t:author>
+          <t:name>Achim Berndzen</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Changed test by replacing static variable with static option.</p>
+        </t:description>
+      </t:revision>
+      <t:revision>
         <t:date>2019-09-07</t:date>
         <t:author>
           <t:name>Achim Berndzen</t:name>
@@ -31,7 +40,7 @@
     <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
                     xmlns:xs="http://www.w3.org/2001/XMLSchema"
                     xmlns:ex="http://example.com/sample" version="3.0">
-      <p:variable name="gi" static="true" select="xs:QName('ex:p')"/>
+      <p:option name="gi" static="true" select="xs:QName('ex:p')"/>
       <p:output port="result"/>
       <p:input port="source"/>
 
