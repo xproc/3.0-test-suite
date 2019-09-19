@@ -1,0 +1,59 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>viewport-010 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-09-18</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Additional tests for p:viewport (partly ported from 1.0)</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests that <code>p:viewport</code> contains a "result" output port.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         <p:viewport match="para" name="viewport">
+            <p:output port="tmp"/>
+            <p:with-input>
+               <doc>
+                  <para>Some paragraph.</para>
+                  <para>Some paragraph.</para>
+                  <para>Some paragraph.</para>
+                  <para>
+                     <para>Nested paragraph.</para>
+                  </para>
+               </doc>
+            </p:with-input>
+            <p:identity>
+               <p:with-input port="source">
+                  <p:inline><foo/></p:inline>
+               </p:with-input>
+            </p:identity>
+         </p:viewport>
+         
+         <p:identity>
+            <p:with-input port="source">
+               <p:pipe step="viewport" port="result"/>
+            </p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="doc">The document root is not 'doc'.</s:assert>
+               <s:assert test="count(doc/*)=4">The document root does not have four children.</s:assert>
+               <s:assert test="count(doc/foo)=4">The document root does not have four children 'foo'.</s:assert>
+            </s:rule>
+          </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
