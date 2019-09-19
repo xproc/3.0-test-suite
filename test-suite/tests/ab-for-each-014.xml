@@ -1,0 +1,60 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>AB for-each 014</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-09-18</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial test</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests output port with inline and pipe</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         
+         <p:identity>
+            <p:with-input>		
+               <doc1 />
+               <doc2 />
+               <doc3 />
+            </p:with-input>
+         </p:identity>
+         
+         <p:for-each>
+            <p:output port="result" sequence="true">
+               <p:inline><res /></p:inline>
+               <p:pipe step="id" />
+            </p:output>
+            <p:identity name="id"/>
+            <p:identity>
+               <p:with-input><foo /></p:with-input>
+            </p:identity>
+         </p:for-each>	
+         <p:wrap-sequence wrapper="result" />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The pipeline root is not result.</s:assert>
+               <s:assert test="count(result/*)=6">Wrapper does not have six children.</s:assert>
+               <s:assert test="result/*[1]/name()='res'">First child is not 'res'.</s:assert>
+               <s:assert test="result/*[2]/name()='doc1'">Second child is not 'doc1'.</s:assert>
+               <s:assert test="result/*[3]/name()='res'">Third child is not 'res'.</s:assert>
+               <s:assert test="result/*[4]/name()='doc2'">Forth child is not 'doc2'.</s:assert>
+               <s:assert test="result/*[5]/name()='res'">fifth child is not 'res'.</s:assert>
+               <s:assert test="result/*[6]/name()='doc3'">Sixth child is not 'doc3'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

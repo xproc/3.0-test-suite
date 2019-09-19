@@ -1,0 +1,57 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>viewport-017 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-09-18</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Additional tests for p:viewport (partly ported from 1.0)</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Test <code>p:viewport</code> with  matched comments/processing instructions before/after document element.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         <p:viewport match="comment() | processing-instruction()">
+            <p:with-input>
+               <p:inline>
+                  <!-- replace here -->
+                  <?target replace-here?>
+                  <doc>
+                     <para>Some para.</para>
+                  </doc>
+                  <?target replace-here?>
+                  <!-- replace here -->
+               </p:inline>
+            </p:with-input>    
+            <p:identity>
+               <p:with-input port="source">
+                  <replaced />
+               </p:with-input>
+            </p:identity>
+         </p:viewport>
+         <p:wrap-sequence wrapper="result" />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The document root is not 'result'.</s:assert>
+               <s:assert test="result/*[1]/name()='replaced'">First child of result is not 'replaced'.</s:assert>
+               <s:assert test="result/*[2]/name()='replaced'">Second child of result is not 'replaced'.</s:assert>
+               <s:assert test="result/*[3]/name()='doc'">Third child of result is not 'doc'.</s:assert>               
+               <s:assert test="result/*[4]/name()='replaced'">Fourth child of result is not 'replaced'.</s:assert>
+               <s:assert test="result/*[5]/name()='replaced'">Fifth child of result is not 'replaced'.</s:assert>
+            </s:rule>
+          </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

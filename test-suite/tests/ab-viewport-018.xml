@@ -1,0 +1,47 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>viewport-018 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-09-18</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Additional tests for p:viewport (partly ported from 1.0)</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Test <code>p:viewport</code> with  matched document node replace by text document.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         <p:viewport match="/">
+            <p:with-input>
+               <doc>
+                  <para>Some para.</para>
+               </doc>
+            </p:with-input>    
+            <p:identity>
+               <p:with-input port="source">
+                  <p:inline content-type="text/plain">Some new text.</p:inline>
+               </p:with-input>
+            </p:identity>
+         </p:viewport>
+         <p:wrap-sequence wrapper="result" />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The document root is not 'result'.</s:assert>
+               <s:assert test="result/text()='Some new text.'">Element 'result' does not contain 'Some new text.'</s:assert>
+            </s:rule>
+          </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

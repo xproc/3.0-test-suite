@@ -1,0 +1,54 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>viewport-001 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-09-18</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Additional tests for p:viewport (partly ported from 1.0)</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:viewport</p>
+   </t:description>
+   <t:input port="source">
+      <doc>
+         <para>Some paragraph.</para>
+         <para>Some paragraph.</para>
+         <para>Some paragraph.</para>
+         <para>
+            <para>Nested paragraph.</para>
+         </para>
+      </doc>
+   </t:input>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:input port="source" />
+         <p:output port="result"/>
+         <p:viewport match="para">
+            <p:identity>
+               <p:with-input><foo /></p:with-input>
+            </p:identity>
+         </p:viewport>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="doc">The document root is not 'doc'.</s:assert>
+               <s:assert test="count(doc/*)=4">Document root does not have exactly four children.</s:assert>
+               <s:assert test="count(doc/foo)=4">Document root does not have exactly four children named 'foo'.</s:assert>
+            </s:rule>
+            <s:rule context="/doc/foo">
+               <s:assert test="count(./child::node())=0">No element 'foo' should have a child.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
