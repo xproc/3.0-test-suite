@@ -1,0 +1,46 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>viewport-020 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-09-18</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Additional tests for p:viewport (partly ported from 1.0)</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Test <code>p:viewport</code> with two documents on the source port.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         <p:viewport match="/*">
+            <p:with-input>
+               <doc1 />
+               <doc2 />
+            </p:with-input>
+            <p:add-attribute match="/*" attribute-name="att" attribute-value="val" />
+         </p:viewport>
+         <p:wrap-sequence wrapper="result" />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The document root is not 'result'.</s:assert>
+               <s:assert test="result/*[1]/name()='doc1'">First child of 'result' is not 'doc1'.</s:assert>
+               <s:assert test="result/*[2]/name()='doc2'">Second child of 'result' is not 'doc2'.</s:assert>
+            </s:rule>
+            <s:rule context="/result/*">
+               <s:assert test="./@att='val'">Element does not have attribute @att with 'val'.</s:assert>
+            </s:rule>
+          </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
