@@ -3,6 +3,15 @@
       <t:title>AB-xslt-015</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-09-19</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed description of test: default collection is not empty, but undefined.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-08-04</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -14,7 +23,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests default collection is empty for apply-template invocation (3.0)</p>
+      <p>Tests default collection is undefined for apply-template invocation (3.0)</p>
    </t:description>
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
