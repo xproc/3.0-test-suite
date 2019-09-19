@@ -11,7 +11,6 @@
                <p>Changed description of test: default collection is not empty, but undefined.</p>
             </t:description>
          </t:revision>
-      </t:revision-history>
          <t:revision>
             <t:date>2019-08-04</t:date>
             <t:author>
