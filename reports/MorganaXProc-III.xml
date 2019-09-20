@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="XProc Test Suite"
            tests="1400"
-           errors="5"
+           errors="4"
            failures="0"
            skipped="0"
-           timestamp="2019-09-19T18:37:04">
+           timestamp="2019-09-20T15:20:24">
    <properties>
       <property name="processor" value="MorganaXProc-III"/>
-      <property name="version" value="0.8.23-alpha"/>
+      <property name="version" value="0.8.24-alpha"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.0"/>
@@ -104,18 +104,7 @@
    <testcase name="ab-choose-035.xml"/>
    <testcase name="ab-choose-036.xml"/>
    <testcase name="ab-choose-037.xml"/>
-   <testcase name="ab-choose-038.xml">
-      <failure>&lt;?xml version="1.0" encoding="UTF-8"?&gt; &lt;failure/&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-      &lt;svrl:schematron-output title="" schemaVersion="" xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
-      &lt;!--       --&gt;
-      &lt;svrl:active-pattern document="file:/Users/berndzen/Documents/GIT/3.0-test-suite/test-suite/tests/ab-choose-038.xml"/&gt;
-      &lt;svrl:fired-rule context="/"/&gt;
-      &lt;svrl:failed-assert test="/success" location="/failure"&gt;
-      &lt;svrl:text&gt;Root element is not 'success'.&lt;/svrl:text&gt;
-      &lt;/svrl:failed-assert&gt;
-      &lt;/svrl:schematron-output&gt;
-      </failure>
-   </testcase>
+   <testcase name="ab-choose-038.xml"/>
    <testcase name="ab-choose-039.xml"/>
    <testcase name="ab-choose-040.xml"/>
    <testcase name="ab-choose-041.xml"/>
