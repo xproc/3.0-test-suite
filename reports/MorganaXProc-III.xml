@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="XProc Test Suite"
            tests="1400"
-           errors="4"
+           errors="0"
            failures="0"
            skipped="0"
-           timestamp="2019-09-20T15:20:24">
+           timestamp="2019-09-27T14:40:30">
    <properties>
       <property name="processor" value="MorganaXProc-III"/>
-      <property name="version" value="0.8.24-alpha"/>
+      <property name="version" value="0.8.25-alpha"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.0"/>
@@ -1369,74 +1369,10 @@
    <testcase name="nw-import-001.xml"/>
    <testcase name="nw-inline-expand-text-001.xml"/>
    <testcase name="nw-inline-expand-text-002.xml"/>
-   <testcase name="nw-inline-expand-text-003.xml">
-      <failure>&lt;?xml version="1.0" encoding="UTF-8"?&gt; &lt;doc&gt;{1 + 2}=&lt;answer p:inline-expand-text="true" xmlns:p="http://www.w3.org/ns/xproc"&gt;{ 1 + 2 }&lt;/answer&gt;&lt;/doc&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-      &lt;svrl:schematron-output title="" schemaVersion="" xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:p="http://www.w3.org/ns/xproc"&gt;
-      &lt;!--       --&gt;
-      &lt;svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/xproc" prefix="p"/&gt;
-      &lt;svrl:active-pattern document="file:///Users/berndzen/Documents/GIT/3.0-test-suite/test-suite/tests/nw-inline-expand-text-003.xml"/&gt;
-      &lt;svrl:fired-rule context="/*"/&gt;
-      &lt;svrl:failed-assert test="answer='3'" location="/doc"&gt;
-      &lt;svrl:text&gt;The answer is not 3.&lt;/svrl:text&gt;
-      &lt;/svrl:failed-assert&gt;
-      &lt;svrl:fired-rule context="answer"/&gt;
-      &lt;svrl:failed-assert test="not(@p:inline-expand-text)" location="/doc/answer"&gt;
-      &lt;svrl:text&gt;The expand text attribute has not been removed.&lt;/svrl:text&gt;
-      &lt;/svrl:failed-assert&gt;
-      &lt;/svrl:schematron-output&gt;
-      </failure>
-   </testcase>
-   <testcase name="nw-inline-expand-text-004.xml">
-      <failure>&lt;?xml version="1.0" encoding="UTF-8"?&gt; &lt;doc&gt;3=&lt;answer p:inline-expand-text="false" xmlns:p="http://www.w3.org/ns/xproc"&gt;3&lt;/answer&gt;&lt;/doc&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-      &lt;svrl:schematron-output title="" schemaVersion="" xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:p="http://www.w3.org/ns/xproc"&gt;
-      &lt;!--       --&gt;
-      &lt;svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/xproc" prefix="p"/&gt;
-      &lt;svrl:active-pattern document="file:///Users/berndzen/Documents/GIT/3.0-test-suite/test-suite/tests/nw-inline-expand-text-004.xml"/&gt;
-      &lt;svrl:fired-rule context="/*"/&gt;
-      &lt;svrl:fired-rule context="answer"/&gt;
-      &lt;svrl:failed-assert test="not(@p:inline-expand-text)" location="/doc/answer"&gt;
-      &lt;svrl:text&gt;The expand text attribute has not been removed.&lt;/svrl:text&gt;
-      &lt;/svrl:failed-assert&gt;
-      &lt;svrl:failed-assert test="contains(., '1 + 2')" location="/doc/answer"&gt;
-      &lt;svrl:text&gt;TVT has been expanded.&lt;/svrl:text&gt;
-      &lt;/svrl:failed-assert&gt;
-      &lt;/svrl:schematron-output&gt;
-      </failure>
-   </testcase>
-   <testcase name="nw-inline-expand-text-005.xml">
-      <failure>&lt;?xml version="1.0" encoding="UTF-8"?&gt; &lt;p:doc xmlns:p="http://www.w3.org/ns/xproc"&gt;{1 + 2}=&lt;p:answer inline-expand-text="true"&gt;{ 1 + 2 }&lt;/p:answer&gt;&lt;/p:doc&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-      &lt;svrl:schematron-output title="" schemaVersion="" xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:p="http://www.w3.org/ns/xproc"&gt;
-      &lt;!--       --&gt;
-      &lt;svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/xproc" prefix="p"/&gt;
-      &lt;svrl:active-pattern document="file:///Users/berndzen/Documents/GIT/3.0-test-suite/test-suite/tests/nw-inline-expand-text-005.xml"/&gt;
-      &lt;svrl:fired-rule context="/*"/&gt;
-      &lt;svrl:failed-assert test="p:answer='3'" location="/*[local-name()='doc']"&gt;
-      &lt;svrl:text&gt;The answer is not 3.&lt;/svrl:text&gt;
-      &lt;/svrl:failed-assert&gt;
-      &lt;svrl:fired-rule context="p:answer"/&gt;
-      &lt;svrl:failed-assert test="not(@inline-expand-text)" location="/*[local-name()='doc']/*[local-name()='answer']"&gt;
-      &lt;svrl:text&gt;The expand text attribute has not been removed.&lt;/svrl:text&gt;
-      &lt;/svrl:failed-assert&gt;
-      &lt;/svrl:schematron-output&gt;
-      </failure>
-   </testcase>
-   <testcase name="nw-inline-expand-text-006.xml">
-      <failure>&lt;?xml version="1.0" encoding="UTF-8"?&gt; &lt;p:doc xmlns:p="http://www.w3.org/ns/xproc"&gt;3=&lt;p:answer inline-expand-text="false"&gt;3&lt;/p:answer&gt;&lt;/p:doc&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-      &lt;svrl:schematron-output title="" schemaVersion="" xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:p="http://www.w3.org/ns/xproc"&gt;
-      &lt;!--       --&gt;
-      &lt;svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/xproc" prefix="p"/&gt;
-      &lt;svrl:active-pattern document="file:///Users/berndzen/Documents/GIT/3.0-test-suite/test-suite/tests/nw-inline-expand-text-006.xml"/&gt;
-      &lt;svrl:fired-rule context="/*"/&gt;
-      &lt;svrl:fired-rule context="p:answer"/&gt;
-      &lt;svrl:failed-assert test="not(@inline-expand-text)" location="/*[local-name()='doc']/*[local-name()='answer']"&gt;
-      &lt;svrl:text&gt;The expand text attribute has not been removed.&lt;/svrl:text&gt;
-      &lt;/svrl:failed-assert&gt;
-      &lt;svrl:failed-assert test="contains(., '1 + 2')" location="/*[local-name()='doc']/*[local-name()='answer']"&gt;
-      &lt;svrl:text&gt;TVT has been expanded.&lt;/svrl:text&gt;
-      &lt;/svrl:failed-assert&gt;
-      &lt;/svrl:schematron-output&gt;
-      </failure>
-   </testcase>
+   <testcase name="nw-inline-expand-text-003.xml"/>
+   <testcase name="nw-inline-expand-text-004.xml"/>
+   <testcase name="nw-inline-expand-text-005.xml"/>
+   <testcase name="nw-inline-expand-text-006.xml"/>
    <testcase name="nw-inline-expand-text-007.xml"/>
    <testcase name="nw-option-value-001.xml"/>
    <testcase name="nw-optional-port-001.xml"/>
