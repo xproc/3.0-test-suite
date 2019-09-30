@@ -3,6 +3,15 @@
       <t:title>p:xquery 024 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-09-30</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added explicit request for XQuery 3.1</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-09-13</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -21,7 +30,7 @@
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
          <p:output port="result"/>
          
-         <p:xquery parameters="map{'array' : ['one', 'two']}">
+         <p:xquery parameters="map{'array' : ['one', 'two']}" version="3.1">
             <p:with-input port="source"><p:empty/></p:with-input>
             <p:with-input port="query">
                <p:inline content-type="text/plain">
