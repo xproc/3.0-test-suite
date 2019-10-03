@@ -5,7 +5,7 @@
       <span class="pelement"><span class="stag"><span class="sto">&lt;</span><span class="gi"><a href="http://spec.xproc.org/master/head/xproc/#p.declare-step">p:declare-step</a></span> <span class="attr nsattr"><span class="aname">xmlns:p</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">http://www.w3.org/ns/xproc</span><span class="aq">"</span></span> <span class="attr"><span class="aname">version</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">3.0</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
          <span class="pelement"><span class="stag"><span class="sto">&lt;</span><span class="gi"><a href="http://spec.xproc.org/master/head/xproc/#p.output">p:output</a></span> <span class="attr"><span class="aname">port</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result</span><span class="aq">"</span></span><span class="stc">/&gt;</span></span></span>
             
-         <span class="pelement"><span class="stag"><span class="sto">&lt;</span><span class="gi"><a href="http://spec.xproc.org/master/head/steps/#c.set-properties">p:set-properties</a></span> <span class="attr"><span class="aname">properties</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">map{'key':'value'}</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
+         <span class="pelement"><span class="stag"><span class="sto">&lt;</span><span class="gi"><a href="http://spec.xproc.org/master/head/steps/#c.set-properties">p:set-properties</a></span> <span class="attr"><span class="aname">properties</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">map{'key':'value'}</span><span class="aq">"</span></span> <span class="attr"><span class="aname">merge</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">false</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
             <span class="pelement"><span class="stag"><span class="sto">&lt;</span><span class="gi"><a href="http://spec.xproc.org/master/head/xproc/#p.with-input">p:with-input</a></span><span class="stc">&gt;</span></span>
                <span class="pelement"><span class="stag"><span class="sto">&lt;</span><span class="gi"><a href="http://spec.xproc.org/master/head/xproc/#p.inline">p:inline</a></span> <span class="attr"><span class="aname">content-type</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">application/json</span><span class="aq">"</span></span> <span class="attr"><span class="aname">document-properties</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">map{'another':'value'}</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>"text"<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:inline</span><span class="etc">&gt;</span></span></span>
             <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:with-input</span><span class="etc">&gt;</span></span></span>
@@ -29,6 +29,11 @@
          <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:pattern</span><span class="etc">&gt;</span></span></span>
       <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:schema</span><span class="etc">&gt;</span></span></span>
    </code></pre></div><dl class="revision-history"><h2>Revision history</h2>
+         <dt>29 Sep 2019, 
+               <span class="name">Achim Berndzen</span>
+            </dt><dd><div class="description">
+               <p>Changed test because merge is now true by default.</p>
+            </div></dd>
          <dt>19 May 2019, 
                <span class="name">Achim Berndzen</span>
             </dt><dd><div class="description">

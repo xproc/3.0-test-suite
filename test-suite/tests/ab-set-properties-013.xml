@@ -3,6 +3,15 @@
       <t:title>p:set-properties-013 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-09-29</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test because merge is now true by default.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-05-19</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -21,7 +30,7 @@
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
          <p:output port="result"/>
             
-         <p:set-properties properties="map{'key':'value'}">
+         <p:set-properties properties="map{'key':'value'}" merge="false">
             <p:with-input>
                <p:inline content-type="application/json">"text"</p:inline>
             </p:with-input>
