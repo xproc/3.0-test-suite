@@ -1,0 +1,32 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+   xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XD0070">
+   <t:info>
+      <t:title>p:set-properties-022 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-10-03</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Additional tests for p:set-properties</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests XD0070 is raised if value of 'serialization' cannot be forced into map(xs:QName, item()*).</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+            
+         <p:set-properties properties="map{'serialization' : map{'5' : 'error'} }" merge="true">
+            <p:with-input>
+               <p:inline><doc /></p:inline>
+            </p:with-input>
+         </p:set-properties>
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
