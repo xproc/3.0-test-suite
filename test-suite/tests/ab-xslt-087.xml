@@ -1,0 +1,50 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" features="xslt-1 xslt-1-output-base-uri">
+   <t:info>
+      <t:title>AB-xslt-087</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-10-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests for p:xslt with version="1.0".</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests output base uri.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         <p:xslt version="1.0" output-base-uri="http://base.uri/doc.xml">
+            <p:with-input><doc /></p:with-input>
+            <p:with-input port="stylesheet">       
+               <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                  <xsl:template match="doc">
+                     <xsl:copy-of select="." />
+                  </xsl:template>
+               </xsl:stylesheet>
+            </p:with-input>
+         </p:xslt>
+         <p:identity>
+            <p:with-input>
+               <uri>{p:document-property(., 'base-uri')}</uri>
+            </p:with-input>
+         </p:identity>         
+         
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="/uri">The document root is not 'uri'.</s:assert>
+               <s:assert test="/uri/text()='http://base.uri/doc.xml'">Text child of uri is not 'http://base.uri/doc.xml'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
