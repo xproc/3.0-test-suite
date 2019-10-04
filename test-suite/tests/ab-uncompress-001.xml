@@ -1,0 +1,39 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>AB-uncompress-001</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-10-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial tests for p:compress/p:uncompress</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests uncompress, default format</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         
+         <p:uncompress content-type="application/xml" >
+            <p:with-input href="../documents/simpledoc.gz" />
+         </p:uncompress>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="/doc">The document root is not 'doc'.</s:assert>
+               <s:assert test="/doc/content">Element 'doc' does not have a child 'content'.</s:assert>
+               <s:assert test="/doc/content/text()='I am a simple document.'">Text child of content is not 'I am a simple document'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
