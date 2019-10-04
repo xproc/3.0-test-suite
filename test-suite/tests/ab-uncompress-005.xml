@@ -1,0 +1,46 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>AB-uncompress-005</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-10-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial tests for p:compress/p:uncompress</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests document-properties uncompress result.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         
+         <p:uncompress content-type="text/plain">
+            <p:with-input>
+               <p:document href="../documents/simpletext.gz" document-properties="map{'additional' : 'bogus'}"/>
+            </p:with-input>
+         </p:uncompress>
+         <p:identity>
+            <p:with-input select="p:document-properties-document(.)" />
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step" />
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="c:document-properties">The document root is not 'c:document-properties'.</s:assert>
+               <s:assert test="c:document-properties/content-type='text/plain'">Property 'content-type' is not 'text/plain'.</s:assert>
+               <s:assert test="ends-with(c:document-properties/base-uri,'simpletext.gz')">Property 'base-uri' does not end with 'simpletext.gz'.</s:assert>
+               <s:assert test="c:document-properties/additional/text()='bogus'">Property 'additional' is not 'bogus'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

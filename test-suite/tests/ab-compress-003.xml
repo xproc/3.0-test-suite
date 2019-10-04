@@ -1,0 +1,50 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>AB-compress-003</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-10-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial tests for p:compress/p:uncompress</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests compress got document-properties of result right.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         <p:compress format="gzip">
+            <p:with-input>
+               <p:inline document-properties="map{'base-uri' : 'http://base.uri/doc',
+                                                  'additional' : 'bogus',
+                                                  'serialization' : map{'indent' : true()}
+                                                  }">
+                  <doc />
+               </p:inline>
+            </p:with-input>
+         </p:compress>
+         <p:identity>
+            <p:with-input select="p:document-properties-document(.)" />
+         </p:identity>        
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="c:document-properties">The document root is not 'c:document-properties'.</s:assert>
+               <s:assert test="c:document-properties/base-uri='http://base.uri/doc'">Property 'base-uri' is not 'http://base.uri/doc'.</s:assert>
+               <s:assert test="c:document-properties/additional='bogus'">Property 'additional' is not 'bogus'.</s:assert>
+               <s:assert test="not(c:document-properties/serialization)">There should be no property 'serialization'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

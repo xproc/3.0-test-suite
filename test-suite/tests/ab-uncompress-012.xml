@@ -1,0 +1,31 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        code="err:XC0201" expected="fail">
+   <t:info>
+      <t:title>AB-uncompress-012</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-10-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial tests for p:compress/p:uncompress</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests uncompress raises error if @content-type does not fit document (xml as json).</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         
+         <p:uncompress content-type="application/json">
+            <p:with-input href="../documents/simpledoc.gz" />
+         </p:uncompress>
+        
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
