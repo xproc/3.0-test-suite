@@ -1,0 +1,50 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" features="xslt-2">
+   <t:info>
+      <t:title>AB-xslt-063</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-10-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests for p:xslt with version="2.0".</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests all document on port source are collection.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         <p:xslt version="2.0">
+            <p:with-input>
+               <doc1 />
+               <doc2 />
+               <doc3 />
+            </p:with-input>
+            <p:with-input port="stylesheet">       
+               <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                  <xsl:template match="doc1">
+                     <result><xsl:copy-of select="collection()" /></result>
+                  </xsl:template>
+               </xsl:stylesheet>
+            </p:with-input>
+         </p:xslt>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="/result">The document root is not 'result'.</s:assert>
+               <s:assert test="/result/doc1">Root element does not have child 'doc1'.</s:assert>               
+               <s:assert test="/result/doc2">Root element does not have child 'doc2'.</s:assert>
+               <s:assert test="/result/doc3">Root element does not have child 'doc3'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
