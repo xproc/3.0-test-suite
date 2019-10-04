@@ -1,0 +1,63 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" features="xslt-2">
+   <t:info>
+      <t:title>AB-xslt-071</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-10-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests for p:xslt with version="2.0".</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests output-base-uri via uri of stylesheet.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         <p:xslt version="2.0" template-name="template">
+            <p:with-input>
+               <p:empty />
+            </p:with-input>
+            <p:with-input port="stylesheet">
+               <p:inline document-properties="map{'base-uri' : 'http://base.uri/doc.xml'}">
+                  <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                     <xsl:template name="template">
+                        <doc />
+                        <xsl:result-document href="one.xml"><secondary-1 /></xsl:result-document>
+                        <xsl:result-document href="two.xml"><secondary-2 /></xsl:result-document>
+                     </xsl:template>
+                  </xsl:stylesheet>
+               </p:inline>
+            </p:with-input>
+         </p:xslt>
+         
+         <p:for-each>
+            <p:with-input pipe="result secondary" />
+            <p:identity>
+               <p:with-input>
+                  <uri>{p:document-property(., 'base-uri')}</uri>
+               </p:with-input>
+            </p:identity>
+         </p:for-each>
+         
+         <p:wrap-sequence wrapper="result" />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="/result">The document root is not 'result'.</s:assert>
+               <s:assert test="/result/uri[. ='http://base.uri/doc.xml']">There is no entry for 'http://base.uri/doc.xml'.</s:assert>
+               <s:assert test="/result/uri[. ='http://base.uri/one.xml']">There is no entry for 'http://base.uri/one.xml'.</s:assert>
+               <s:assert test="/result/uri[. ='http://base.uri/two.xml']">There is no entry for 'http://base.uri/two.xml'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
