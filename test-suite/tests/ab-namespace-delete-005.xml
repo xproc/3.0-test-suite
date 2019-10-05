@@ -1,0 +1,55 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>AB-namespace-delete-005</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-10-05</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial tests for p:namespace-delete</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Removing unused namespace does not change anything.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         
+         <p:namespace-delete prefixes="pre" xmlns:pre="http://not-used">
+            <p:with-input>
+               <dummy:doc xmlns:dummy="http://dummy">
+                  <dummy:section dummy:id="one">
+                     <dummy:par>This is a para.</dummy:par>
+                     <dummy:par>This is another para.</dummy:par>
+                  </dummy:section>
+                  <dummy:section dummy:id="two">
+                     <dummy:par>First para.</dummy:par>
+                     <dummy:par>Second para.</dummy:par>
+                  </dummy:section>
+               </dummy:doc>
+            </p:with-input>
+         </p:namespace-delete>
+         
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="dummy" uri="http://dummy" />
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="/dummy:doc">The document root is not 'doc'.</s:assert>
+               <s:assert test="count(/dummy:doc/dummy:section)='2'">Element doc does not have two children 'section'.</s:assert>
+            </s:rule>
+            <s:rule context="/dummy:doc/dummy:section">
+               <s:assert test="./@dummy:id">Section does not have an attribute 'id'.</s:assert>
+               <s:assert test="count(dummy:par)=2">Section does not have two paragraphs.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

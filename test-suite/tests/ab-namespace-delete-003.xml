@@ -1,0 +1,55 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>AB-namespace-delete-003</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-10-05</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial tests for p:namespace-delete</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Removing default namespace does not harm elements/attribute in other namespace.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         
+         <p:namespace-delete prefixes="pre" xmlns:pre="http://dummy">
+            <p:with-input>
+               <doc xmlns="http://dummy" xmlns:other="http://other">
+                  <section other:id="one">
+                     <other:par>This is a para.</other:par>
+                     <other:par>This is another para.</other:par>
+                  </section>
+                  <section other:id="two">
+                     <other:par>First para.</other:par>
+                     <other:par>Second para.</other:par>
+                  </section>
+               </doc>
+            </p:with-input>
+         </p:namespace-delete>
+         
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="other" uri="http://other" />
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="/doc">The document root is not 'doc'.</s:assert>
+               <s:assert test="count(/doc/section)='2'">Element doc does not have two children 'section'.</s:assert>
+            </s:rule>
+            <s:rule context="/doc/section">
+               <s:assert test="./@other:id">Section does not have an attribute 'id'.</s:assert>
+               <s:assert test="count(other:par)=2">Section does not have two paragraphs.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
