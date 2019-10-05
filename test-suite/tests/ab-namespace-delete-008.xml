@@ -1,0 +1,46 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>AB-namespace-delete-008</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-10-05</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial tests for p:namespace-delete</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Removing namespace from att is ok as long as other att is in a namespace.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         
+         <p:namespace-delete prefixes="pre" xmlns:pre="http://att">
+            <p:with-input>
+               <document xmlns:att="http://att" xmlns:att1="http://att1">
+                  <element att:att="3" att1:att="4" />
+               </document>
+            </p:with-input>
+         </p:namespace-delete>
+         
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="ns" uri="http://att1" />
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="/document">The document root is not 'document'.</s:assert>
+               <s:assert test="/document/element">Element 'document' does not have child element 'element'.</s:assert>
+               <s:assert test="/document/element/@att='3'">Element does not have attribute 'att' with '3'.</s:assert>
+               <s:assert test="/document/element/@ns:att='4'">Element does not have attribute 'att' with '3'.</s:assert>               
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
