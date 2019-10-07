@@ -1,0 +1,57 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>JSON join 010(AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-10-07</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests for p:json-join</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests simple p:JSON-join with doc, text, and json entries.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:json-join>
+            <p:with-input>
+               <p:inline><node /></p:inline>
+               <p:inline content-type="text/plain" >This is a text.</p:inline>
+               <p:inline content-type="application/json" expand-text="false">{"json" : "value"}</p:inline>
+            </p:with-input>
+         </p:json-join>
+         
+         <p:variable name="key" select="map:keys(array:get(., 3))[1]" />
+         
+         <p:identity>
+            <p:with-input>
+               <result>
+                  <one>{array:get(.,1)}</one>
+                  <two>{array:get(.,2)}</two>
+                  <three key="{$key}">{map:get(array:get(., 3), $key)}</three>
+               </result>
+            </p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The document node is not 'result'.</s:assert>
+               <s:assert test="result/one/node">Element 'one' does not have child 'node'.</s:assert>
+               <s:assert test="result/two/text()='This is a text.'">Text child of element 'two' is not 'This is a text.'</s:assert>
+               <s:assert test="result/three/@key='json'">Attribute 'key' of element 'three' is not 'json'.</s:assert>
+               <s:assert test="result/three/text()='value'">Text child of element 'three' is not 'value'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
