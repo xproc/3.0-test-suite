@@ -56,7 +56,7 @@
             <s:rule context="/">
                <s:assert test="/wrapper">The document root is not 'wrapper'.</s:assert>
                <s:assert test="/wrapper/result[1]/text()='http://xproc-test/xslt/one.xml'">Element 'result[1]' does not have a text child 'http://xproc-test/xslt/one.xml'.</s:assert>
-               <s:assert test="/wrapper/result[2]/text()='http://xproc-test/xslt/two.xml'">Element 'result[2]' does not have a text child 'http://xproc-test/two/one.xml'.</s:assert>               
+               <s:assert test="/wrapper/result[2]/text()='http://xproc-test/xslt/two.xml'">Element 'result[2]' does not have a text child 'http://xproc-test/xslt/two.xml'.</s:assert>               
             </s:rule>
          </s:pattern>
       </s:schema>
