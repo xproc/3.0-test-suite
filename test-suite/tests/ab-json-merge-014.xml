@@ -1,0 +1,56 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>JSON merge 014(AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-10-13</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests for p:json-merge</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Joining map and JSON string with conflict in keys, explicit strategy combine.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema"
+         exclude-inline-prefixes="xs">
+         <p:output port="result" />
+         
+         <p:json-merge key="'key1'" duplicates='combine'>
+            <p:with-input expand-text="false">
+               <p:inline content-type="application/json">{"key1" : "value"}</p:inline>
+               <p:inline content-type="application/json">"one"</p:inline>
+            </p:with-input>
+         </p:json-merge>         
+         
+         <p:variable name="seq" as="xs:string+" select=".?key1" />
+         
+         <p:identity>
+            <p:with-input>
+               <result>
+                  <value1>{$seq[1]}</value1>
+                  <value2>{$seq[2]}</value2>
+               </result>
+            </p:with-input>
+         </p:identity>
+         
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The document node is not 'result'.</s:assert>
+               <s:assert test="result/value1 = 'value'">First value is not 'value'.</s:assert>
+               <s:assert test="result/value2 = 'one'">Second value is not 'one'.</s:assert>
+             </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
