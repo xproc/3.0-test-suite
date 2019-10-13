@@ -1,0 +1,45 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>JSON merge 023(AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-10-13</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests for p:json-merge</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests that the string value of a node result is taken as key.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:json-merge key="concat('label-',.)">
+            <p:with-input>
+               <p:inline><doc>1</doc></p:inline>
+               <p:inline><doc>2</doc></p:inline>
+            </p:with-input>
+         </p:json-merge>         
+         
+         <p:cast-content-type content-type="application/xml" />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:ns prefix="fn" uri="http://www.w3.org/2005/xpath-functions" />
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="fn:map">The document node is not 'fn:map'.</s:assert>
+               <s:assert test="fn:map/fn:string/@key='label-1'">No element with @key = 'label-1' found.</s:assert>
+               <s:assert test="fn:map/fn:string/@key='label-2'">No element with @key = 'label-2' found.</s:assert>
+             </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

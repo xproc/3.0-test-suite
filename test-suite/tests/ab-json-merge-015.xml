@@ -1,0 +1,34 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+   expected="fail" code="err:XC0106">
+   <t:info>
+      <t:title>JSON merge 015(AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-10-13</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests for p:json-merge</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Joining map and JSON string with conflict in keys, explicit strategy reject.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:json-merge key="'key1'" duplicates='reject'>
+            <p:with-input expand-text="false">
+               <p:inline content-type="application/json">{"key1" : "value"}</p:inline>
+               <p:inline content-type="application/json">"one"</p:inline>
+            </p:with-input>
+         </p:json-merge>         
+         
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
