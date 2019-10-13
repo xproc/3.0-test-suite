@@ -1,0 +1,46 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>JSON merge 011(AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-10-13</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests for p:json-merge</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Joining map and JSON string with conflict in keys, explicit strategy use-first.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:json-merge key="'key1'" duplicates='use-first'>
+            <p:with-input expand-text="false">
+               <p:inline content-type="application/json">{"key1" : "value"}</p:inline>
+               <p:inline content-type="application/json">"one"</p:inline>
+            </p:with-input>
+         </p:json-merge>         
+         
+         <p:cast-content-type content-type="application/xml" />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:ns prefix="map" uri="http://www.w3.org/2005/xpath-functions" />
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="map:map">The document node is not 'map:map'.</s:assert>
+               <s:assert test="count(map:map/*)=1">Element 'map:map' does not have one child.</s:assert>
+               <s:assert test="count(map:map/map:string)=1">Element 'map:map' does not have one child 'map:string'.</s:assert>
+               <s:assert test="map:map/map:string[@key='key1'] = 'value'">Value of string/@key='key1' is not 'value'.</s:assert>
+             </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

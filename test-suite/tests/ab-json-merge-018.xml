@@ -1,0 +1,64 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>JSON merge 018(AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-10-13</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests for p:json-merge</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests mixing all possible documents</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:json-merge key="concat('label-',$p:index)">
+            <p:with-input expand-text="false">       
+               <p:inline content-type="application/json">{"key1" : "value1"}</p:inline>
+               <p:inline content-type="application/json">[1, 2]</p:inline>
+               <p:inline content-type="text/plain">This is a text document.</p:inline>
+               <p:inline><xml /></p:inline>
+               <p:inline content-type="text/html"><html /></p:inline>
+            </p:with-input>
+         </p:json-merge>         
+         
+         <p:identity>
+            <p:with-input>
+               <result>
+                  <first>{.?key1}</first>
+                  <second>
+                     <one>{.?label-2?1}</one>
+                     <two>{.?label-2?2}</two>
+                  </second>
+                  <third>{.?label-3}</third>
+                  <forth>{.?label-4}</forth>
+                  <fifth>{.?label-5}</fifth>
+               </result>
+            </p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The document node is not 'result'.</s:assert>
+               <s:assert test="result/first='value1'">Entry for 'first' is not 'value1'.</s:assert>
+               <s:assert test="result/second/one='1'">Entry 'second/one' is not '1'.</s:assert>
+               <s:assert test="result/second/two='2'">Entry 'second/two' is not '2'.</s:assert>
+               <s:assert test="result/third ='This is a text document.'">Entry for 'third' is not 'This is a text document.'</s:assert>
+               <s:assert test="result/forth/xml">Entry for 'forth' is not an element 'xml'.</s:assert>
+               <s:assert test="result/fifth/html">Entry for 'fifth' is not an element 'html'.</s:assert>               
+             </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

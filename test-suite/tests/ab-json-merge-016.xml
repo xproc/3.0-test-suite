@@ -1,0 +1,53 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>JSON merge 016(AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-10-13</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests for p:json-merge</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests that p:index is correctly counted.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:json-merge key="concat('label-',$p:index)">
+            <p:with-input expand-text="false">
+               <p:inline content-type="application/json">"one"</p:inline>               
+               <p:inline content-type="application/json">{"key1" : "value1"}</p:inline>
+               <p:inline content-type="application/json">"two"</p:inline>
+               <p:inline content-type="application/json">{"key2" : "value2"}</p:inline>
+               <p:inline content-type="application/json">"three"</p:inline>
+            </p:with-input>
+         </p:json-merge>         
+         
+         <p:cast-content-type content-type="application/xml" />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:ns prefix="map" uri="http://www.w3.org/2005/xpath-functions" />
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="map:map">The document node is not 'map:map'.</s:assert>
+               <s:assert test="count(map:map/*)=5">Element 'map:map' does not have five children.</s:assert>
+               <s:assert test="count(map:map/map:string)=5">Element 'map:map' does not have five children 'map:string'.</s:assert>
+               <s:assert test="map:map/map:string[@key='label-1'] = 'one'">Value of string/@key='label-1' is not 'one'.</s:assert>
+               <s:assert test="map:map/map:string[@key='label-3'] = 'two'">Value of string/@key='label-3' is not 'two'.</s:assert>
+               <s:assert test="map:map/map:string[@key='label-5'] = 'three'">Value of string/@key='label-5' is not 'three'.</s:assert>
+               <s:assert test="map:map/map:string[@key='key1'] = 'value1'">Value of string/@key='key1' is not 'value1'.</s:assert>
+               <s:assert test="map:map/map:string[@key='key2'] = 'value2'">Value of string/@key='key2' is not 'value2'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

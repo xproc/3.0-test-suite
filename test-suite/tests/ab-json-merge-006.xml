@@ -1,0 +1,61 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>JSON merge 006(AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-10-13</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests for p:json-merge</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Simple test, joining together three maps with conflicting keys and 'combine'.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         
+         <p:json-merge duplicates="combine">
+            <p:with-input expand-text="false">
+               <p:inline content-type="application/json">{"key" : "value1"}</p:inline>
+               <p:inline content-type="application/json">{"key3" : "value3"}</p:inline>
+               <p:inline content-type="application/json">{"key" : "value4"}</p:inline>
+            </p:with-input>
+         </p:json-merge>         
+         
+         <p:variable name="values" select=".?key" />
+         
+         <p:choose>
+            <p:when test="count($values)=2 and $values[1]='value1' and $values[2]='value4' and .?key3='value3'">
+               <p:identity>
+                  <p:with-input>
+                     <correct />
+                  </p:with-input>
+               </p:identity>
+            </p:when>
+            <p:otherwise>
+               <p:identity>
+                  <p:with-input>
+                     <wrong />
+                  </p:with-input>
+               </p:identity>
+            </p:otherwise>
+         </p:choose>
+         
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="correct">The document node is not 'correct'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
