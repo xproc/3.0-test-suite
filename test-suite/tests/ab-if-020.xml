@@ -1,0 +1,48 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>AB if-020</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-10-19</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Additional tests</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests (explicit) primary output port of p:if is sequence.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="pipeline" xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result" />
+         
+         <p:identity>
+            <p:with-input><doc1 /><doc2 /></p:with-input>
+         </p:identity>
+         <p:if test="false()">
+            <p:output port="result" />
+            <p:insert match="/" position="last-child">
+               <p:with-input><doc /></p:with-input>
+               <p:with-input port="insertion"><element /></p:with-input>
+            </p:insert>
+         </p:if>
+         
+         <p:count />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="c:result">The root element is not 'c:result'.</s:assert>
+               <s:assert test="c:result/text()='2'">Text child of 'c:result' is not '2'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
