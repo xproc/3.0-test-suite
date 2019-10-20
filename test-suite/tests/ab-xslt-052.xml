@@ -3,6 +3,24 @@
       <t:title>AB-xslt-052</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-10-20</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed test by setting document's base uri instead of root element's base uri.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-10-20</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed test by setting document's base uri instead of root element's base uri.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-08-06</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -32,16 +50,18 @@
             <p:with-input port="source">
                <p:empty />
             </p:with-input>
-            <p:with-input port="stylesheet">
-               <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xml:base="http://xproc-test/doc.xml">
-                  <xsl:output method="xml" indent="true" encoding="UTF-8"/>
-                  <xsl:template name="start">
-                     <doc />
-                     <xsl:result-document href="doc1.xml" >
-                        <doc1 />
-                     </xsl:result-document>
-                  </xsl:template>
-               </xsl:stylesheet>
+            <p:with-input port="stylesheet" xml:base="http://xproc-test/doc.xml">
+               <p:inline>               
+                  <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                     <xsl:output method="xml" indent="true" encoding="UTF-8"/>
+                     <xsl:template name="start">
+                        <doc />
+                        <xsl:result-document href="doc1.xml" >
+                           <doc1 />
+                        </xsl:result-document>
+                     </xsl:template>
+                  </xsl:stylesheet>
+               </p:inline>            
             </p:with-input>
          </p:xslt>
          
