@@ -13,13 +13,13 @@
   
   <p:identity name="id">
     <p:with-input port="source">
-      <p:document document-properties="map { 'a': /doc/@a }" href="{/doc/@path}"/>
+      <p:document document-properties="map { 'a': xs:integer(/doc/@a) }" href="{/doc/@path}"/>
       
     </p:with-input>
   </p:identity>
   
-  <p:identity>
-    <p:with-input port="source" select="p:document-properties-document(.)/c:document-properties/a"/>
-  </p:identity>
+  <p:cast-content-type content-type="application/xml">
+    <p:with-input port="source" select="p:document-properties(.)"/>
+  </p:cast-content-type>
   
 </p:declare-step>

@@ -2,6 +2,15 @@
    <t:info>
       <t:title>p:document 027</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2019-11-23</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test from p:document-properties-document() to p:document-properties().</p>
+            </t:description>
+         </t:revision>
         <t:revision>
           <t:date>2018-10-22</t:date>
           <t:author initials="ndw">
@@ -34,9 +43,9 @@
                 <p:with-input href="../documents/ab-binary.bin"/>
             </p:identity>
             
-            <p:identity name="props">
-                <p:with-input select="p:document-properties-document(.)"/>
-            </p:identity>
+            <p:cast-content-type content-type="application/xml" name="props">
+                <p:with-input select="p:document-properties(.)"/>
+            </p:cast-content-type>
             <p:cast-content-type content-type="application/xml" name="cast">
                 <p:with-input pipe="@producer"/>
             </p:cast-content-type>
@@ -48,14 +57,14 @@
    </t:pipeline>
    <t:schematron>
       <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
-         <s:ns uri="http://www.w3.org/ns/xproc" prefix="p"/>
+         <s:ns uri="http://www.w3.org/2005/xpath-functions" prefix="j"/>
          <s:ns uri="http://www.w3.org/ns/xproc-step" prefix="c"/>
          <s:pattern>
             <s:rule context="/">
                <s:assert test="result">Root element is not result.</s:assert>
-               <s:assert test="/result/c:document-properties">There is no element c:document-properties.</s:assert>
-               <s:assert test="/result/c:document-properties/content-type = 'application/octet-stream'">Content-type is not 'application/octet-stream'.</s:assert>
-               <s:assert test="ends-with(/result/c:document-properties/base-uri,'/documents/ab-binary.bin')">Base-uri does not end with '/documents/ab-binary.bin'.</s:assert>
+               <s:assert test="/result/j:map">There is no element j:map.</s:assert>
+               <s:assert test="/result/j:map/j:string[@key='content-type']/text() = 'application/octet-stream'">Content-type is not 'application/octet-stream'.</s:assert>
+               <s:assert test="ends-with(/result/j:map/j:string[@key='base-uri']/text(),'/documents/ab-binary.bin')">Base-uri does not end with '/documents/ab-binary.bin'.</s:assert>
             </s:rule>
             <s:rule context="/result/c:data">
                <s:assert test="@content-type='application/octet-stream'">@content-type is not 'application/octet-stream'.</s:assert>

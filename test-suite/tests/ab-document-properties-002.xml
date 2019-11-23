@@ -1,7 +1,16 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
    <t:info>
-      <t:title>ab-document-properties-document-002</t:title>
+      <t:title>ab-document-properties-002</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2019-11-20</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test from p:document-properties-document() to p:document-properties()</p>
+            </t:description>
+         </t:revision>
         <t:revision>
           <t:date>2018-10-22</t:date>
           <t:author initials="ndw">
@@ -34,23 +43,22 @@
             <doc/>
          </p:variable>
       
-         <p:identity>
-            <p:with-input select="p:document-properties-document($var)">
+         <p:cast-content-type content-type="application/xml">
+            <p:with-input select="p:document-properties($var)">
                <dummy/>
             </p:with-input>
-         </p:identity>
+         </p:cast-content-type>
 
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
       <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
-         <s:ns prefix="p" uri="http://www.w3.org/ns/xproc"/>
-         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
+         <s:ns prefix="j" uri="http://www.w3.org/2005/xpath-functions"/>
          <s:pattern>
             <s:rule context="/">
-               <s:assert test="c:document-properties">The document root is not c:document-properties.</s:assert>
-               <s:assert test="/c:document-properties/content-type = 'application/xml'">Content-type is not application/xml.</s:assert>
-               <s:assert test="ends-with(/c:document-properties/base-uri, 'document-properties-doc002.xml')">Base-uri is not correct.</s:assert>
+               <s:assert test="j:map">The document root is not j:map.</s:assert>
+               <s:assert test="j:map/j:string[@key='content-type']/text() = 'application/xml'">Content-type is not application/xml.</s:assert>
+               <s:assert test="ends-with(j:map/j:string[@key='base-uri']/text(), 'document-properties-002.xml')">Base-uri is not correct.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>

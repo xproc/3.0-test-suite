@@ -3,6 +3,16 @@
       <t:title>p:archive 014 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-11-22</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added relative-to option to p:unarchive, because archive does not
+                  have a valid base uri.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-09-01</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -32,7 +42,7 @@
                <p:with-input port="archive"><p:empty /></p:with-input>
             </p:archive>
  
-            <p:unarchive />
+            <p:unarchive relative-to="folder"/>
             <p:wrap-sequence wrapper="result" />
       </p:declare-step>
    </t:pipeline>

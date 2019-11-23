@@ -2,6 +2,15 @@
     <t:info>
         <t:title>Static variables/option 007</t:title>
         <t:revision-history>
+            <t:revision>
+                <t:date>2019-11-23</t:date>
+                <t:author>
+                    <t:name>Achim Berndzen</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>Changed test to remove p:document-properties-document().</p>
+                </t:description>
+            </t:revision>
            <t:revision>
              <t:date>2018-10-22</t:date>
              <t:author initials="ndw">
@@ -28,21 +37,26 @@
     </t:description>
     <t:pipeline>
         <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
-                        xmlns:c="http://www.w3.org/ns/xproc-step"
-                        name="main" version="3.0">
+            xmlns:c="http://www.w3.org/ns/xproc-step"
+            xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            name="main" version="3.0">
             <p:output port="result"/>
             <p:option static="true" name="static-option" select="18"/>
-
+            
             <p:input port="source">
                 <p:inline document-properties="map{'a': $static-option}">
                     <doc/>
                 </p:inline>
             </p:input>
-
+            
             <p:identity>
-                <p:with-input select="p:document-properties-document(.)/c:document-properties/a"/>
+                <p:with-input>
+                    <p:inline>
+                        <a>{map:get(p:document-properties(.),xs:QName('a'))}</a>
+                    </p:inline>
+                </p:with-input>
             </p:identity>
-
+            
         </p:declare-step>
     </t:pipeline>
 
@@ -52,8 +66,8 @@
 
             <s:pattern>
                 <s:rule context="/">
-                    <s:assert test="a">The pipeline root is not “doc”.</s:assert>
-                    <s:assert test="a/text()='18'">Text node of doc is not '18'.</s:assert>
+                    <s:assert test="a">The pipeline root is not “a”.</s:assert>
+                    <s:assert test="a/text()='18'">Text node of a is not '18'.</s:assert>
                 </s:rule>
             </s:pattern>
         </s:schema>

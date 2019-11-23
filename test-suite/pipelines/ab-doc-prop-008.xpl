@@ -13,8 +13,8 @@
     </p:inline>
   </p:input>
   
-  <p:identity>
-    <p:with-input port="source" select="p:document-properties-document(.)/c:document-properties/a"/>
-  </p:identity>
+  <p:cast-content-type content-type="application/xml">
+    <p:with-input port="source" select="p:document-properties(.)"/>
+  </p:cast-content-type>
 
 </p:declare-step>

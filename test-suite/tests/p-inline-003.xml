@@ -2,6 +2,15 @@
    <t:info>
       <t:title>p:inline 003</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2019-11-23</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test from p:document-properties-document() to p:document-properties().</p>
+            </t:description>
+         </t:revision>
         <t:revision>
           <t:date>2018-10-22</t:date>
           <t:author initials="ndw">
@@ -154,9 +163,9 @@ YII=
             </p:with-input>
          </p:identity>
 
-         <p:identity name="properties">
-            <p:with-input port="source" select="p:document-properties-document(.)"/>
-         </p:identity>
+         <p:cast-content-type content-type="application/xml" name="properties">
+            <p:with-input port="source" select="p:document-properties(.)"/>
+         </p:cast-content-type>
 
          <p:cast-content-type name="cast" content-type="application/xml">
             <p:with-input port="source" pipe="@inline"/>
@@ -169,23 +178,21 @@ YII=
    </t:pipeline>
    <t:schematron>
       <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
-         <s:ns prefix="p" uri="http://www.w3.org/ns/xproc"/>
+         <s:ns prefix="j" uri="http://www.w3.org/2005/xpath-functions"/>
          <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
          <s:pattern>
             <s:rule context="/*">
                <s:assert test="self::c:result">The pipeline root is not c:result</s:assert>
-               <s:assert test="c:document-properties">
-            The result does not include c:document-properties
-          </s:assert>
+               <s:assert test="j:map">The result does not include j:map</s:assert>
                <s:assert test="c:data">
             The result does not include c:data
           </s:assert>
             </s:rule>
-            <s:rule context="/c:result/c:document-properties">
-               <s:assert test="empty(*:content-length) or (*:content-length = 3764)">
+            <s:rule context="/c:result/j:map">
+               <s:assert test="empty(*[@key='content-length']) or (*[@key='content-length'] = 3764)">
             The wrong content-length is reported
           </s:assert>
-               <s:assert test="*:content-type = 'image/png'">
+               <s:assert test="j:string[@key ='content-type']/text() = 'image/png'">
             The content type of the result is not image/png
           </s:assert>
             </s:rule>

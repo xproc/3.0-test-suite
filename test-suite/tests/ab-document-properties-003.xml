@@ -1,7 +1,16 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
    <t:info>
-      <t:title>ab-document-properties-document-003</t:title>
+      <t:title>ab-document-properties-003</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2019-11-20</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test from p:document-properties-document() to p:document-properties()</p>
+            </t:description>
+         </t:revision>
         <t:revision>
           <t:date>2018-10-22</t:date>
           <t:author initials="ndw">
@@ -24,30 +33,28 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests document-properties-document for a document loaded with doc()</p>
+      <p>Tests document-properties() for a document loaded with doc()</p>
    </t:description>
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
          <p:output port="result"/>
           
-         <p:identity>
-            <p:with-input>
-               <result>{p:document-properties-document(doc('../documents/ab-doc.xml'))}</result>
+         <p:cast-content-type content-type="application/xml">
+            <p:with-input select="p:document-properties(doc('../documents/ab-doc.xml'))">
+               <p:empty />
             </p:with-input>
-         </p:identity>
+         </p:cast-content-type>
 
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
       <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
-         <s:ns prefix="p" uri="http://www.w3.org/ns/xproc"/>
-         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
+         <s:ns prefix="j" uri="http://www.w3.org/2005/xpath-functions"/>
          <s:pattern>
             <s:rule context="/">
-               <s:assert test="result">The document root is not result.</s:assert>
-               <s:assert test="/result/c:document-properties">The root has no child document-properties.</s:assert>
-               <s:assert test="/result/c:document-properties/content-type = 'application/xml'">Content-type is not application/xml.</s:assert>
-               <s:assert test="ends-with(/result/c:document-properties/base-uri, '/documents/ab-doc.xml')">Base-uri is not correct.</s:assert>
+               <s:assert test="j:map">The root is not j:map.</s:assert>
+               <s:assert test="j:map/j:string[@key='content-type']/text() = 'application/xml'">Content-type is not application/xml.</s:assert>
+               <s:assert test="ends-with(j:map/j:string[@key='base-uri']/text(), '/documents/ab-doc.xml')">Base-uri is not correct.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>

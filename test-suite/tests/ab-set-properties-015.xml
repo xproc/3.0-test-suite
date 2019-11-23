@@ -3,6 +3,15 @@
       <t:title>p:set-properties-015 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-11-23</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test from p:document-properties-document() to p:document-properties()-</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-05-19</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -27,23 +36,23 @@
             </p:with-input>
          </p:set-properties>
          
-         <p:identity>
-            <p:with-input select="p:document-properties-document(.)" />
-         </p:identity>
+         <p:cast-content-type content-type="application/xml">
+            <p:with-input select="p:document-properties(.)" />
+         </p:cast-content-type>
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
       <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
-         <s:ns uri="http://www.w3.org/ns/xproc-step" prefix="c" />
+         <s:ns uri="http://www.w3.org/2005/xpath-functions" prefix="j" />
          <s:pattern>
             <s:rule context="/">
-               <s:assert test="c:document-properties">Root element is not 'c:document-properties'.</s:assert>
-               <s:assert test="c:document-properties/content-type">No 'content-type' property found.</s:assert>
-               <s:assert test="c:document-properties/content-type/text()='application/json'">Element 'content-type' is not 'application/json'.</s:assert>
-               <s:assert test="c:document-properties/key/text()='value'">No 'key' property with value 'value' found.</s:assert>
-               <s:assert test="c:document-properties/base-uri">No 'base-uri' property found.</s:assert>
-               <s:assert test="c:document-properties/another/text()='value'">No 'another' property with value 'value' found.</s:assert>
-               <s:assert test="count(c:document-properties/*)=4">Root element does not have exactly two children.</s:assert>
+               <s:assert test="j:map">Root element is not 'j:map'.</s:assert>
+               <s:assert test="j:map/j:string[@key='content-type']">No 'content-type' property found.</s:assert>
+               <s:assert test="j:map/j:string[@key='content-type']/text()='application/json'">Element 'content-type' is not 'application/json'.</s:assert>
+               <s:assert test="j:map/j:string[@key='key']/text()='value'">No 'key' property with value 'value' found.</s:assert>
+               <s:assert test="j:map/j:string[@key='base-uri']">No 'base-uri' property found.</s:assert>
+               <s:assert test="j:map/j:string[@key='another']/text()='value'">No 'another' property with value 'value' found.</s:assert>
+               <s:assert test="count(j:map/*)=4">Root element does not have exactly two children.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
