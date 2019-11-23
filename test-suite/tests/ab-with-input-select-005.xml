@@ -2,6 +2,15 @@
    <t:info>
       <t:title>with-input-select-005</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2019-11-23</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test from p:document-properties-document() to p:document-properties().</p>
+            </t:description>
+         </t:revision>
         <t:revision>
           <t:date>2018-10-22</t:date>
           <t:author initials="ndw">
@@ -40,22 +49,21 @@
                 </p:with-input>
             </p:identity>
             
-           <p:identity>
-               <p:with-input select="p:document-properties-document(.)"/>
-           </p:identity>
+           <p:cast-content-type content-type="application/xml">
+               <p:with-input select="p:document-properties(.)"/>
+           </p:cast-content-type>
         </p:declare-step>
    </t:pipeline>
    <t:schematron>
       <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
-         <s:ns prefix="p" uri="http://www.w3.org/ns/xproc"/>
-         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
+         <s:ns prefix="j" uri="http://www.w3.org/2005/xpath-functions"/>
          <s:pattern>
             <s:rule context="/">
                <s:assert test="count(*) = 1">Document does not have exactly one child element.</s:assert>
-               <s:assert test="*[1]/name()='c:document-properties'">Root element is not named 'c:document-properties'.</s:assert>
+               <s:assert test="j:map">Root element is not named 'j:map'.</s:assert>
             </s:rule>
-            <s:rule context="/c:document-properties">
-               <s:assert test="content-type='text/plain'">Content type is not text/plain.</s:assert>
+            <s:rule context="/j:map">
+               <s:assert test="j:string[@key='content-type']/text()='text/plain'">Content type is not text/plain.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>

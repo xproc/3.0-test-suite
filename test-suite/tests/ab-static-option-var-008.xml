@@ -2,6 +2,15 @@
     <t:info>
         <t:title>Static variables/option 008</t:title>
         <t:revision-history>
+            <t:revision>
+                <t:date>2019-11-20</t:date>
+                <t:author>
+                    <t:name>Achim Berndzen</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>Changed test from p:document-properties-document() to p:document-properties()</p>
+                </t:description>
+            </t:revision>
           <t:revision>
             <t:date>2018-10-22</t:date>
             <t:author initials="ndw">
@@ -33,25 +42,25 @@
             <p:output port="result"/>
             <p:option static="true" name="static-option" select="18"/>
 
-            <p:identity>
-                <p:with-input select="p:document-properties-document(.)/c:document-properties/a">
+            <p:cast-content-type content-type="application/xml">
+                <p:with-input select="p:document-properties(.)">
                     <p:inline document-properties="map{'a': $static-option}">
                         <doc xmlns="http://www.w3.org/1999/xhtml"/>
                     </p:inline>
                 </p:with-input>
-            </p:identity>
+            </p:cast-content-type>
         
         </p:declare-step>
     </t:pipeline>
     
     <t:schematron>
         <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
-            <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
+            <s:ns prefix="j" uri="http://www.w3.org/2005/xpath-functions"/>
             
             <s:pattern>
                 <s:rule context="/">
-                    <s:assert test="a">The pipeline root is not “doc”.</s:assert>
-                    <s:assert test="a/text()='18'">Text node of doc is not '18'.</s:assert>
+                    <s:assert test="j:map">The pipeline root is not “map”.</s:assert>
+                    <s:assert test="j:map/j:number[@key='a']/text()='18'">Entry for 'a' is not '18'.</s:assert>
                 </s:rule>
             </s:pattern>
         </s:schema>

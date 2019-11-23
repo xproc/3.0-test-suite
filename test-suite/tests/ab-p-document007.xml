@@ -2,6 +2,15 @@
    <t:info>
       <t:title>p:document 007</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2019-11-18</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test from p:document-properties-document() to p:document-properties()</p>
+            </t:description>
+         </t:revision>
         <t:revision>
           <t:date>2018-10-22</t:date>
           <t:author initials="ndw">
@@ -54,20 +63,20 @@
                 </p:with-input>
             </p:identity>
             
-            <p:identity>
-                <p:with-input select="p:document-properties-document(.)"/>
-            </p:identity>
+            <p:cast-content-type content-type="application/xml">
+                <p:with-input select="p:document-properties(.)"/>
+            </p:cast-content-type>
         </p:declare-step>
    </t:pipeline>
    <t:schematron>
       <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
          <s:ns uri="http://www.w3.org/ns/xproc" prefix="p"/>
-         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
+         <s:ns prefix="j" uri="http://www.w3.org/2005/xpath-functions"/>
          <s:pattern>
             <s:rule context="/">
-               <s:assert test="c:document-properties">The document root is not c:document-properties.</s:assert>
-               <s:assert test="string-length(c:document-properties/base-uri) != 0">Base-uri is not set.</s:assert>
-               <s:assert test="starts-with(c:document-properties/base-uri,'http://www.w3.org')">Base-uri is not set correctly</s:assert>
+               <s:assert test="j:map">The document root is not j:map.</s:assert>
+               <s:assert test="string-length(j:map/j:string[@key='base-uri']/text()) != 0">Base-uri is not set.</s:assert>
+               <s:assert test="starts-with(j:map/j:string[@key='base-uri']/text(),'http://www.w3.org')">Base-uri is not set correctly</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
