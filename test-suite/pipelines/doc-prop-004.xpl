@@ -15,8 +15,8 @@
 
   <p:variable name="a" select="."/>
 
-  <p:identity>
-    <p:with-input port="source" select="p:document-properties-document($a)/c:document-properties/a"/>
-  </p:identity>
+  <p:cast-content-type content-type="application/xml">
+    <p:with-input port="source" select="p:document-properties($a)"/>
+  </p:cast-content-type>
 
 </p:declare-step>

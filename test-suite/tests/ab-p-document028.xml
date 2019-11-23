@@ -2,6 +2,15 @@
    <t:info>
       <t:title>p:document 028</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2019-11-19</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Change test from p:document-properties-document() to p:document-properties.</p>
+            </t:description>
+         </t:revision>
         <t:revision>
           <t:date>2018-10-22</t:date>
           <t:author initials="ndw">
@@ -48,23 +57,22 @@
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
             <p:output port="result"/>
             
-            <p:identity>
-                <p:with-input select="p:document-properties-document(.)">
+            <p:cast-content-type content-type="application/xml">
+                <p:with-input select="p:document-properties(.)">
                     <p:document href="../documents/ab-doc.zip"/>
                 </p:with-input> 
-            </p:identity>
+            </p:cast-content-type>
             
         </p:declare-step>
    </t:pipeline>
    <t:schematron>
       <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
-         <s:ns uri="http://www.w3.org/ns/xproc" prefix="p"/>
-         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
+         <s:ns uri="http://www.w3.org/2005/xpath-functions" prefix="j"/>
          <s:pattern>
             <s:rule context="/">
-               <s:assert test="c:document-properties">There is no root element c:document-properties.</s:assert>
-               <s:assert test="c:document-properties/content-type = 'application/zip'">Content-type is not 'application/zip'.</s:assert>
-               <s:assert test="ends-with(/c:document-properties/base-uri,'/documents/ab-doc.zip')">Base-uri does not end with '/documents/ab-doc.zip'.</s:assert>
+               <s:assert test="j:map">There is no root element 'map'.</s:assert>
+               <s:assert test="j:map/j:string[@key='content-type']/text() = 'application/zip'">Content-type is not 'application/zip'.</s:assert>
+               <s:assert test="ends-with(j:map/j:string[@key='base-uri']/text(),'/documents/ab-doc.zip')">Base-uri does not end with '/documents/ab-doc.zip'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>

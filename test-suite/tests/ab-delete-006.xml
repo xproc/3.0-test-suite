@@ -3,6 +3,15 @@
         <t:title>Test for p:delete 006 (AB)</t:title>
         <t:revision-history>
             <t:revision>
+                <t:date>2019-11-19</t:date>
+                <t:author>
+                    <t:name>Achim Berndzen</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>Changed test from p:document-properties-document() to p:document-properties()</p>
+                </t:description>
+            </t:revision>
+            <t:revision>
                 <t:date>2019-03-22</t:date>
                 <t:author>
                     <t:name>Achim Berndzen</t:name>
@@ -37,20 +46,18 @@
                 </p:with-input>
             </p:delete>
             
-            <p:identity>
-                <p:with-input>
-                    <p:inline>{p:document-properties-document(.)}</p:inline>
-                </p:with-input>
-            </p:identity>
+            <p:cast-content-type content-type="application/xml">
+                <p:with-input select="p:document-properties(.)" />
+            </p:cast-content-type>
         </p:declare-step>
     </t:pipeline>
     <t:schematron>
         <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
-            <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
+            <s:ns prefix="j" uri="http://www.w3.org/2005/xpath-functions"/>
             <s:pattern>
                 <s:rule context="/">
-                    <s:assert test="c:document-properties">The document root is not document-properties.</s:assert>
-                    <s:assert test="c:document-properties/add='prop'">Either 'add' not found or 'prop' is not a text child of add.</s:assert>
+                    <s:assert test="j:map">The document root is not 'map'.</s:assert>
+                    <s:assert test="j:map/j:string[@key='add']/text()='prop'">Either 'add' not found or 'prop' is not a text child of add.</s:assert>
                 </s:rule>
             </s:pattern>
         </s:schema>

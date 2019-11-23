@@ -3,6 +3,15 @@
       <t:title>p:document 023</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-11-23</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test from p:document-properties-document() to p:document-properties().</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2018-08-29T15:54:35+02:00</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -32,14 +41,14 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests p:document with a JSON-document: Error MOX003 expected because 'duplicates'='reject'</p>
+      <p>Tests p:document with a JSON-document: Error XD0058 expected because 'duplicates'='reject'</p>
    </t:description>
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
             <p:output port="result"/>        
 
             <p:identity>
-                <p:with-input select="p:document-properties-document(.)">
+                <p:with-input select="p:document-properties(.)">
                     <p:document href="../documents/JSon-doc1.json" content-type="application/json" parameters="map{'duplicates':'reject'}"/>
                 </p:with-input>
             </p:identity>
