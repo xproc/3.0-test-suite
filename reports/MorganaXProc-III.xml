@@ -4,10 +4,10 @@
            errors="0"
            failures="0"
            skipped="0"
-           timestamp="2019-10-30T15:37:20">
+           timestamp="2019-11-23T14:40:46">
    <properties>
       <property name="processor" value="MorganaXProc-III"/>
-      <property name="version" value="0.8.28-alpha"/>
+      <property name="version" value="0.8.29-alpha"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.0"/>
@@ -238,10 +238,10 @@
    <testcase name="ab-doc-prop-022.xml"/>
    <testcase name="ab-doc-prop-023.xml"/>
    <testcase name="ab-doc-prop-024.xml"/>
-   <testcase name="ab-document-properties-doc001.xml"/>
-   <testcase name="ab-document-properties-doc002.xml"/>
-   <testcase name="ab-document-properties-doc003.xml"/>
-   <testcase name="ab-document-properties-doc004.xml"/>
+   <testcase name="ab-document-properties-001.xml"/>
+   <testcase name="ab-document-properties-002.xml"/>
+   <testcase name="ab-document-properties-003.xml"/>
+   <testcase name="ab-document-properties-004.xml"/>
    <testcase name="ab-drp-context-001.xml"/>
    <testcase name="ab-drp-context-002.xml"/>
    <testcase name="ab-drp-context-003.xml"/>
