@@ -1,0 +1,29 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XD0064">
+   <t:info>
+      <t:title>p:load 001 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-11-24</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>New tests for p:load</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:load: It is a dynamic error, if "href" is not a valid base uri.</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+         <p:output port="result"/>
+         <p:load href="%gg" />   
+      
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
