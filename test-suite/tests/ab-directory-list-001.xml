@@ -1,0 +1,49 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+    <t:info>
+        <t:title>p:direcotry-list 001 (AB)</t:title>
+        <t:revision-history>
+            <t:revision>
+                <t:date>2019-11-29</t:date>
+                <t:author>
+                    <t:name>Achim Berndzen</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>Test for p:directory-list</p>
+                </t:description>
+            </t:revision>
+        </t:revision-history>
+    </t:info>
+    <t:description xmlns="http://www.w3.org/1999/xhtml">
+        <p>Tests base uri of p:directory document is set correctly.</p>
+    </t:description>
+    
+    <t:pipeline>
+        <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+            <p:output port="result"/>
+            
+            <p:directory-list path="." />
+            
+            <p:choose>
+                <p:when test="base-uri(.) = p:document-property(., 'base-uri')">
+                    <p:identity>
+                        <p:with-input><correct /></p:with-input>
+                    </p:identity>
+                </p:when>
+                <p:otherwise>
+                    <p:identity>
+                        <p:with-input><wrong /></p:with-input>
+                    </p:identity>
+                </p:otherwise>
+            </p:choose>
+        </p:declare-step>
+    </t:pipeline>
+    <t:schematron>
+        <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+            <s:pattern>
+                <s:rule context="/">
+                    <s:assert test="correct">The document root is not 'correct'.</s:assert>
+                </s:rule>
+            </s:pattern>
+        </s:schema>
+    </t:schematron>
+</t:test>
