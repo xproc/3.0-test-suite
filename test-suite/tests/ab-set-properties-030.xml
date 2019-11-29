@@ -1,0 +1,49 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:set-properties-030 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-11-29</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Additional tests for p:set-properties</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests value that base URI is changed with 'base-uri'.</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+            
+         <p:set-properties properties="map{'base-uri' : 'http://www.new-base-uri.test'}">
+            <p:with-input>
+               <p:inline content-type="application/octet-stream" xml:base="http://www.old-base-uri.test">42 42 42 42</p:inline>
+            </p:with-input>
+         </p:set-properties>
+         
+         <p:identity>
+            <p:with-input>
+               <result>
+                  <property>{p:document-property(., 'base-uri')}</property>
+               </result>
+            </p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The document root is not result.</s:assert>
+               <s:assert test="result/property/text()= 'http://www.new-base-uri.test'">Document property base-uri is wrong.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
