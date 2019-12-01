@@ -26,11 +26,16 @@
                <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">j:map/j:string[@key='content-type']</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>No 'content-type' property found.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
                <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">j:map/j:string[@key='content-type']/text()='application/xml'</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>Element 'content-type' is not 'application/xml'.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
                <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">j:map/j:string[@key='key']/text()='value'</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>No 'key' property with value 'value' found.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
-               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">count(j:map/*)=2</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>Root element does not have exactly two children.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
+               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">count(j:map/*)=3</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>Root element does not have exactly three children.<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span></span>
             <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:rule</span><span class="etc">&gt;</span></span></span>
          <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:pattern</span><span class="etc">&gt;</span></span></span>
       <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:schema</span><span class="etc">&gt;</span></span></span>
    </code></pre></div><dl class="revision-history"><h2>Revision history</h2>
+         <dt>28 Nov 2019, 
+               <span class="name">Achim Berndzen</span>
+            </dt><dd><div class="description">
+               <p>Fixed test because base-uri is present according to our new concept.</p>
+            </div></dd>
          <dt>23 Nov 2019, 
                <span class="name">Achim Berndzen</span>
             </dt><dd><div class="description">
