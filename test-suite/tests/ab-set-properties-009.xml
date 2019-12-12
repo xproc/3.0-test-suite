@@ -2,6 +2,15 @@
    <t:info>
       <t:title>p:set-properties-009 (AB)</t:title>
       <t:revision-history>
+      <t:revision>
+            <t:date>2019-12-12</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test back because merge=false removes base-uri.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-11-28</t:date>
             <t:author>
@@ -68,7 +77,7 @@
                <s:assert test="j:map/j:string[@key='content-type']">No 'content-type' property found.</s:assert>
                <s:assert test="j:map/j:string[@key='content-type']/text()='text/plain'">Element 'content-type' is not 'text/plain'.</s:assert>
                <s:assert test="j:map/j:string[@key='key']/text()='value'">No 'key' property with value 'value' found.</s:assert>
-               <s:assert test="count(j:map/*)=3">Root element does not have exactly three children.</s:assert>
+               <s:assert test="count(j:map/*)=2">Root element does not have exactly two children.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
