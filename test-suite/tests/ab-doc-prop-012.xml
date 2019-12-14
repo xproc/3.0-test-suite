@@ -8,6 +8,15 @@
                <t:name>Achim Berndzen</t:name>
             </t:author>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed test by declaring prefix "xs".</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-11-20</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Changed test from p:document-properties-document() to p:document-properties()</p>
             </t:description>
          </t:revision>

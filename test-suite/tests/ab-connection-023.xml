@@ -3,6 +3,15 @@
       <t:title>Connection 023</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-12-14</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added declaration for prefix "xs".</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2018-09-16T10:45:02+02:00</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -26,7 +35,8 @@
       <p>Checks that DRP counts a connection for TVT as child of p:inline.</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+                      xmlns:xs="http://www.w3.org/2001/XMLSchema" version="3.0">
             <p:output port="result"/>
             
             <p:identity>

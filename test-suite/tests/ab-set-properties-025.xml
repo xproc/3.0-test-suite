@@ -3,6 +3,15 @@
       <t:title>p:set-properties-025 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-11-20</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed test by declaring prefix "xs".</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-10-03</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -18,7 +27,8 @@
    </t:description>
    
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:xs="http://www.w3.org/2001/XMLSchema" version="3.0">
          <p:output port="result"/>
             
          <p:set-properties properties="map{'serialization' : map{xs:QName('indent') : true() }}" merge="true">
