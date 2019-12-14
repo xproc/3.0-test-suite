@@ -3,6 +3,15 @@
       <t:title>ab-doc-props-005</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-12-14</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added declaration for prefix "xs".</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-11-20</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
