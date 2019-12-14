@@ -3,6 +3,15 @@
       <t:title>AB-uncompress-006</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-12-14</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed expected content-type from application/binary to application/octet-stream.</p>
+            </t:description>
+         </t:revision> 
+         <t:revision>
             <t:date>2019-11-18</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -10,8 +19,7 @@
             <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Change test from p:document-properties-document() to p:document-properties()</p>
             </t:description>
-         </t:revision>
-         
+         </t:revision> 
          <t:revision>
             <t:date>2019-10-04</t:date>
             <t:author>
@@ -24,7 +32,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests document-properties uncompress result: no content-type ->application/binary</p>
+      <p>Tests document-properties uncompress result: no content-type ->application/octet-stream</p>
    </t:description>
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
@@ -46,7 +54,7 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="j:map">The document root is not 'map'.</s:assert>
-               <s:assert test="j:map/j:string[@key='content-type']/text()='application/binary'">Property 'content-type' is not 'application/binary'.</s:assert>
+               <s:assert test="j:map/j:string[@key='content-type']/text()='application/octet-stream'">Property 'content-type' is not 'application/octet-stream'.</s:assert>
                <s:assert test="ends-with(j:map/j:string[@key='base-uri']/text(),'simpletext.gz')">Property 'base-uri' does not end with 'simpletext.gz'.</s:assert>
                <s:assert test="j:map/j:string[@key='additional']/text()='bogus'">Property 'additional' is not 'bogus'.</s:assert>
             </s:rule>
