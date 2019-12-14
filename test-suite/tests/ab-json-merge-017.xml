@@ -41,11 +41,11 @@
                <s:assert test="map:map">The document node is not 'map:map'.</s:assert>
                <s:assert test="count(map:map/*)=5">Element 'map:map' does not have five children.</s:assert>
                <s:assert test="count(map:map/map:string)=5">Element 'map:map' does not have five children 'map:string'.</s:assert>
-               <s:assert test="map:map/map:string[1]/@key = 'label-1'">The first entry does not have @key 'label-1'.</s:assert>
-               <s:assert test="map:map/map:string[2]/@key = 'key1'">The second entry does not have @key 'lkey1'.</s:assert>
-               <s:assert test="map:map/map:string[3]/@key = 'label-3'">The third entry does not have @key 'label-3'.</s:assert>
-               <s:assert test="map:map/map:string[4]/@key = 'key2'">The forth entry does not have @key 'key2'.</s:assert>
-               <s:assert test="map:map/map:string[5]/@key = 'label-5'">The fifth entry does not have @key 'label-5'.</s:assert>
+               <s:assert test="map:map/map:string[@key='label-1']='one'">The ‘one’ entry does not have @key 'label-1'.</s:assert>
+               <s:assert test="map:map/map:string[@key='key1']='value1'">The ‘value1’ entry does not have @key 'key1'.</s:assert>
+               <s:assert test="map:map/map:string[@key='label-3']='two'">The ‘two’ entry does not have @key 'label-3'.</s:assert>
+               <s:assert test="map:map/map:string[@key='key2']='value2'">The ‘value2’ entry does not have @key 'key2'.</s:assert>
+               <s:assert test="map:map/map:string[@key='label-5']='three'">The ‘three’ entry does not have @key 'label-5'.</s:assert>
              </s:rule>
          </s:pattern>
       </s:schema>
