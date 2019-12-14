@@ -39,6 +39,7 @@
         <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
             xmlns:c="http://www.w3.org/ns/xproc-step"
             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            xmlns:map="http://www.w3.org/2005/xpath-functions/map"
             name="main" version="3.0">
             <p:output port="result"/>
             <p:option static="true" name="static-option" select="18"/>
