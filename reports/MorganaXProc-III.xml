@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="XProc Test Suite"
-           tests="1516"
+           tests="1566"
            errors="0"
            failures="0"
            skipped="0"
-           timestamp="2019-11-23T14:40:46">
+           timestamp="2019-12-14T18:05:33">
    <properties>
       <property name="processor" value="MorganaXProc-III"/>
-      <property name="version" value="0.8.29-alpha"/>
+      <property name="version" value="SE 0.8.31-alpha"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.0"/>
@@ -50,6 +50,9 @@
    <testcase name="ab-archive-manifest-006.xml"/>
    <testcase name="ab-archive-manifest-007.xml"/>
    <testcase name="ab-archive-manifest-008.xml"/>
+   <testcase name="ab-archive-manifest-009.xml"/>
+   <testcase name="ab-archive-manifest-010.xml"/>
+   <testcase name="ab-archive-manifest-011.xml"/>
    <testcase name="ab-att-version-001.xml"/>
    <testcase name="ab-att-version-002.xml"/>
    <testcase name="ab-att-version-003.xml"/>
@@ -218,6 +221,7 @@
    <testcase name="ab-delete-019.xml"/>
    <testcase name="ab-delete-020.xml"/>
    <testcase name="ab-delete-021.xml"/>
+   <testcase name="ab-directory-list-001.xml"/>
    <testcase name="ab-doc-prop-001.xml"/>
    <testcase name="ab-doc-prop-002.xml"/>
    <testcase name="ab-doc-prop-004.xml"/>
@@ -520,6 +524,8 @@
    <testcase name="ab-library-023.xml"/>
    <testcase name="ab-library-024.xml"/>
    <testcase name="ab-library-035.xml"/>
+   <testcase name="ab-load-001.xml"/>
+   <testcase name="ab-load-002.xml"/>
    <testcase name="ab-namespace-delete-001.xml"/>
    <testcase name="ab-namespace-delete-002.xml"/>
    <testcase name="ab-namespace-delete-003.xml"/>
@@ -663,6 +669,10 @@
    <testcase name="ab-p-archive-071.xml"/>
    <testcase name="ab-p-archive-072.xml"/>
    <testcase name="ab-p-archive-073.xml"/>
+   <testcase name="ab-p-archive-074.xml"/>
+   <testcase name="ab-p-archive-075.xml"/>
+   <testcase name="ab-p-archive-076.xml"/>
+   <testcase name="ab-p-archive-077.xml"/>
    <testcase name="ab-p-document001.xml"/>
    <testcase name="ab-p-document002.xml"/>
    <testcase name="ab-p-document003.xml"/>
@@ -699,6 +709,10 @@
    <testcase name="ab-p-document034.xml"/>
    <testcase name="ab-p-document035.xml"/>
    <testcase name="ab-p-document036.xml"/>
+   <testcase name="ab-p-document037.xml"/>
+   <testcase name="ab-p-document038.xml"/>
+   <testcase name="ab-p-document039.xml"/>
+   <testcase name="ab-p-document040.xml"/>
    <testcase name="ab-p-pipe-020.xml"/>
    <testcase name="ab-p-pipe-021.xml"/>
    <testcase name="ab-p-pipe-022.xml"/>
@@ -800,6 +814,13 @@
    <testcase name="ab-set-properties-024.xml"/>
    <testcase name="ab-set-properties-025.xml"/>
    <testcase name="ab-set-properties-026.xml"/>
+   <testcase name="ab-set-properties-027.xml"/>
+   <testcase name="ab-set-properties-028.xml"/>
+   <testcase name="ab-set-properties-029.xml"/>
+   <testcase name="ab-set-properties-030.xml"/>
+   <testcase name="ab-set-properties-031.xml"/>
+   <testcase name="ab-set-properties-032.xml"/>
+   <testcase name="ab-set-properties-033.xml"/>
    <testcase name="ab-split-sequence-001.xml"/>
    <testcase name="ab-split-sequence-002.xml"/>
    <testcase name="ab-split-sequence-003.xml"/>
@@ -833,6 +854,32 @@
    <testcase name="ab-static-option-var-024.xml"/>
    <testcase name="ab-static-option-var-025.xml"/>
    <testcase name="ab-static-option-var-053.xml"/>
+   <testcase name="ab-step-available-001.xml"/>
+   <testcase name="ab-step-available-002.xml"/>
+   <testcase name="ab-step-available-003.xml"/>
+   <testcase name="ab-step-available-004.xml"/>
+   <testcase name="ab-step-available-005.xml"/>
+   <testcase name="ab-step-available-006.xml"/>
+   <testcase name="ab-step-available-007.xml"/>
+   <testcase name="ab-step-available-008.xml"/>
+   <testcase name="ab-step-available-009.xml"/>
+   <testcase name="ab-step-available-010.xml"/>
+   <testcase name="ab-step-available-011.xml"/>
+   <testcase name="ab-step-available-012.xml"/>
+   <testcase name="ab-step-available-013.xml"/>
+   <testcase name="ab-step-available-014.xml"/>
+   <testcase name="ab-step-available-015.xml"/>
+   <testcase name="ab-step-available-016.xml"/>
+   <testcase name="ab-step-available-017.xml"/>
+   <testcase name="ab-step-available-018.xml"/>
+   <testcase name="ab-step-available-019.xml"/>
+   <testcase name="ab-step-available-020.xml"/>
+   <testcase name="ab-step-available-021.xml"/>
+   <testcase name="ab-step-available-022.xml"/>
+   <testcase name="ab-step-available-023.xml"/>
+   <testcase name="ab-step-available-024.xml"/>
+   <testcase name="ab-store-001.xml"/>
+   <testcase name="ab-store-002.xml"/>
    <testcase name="ab-string-replace-001.xml"/>
    <testcase name="ab-string-replace-002.xml"/>
    <testcase name="ab-string-replace-003.xml"/>
@@ -1018,6 +1065,7 @@
    <testcase name="ab-unarchive-015.xml"/>
    <testcase name="ab-unarchive-016.xml"/>
    <testcase name="ab-unarchive-017.xml"/>
+   <testcase name="ab-unarchive-018.xml"/>
    <testcase name="ab-uncompress-001.xml"/>
    <testcase name="ab-uncompress-002.xml"/>
    <testcase name="ab-uncompress-003.xml"/>
@@ -1452,6 +1500,8 @@
    <testcase name="ab-xslt-087.xml"/>
    <testcase name="ab-xslt-088.xml"/>
    <testcase name="ab-xslt-089.xml"/>
+   <testcase name="ab-xslt-090.xml"/>
+   <testcase name="ab-xslt-091.xml"/>
    <testcase name="choose-001.xml"/>
    <testcase name="choose-002.xml"/>
    <testcase name="choose-003.xml"/>
