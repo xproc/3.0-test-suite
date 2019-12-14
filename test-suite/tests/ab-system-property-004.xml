@@ -3,6 +3,15 @@
       <t:title>ab-system-property-004</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-12-14</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added declaration for prefix "xs".</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-07-14</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -18,7 +27,8 @@
    </t:description>
    
    <t:pipeline>
-      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc"
+                                    xmlns:xs="http://www.w3.org/2001/XMLSchema">
          <p:output port="result" />
          
          <p:identity>
