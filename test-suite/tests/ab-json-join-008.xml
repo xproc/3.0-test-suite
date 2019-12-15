@@ -1,9 +1,18 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
         xmlns:err="http://www.w3.org/ns/xproc-error"
-      expected="fail" code="err:XD0028">
+      expected="fail" code="err:XC0119">
    <t:info>
       <t:title>JSON join 008(AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2019-12-14</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed error code to XC0119</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-09-06</t:date>
             <t:author>
