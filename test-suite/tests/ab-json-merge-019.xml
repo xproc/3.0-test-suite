@@ -70,7 +70,7 @@
             <s:rule context="/fn:map/*[5]">
                <s:assert test="local-name(.)='string'">Local name of child element 5 is not 'string'.</s:assert>
                <s:assert test="./@key='label-5'">Child element 5 does not have @key with 'label-5'.</s:assert>
-               <s:assert test="./text()='&lt;html/&gt;'">Child element 5 does not have text child with '&lt;html/&gt;'.</s:assert>
+               <s:assert test="starts-with(./text(), '&lt;html')">Child element 5 does not have text child with '&lt;html/&gt;'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
