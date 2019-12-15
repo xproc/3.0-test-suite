@@ -28,7 +28,8 @@
    
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
-                      xmlns:xs="http://www.w3.org/2001/XMLSchema" version="3.0">
+                      xmlns:xs="http://www.w3.org/2001/XMLSchema" version="3.0"
+                      xmlns:map="http://www.w3.org/2005/xpath-functions/map">
          <p:output port="result"/>
             
          <p:set-properties properties="map{'serialization' : map{xs:QName('indent') : true() }}" merge="true">
