@@ -43,7 +43,7 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="/dummy:doc">The document root is not 'doc'.</s:assert>
-               <s:assert test="count(/dummy:doc/dummy:section)='2'">Element doc does not have two children 'section'.</s:assert>
+               <s:assert test="count(/dummy:doc/dummy:section)=2">Element doc does not have two children 'section'.</s:assert>
             </s:rule>
             <s:rule context="/dummy:doc/dummy:section">
                <s:assert test="./@dummy:id">Section does not have an attribute 'id'.</s:assert>
