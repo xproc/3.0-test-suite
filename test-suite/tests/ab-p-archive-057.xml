@@ -1,9 +1,18 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
         xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail" code="err:XC0081">
+        expected="fail" code="err:XC0085">
    <t:info>
       <t:title>p:archive 057 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2019-12-16</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed error code from C0081 -> C0085</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-09-01</t:date>
             <t:author>
@@ -16,7 +25,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests p:archive: XC0081 must be raised @format and content-type do not match.</p>
+      <p>Tests p:archive: XC0085 must be raised @format and content-type do not match.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
