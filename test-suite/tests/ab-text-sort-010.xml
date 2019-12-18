@@ -20,7 +20,7 @@
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
             <p:output port="result"/>        
 
-         <p:text-sort sort-key="if (position() lt 3) then 1 else ." stable="true">
+         <p:text-sort sort-key="if (position() lt 3) then '@' else ." stable="true">
                <p:with-input>
                   <p:inline content-type="text/plain">D
 B
