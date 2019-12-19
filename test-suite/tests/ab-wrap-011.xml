@@ -22,7 +22,7 @@
          <p:output port="result"/>
          
          <p:wrap match="doc"
-                 group-adjacent="local-name" wrapper="wrap">
+                 group-adjacent="local-name(.)" wrapper="wrap">
             <p:with-input>
                <root>
                  <doc />
