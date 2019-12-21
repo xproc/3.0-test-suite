@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+    <t:info>
+        <t:title>load 004 (AB)</t:title>
+        <t:revision-history>
+            <t:revision>
+                <t:date>2019-12-21</t:date>
+                <t:author>
+                    <t:name>Achim Berndzen</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>Ported test for p:load from 1.0 test suite.</p>
+                </t:description>
+            </t:revision>
+        </t:revision-history>
+    </t:info>
+    <t:description xmlns="http://www.w3.org/1999/xhtml">
+        <p>Testing p:load</p>
+    </t:description>
+    <t:pipeline>
+        <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+            <p:output port="result"/>
+            
+            <p:load href="../documents/address-valid-sample.xml" 
+                parameters="map{'dtd-validate' : true()}" />
+            
+        </p:declare-step>
+    </t:pipeline>
+    
+    <t:schematron>
+        <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+            <s:pattern>
+                <s:rule context="/">
+                    <s:assert test="address">The document root is not address.</s:assert>
+                    
+                    <s:assert test="address/first/text()='Jon'">Document does not have a first element with 'Jon'</s:assert>
+                    <s:assert test="address/last/text()='Tester'">Document does not have a last element with 'Tester'</s:assert>
+                    <s:assert test="address/phone/text()='5555555555'">Document does not have a phone element with '5555555555'</s:assert>
+                    
+                </s:rule>
+            </s:pattern>
+        </s:schema>
+    </t:schematron>
+</t:test>
