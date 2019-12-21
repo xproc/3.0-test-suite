@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+    xmlns:err="http://www.w3.org/ns/xproc-error"
+    expected="fail" code="err:XC0120">
+    <t:info>
+        <t:title>p:archive-manifest 012 (AB)</t:title>
+        <t:revision-history>
+            <t:revision>
+                <t:date>2019-12-21</t:date>
+                <t:author>
+                    <t:name>Achim Berndzen</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>Additional tests for p:unarchive and p:archive-manifest</p>
+                </t:description>
+            </t:revision>
+        </t:revision-history>
+    </t:info>
+    <t:description xmlns="http://www.w3.org/1999/xhtml">
+        <p>Tests XC0120 is raised if the source of p:archive-manifest does not have base URI and
+        option `relative-to`is not present.</p>
+    </t:description>
+    
+    <t:pipeline>
+        <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+            <p:output port="result"/>
+            
+            <p:archive>
+                <p:with-input>
+                    <p:inline><doc /></p:inline>
+                </p:with-input>
+            </p:archive>
+            
+            <p:set-properties properties="map{}" /> <!-- remove base URI -->
+            
+            <p:archive-manifest />
+        </p:declare-step>
+    </t:pipeline>
+</t:test>
