@@ -1,6 +1,6 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
    <t:info>
-      <t:title>p:text-count 001 (NW)</t:title>
+      <t:title>p:text-count 003 (NW)</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2019-12-21</t:date>
