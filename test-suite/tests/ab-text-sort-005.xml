@@ -3,6 +3,15 @@
       <t:title>p:text-sort-005 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-12-21</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Correct end-of-line handling.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-09-01</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -36,7 +45,7 @@ B</p:inline>
           <s:pattern>
             <s:rule context="/">
                <s:assert test="wrapper">The root element is not wrapper.</s:assert>
-               <s:assert test="wrapper/text()='D&#xA;C&#xA;B&#xA;A'">Text is not sorted correctly.</s:assert>
+               <s:assert test="wrapper/text()='D&#xA;C&#xA;B&#xA;A&#xA;'">Text is not sorted correctly.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
