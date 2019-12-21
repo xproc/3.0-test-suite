@@ -3,6 +3,15 @@
       <t:title>p:archive 034 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-12-21</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added option "relative-to" to p:archive-manifest</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-09-01</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -41,7 +50,7 @@
                <p:with-input port="archive" pipe="result" />
             </p:archive>
  
-            <p:archive-manifest />
+            <p:archive-manifest relative-to="http://xproc.org/ns/testsuite"/>
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
