@@ -3,6 +3,15 @@
       <t:title>p:text-head 009 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2019-12-22</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed expected result text with should end with newline now.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-05-31</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -52,7 +61,7 @@ lines.</p:inline>
             <s:rule context="/">
                <s:assert test="text">Root element is not 'text'.</s:assert>
                <s:assert test="text/@counter='1'">Attribute 'counter' is not '1'.</s:assert>
-               <s:assert test="text/text()='lines.'">Text content of 'text' is wrong.</s:assert>
+               <s:assert test="text/text()='lines.&#10;'">Text content of 'text' is wrong.</s:assert>
              </s:rule>
          </s:pattern>
       </s:schema>
