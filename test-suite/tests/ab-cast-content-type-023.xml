@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+    <t:info>
+        <t:title>cast-content-type 023 (AB)</t:title>
+        <t:revision-history>
+            <t:revision>
+                <t:date>2019-12-27</t:date>
+                <t:author>
+                    <t:name>Achim Berndzen</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>Initial tests for the new iteration of p:cast-content-type</p>
+                </t:description>
+            </t:revision>
+        </t:revision-history>
+    </t:info>
+    <t:description xmlns="http://www.w3.org/1999/xhtml">
+        <p>Tests casting from a text document to an HTML document.</p>
+     </t:description>
+    
+    <t:pipeline>
+        <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+            xmlns:map="http://www.w3.org/2005/xpath-functions/map"
+            name="pipeline" version="3.0">
+            <p:output port="result"/>
+            
+            <p:cast-content-type content-type="text/html" name="caster">
+                <p:with-input>
+                    <p:inline content-type="text/plain" document-properties="map{'base-uri' : 'http://xproc-test.org',
+                        'serialization' : map{'method' : 'text'},
+                        'additional' : 'property'}">&lt;html /&gt;</p:inline>
+                </p:with-input>
+            </p:cast-content-type>
+            
+            
+            <p:cast-content-type content-type="application/xml" name="properties">
+                <p:with-input select="p:document-properties(.)" pipe="@caster"/>
+            </p:cast-content-type>
+            
+            <p:wrap-sequence wrapper="result">
+                <p:with-input pipe="@caster @properties" />
+            </p:wrap-sequence>
+            
+        </p:declare-step>
+    </t:pipeline>
+    
+    <t:schematron>
+        <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+            <s:ns prefix="fn" uri="http://www.w3.org/2005/xpath-functions" />
+            <s:ns prefix="html" uri="http://www.w3.org/1999/xhtml" />
+            <s:pattern>
+                <s:rule context="/">
+                    <s:assert test="result">The root element is not result.</s:assert>
+                    <s:assert test="result/html or result/html:html">Root element does not have a child 'html'.</s:assert>
+                    <s:assert test="result/fn:map">Root element does not have a child 'fn:map'.</s:assert>
+                    <s:assert test="result/fn:map/fn:string[@key='base-uri']='http://xproc-test.org'">The base-uri property is not correct.</s:assert>
+                    <s:assert test="result/fn:map/fn:string[@key='content-type']='text/html'">The content-type property is not correct.</s:assert>
+                    <s:assert test="result/fn:map/fn:string[@key='additional']='property'">The additional property is not correct.</s:assert>
+                    <s:assert test="not(result/fn:map/fn:map[@key='serialization'])">There should be no serialization property.</s:assert>
+                </s:rule>
+            </s:pattern>
+        </s:schema>
+    </t:schematron>
+</t:test>
