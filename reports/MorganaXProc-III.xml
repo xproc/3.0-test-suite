@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="XProc Test Suite"
-           tests="1566"
+           tests="1608"
            errors="0"
            failures="0"
            skipped="0"
-           timestamp="2019-12-14T18:05:33">
+           timestamp="2019-12-28T18:02:09">
    <properties>
       <property name="processor" value="MorganaXProc-III"/>
-      <property name="version" value="SE 0.8.31-alpha"/>
+      <property name="version" value="SE 0.8.32-alpha"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.0"/>
@@ -53,6 +53,9 @@
    <testcase name="ab-archive-manifest-009.xml"/>
    <testcase name="ab-archive-manifest-010.xml"/>
    <testcase name="ab-archive-manifest-011.xml"/>
+   <testcase name="ab-archive-manifest-012.xml"/>
+   <testcase name="ab-archive-manifest-013.xml"/>
+   <testcase name="ab-archive-manifest-014.xml"/>
    <testcase name="ab-att-version-001.xml"/>
    <testcase name="ab-att-version-002.xml"/>
    <testcase name="ab-att-version-003.xml"/>
@@ -70,6 +73,33 @@
    <testcase name="ab-att-version-015.xml"/>
    <testcase name="ab-att-version-016.xml"/>
    <testcase name="ab-att-version-017.xml"/>
+   <testcase name="ab-cast-content-type-001.xml"/>
+   <testcase name="ab-cast-content-type-002.xml"/>
+   <testcase name="ab-cast-content-type-003.xml"/>
+   <testcase name="ab-cast-content-type-004.xml"/>
+   <testcase name="ab-cast-content-type-005.xml"/>
+   <testcase name="ab-cast-content-type-006.xml"/>
+   <testcase name="ab-cast-content-type-007.xml"/>
+   <testcase name="ab-cast-content-type-008.xml"/>
+   <testcase name="ab-cast-content-type-009.xml"/>
+   <testcase name="ab-cast-content-type-010.xml"/>
+   <testcase name="ab-cast-content-type-011.xml"/>
+   <testcase name="ab-cast-content-type-012.xml"/>
+   <testcase name="ab-cast-content-type-013.xml"/>
+   <testcase name="ab-cast-content-type-014.xml"/>
+   <testcase name="ab-cast-content-type-015.xml"/>
+   <testcase name="ab-cast-content-type-016.xml"/>
+   <testcase name="ab-cast-content-type-017.xml"/>
+   <testcase name="ab-cast-content-type-018.xml"/>
+   <testcase name="ab-cast-content-type-019.xml"/>
+   <testcase name="ab-cast-content-type-020.xml"/>
+   <testcase name="ab-cast-content-type-021.xml"/>
+   <testcase name="ab-cast-content-type-022.xml"/>
+   <testcase name="ab-cast-content-type-023.xml"/>
+   <testcase name="ab-cast-content-type-024.xml"/>
+   <testcase name="ab-cast-content-type-025.xml"/>
+   <testcase name="ab-cast-content-type-026.xml"/>
+   <testcase name="ab-cast-content-type-027.xml"/>
    <testcase name="ab-choose-001.xml"/>
    <testcase name="ab-choose-002.xml"/>
    <testcase name="ab-choose-003.xml"/>
@@ -526,6 +556,12 @@
    <testcase name="ab-library-035.xml"/>
    <testcase name="ab-load-001.xml"/>
    <testcase name="ab-load-002.xml"/>
+   <testcase name="ab-load-003.xml"/>
+   <testcase name="ab-load-004.xml"/>
+   <testcase name="ab-load-005.xml"/>
+   <testcase name="ab-load-006.xml"/>
+   <testcase name="ab-load-007.xml"/>
+   <testcase name="ab-load-008.xml"/>
    <testcase name="ab-namespace-delete-001.xml"/>
    <testcase name="ab-namespace-delete-002.xml"/>
    <testcase name="ab-namespace-delete-003.xml"/>
@@ -1066,6 +1102,9 @@
    <testcase name="ab-unarchive-016.xml"/>
    <testcase name="ab-unarchive-017.xml"/>
    <testcase name="ab-unarchive-018.xml"/>
+   <testcase name="ab-unarchive-019.xml"/>
+   <testcase name="ab-unarchive-020.xml"/>
+   <testcase name="ab-unarchive-021.xml"/>
    <testcase name="ab-uncompress-001.xml"/>
    <testcase name="ab-uncompress-002.xml"/>
    <testcase name="ab-uncompress-003.xml"/>
@@ -1543,6 +1582,9 @@
    <testcase name="nw-inline-expand-text-007.xml"/>
    <testcase name="nw-option-value-001.xml"/>
    <testcase name="nw-optional-port-001.xml"/>
+   <testcase name="nw-text-count-001.xml"/>
+   <testcase name="nw-text-count-002.xml"/>
+   <testcase name="nw-text-count-003.xml"/>
    <testcase name="nw-validate-with-xsd-001.xml"/>
    <testcase name="nw-validate-with-xsd-002.xml"/>
    <testcase name="nw-validate-with-xsd-003.xml"/>
