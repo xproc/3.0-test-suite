@@ -1,0 +1,40 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+   xmlns:err="http://www.w3.org/ns/xproc-error"
+   expected="fail" code="err:XS0077">
+   <t:info>
+      <t:title>depends 031 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-01-02</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added new tests for [p:] depends.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests @depends on p:choose must be an NCName.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"  xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:choose depends="1234">
+            <p:when test="true()">
+               <p:identity>
+                  <p:with-input><true /></p:with-input>
+               </p:identity>
+            </p:when>
+            <p:otherwise>
+               <p:identity>
+                  <p:with-input><false /></p:with-input>
+               </p:identity>
+            </p:otherwise>
+         </p:choose>
+         
+      </p:declare-step>
+   </t:pipeline>   
+</t:test>

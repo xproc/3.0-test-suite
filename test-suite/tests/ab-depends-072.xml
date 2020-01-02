@@ -1,0 +1,37 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+   xmlns:err="http://www.w3.org/ns/xproc-error"
+   expected="fail" code="err:XS0073">
+   <t:info>
+      <t:title>depends 072 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-01-02</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added new tests for [p:] depends.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests @depends on p:catch must be an inscope name.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"  xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+        <p:try>
+           <p:identity>
+              <p:with-input><doc /></p:with-input>
+           </p:identity>
+           
+           <p:catch depends="not-inscope">
+              <p:identity />
+           </p:catch>
+        </p:try>
+         
+      </p:declare-step>
+   </t:pipeline>   
+</t:test>
