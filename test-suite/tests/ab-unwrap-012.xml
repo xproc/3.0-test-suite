@@ -1,0 +1,55 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:unwrap 012 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-01-02</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests p:wrap / p:unwrap perserve document properties </p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:unwrap to preserve document properties</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+         <p:output port="result"/>
+         
+         <p:unwrap match="section">
+            <p:with-input>
+               <p:inline document-properties="map{'base-uri' : 'http://xproc.org/ns/testsuite/3.0',
+                                                  'serialization' : map{'indent' : true()},
+                                                  'prop' : 'bonus'}">
+                  <document>
+                     <section>
+                        <p>This is just some text.</p>
+                     </section>
+                  </document>
+               </p:inline>
+            </p:with-input>
+         </p:unwrap>
+         <p:cast-content-type content-type="application/xml">
+            <p:with-input select="p:document-properties(.)" />
+         </p:cast-content-type>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="j" uri="http://www.w3.org/2005/xpath-functions"/>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="j:map">The root is not 'j:map'.</s:assert>
+               <s:assert test="j:map/j:string[@key='content-type'] = 'application/xml'">Content-type is not application/xml.</s:assert>
+               <s:assert test="j:map/j:string[@key='base-uri'] = 'http://xproc.org/ns/testsuite/3.0'">Base-uri is not correct.</s:assert>
+               <s:assert test="j:map/j:map[@key='serialization']">The serialization map is not perserved.</s:assert>
+               <s:assert test="j:map/j:string[@key='prop'] = 'bonus'">The property 'prop' is not 'bonus'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
