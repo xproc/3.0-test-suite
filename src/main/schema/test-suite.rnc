@@ -15,7 +15,7 @@ testattr = attribute features {
 test-suite =
     element t:test-suite {
         testattr,
-        (info, description?, test*, test-div*)
+        (info, description?, property*, test*, test-div*)
     }
 
 passingTest =
@@ -23,7 +23,8 @@ passingTest =
         testattr
       & attribute step { text }?
       & attribute expected { "pass" }
-      & (info, description?, (input* & option* & pipeline? & schematron?))
+      & (info, description?,
+         (property* & input* & option* & pipeline? & schematron?))
     }
 
 failingTest =
@@ -32,12 +33,13 @@ failingTest =
       & attribute step { text }?
       & attribute expected { "fail" }
       & attribute code { xsd:NMTOKENS }
-      & (info, description?, (input* & option* & pipeline?))
+      & (info, description?,
+         (property* & input* & option* & pipeline?))
     }
 
 test-div =
     element t:div {
-        (info, description?, test*, test-div*)
+        (info, description?, property*, test*, test-div*)
     }
 
 info =
@@ -129,4 +131,10 @@ anyhtml =
 description =
     element t:description {
         anyhtml+
+    }
+
+property =
+    element t:property {
+        attribute name { text }
+      & attribute value { text }
     }
