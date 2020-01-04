@@ -3,6 +3,15 @@
       <t:title>p:rename-006 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2020-01-03</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test so it doesn't use p:unescape-markup anymore.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-05-18</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -28,10 +37,10 @@
             
          <p:rename match="element" new-name="baz:foo" xmlns:baz="http://baz.com"/>
          
-         <p:escape-markup/>
+         <p:cast-content-type content-type="text/plain" />
          
          <p:choose>
-            <p:when test="contains(/document, '&lt;baz:foo') and contains(/document, 'xmlns:baz=&quot;http://baz.com&quot;')">
+            <p:when test="contains(., '&lt;baz:foo') and contains(., 'xmlns:baz=&quot;http://baz.com&quot;')">
                <p:identity>
                   <p:with-input port="source">
                      <p:inline>
