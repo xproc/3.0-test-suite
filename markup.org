@@ -1,6 +1,6 @@
 #+TITLE: XProc Test Suite markup
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/org.css"/>
-#+OPTIONS: toc:nil num:3 H:4 ^:nil pri:t html-postamble:nil html-style:nil
+#+OPTIONS: toc:t num:3 H:4 ^:nil pri:t html-postamble:nil html-style:nil
 
 # This org-mode file documents the test-suite.rnc schema file.
 # It needs to be tangled and woven.
@@ -8,6 +8,9 @@
 # “woven” documentation (C-c C-e h h for HTML; C-c C-e l p for PDF).
 
 * Introduction
+:PROPERTIES:
+:CUSTOM_ID: introduction
+:END:
 
 The XProc Test Suite consists of a set of test suite documents and
 assorted ancillary files. The test suite documents are defined by the
@@ -29,6 +32,9 @@ start = test | test-suite | test-div
 #+END_SRC
 
 * Metadata
+:PROPERTIES:
+:CUSTOM_ID: metadata
+:END:
 
 All tests, test suites, and divisions begin with a required metadata
 element named ~info~. Metadata consists of a ~title~, a simple string
@@ -46,6 +52,9 @@ info =
 #+END_SRC
 
 ** Revision history
+:PROPERTIES:
+:CUSTOM_ID: revision-history
+:END:
 
 A revision history is a collection of one or more revisions.
 
@@ -88,6 +97,9 @@ author =
 #+END_SRC
 
 *** Author initials
+:PROPERTIES:
+:CUSTOM_ID: author-initials
+:END:
 
 Repeating all of the author information in each revision can be
 tedious. The ~initials~ attribute can simplify the markup: it acts as
@@ -120,6 +132,9 @@ revisions have the same authorship:
 #+END_SRC
 
 ** Specref
+:PROPERTIES:
+:CUSTOM_ID: specref
+:END:
 
 If a test, or set of tests, relates to a particular aspect of a
 particular specification, a link can be provided. The link consists of
@@ -140,15 +155,18 @@ specref =
 (It’s not clear if this turned out to be as useful in practice as it was in theory.)
 
 * Description
+:PROPERTIES:
+:CUSTOM_ID: description
+:END:
 
 The description can contain any mixture of text and HTML elements. HTML elements
 must be in the HTML namespace:
-
-#+BEGIN_SRC rnc :noweb yes
-<<html_namespace>>
-#+END_SRC
+src_emacs-lisp[:noweb yes :exports results]{"<<html_namespace>>"}{{{results(=http://www.w3.org/1999/xhtml=)}}}.
 
 * Test suites and divisions
+:PROPERTIES:
+:CUSTOM_ID: test-suites
+:END:
 
 The ~test-suite~ and ~div~ elements serve to group tests together.
 
@@ -172,6 +190,9 @@ test-div =
 #+END_SRC
 
 * Common attributes
+:PROPERTIES:
+:CUSTOM_ID: common-attributes
+:END:
 
 Each ~test~ (and ~test-suite~) has attributes to identify the features
 it requires and the circumstances under which it should be run.
@@ -222,6 +243,9 @@ The attributes should be interpreted as follows:
 + ~version~ specifies the version of the XProc processor required for this test.
 
 * Tests
+:PROPERTIES:
+:CUSTOM_ID: tests
+:END:
 
 There are two kinds of tests, passing tests and failing tests.
 
@@ -279,6 +303,9 @@ can be specified inline or with a ~src~ attribute that points to their
 content.
 
 ** Properties
+:PROPERTIES:
+:CUSTOM_ID: properties
+:END:
 
 A property is a name/value pair. These must be made available to the
 implementation, but the precise mechanism is necessarily
@@ -296,6 +323,9 @@ property =
 On the Java platform, these are system properties.
 
 ** Inputs
+:PROPERTIES:
+:CUSTOM_ID: inputs
+:END:
 
 Each ~input~ element identifies the input for a source port on the pipeline.
 XML and text documents can be placed inline; other media types must be
@@ -316,6 +346,9 @@ input =
 #+END_SRC
 
 ** Options
+:PROPERTIES:
+:CUSTOM_ID: options
+:END:
 
 Each ~option~ element identifies the value for a pipeline option. If a
 ~select~ attribute is provided, it must be an XPath expression.
@@ -334,6 +367,9 @@ option =
 #+END_SRC
 
 ** Pipeline
+:PROPERTIES:
+:CUSTOM_ID: pipeline
+:END:
 
 The ~pipeline~ element, which can only occur once, provides the pipeline
 to be tested. The pipeline must be written so that it has only a single, primary
@@ -349,6 +385,9 @@ pipeline =
 #+END_SRC
 
 ** Schematron
+:PROPERTIES:
+:CUSTOM_ID: schematron
+:END:
 
 The ~schematron~ element contains Schematron rules. Assertions in the
 Schematron are tested against the results of the pipeline.
@@ -363,6 +402,9 @@ schematron =
 #+END_SRC
 
 * Namespaces
+:PROPERTIES:
+:CUSTOM_ID: namespaces
+:END:
 
 The following namespaces are defined in this schema.
 
@@ -380,8 +422,12 @@ http://www.w3.org/1999/xhtml
 #+END_SRC
 
 * Relax NG Schema
+:PROPERTIES:
+:CUSTOM_ID: composed-schema
+:END:
 
-These fragments are stitched together into a complete schema.
+These fragments are stitched together (with a few other fragments)
+into a complete schema.
 
 #+BEGIN_SRC rnc :noweb yes :tangle ../schema/test-suite.rnc
 <<namespaces>>
