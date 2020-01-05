@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-01-05 Sun 12:29 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>XProc Test Suite markup</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Norman Walsh" />
+<link rel="stylesheet" type="text/css" href="css/org.css"/>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">XProc Test Suite markup</h1>
+
+<div id="outline-container-orge29eb38" class="outline-2">
+<h2 id="orge29eb38"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+The XProc Test Suite consists of a set of test suite documents and
+assorted ancillary files. The test suite documents are defined by the
+schema described in this document.
+</p>
+
+<p>
+The test suite schema is normatively defined in RELAX NG Compact
+Syntax, but it isn’t necessary for an implementation to use this
+schema for validation.
+</p>
+
+<p>
+Each individual test is defined by a <code>test</code> element. Tests can be grouped
+together with <code>div</code> elements and/or collected together in a <code>test-suite</code>.
+A test suite document must begin with one of these elements.
+All of the test suite elements are in the test suite namespace, see 
+<a href="#orgef062b8">Namespaces</a>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org8457452"><span style="color: #388E3C;">start</span> = test | test-suite | test-div
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org231ef04" class="outline-2">
+<h2 id="org231ef04"><span class="section-number-2">2</span> Metadata</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+All tests, test suites, and divisions begin with a required metadata
+element named <code>info</code>. Metadata consists of a <code>title</code>, a simple string
+with inline markup, a <code>revision-history</code> that documents changes to the
+test, and optional <code>specref</code> elements.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org3774392"><span style="color: #388E3C;">info</span> =
+    <span style="color: #bf360c;">element</span> t:info <span style="color: #707183;">{</span>
+        title
+        &amp; revision-history
+        &amp; specref*
+    <span style="color: #707183;">}</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org3a9f615" class="outline-3">
+<h3 id="org3a9f615"><span class="section-number-3">2.1</span> Revision history</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+A revision history is a collection of one or more revisions.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org8574d63"><span style="color: #388E3C;">revision-history</span> =
+    <span style="color: #bf360c;">element</span> t:revision-history <span style="color: #707183;">{</span>
+        revision+
+    <span style="color: #707183;">}</span>
+</pre>
+</div>
+
+<p>
+Revisions <i>must</i> be listed in reverse chronological order, so the most
+recent revision appears first. Each revision consists of a <code>date</code>, an <code>author</code>,
+and a <code>description</code> of the revision (see <a href="#orgcdcbbe8">Description</a>).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org61978ae"><span style="color: #388E3C;">revision</span> =
+    <span style="color: #bf360c;">element</span> t:revision <span style="color: #707183;">{</span>
+        <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">initials</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>?,
+        date,
+        author?,
+        description
+    <span style="color: #707183;">}</span>
+</pre>
+</div>
+
+<p>
+The <code>date</code> must be an ISO 8601 <i>date</i> or <i>dateTime</i>. An <code>author</code>
+has a <code>name</code> and an optional <code>email</code> address and <code>uri</code>. The <code>description</code>
+should describe what has been changed and why.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org854c892"><span style="color: #388E3C;">author</span> =
+    <span style="color: #bf360c;">element</span> t:author <span style="color: #707183;">{</span>
+        <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">initials</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>?
+      &amp; name?
+      &amp; email?
+      &amp; uri?
+    <span style="color: #707183;">}</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org0c15665" class="outline-4">
+<h4 id="org0c15665"><span class="section-number-4">2.1.1</span> Author initials</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<p>
+Repeating all of the author information in each revision can be
+tedious. The <code>initials</code> attribute can simplify the markup: it acts as
+an ID/IDREF link. The first time an author is mentioned, provide as
+much information as possible and mark that author with a (unique) set
+of initials. In other revisions, specify the author initials but leave
+the author element otherwise empty. For example, both of these
+revisions have the same authorship:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-xml">&lt;<span style="color: #795548;">t</span>:<span style="color: #388E3C;">revision</span>&gt;
+  &lt;<span style="color: #795548;">t</span>:<span style="color: #388E3C;">date</span>&gt;2020&#8212;01-04&lt;/<span style="color: #795548;">t</span>:<span style="color: #388E3C;">date</span>&gt;
+  &lt;<span style="color: #795548;">t</span>:<span style="color: #388E3C;">author</span> <span style="color: #455A64;">initials</span>=<span style="color: #6C3082;">"jd"</span>/&gt;
+  &lt;<span style="color: #795548;">t</span>:<span style="color: #388E3C;">description</span> <span style="color: #795548;">xmlns</span>=<span style="color: #6C3082;">"http://www.w3.org/1999/xhtml"</span>&gt;
+    &lt;<span style="color: #388E3C;">p</span>&gt;Corrected typo in test.&lt;/<span style="color: #388E3C;">p</span>&gt;
+  &lt;/<span style="color: #795548;">t</span>:<span style="color: #388E3C;">description</span>&gt;
+&lt;/<span style="color: #795548;">t</span>:<span style="color: #388E3C;">revision</span>&gt;
+
+&lt;<span style="color: #795548;">t</span>:<span style="color: #388E3C;">revision</span>&gt;
+  &lt;<span style="color: #795548;">t</span>:<span style="color: #388E3C;">date</span>&gt;2019-12&#8212;31&lt;/<span style="color: #795548;">t</span>:<span style="color: #388E3C;">date</span>&gt;
+  &lt;<span style="color: #795548;">t</span>:<span style="color: #388E3C;">author</span> <span style="color: #455A64;">initials</span>=<span style="color: #6C3082;">"jd"</span>&gt;
+    &lt;<span style="color: #795548;">t</span>:<span style="color: #388E3C;">name</span>&gt;Jane Doe&lt;/<span style="color: #795548;">t</span>:<span style="color: #388E3C;">name</span>&gt;
+    &lt;<span style="color: #795548;">t</span>:<span style="color: #388E3C;">email</span>&gt;jane@example.com&lt;/<span style="color: #795548;">t</span>:<span style="color: #388E3C;">email</span>&gt;
+    &lt;<span style="color: #795548;">t</span>:<span style="color: #388E3C;">uri</span>&gt;https://example.com/jane/&lt;/<span style="color: #795548;">t</span>:<span style="color: #388E3C;">uri</span>&gt;
+  &lt;/<span style="color: #795548;">t</span>:<span style="color: #388E3C;">author</span>&gt;
+  &lt;<span style="color: #795548;">t</span>:<span style="color: #388E3C;">description</span> <span style="color: #795548;">xmlns</span>=<span style="color: #6C3082;">"http://www.w3.org/1999/xhtml"</span>&gt;
+    &lt;<span style="color: #388E3C;">p</span>&gt;Initial checkin.&lt;/<span style="color: #388E3C;">p</span>&gt;
+  &lt;/<span style="color: #795548;">t</span>:<span style="color: #388E3C;">description</span>&gt;
+&lt;/<span style="color: #795548;">t</span>:<span style="color: #388E3C;">revision</span>&gt;
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org485760e" class="outline-3">
+<h3 id="org485760e"><span class="section-number-3">2.2</span> Specref</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+If a test, or set of tests, relates to a particular aspect of a
+particular specification, a link can be provided. The link consists of
+a <code>spec</code> attribute that identifies the specification and a <code>linkend</code>
+attribute that must contain the ID value in the specification with
+which this test is associated.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org48e12e9"><span style="color: #388E3C;">specref</span> =
+    <span style="color: #bf360c;">element</span> t:specref <span style="color: #707183;">{</span>
+        <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">spec</span> <span style="color: #7388d6;">{</span> <span style="color: #6C3082;">"xproc"</span> | <span style="color: #6C3082;">"steps"</span> <span style="color: #7388d6;">}</span>?
+      &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">linkend</span> <span style="color: #7388d6;">{</span> xsd:NMTOKEN <span style="color: #7388d6;">}</span>
+      &amp; <span style="color: #bf360c;">empty</span>
+    <span style="color: #707183;">}</span>
+</pre>
+</div>
+
+<p>
+(It’s not clear if this turned out to be as useful in practice as it was in theory.)
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcdcbbe8" class="outline-2">
+<h2 id="orgcdcbbe8"><span class="section-number-2">3</span> Description</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+The description can contain any mixture of text and HTML elements. HTML elements
+must be in the HTML namespace:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc">http://www.w3.org/1999/xhtml
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org81d74f0" class="outline-2">
+<h2 id="org81d74f0"><span class="section-number-2">4</span> Test suites and divisions</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+The <code>test-suite</code> and <code>div</code> elements serve to group tests together.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org1aacd49"><span style="color: #388E3C;">test-suite</span> =
+    <span style="color: #bf360c;">element</span> t:test-suite <span style="color: #707183;">{</span>
+        testattr,
+        <span style="color: #7388d6;">(</span>info, description?, property*, test*, test-div*<span style="color: #7388d6;">)</span>
+    <span style="color: #707183;">}</span>
+</pre>
+</div>
+
+<p>
+Divisions may be nested.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org7c12251"><span style="color: #388E3C;">test-div</span> =
+    <span style="color: #bf360c;">element</span> t:div <span style="color: #707183;">{</span>
+        <span style="color: #7388d6;">(</span>info, description?, property*, test*, test-div*<span style="color: #7388d6;">)</span>
+    <span style="color: #707183;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org45e4c1e" class="outline-2">
+<h2 id="org45e4c1e"><span class="section-number-2">5</span> Common attributes</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Each <code>test</code> (and <code>test-suite</code>) has attributes to identify the features
+it requires and the circumstances under which it should be run.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org63e1893"><span style="color: #388E3C;">testattr</span> = <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">features</span> <span style="color: #707183;">{</span>
+               <span style="color: #bf360c;">list</span> <span style="color: #7388d6;">{</span> xsd:token+ <span style="color: #7388d6;">}</span>
+           <span style="color: #707183;">}</span> ?
+           &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">when</span> <span style="color: #707183;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #707183;">}</span>?
+           &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">src</span> <span style="color: #707183;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #707183;">}</span>?
+           &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">version</span> <span style="color: #707183;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #707183;">}</span>?
+</pre>
+</div>
+
+<p>
+The attributes should be interpreted as follows:
+</p>
+
+<ul class="org-ul">
+<li><p>
+<code>features</code> is a set of one or more feature tokens. Feature tokens identify
+features that the implementation must support in order for this test to pass.
+The test should be skipped if it identifies any unsupported features.
+</p>
+
+<p>
+The set of feature tokens is a bit ad hoc. Here’s a summary of the feature
+tokens at the time this document was written:
+</p>
+
+<ul class="org-ul">
+<li><code>archive-order</code>, ???</li>
+<li><code>dtd-id-ref-warning</code>, a RELAX NG validator capable of reporting
+DTD-based ID/IDREF warnings is required.</li>
+<li><code>lazy-eval</code>, lazy evaluation of variable bindings is required.</li>
+<li><code>p-validate-with-relax-ng</code>, a RELAX NG validator is required.</li>
+<li><code>p-validate-with-schematron</code>, a Schematron validator is required.</li>
+<li><code>p-validate-with-xsd</code>, a W3C XML Schema validator is required.</li>
+<li><code>webaccess</code>, access to the web is required (this test cannot be run offline).</li>
+<li><code>xquery_1_0</code>, an XQuery 1.0 processor is required.</li>
+<li><code>xquery_3_0</code>, an XQuery 3.0 processor is required.</li>
+<li><code>xquery_3_1</code>, an XQuery 3.1 processor is required.</li>
+<li><code>xslt-1</code>, an XSLT 1.0 processor is required.</li>
+<li><code>xslt-1-output-base-uri</code>, ???</li>
+<li><code>xslt-2</code>, an XSLT 2.0 processor is required.</li>
+<li><code>xslt-3</code>, an XSLT 3.0 processor is required.</li>
+<li><code>xslt-serialization</code>, ???</li>
+</ul></li>
+
+<li><code>when</code> specifies an XPath expression that can be evaluated statically by
+the test processor. If the effective boolean value of the result is <code>false()</code>, the
+test is ignored.</li>
+
+<li><code>src</code> specifies a URI where the <code>test</code> (or <code>test-suite</code>) is located. If this
+attribute is specified, the element on which it occurs must be empty.</li>
+
+<li><code>version</code> specifies the version of the XProc processor required for this test.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgfcf2351" class="outline-2">
+<h2 id="orgfcf2351"><span class="section-number-2">6</span> Tests</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+There are two kinds of tests, passing tests and failing tests.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org34ff7cb"><span style="color: #388E3C;">test</span> = passingTest | failingTest
+</pre>
+</div>
+
+<p>
+Passing and failing tests are mostly the same. Tests have <a href="#org45e4c1e">common
+attributes</a>, <a href="#org231ef04">metadata</a>, and a <a href="#orgcdcbbe8">description</a>. The body of the test in each
+case consists of <code>property</code>, <code>input</code>, <code>output</code>, and <code>pipeline</code>
+elements.
+</p>
+
+<p>
+A passing test has an <code>expected</code> attribute (that must have the value be <code>pass</code>)
+and may have <code>schematron</code> tests to verify the results.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="orgd22ad78"><span style="color: #388E3C;">passingTest</span> =
+    <span style="color: #bf360c;">element</span> t:test <span style="color: #707183;">{</span>
+        testattr
+      &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">expected</span> <span style="color: #7388d6;">{</span> <span style="color: #6C3082;">"pass"</span> <span style="color: #7388d6;">}</span>
+      &amp; <span style="color: #7388d6;">(</span>info, description?,
+         <span style="color: #909183;">(</span>property* &amp; input* &amp; option* &amp; pipeline? &amp; schematron?<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
+    <span style="color: #707183;">}</span>
+</pre>
+</div>
+
+<p>
+A failing test has an <code>expected</code> attribute (that must have the value be <code>fail</code>)
+and must specify one or more expected error conditions.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="orgaf865db"><span style="color: #388E3C;">failingTest</span> =
+    <span style="color: #bf360c;">element</span> t:test <span style="color: #707183;">{</span>
+        testattr
+      &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">expected</span> <span style="color: #7388d6;">{</span> <span style="color: #6C3082;">"fail"</span> <span style="color: #7388d6;">}</span>
+      &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">code</span> <span style="color: #7388d6;">{</span> xsd:NMTOKENS <span style="color: #7388d6;">}</span>
+      &amp; <span style="color: #7388d6;">(</span>info, description?,
+         <span style="color: #909183;">(</span>property* &amp; input* &amp; option* &amp; pipeline?<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
+    <span style="color: #707183;">}</span>
+</pre>
+</div>
+
+<p>
+Broadly speaking, the test harness sets the specified properties and
+runs the specified pipeline with the specified inputs and options. A
+passing test must complete without error, or it must be recorded as a
+failure. If it completes, its output is tested against any Schematron
+rules provided. No assertions must be raised.
+</p>
+
+<p>
+If a failing test raises one of the specified error codes, it is a
+“pass” from the perspective of the test suite, otherwise it must be
+recorded as a failure.
+</p>
+
+<p>
+Like tests and test-suites, inputs, pipelines, and Schematron rules
+can be specified inline or with a <code>src</code> attribute that points to their
+content.
+</p>
+</div>
+
+<div id="outline-container-org24bfba7" class="outline-3">
+<h3 id="org24bfba7"><span class="section-number-3">6.1</span> Properties</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+A property is a name/value pair. These must be made available to the
+implementation, but the precise mechanism is necessarily
+implementation defined.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="orgb4ecb13"><span style="color: #388E3C;">property</span> =
+    <span style="color: #bf360c;">element</span> t:property <span style="color: #707183;">{</span>
+        <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">name</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>
+      &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">value</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>
+    <span style="color: #707183;">}</span>
+</pre>
+</div>
+
+<p>
+On the Java platform, these are system properties.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org80355ab" class="outline-3">
+<h3 id="org80355ab"><span class="section-number-3">6.2</span> Inputs</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+Each <code>input</code> element identifies the input for a source port on the pipeline.
+XML and text documents can be placed inline; other media types must be
+stored externally and identified by URI.
+</p>
+
+<p>
+If several inputs identify the same <code>port</code>, then the sequence of
+documents identified appears on that port, in document order of the <code>input</code>
+elements in the test.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="orga18eeb5"><span style="color: #388E3C;">input</span> =
+    <span style="color: #bf360c;">element</span> t:input <span style="color: #707183;">{</span>
+        <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">port</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>
+      &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">src</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>?
+      &amp; any*
+    <span style="color: #707183;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6736f4b" class="outline-3">
+<h3 id="org6736f4b"><span class="section-number-3">6.3</span> Options</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+Each <code>option</code> element identifies the value for a pipeline option. If a
+<code>select</code> attribute is provided, it must be an XPath expression.
+Evaluating that expression gives the value of the option. If the
+<code>select</code> attribute is not provided, the contents of the element is the
+value of the option.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="orge654124"><span style="color: #388E3C;">option</span> =
+    <span style="color: #bf360c;">element</span> t:option <span style="color: #707183;">{</span>
+        <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">name</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>
+      &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">select</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>?
+      &amp; any*
+    <span style="color: #707183;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org05d0c2f" class="outline-3">
+<h3 id="org05d0c2f"><span class="section-number-3">6.4</span> Pipeline</h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+The <code>pipeline</code> element, which can only occur once, provides the pipeline
+to be tested. The pipeline must be written so that it has only a single, primary
+output port named <code>result</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="orgc01568c"><span style="color: #388E3C;">pipeline</span> =
+    <span style="color: #bf360c;">element</span> t:pipeline <span style="color: #707183;">{</span>
+        <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">src</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>?
+      &amp; any*
+    <span style="color: #707183;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org43a2c20" class="outline-3">
+<h3 id="org43a2c20"><span class="section-number-3">6.5</span> Schematron</h3>
+<div class="outline-text-3" id="text-6-5">
+<p>
+The <code>schematron</code> element contains Schematron rules. Assertions in the
+Schematron are tested against the results of the pipeline.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org37bee10"><span style="color: #388E3C;">schematron</span> =
+    <span style="color: #bf360c;">element</span> t:schematron <span style="color: #707183;">{</span>
+        <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">src</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>?
+      &amp; any*
+    <span style="color: #707183;">}</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgef062b8" class="outline-2">
+<h2 id="orgef062b8"><span class="section-number-2">7</span> Namespaces</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+The following namespaces are defined in this schema.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="orgb5b4f0f"><span style="color: #bf360c;">namespace</span> rng  = <span style="color: #6C3082;">"http://relaxng.org/ns/structure/1.0"</span>
+<span style="color: #bf360c;">namespace</span> t = <span style="color: #6C3082;">"http://xproc.org/ns/testsuite/3.0"</span>
+<span style="color: #bf360c;">namespace</span> h = <span style="color: #6C3082;">"http://www.w3.org/1999/xhtml"</span>
+<span style="color: #bf360c;">default</span> <span style="color: #bf360c;">namespace</span> = <span style="color: #6C3082;">"http://xproc.org/ns/testsuite/3.0"</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfe2709a" class="outline-2">
+<h2 id="orgfe2709a"><span class="section-number-2">8</span> Relax NG Schema</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+These fragments are stitched together into a complete schema.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc"><span style="color: #bf360c;">namespace</span> rng  = <span style="color: #6C3082;">"http://relaxng.org/ns/structure/1.0"</span>
+<span style="color: #bf360c;">namespace</span> t = <span style="color: #6C3082;">"http://xproc.org/ns/testsuite/3.0"</span>
+<span style="color: #bf360c;">namespace</span> h = <span style="color: #6C3082;">"http://www.w3.org/1999/xhtml"</span>
+<span style="color: #bf360c;">default</span> <span style="color: #bf360c;">namespace</span> = <span style="color: #6C3082;">"http://xproc.org/ns/testsuite/3.0"</span>
+
+<span style="color: #388E3C;">start</span> = test | test-suite | test-div
+
+<span style="color: #388E3C;">testattr</span> = <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">features</span> <span style="color: #707183;">{</span>
+               <span style="color: #bf360c;">list</span> <span style="color: #7388d6;">{</span> xsd:token+ <span style="color: #7388d6;">}</span>
+           <span style="color: #707183;">}</span> ?
+           &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">when</span> <span style="color: #707183;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #707183;">}</span>?
+           &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">src</span> <span style="color: #707183;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #707183;">}</span>?
+           &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">version</span> <span style="color: #707183;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #707183;">}</span>?
+
+<span style="color: #388E3C;">test-suite</span> =
+    <span style="color: #bf360c;">element</span> t:test-suite <span style="color: #707183;">{</span>
+        testattr,
+        <span style="color: #7388d6;">(</span>info, description?, property*, test*, test-div*<span style="color: #7388d6;">)</span>
+    <span style="color: #707183;">}</span>
+
+<span style="color: #388E3C;">passingTest</span> =
+    <span style="color: #bf360c;">element</span> t:test <span style="color: #707183;">{</span>
+        testattr
+      &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">expected</span> <span style="color: #7388d6;">{</span> <span style="color: #6C3082;">"pass"</span> <span style="color: #7388d6;">}</span>
+      &amp; <span style="color: #7388d6;">(</span>info, description?,
+         <span style="color: #909183;">(</span>property* &amp; input* &amp; option* &amp; pipeline? &amp; schematron?<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
+    <span style="color: #707183;">}</span>
+
+<span style="color: #388E3C;">failingTest</span> =
+    <span style="color: #bf360c;">element</span> t:test <span style="color: #707183;">{</span>
+        testattr
+      &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">expected</span> <span style="color: #7388d6;">{</span> <span style="color: #6C3082;">"fail"</span> <span style="color: #7388d6;">}</span>
+      &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">code</span> <span style="color: #7388d6;">{</span> xsd:NMTOKENS <span style="color: #7388d6;">}</span>
+      &amp; <span style="color: #7388d6;">(</span>info, description?,
+         <span style="color: #909183;">(</span>property* &amp; input* &amp; option* &amp; pipeline?<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
+    <span style="color: #707183;">}</span>
+
+<span style="color: #388E3C;">test-div</span> =
+    <span style="color: #bf360c;">element</span> t:div <span style="color: #707183;">{</span>
+        <span style="color: #7388d6;">(</span>info, description?, property*, test*, test-div*<span style="color: #7388d6;">)</span>
+    <span style="color: #707183;">}</span>
+
+<span style="color: #388E3C;">info</span> =
+    <span style="color: #bf360c;">element</span> t:info <span style="color: #707183;">{</span>
+        title
+        &amp; revision-history
+        &amp; specref*
+    <span style="color: #707183;">}</span>
+
+<span style="color: #388E3C;">author</span> =
+    <span style="color: #bf360c;">element</span> t:author <span style="color: #707183;">{</span>
+        <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">initials</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>?
+      &amp; name?
+      &amp; email?
+      &amp; uri?
+    <span style="color: #707183;">}</span>
+
+<span style="color: #388E3C;">name</span> = <span style="color: #bf360c;">element</span> t:name <span style="color: #707183;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #707183;">}</span>
+<span style="color: #388E3C;">email</span> = <span style="color: #bf360c;">element</span> t:email <span style="color: #707183;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #707183;">}</span>
+<span style="color: #388E3C;">uri</span> = <span style="color: #bf360c;">element</span> t:uri <span style="color: #707183;">{</span> xsd:anyURI <span style="color: #707183;">}</span>
+
+<span style="color: #388E3C;">revision-history</span> =
+    <span style="color: #bf360c;">element</span> t:revision-history <span style="color: #707183;">{</span>
+        revision+
+    <span style="color: #707183;">}</span>
+
+<span style="color: #388E3C;">revision</span> =
+    <span style="color: #bf360c;">element</span> t:revision <span style="color: #707183;">{</span>
+        <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">initials</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>?,
+        date,
+        author?,
+        description
+    <span style="color: #707183;">}</span>
+
+<span style="color: #388E3C;">title</span> =
+    <span style="color: #bf360c;">element</span> t:title <span style="color: #707183;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #707183;">}</span>
+
+<span style="color: #388E3C;">date</span> =
+    <span style="color: #bf360c;">element</span> t:date <span style="color: #707183;">{</span> xsd:date|xsd:dateTime <span style="color: #707183;">}</span>
+
+<span style="color: #388E3C;">specref</span> =
+    <span style="color: #bf360c;">element</span> t:specref <span style="color: #707183;">{</span>
+        <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">spec</span> <span style="color: #7388d6;">{</span> <span style="color: #6C3082;">"xproc"</span> | <span style="color: #6C3082;">"steps"</span> <span style="color: #7388d6;">}</span>?
+      &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">linkend</span> <span style="color: #7388d6;">{</span> xsd:NMTOKEN <span style="color: #7388d6;">}</span>
+      &amp; <span style="color: #bf360c;">empty</span>
+    <span style="color: #707183;">}</span>
+
+<span style="color: #388E3C;">test</span> = passingTest | failingTest
+
+<span style="color: #388E3C;">pipeline</span> =
+    <span style="color: #bf360c;">element</span> t:pipeline <span style="color: #707183;">{</span>
+        <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">src</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>?
+      &amp; any*
+    <span style="color: #707183;">}</span>
+
+<span style="color: #388E3C;">schematron</span> =
+    <span style="color: #bf360c;">element</span> t:schematron <span style="color: #707183;">{</span>
+        <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">src</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>?
+      &amp; any*
+    <span style="color: #707183;">}</span>
+
+<span style="color: #388E3C;">input</span> =
+    <span style="color: #bf360c;">element</span> t:input <span style="color: #707183;">{</span>
+        <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">port</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>
+      &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">src</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>?
+      &amp; any*
+    <span style="color: #707183;">}</span>
+
+<span style="color: #388E3C;">option</span> =
+    <span style="color: #bf360c;">element</span> t:option <span style="color: #707183;">{</span>
+        <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">name</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>
+      &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">select</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>?
+      &amp; any*
+    <span style="color: #707183;">}</span>
+
+<span style="color: #388E3C;">any</span> =
+    <span style="color: #bf360c;">element</span> * <span style="color: #707183;">{</span>
+        <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">*</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>*
+      &amp; <span style="color: #7388d6;">(</span><span style="color: #bf360c;">text</span> | any<span style="color: #7388d6;">)</span>*
+    <span style="color: #707183;">}</span>
+
+<span style="color: #388E3C;">anyhtml</span> =
+    <span style="color: #bf360c;">element</span> h:* <span style="color: #707183;">{</span>
+        <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">*</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>*
+      &amp; <span style="color: #7388d6;">(</span><span style="color: #bf360c;">text</span> | anyhtml<span style="color: #7388d6;">)</span>*
+    <span style="color: #707183;">}</span>
+
+<span style="color: #388E3C;">description</span> =
+    <span style="color: #bf360c;">element</span> t:description <span style="color: #707183;">{</span>
+        anyhtml+
+    <span style="color: #707183;">}</span>
+
+<span style="color: #388E3C;">property</span> =
+    <span style="color: #bf360c;">element</span> t:property <span style="color: #707183;">{</span>
+        <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">name</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>
+      &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">value</span> <span style="color: #7388d6;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #7388d6;">}</span>
+    <span style="color: #707183;">}</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
