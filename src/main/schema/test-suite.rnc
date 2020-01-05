@@ -21,7 +21,6 @@ test-suite =
 passingTest =
     element t:test {
         testattr
-      & attribute step { text }?
       & attribute expected { "pass" }
       & (info, description?,
          (property* & input* & option* & pipeline? & schematron?))
@@ -30,7 +29,6 @@ passingTest =
 failingTest =
     element t:test {
         testattr
-      & attribute step { text }?
       & attribute expected { "fail" }
       & attribute code { xsd:NMTOKENS }
       & (info, description?,
@@ -88,7 +86,6 @@ specref =
     }
 
 test = passingTest | failingTest
-
 
 pipeline =
     element t:pipeline {
