@@ -1,0 +1,45 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>http-request-026 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-01-12</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added new tests for p:http-request (Ported from 1.0).</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:http-request: post with json payload to a responder.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:http-request href="http://tests.xproc.org/service/echo" method="post">
+            <p:with-input>
+               <p:inline content-type='application/json'>{{"key1" : "value1", "key2": "value2"}}</p:inline>
+            </p:with-input>
+         </p:http-request>
+         
+         <p:cast-content-type content-type="application/xml" />
+      </p:declare-step>
+   </t:pipeline>
+   
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:ns prefix="j" uri="http://www.w3.org/2005/xpath-functions" />
+           <s:pattern>
+            <s:rule context="/">
+               <s:assert test="j:map">The root element is not 'map'.</s:assert>
+               <s:assert test="j:map/j:string[@key='key1']/text()='value1'">There is no string element with key1/value1.</s:assert>
+               <s:assert test="j:map/j:string[@key='key2']/text()='value2'">There is no string element with key2/value2.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
