@@ -1,0 +1,51 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>http-request-016 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-01-12</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added new tests for p:http-request (Ported from 1.0).</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:http-request: tests headers from a multi-part response.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:http-request href="http://tests.xproc.org/service/fixed-multipart">
+            <p:with-input><p:empty/></p:with-input>
+         </p:http-request>
+         
+         <p:identity>
+            <p:with-input pipe="report" />
+         </p:identity>
+         
+         <p:identity>
+            <p:with-input>
+               <headers>
+                  <content-type>{.?headers?CONTENT-TYPE}</content-type>
+               </headers>
+            </p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+   
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+          <s:pattern>
+            <s:rule context="/">
+               <s:assert test="headers">The root element is not 'headers'.</s:assert>
+               <s:assert test="headers/content-type='multipart/related; boundary=&quot;=-=-=-=-=&quot;'">The content-type header is not right.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
