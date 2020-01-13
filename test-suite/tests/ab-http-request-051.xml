@@ -1,0 +1,56 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>http-request-051 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-01-13</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added new tests for p:http-request.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:http-request: get with multi-part response,
+         parameter 'multipart' set to true.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:http-request href="http://tests.xproc.org/service/fixed-multipart"
+                         parameters="map{'multipart' : true()}">
+            <p:with-input><p:empty/></p:with-input>
+         </p:http-request>
+         
+         <p:for-each>
+            <p:cast-content-type content-type="application/xml" />
+         </p:for-each>
+         
+         <p:wrap-sequence wrapper="result" />
+      </p:declare-step>
+   </t:pipeline>
+   
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:ns prefix="html" uri="http://www.w3.org/1999/xhtml" />
+         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step" />
+          <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The root element is not 'result'.</s:assert>
+               <s:assert test="result/html:html">There is no child 'html:html'.</s:assert>
+               <s:assert test="result/html:html/html:head/html:title/text()='Hello world!'">The document title is not 'Hello world!'</s:assert>
+               <s:assert test="result/html:html/html:body/html:h1/html:img/@src='helloworld.png'">The is no @src with 'helloworld.png' in body/h1/img.</s:assert>
+               <s:assert test="result/c:data">The root element is not 'c:data'.</s:assert>
+               <s:assert test="result/c:data/@content-type='image/png'">Content-Type is not 'image/png'.</s:assert>
+               <s:assert test="result/c:data/@encoding='base64'">Encoding is not 'base64'.</s:assert>
+               <s:assert test="starts-with(result/c:data/text(),'iVBORw0KGgoAAAANSUhEUgAAAPwAAABJCAYAAAAZrEuhAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A') and
+                  ends-with(result/c:data/text(), '/f8AMGN9ADsjEr4AAAAASUVORK5CYII=')">Content is not right.</s:assert>               
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
