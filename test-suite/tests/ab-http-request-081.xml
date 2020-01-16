@@ -1,0 +1,32 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+   xmlns:err="http://www.w3.org/ns/xproc-error"
+   expected="fail" code="err:XC0003">
+   <t:info>
+      <t:title>http-request-081 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-01-15</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added new tests for p:http-request.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:http-request: Test XC003 is correctly raised.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:http-request method="get" href="http://tests.xproc.org/docs/basic-auth/"
+            auth="map{'password' : '123456'}">
+            <p:with-input><p:empty /></p:with-input>
+         </p:http-request>
+         
+      </p:declare-step>
+   </t:pipeline>
+</t:test>

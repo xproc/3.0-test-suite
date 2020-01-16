@@ -1,0 +1,45 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>http-request-088 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-01-15</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added new tests for p:http-request.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>This test checks to see if the processor identifies XML content types
+         when an explicit charset parameter is specified. (Ported from http-request #014)</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:http-request method="post" href="http://tests.xproc.org/service/fixed-rdf-charset">
+            <p:with-input><c:content xmlns:c="http://www.w3.org/ns/xproc-step" /></p:with-input>
+         </p:http-request>
+   
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:ns prefix="rdf" uri="http://www.w3.org/1999/02/22-rdf-syntax-ns#" />
+         <s:ns prefix="dc" uri="http://purl.org/dc/elements/1.1/" />
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="rdf:RDF">The document root is not RDF.</s:assert>
+               <s:assert test="rdf:RDF/rdf:Description">There is no element 'Description'.</s:assert>
+               <s:assert test="rdf:RDF/rdf:Description/@rdf:about=''">There is no attribute 'about' with ''.</s:assert>
+               <s:assert test="rdf:RDF/rdf:Description/dc:title/text()='Hello world!'">There is no element 'title' with 'Hello world.'</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+   
+</t:test>
