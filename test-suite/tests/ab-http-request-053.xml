@@ -5,6 +5,15 @@
       <t:title>http-request-053 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2020-01-29</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed name of key.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2020-01-13</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -17,7 +26,7 @@
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Tests p:http-request: get with multi-part response,
-         parameter 'multipart' set to false, so error expected.
+         parameter 'accept-multipart' set to false, so error expected.
       (Settigs for 'status-only' doesn't matter here.)</p>
    </t:description>
    <t:pipeline>
@@ -25,7 +34,7 @@
          <p:output port="result" />
          
          <p:http-request href="http://tests.xproc.org/service/fixed-multipart"
-                         parameters="map{'multipart' : false(),
+                         parameters="map{'accept-multipart' : false(),
                                          'status-only' : true()}">
             <p:with-input><p:empty/></p:with-input>
          </p:http-request>
