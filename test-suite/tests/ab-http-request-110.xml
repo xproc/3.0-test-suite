@@ -2,19 +2,10 @@
         xmlns:err="http://www.w3.org/ns/xproc-error"
    expected="fail" code="err:XC0124">
    <t:info>
-      <t:title>http-request-037 (AB)</t:title>
+      <t:title>http-request-110 (AB)</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2020-01-29</t:date>
-            <t:author>
-               <t:name>Achim Berndzen</t:name>
-            </t:author>
-            <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>Changed name of key.</p>
-         </t:description>
-         </t:revision>
-         <t:revision>
-            <t:date>2020-01-13</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
@@ -25,14 +16,14 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests p:http-request: Error needs to be raised if parameter has the wrong type.</p>
+      <p>Tests p:http-request: Error needs to be raised if is not suitable for key.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result" />
          
          <p:http-request href="http://tests.xproc.org/service/fixed-xml"
-                         parameters="map{'accept-multipart' : 12}">
+            parameters="map{'multipart-boundary' : '-- not allowed'}">
             <p:with-input>
                <p:empty />
             </p:with-input>
