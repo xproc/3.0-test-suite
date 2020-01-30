@@ -8,7 +8,7 @@
                <t:name>Achim Berndzen</t:name>
             </t:author>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>Changed headers to lower-case.</p>
+               <p>Changed headers to lower-case, fixed typo.</p>
             </t:description>
          </t:revision>
          <t:revision>
@@ -32,7 +32,7 @@
          <p:http-request href="http://tests.xproc.org/service/echo" method="post"
             parameters="map{'override-content-type' : 'text/plain'}">
             <p:with-input>
-               <p:inline>><doc /></p:inline>
+               <p:inline><doc /></p:inline>
             </p:with-input>
          </p:http-request>
          
