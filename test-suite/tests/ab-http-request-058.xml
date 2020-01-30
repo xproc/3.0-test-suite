@@ -3,6 +3,15 @@
       <t:title>http-request-058 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2020-01-30</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed headers to lower-case.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2020-01-13</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -21,7 +30,7 @@
          <p:output port="result" />
          
          <p:http-request href="http://tests.xproc.org/service/fixed-xml"
-               assert =".?headers?CONTENT-TYPE='application/xml'">
+               assert =".?headers?content-type='application/xml'">
             <p:with-input><p:empty /></p:with-input>
          </p:http-request>
       </p:declare-step>

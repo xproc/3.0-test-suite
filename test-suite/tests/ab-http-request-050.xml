@@ -3,6 +3,15 @@
       <t:title>http-request-050 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2020-01-30</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed headers to lower-case.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2020-01-13</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -31,7 +40,7 @@
          
          <p:identity>
             <p:with-input>
-               <header>{.?headers?CONTENT-TYPE}</header>
+               <header>{.?headers?content-type}</header>
             </p:with-input>
          </p:identity>
       </p:declare-step>
