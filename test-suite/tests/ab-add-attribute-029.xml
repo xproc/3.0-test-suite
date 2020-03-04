@@ -1,0 +1,44 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>Add-attribute-029 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-03-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>New test for p:add-attribute.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests adding attribute "xml:base"</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc"
+         xmlns:html="http://www.w3.org/1999/xhtml">
+         <p:output port="result" />
+         
+         
+         <p:add-attribute match="doc" attribute-name="xml:base" attribute-value="http://www.my-fancy.uri">
+            <p:with-input>
+               <doc/>
+            </p:with-input>
+         </p:add-attribute>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="/doc">Root element is not doc.</s:assert>
+               <s:assert test="/doc/@xml:base">Root element does not have an @xml:base.</s:assert>
+               <s:assert test="namespace-uri(/doc/@xml:base)='http://www.w3.org/XML/1998/namespace'">Namespace xml:base is not 'http://www.w3.org/XML/1998/namespace'.</s:assert>
+               <s:assert test="/doc/@xml:base='http://www.my-fancy.uri'">Value of @att is not '5'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
