@@ -22,6 +22,7 @@
         <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
             xmlns:c="http://www.w3.org/ns/xproc-step"
             xmlns:map="http://www.w3.org/2005/xpath-functions/map"
+            xmlns:xs="http://www.w3.org/2001/XMLSchema"
             name="pipeline" version="3.0">
             <p:output port="result"/>
             
@@ -38,7 +39,7 @@
             </p:cast-content-type>
             
             <p:choose name="checker">
-                <p:when test=". instance of map(*) and map:get(., 'key') = 'value' ">
+                <p:when test=". instance of map(*) and map:get(., xs:QName('key')) = 'value' ">
                     <p:identity>
                         <p:with-input><right /></p:with-input>
                     </p:identity>
