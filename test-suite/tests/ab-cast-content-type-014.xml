@@ -49,8 +49,9 @@
             <s:pattern>
                 <s:rule context="/">
                     <s:assert test="result">The root element is not result.</s:assert>
-                    <s:assert test="starts-with(result/text,'&lt;html') and
-                        ends-with(result/text,'/&gt;')">result/text is not '&lt;html /&gt;</s:assert>
+                    <s:assert test="matches(result/text, '&lt;html\s*/&gt;')
+                                    or matches(result/text, '&lt;html\s*&gt;&lt;/html&gt;')"
+                              >result/text is not '&lt;html /&gt;</s:assert>
                     <s:assert test="result/fn:map">Root element does not have child 'fn:map'.</s:assert>
                     <s:assert test="result/fn:map/fn:string[@key='base-uri']='http://xproc-test.org'">The base-uri property is not correct.</s:assert>
                     <s:assert test="result/fn:map/fn:string[@key='content-type']='text/plain'">The content-type property is not correct.</s:assert>
