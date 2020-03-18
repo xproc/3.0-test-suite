@@ -35,10 +35,10 @@
          <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step" />
            <s:pattern>
             <s:rule context="/">
-               <s:assert test="c:data">The root element is not 'doc'.</s:assert>
+               <s:assert test="c:data">The root element is not 'c:data'.</s:assert>
                <s:assert test="c:data/@content-type='image/png'">The content-type attribute is not 'image/png".</s:assert>
-               <s:assert test="starts-with(c:data/text(), 'iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAAAXNSR0IArs4c') and
-                  ends-with(c:data/text(),'uQ4xzXIp2zJhAklfSuwLynDEe8H8KTcyan5ntBbRQbHDA4YHAg+jnw/wF+qfGjC/OmrgAAAABJRU5ErkJggg==')">The content is not right.</s:assert>
+               <s:assert test="starts-with(replace(c:data/text(),'&#10;',''), 'iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAAAXNSR0IArs4c') and
+                  ends-with(replace(c:data/text(),'&#10;',''),'uQ4xzXIp2zJhAklfSuwLynDEe8H8KTcyan5ntBbRQbHDA4YHAg+jnw/wF+qfGjC/OmrgAAAABJRU5ErkJggg==')">The content is not right.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
