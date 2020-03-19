@@ -5,6 +5,15 @@
       <t:title>http-request-076 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2020-03-19</t:date>
+            <t:author>
+               <t:name>Norman Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Corrected key name.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2020-01-14</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
