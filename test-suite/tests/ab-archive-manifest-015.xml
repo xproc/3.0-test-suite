@@ -1,0 +1,42 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:archive-manifest 015 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-03-20</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Additional tests for p:archive-manifest</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:archive-manifest: Every entry needs an @content-type.</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+         <p:output port="result"/>
+         
+         <p:archive-manifest>
+            <p:with-option name="relative-to" select="'test/'" xml:base="http://xproc.org/ns/testsuite/3.0/" />
+            <p:with-input href="../documents/archive.zip" />
+         </p:archive-manifest>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"></s:ns>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="c:archive">Root element is not 'c:archive'.</s:assert>
+               <s:assert test="count(c:archive/c:entry)=10">Element 'c:archive' does not have 10 children named 'c:entry'</s:assert>
+               <s:assert test="count(c:archive/c:entry/@content-type)=10">Not every 'c:entry' has an attribute 'content-type'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
