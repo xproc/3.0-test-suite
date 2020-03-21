@@ -620,6 +620,42 @@
 
 <!-- ============================================================ -->
 
+<xsl:function name="t:trace-ancestor-namespace" as="xs:boolean">
+  <xsl:param name="ancestors" as="element()*"/>
+  <xsl:param name="namespace" as="namespace-node()"/>
+
+  <xsl:choose>
+    <xsl:when test="local-name($namespace) eq 'xml'
+                    or string($namespace) = 'http://test.xproc.org/placeholder/'">
+      <xsl:sequence select="true()"/>
+    </xsl:when>
+    <xsl:when test="empty($ancestors)">
+      <xsl:sequence select="false()"/>
+    </xsl:when>
+    <xsl:when test="$ancestors[last()][namespace::*[local-name(.) = local-name($namespace)
+                                               and string(.) = string($namespace)]]">
+      <xsl:sequence select="true()"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:message>1: <xsl:value-of select="node-name($ancestors[last()])"/></xsl:message>
+      <xsl:for-each select="$ancestors[last()]/namespace::*">
+        <xsl:message>XNS: <xsl:value-of select="local-name(.)"/>, <xsl:value-of select="string(.)"/></xsl:message>
+      </xsl:for-each>
+      <xsl:for-each select="$ancestors[last()]/namespace::*">
+        <xsl:message>
+          <xsl:value-of select="concat(local-name(.), ' = ', local-name($namespace))"/>
+        </xsl:message>
+        <xsl:message>
+          <xsl:value-of select="concat(string(.), ' = ', string($namespace))"/>
+        </xsl:message>
+      </xsl:for-each>
+
+      <xsl:variable name="rest" select="subsequence($ancestors, 1, count($ancestors) - 1)"/>
+      <xsl:sequence select="t:ancestor-namespace($rest, $namespace)"/>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:function>
+
 <xsl:function name="t:ancestor-namespace" as="xs:boolean">
   <xsl:param name="ancestors" as="element()*"/>
   <xsl:param name="namespace" as="namespace-node()"/>
@@ -632,8 +668,8 @@
     <xsl:when test="empty($ancestors)">
       <xsl:sequence select="false()"/>
     </xsl:when>
-    <xsl:when test="$ancestors[1][namespace::*[local-name(.) = local-name($namespace)
-                                               and string(.) = string($namespace)]]">
+    <xsl:when test="$ancestors[last()][namespace::*[local-name(.) = local-name($namespace)
+                                                    and string(.) = string($namespace)]]">
       <xsl:sequence select="true()"/>
     </xsl:when>
     <xsl:otherwise>
