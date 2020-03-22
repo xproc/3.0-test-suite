@@ -3,6 +3,15 @@
       <t:title>AB-xslt-037</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2020-03-22</t:date>
+            <t:author>
+               <t:name>Norman Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Remove initial-mode option for which there was no corresponding mode.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-08-04</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -19,7 +28,7 @@
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
          <p:output port="result"/>
-         <p:xslt version="3.0" template-name="template" initial-mode="initial">
+         <p:xslt version="3.0" template-name="template">
             <p:with-input port="source">
                <doc />
             </p:with-input>
