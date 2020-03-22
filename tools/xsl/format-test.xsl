@@ -632,8 +632,8 @@
     <xsl:when test="empty($ancestors)">
       <xsl:sequence select="false()"/>
     </xsl:when>
-    <xsl:when test="$ancestors[1][namespace::*[local-name(.) = local-name($namespace)
-                                               and string(.) = string($namespace)]]">
+    <xsl:when test="$ancestors[last()][namespace::*[local-name(.) = local-name($namespace)
+                                                    and string(.) = string($namespace)]]">
       <xsl:sequence select="true()"/>
     </xsl:when>
     <xsl:otherwise>
