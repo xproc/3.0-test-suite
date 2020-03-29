@@ -4,10 +4,10 @@
            errors="1"
            failures="0"
            skipped="0"
-           timestamp="2020-03-22T17:48:18">
+           timestamp="2020-03-29T16:37:38">
    <properties>
       <property name="processor" value="MorganaXProc-III"/>
-      <property name="version" value="0.9.1.7-beta"/>
+      <property name="version" value="0.9.1.8-beta"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.0"/>
