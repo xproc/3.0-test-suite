@@ -3,6 +3,15 @@
       <t:title>ab-doc-props-015</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2020-03-31</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Replaced double curly brackets in TVT with single ones.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-07-14</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -31,7 +40,7 @@
          
          <p:identity>
             <p:with-input>
-               <result>{p:document-property(., 'Q{{http://test}}opt')}</result>
+               <result>{p:document-property(., 'Q{http://test}opt')}</result>
             </p:with-input>
          </p:identity>
       </p:declare-step>
