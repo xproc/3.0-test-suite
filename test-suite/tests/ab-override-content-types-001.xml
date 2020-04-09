@@ -1,0 +1,31 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+   xmlns:err="http://www.w3.org/ns/xproc-error"
+   expected="fail" code="err:XD0036">
+   <t:info>
+      <t:title>override-content-types-001 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-04-09</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial tests for override-content-types</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests @override-content-types is correctly implemented.</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+         <p:output port="result"/>
+         
+         <p:archive-manifest override-content-types="13">
+            <p:with-input href="../documents/archive.zip" />
+         </p:archive-manifest>     
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
