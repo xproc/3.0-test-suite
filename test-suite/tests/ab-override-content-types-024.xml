@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+    <t:info>
+        <t:title>override-content-types-024 (AB)</t:title>
+        <t:revision-history>
+            <t:revision>
+                <t:date>2020-04-09</t:date>
+                <t:author>
+                    <t:name>Achim Berndzen</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>Initial tests for override-content-types</p>
+                </t:description>
+            </t:revision>
+        </t:revision-history>
+    </t:info>
+    <t:description xmlns="http://www.w3.org/1999/xhtml">
+        <p>Tests @override-content-types is correctly implemented.</p>
+    </t:description>
+    
+    <t:pipeline>
+        <p:declare-step version="3.0"  xmlns:p="http://www.w3.org/ns/xproc"
+            xmlns:c="http://www.w3.org/ns/xproc-step">
+            <p:output port="result" />
+            
+            <p:archive-manifest override-content-types="[['^ab-doc.xml$', 'application/test+xml']]">
+                <p:with-input href="../documents/ab-doc.zip" />
+            </p:archive-manifest>
+            
+            <p:identity>
+                <p:with-input>
+                    <result>{string(/c:archive/c:entry[@name='ab-doc.xml']/@content-type)}</result>
+                </p:with-input>
+            </p:identity>
+        </p:declare-step>
+    </t:pipeline>
+    
+    <t:schematron>
+        <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+            <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step" />
+            <s:pattern>
+                <s:rule context="/">
+                    <s:assert test="result">The root element is not 'result'.</s:assert>
+                    <s:assert test="result/text()='application/test+xml'">Text content of 'result' is not 'application/test+xml'.</s:assert>
+                </s:rule>
+            </s:pattern>
+        </s:schema>
+    </t:schematron>
+</t:test>
