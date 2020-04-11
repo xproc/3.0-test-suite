@@ -4,6 +4,15 @@
         <t:title>cast-content-type 018 (AB)</t:title>
         <t:revision-history>
             <t:revision>
+                <t:date>2020-04-11</t:date>
+                <t:author>
+                    <t:name>Achim Berndzen</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>Change escaped '{' and '}' in test to single ones.</p>
+                </t:description>
+            </t:revision>
+            <t:revision>
                 <t:date>2019-12-27</t:date>
                 <t:author>
                     <t:name>Achim Berndzen</t:name>
@@ -59,8 +68,8 @@
                     <s:assert test="not(result/fn:map/fn:map[@key='serialization'])">There should be no serialization property.</s:assert>
                 </s:rule>
                 <s:rule context="/result/text/text()">
-                    <s:assert test="starts-with(., '{{')">Serialized map does not start with '{'.</s:assert>
-                    <s:assert test="ends-with(., '}}')">Serialized map does not end with '}'.</s:assert>
+                    <s:assert test="starts-with(., '{')">Serialized map does not start with '{'.</s:assert>
+                    <s:assert test="ends-with(., '}')">Serialized map does not end with '}'.</s:assert>
                     <s:assert test="contains(., '&quot;key&quot;')">Serialized map does not contain 'key'.</s:assert>
                     <s:assert test="contains(substring-after(.,'&quot;key&quot;'), ':')">Serialized map does not contain ':' after "key".</s:assert>
                     <s:assert test="contains(substring-after(., ':'), '&quot;value&quot;')">Serialized map does not contain 'value' after ".".</s:assert>
