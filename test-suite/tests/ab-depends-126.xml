@@ -1,0 +1,62 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" features="file-steps">
+   <t:info>
+      <t:title>depends 126 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-04-11</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Additional tests</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests [p:]depends</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step version="3.0"  xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:variable name="episode" select="p:system-property('p:episode')" />
+         
+         <p:file-create-tempfile delete-on-exit="true"/>
+         
+         <p:variable name="path" select="*:result/text()" />
+         <p:group depends="storer" name="loader">
+            <p:load href="{$path}" content-type="application/xml"/>
+         </p:group>
+         <p:sink />
+         
+         <p:store href="{$path}" name="storer">
+            <p:with-input><doc>{$episode}</doc></p:with-input>
+         </p:store>
+         
+         <p:choose>
+            <p:with-input pipe="@loader" />
+            <p:when test="doc/text() = $episode">
+               <p:identity>
+                  <p:with-input><success /></p:with-input>
+               </p:identity>
+            </p:when>
+            <p:otherwise>
+               <p:identity>
+                  <p:with-input><failure /></p:with-input>
+               </p:identity>
+            </p:otherwise>
+         </p:choose>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="success">Test failed.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
