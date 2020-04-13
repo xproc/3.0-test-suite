@@ -1,0 +1,32 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XD0030">
+   <t:info>
+      <t:title>Attribute value templates 012 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-04-13</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>New test</p>
+            </t:description>
+         </t:revision>
+         
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests AVTs.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"  xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:add-attribute match="/*" attribute-name="avt" attribute-value="{map{'a' : '5'} }">
+            <p:with-input><doc /></p:with-input>
+         </p:add-attribute>
+      </p:declare-step>
+      
+   </t:pipeline>
+</t:test>
