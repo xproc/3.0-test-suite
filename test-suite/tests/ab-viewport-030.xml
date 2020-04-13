@@ -1,0 +1,59 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>viewport-030 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-04-13</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>New test</p>
+            </t:description>
+         </t:revision>
+         
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Test <code>p:viewport</code> with a pipe to current on a mixed input port.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"  xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" pipe="@viewport" />
+         
+         <p:viewport match="par" name="viewport">
+            <p:with-input>
+               <doc>
+                  <par>Text</par>
+                  <par>Text</par>
+                  <par>Text</par>
+               </doc>
+            </p:with-input>
+            <p:identity name="two">
+               <p:with-input>
+                  <p:inline><title xml:id="section-{p:iteration-position()}" /></p:inline>
+                  <p:pipe port="current" />
+               </p:with-input>
+            </p:identity>
+            <p:wrap-sequence name="wrapper" wrapper="section" />
+         </p:viewport>
+      </p:declare-step>
+      
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="doc">The root element is not 'doc'.</s:assert>
+               <s:assert test="count(doc/*)=3 and count(doc/section)=3">Root element does not have 3 children 'section'.</s:assert>
+               
+               <s:assert test="doc/section[1]/title/@xml:id='section-1'">title/@xml:id of section[1] is not 'section-1'.</s:assert>
+               <s:assert test="doc/section[2]/title/@xml:id='section-2'">title/@xml:id of section[2] is not 'section-2'.</s:assert>
+               <s:assert test="doc/section[3]/title/@xml:id='section-3'">title/@xml:id of section[3] is not 'section-3'.</s:assert>
+               
+               <s:assert test="doc/section/par/text()='Text'">Not all par elements are 'text'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
