@@ -1,0 +1,56 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>Output port declaration 015 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-05-09</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>New tests</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests pipe on output port declaration</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" name="main" 
+         xmlns:p="http://www.w3.org/ns/xproc"
+         xmlns:test="http://www.xml-project.com/test">
+         <p:output port="result" />
+         
+         <p:try>
+            <p:error code="test:error" >
+               <p:with-input><some-code /></p:with-input>
+            </p:error>
+            
+            <p:catch name="catcher">
+               <p:group>
+                  <p:output port="result">
+                     <p:pipe port="error" step="catcher" />
+                  </p:output>
+                  <p:identity>
+                     <p:with-input><not-correct /></p:with-input>
+                  </p:identity>
+               </p:group>
+            </p:catch>
+         </p:try>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="c:errors">The pipeline root is not "c:errors".</s:assert>
+               <s:assert test="count(c:errors/c:error)">There is not exactly one c:error child.</s:assert>
+               <s:assert test="c:errors/c:error/@code='test:error'">The code attribute of c:error is not right.</s:assert>
+               <s:assert test="c:errors/c:error/some-code">Element c:error does not have a child some-code.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
