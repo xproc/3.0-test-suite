@@ -1,0 +1,42 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>Output port declaration 005 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-05-09</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>New tests</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests pipe on output port declaration</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="main" xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         
+         <p:input port="source">
+            <doc />
+         </p:input>
+         <p:output port="result" pipe="source@main"/>
+         
+         <p:identity>
+            <p:with-input><doc2/></p:with-input>
+         </p:identity> 
+        
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="doc">The pipeline root is not doc.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
