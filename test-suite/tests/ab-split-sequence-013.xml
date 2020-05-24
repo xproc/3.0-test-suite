@@ -1,0 +1,70 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:split-sequence-013 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-05-24</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Additional tests for p:split-sequence</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:split-sequence accepts any document</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step name="pipeline" xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         
+         <p:identity>
+            <p:with-input>
+               <p:inline><doc /></p:inline>
+               <p:inline content-type="text/html"><html xmlns="http://www.w3.org/1999/xhtml"/></p:inline>
+               <p:inline content-type="text/plain">This is a text.</p:inline>
+               <p:inline content-type="application/json">{{"key" : "value"}}</p:inline>
+               <p:inline content-type="application/octet-stream">0102030405</p:inline>
+            </p:with-input>
+         </p:identity>
+         
+         <p:split-sequence test=". instance of document-node()" name="splitter"/>
+         
+         <p:for-each>
+            <p:identity>
+               <p:with-input><content-type>{p:document-property(., 'content-type')}</content-type></p:with-input>
+            </p:identity>
+         </p:for-each>
+         <p:wrap-sequence wrapper="matched" name="matched-sequence"/>
+         
+         <p:for-each>
+            <p:with-input pipe="not-matched@splitter" />
+            <p:identity>
+               <p:with-input><content-type>{p:document-property(., 'content-type')}</content-type></p:with-input>
+            </p:identity>
+         </p:for-each>
+         <p:wrap-sequence wrapper="not-matched" name="not-matched-sequence"/>
+         
+         <p:wrap-sequence wrapper="result">
+            <p:with-input pipe="@matched-sequence @not-matched-sequence" />
+         </p:wrap-sequence>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">Root element is not 'result'.</s:assert>
+               <s:assert test="result/matched/content-type[1]/text()='application/xml'">Content type is not 'application/xml'.</s:assert>
+               <s:assert test="result/matched/content-type[2]/text()='text/html'">Content type is not 'text/html'.</s:assert>
+               <s:assert test="result/matched/content-type[3]/text()='text/plain'">Content type is not 'text/plain'.</s:assert>
+               <s:assert test="result/matched/content-type[4]/text()='application/octet-stream'">Content type is not 'application/octet-stream'.</s:assert>
+               <s:assert test="result/not-matched/content-type[1]/text()='application/json'">Content type is not 'application/json'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
