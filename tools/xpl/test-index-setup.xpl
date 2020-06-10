@@ -5,7 +5,7 @@
 <p:input port="parameters" kind="parameter"/>
 <p:output port="result"/>
 
-<p:directory-list path="../../test-suite/tests"/>
+<p:directory-list path="../../test-suite/tests" include-filter=".*\.xml"/>
 
 <p:xslt>
   <p:input port="stylesheet">
