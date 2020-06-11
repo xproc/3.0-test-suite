@@ -5,6 +5,16 @@
       <t:title>p:archive 071 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2020-06-11</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Setting command to 'create' to make sure the error is raised.</p>
+               <p>This revision is necessary due to step spec change [11].</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-09-01</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -23,7 +33,7 @@
                       xmlns:c="http://www.w3.org/ns/xproc-step" version="3.0">
             <p:output port="result"/>        
 
-            <p:archive format="zip">
+            <p:archive format="zip" parameters="map{'command' : 'create'}">
                <p:with-input port="source"><p:empty /></p:with-input>
                <p:with-input port="manifest">
                   <c:archive>
