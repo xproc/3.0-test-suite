@@ -4,6 +4,15 @@
       <t:title>p:document 002</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2020-06-11</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test as a consequence of removing of xproc.org/about.html.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-08-31</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -32,7 +41,7 @@
 
             <p:identity>
                 <p:with-input>
-                   <p:document href="about.html" xml:base="http://xproc.org/"/>
+                   <p:document href="learning.html" xml:base="http://xproc.org/"/>
                 </p:with-input>
             </p:identity>
         </p:declare-step>
@@ -42,7 +51,7 @@
          <s:ns uri="http://www.w3.org/1999/xhtml" prefix="html"/>
          <s:pattern>
             <s:rule context="/">
-               <s:assert test="html:html/html:head/html:title='About'">Element hmtl/head/title is not 'About'.</s:assert>
+               <s:assert test="html:html/html:head/html:title='XProc 3.0 - Learning'">Element hmtl/head/title is not 'XProc 3.0 - Learning'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
