@@ -6,7 +6,8 @@
          <span class="pelement"><span class="stag"><span class="sto">&lt;</span><span class="gi"><a href="http://spec.xproc.org/master/head/xproc/#p.output">p:output</a></span> <span class="attr"><span class="aname">port</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result</span><span class="aq">"</span></span><span class="stc">/&gt;</span></span></span>
          <span class="pelement"><span class="stag"><span class="sto">&lt;</span><span class="gi"><a href="http://spec.xproc.org/master/head/steps/#c.xslt">p:xslt</a></span> <span class="attr"><span class="aname">version</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">3.0</span><span class="aq">"</span></span> <span class="attr"><span class="aname">template-name</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">template</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
             <span class="pelement"><span class="stag"><span class="sto">&lt;</span><span class="gi"><a href="http://spec.xproc.org/master/head/xproc/#p.with-input">p:with-input</a></span> <span class="attr"><span class="aname">port</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">source</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
-               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">doc</span> <span class="attr nsattr"><span class="aname">xmlns</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue"></span><span class="aq">"</span></span><span class="stc">/&gt;</span></span></span>
+               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">doc1</span> <span class="attr nsattr"><span class="aname">xmlns</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue"></span><span class="aq">"</span></span><span class="stc">/&gt;</span></span></span>
+               <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">doc2</span> <span class="attr nsattr"><span class="aname">xmlns</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue"></span><span class="aq">"</span></span><span class="stc">/&gt;</span></span></span>
             <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:with-input</span><span class="etc">&gt;</span></span></span>
             <span class="pelement"><span class="stag"><span class="sto">&lt;</span><span class="gi"><a href="http://spec.xproc.org/master/head/xproc/#p.with-input">p:with-input</a></span> <span class="attr"><span class="aname">port</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">stylesheet</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
                <span class="element"><span class="stag"><span class="sto">&lt;</span><span class="gi">xsl:stylesheet</span> <span class="attr nsattr"><span class="aname">xmlns:xsl</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">http://www.w3.org/1999/XSL/Transform</span><span class="aq">"</span></span> <span class="attr"><span class="aname">version</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">3.0</span><span class="aq">"</span></span><span class="stc">&gt;</span></span>
@@ -31,6 +32,12 @@
          <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:pattern</span><span class="etc">&gt;</span></span></span>
       <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:schema</span><span class="etc">&gt;</span></span></span>
    </code></pre></div><dl class="revision-history"><h2>Revision history</h2>
+         <dt>11 Jun 2020, 
+               <span class="name">Achim Berndzen</span>
+            </dt><dd><div class="description">
+               <p>Added a second document to source port, so GCI is guaranteed to be absent.</p>
+               <p>This revision is necessary due to step spec change [9].</p>
+            </div></dd>
          <dt>22 Mar 2020, 
                <span class="name">Norman Tovey-Walsh</span>
             </dt><dd><div class="description">

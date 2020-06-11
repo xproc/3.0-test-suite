@@ -4,6 +4,15 @@
       <t:title>p:document 001</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2020-06-11</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test as a consequence of the new title of xproc.org.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-08-31</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -42,7 +51,7 @@
          <s:ns uri="http://www.w3.org/1999/xhtml" prefix="html"/>
          <s:pattern>
             <s:rule context="/">
-               <s:assert test="html:html/html:head/html:title='XProc.org'">Element hmtl/head/title is not 'XProc.org'.</s:assert>
+               <s:assert test="html:html/html:head/html:title='XProc 3.0 - Home'">Element hmtl/head/title is not 'XProc 3.0 - Home'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
