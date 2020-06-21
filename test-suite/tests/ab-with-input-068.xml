@@ -1,0 +1,31 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0043">
+   <t:info>
+      <t:title>with-input-068</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-06-21</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Test anonymous input ports etc. are treated right.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests XS0043 is raised because @port is not allowed on p:with-input.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+      
+         <p:viewport match="a">
+            <p:with-input port="source">
+               <doc><a /></doc>
+            </p:with-input>
+            <p:identity />
+         </p:viewport>
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
