@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="XProc Test Suite"
-           tests="1950"
+           tests="1967"
            errors="0"
            failures="0"
            skipped="0"
-           timestamp="2020-05-28T12:13:15">
+           timestamp="2020-06-21T10:31:05">
    <properties>
       <property name="processor" value="MorganaXProc-IIIse"/>
-      <property name="version" value="0.9.3-beta"/>
+      <property name="version" value="0.9.3.5-beta"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.0"/>
@@ -903,6 +903,8 @@
    <testcase name="ab-option-033.xml"/>
    <testcase name="ab-option-034.xml"/>
    <testcase name="ab-option-035.xml"/>
+   <testcase name="ab-option-036.xml"/>
+   <testcase name="ab-option-037.xml"/>
    <testcase name="ab-output-declaration-001.xml"/>
    <testcase name="ab-output-declaration-002.xml"/>
    <testcase name="ab-output-declaration-003.xml"/>
@@ -1883,6 +1885,21 @@
    <testcase name="ab-xslt-089.xml"/>
    <testcase name="ab-xslt-090.xml"/>
    <testcase name="ab-xslt-091.xml"/>
+   <testcase name="ab-xslt-092.xml"/>
+   <testcase name="ab-xslt-093.xml"/>
+   <testcase name="ab-xslt-094.xml"/>
+   <testcase name="ab-xslt-095.xml"/>
+   <testcase name="ab-xslt-096.xml"/>
+   <testcase name="ab-xslt-097.xml"/>
+   <testcase name="ab-xslt-098.xml"/>
+   <testcase name="ab-xslt-099.xml"/>
+   <testcase name="ab-xslt-100.xml"/>
+   <testcase name="ab-xslt-101.xml"/>
+   <testcase name="ab-xslt-102.xml"/>
+   <testcase name="ab-xslt-103.xml"/>
+   <testcase name="ab-xslt-104.xml"/>
+   <testcase name="ab-xslt-105.xml"/>
+   <testcase name="ab-xslt-106.xml"/>
    <testcase name="choose-001.xml"/>
    <testcase name="choose-002.xml"/>
    <testcase name="choose-003.xml"/>
