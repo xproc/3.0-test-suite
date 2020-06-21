@@ -1,6 +1,6 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" features="xslt-3">
    <t:info>
-      <t:title>AB-xslt-015</t:title>
+      <t:title>AB-xslt-097</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2020-06-21</t:date>
@@ -8,38 +8,19 @@
                <t:name>Achim Berndzen</t:name>
             </t:author>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>Changed text as result of introducing @populate-default-collection.</p>
-            </t:description>
-         </t:revision>
-         <t:revision>
-            <t:date>2019-09-19</t:date>
-            <t:author>
-               <t:name>Achim Berndzen</t:name>
-            </t:author>
-            <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>Changed description of test: default collection is not empty, but undefined.</p>
-            </t:description>
-         </t:revision>
-         <t:revision>
-            <t:date>2019-08-04</t:date>
-            <t:author>
-               <t:name>Achim Berndzen</t:name>
-            </t:author>
-            <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>Initial commit</p>
+               <p>Added tests for @populate-default-collection</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests default collection is undefined for apply-template invocation (3.0), if
-      @populate-default-collection is false.</p>
+      <p>Tests @populate-default-collection is correctly handled.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
          <p:output port="result"/>
          
-         <p:xslt version="3.0" populate-default-collection="false" name="xslt">
+         <p:xslt version="3.0" populate-default-collection="true" name="xslt">
             <p:with-input port="source">
                <a />
                <b />
@@ -49,11 +30,9 @@
             <p:with-input port="stylesheet">
                <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                   <xsl:template match="a">
-                     <xsl:try>
-                        <failure><xsl:value-of select="count(collection())=0" /></failure>
-                        
-                        <xsl:catch><success /></xsl:catch>
-                     </xsl:try>
+                     <result>
+                        <xsl:value-of select="count(collection())" />
+                     </result>
                   </xsl:template>
                </xsl:stylesheet>
             </p:with-input>
@@ -64,7 +43,8 @@
       <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
          <s:pattern>
             <s:rule context="/">
-               <s:assert test="/success">The document root is not 'success'.</s:assert>
+               <s:assert test="/result">The document root is not 'result'.</s:assert>
+               <s:assert test="/result/text()='4'">Number of docs in default collection is not 4.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
