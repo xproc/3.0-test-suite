@@ -3,6 +3,15 @@
       <t:title>p:archive 046 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2020-06-26</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed test so that is actually checks orders of the entries.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-09-01</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -14,7 +23,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests p:archive: Tests port 'report' reflects explcit manifest.</p>
+      <p>Tests p:archive: Tests port 'report' reflects explicit manifest.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
@@ -51,9 +60,9 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="c:archive">Root element is not 'c:archive'.</s:assert>
-               <s:assert test="c:archive/c:entry[@name='one.xml']">There is no entry for 'one.xml'.</s:assert>
-               <s:assert test="c:archive/c:entry[@name='two.xml']">There is no entry for 'two.xml'.</s:assert>
-               <s:assert test="c:archive/c:entry[@name='three.xml']">There is no entry for 'three.xml'.</s:assert>
+               <s:assert test="c:archive/c:entry[1]/@name='one.xml'">The first entry is not 'one.xml'.</s:assert>
+               <s:assert test="c:archive/c:entry[2]/@name='two.xml'">The second entry is not 'two.xml'.</s:assert>
+               <s:assert test="c:archive/c:entry[3]/@name='three.xml'">The third entry is not 'three.xml'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
