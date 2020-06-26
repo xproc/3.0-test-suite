@@ -22,6 +22,7 @@ passingTest =
     element t:test {
         testattr
       & attribute expected { "pass" }
+      & attribute platform { text }?
       & (info, description?,
          (property* & input* & option* & pipeline? & schematron?))
     }
@@ -31,6 +32,7 @@ failingTest =
         testattr
       & attribute expected { "fail" }
       & attribute code { xsd:NMTOKENS }
+      & attribute platform { text }?
       & (info, description?,
          (property* & input* & option* & pipeline?))
     }
