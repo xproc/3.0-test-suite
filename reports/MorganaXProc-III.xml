@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="XProc Test Suite"
-           tests="1967"
+           tests="1978"
            errors="0"
            failures="0"
            skipped="0"
-           timestamp="2020-06-21T10:31:05">
+           timestamp="2020-06-27T10:58:12">
    <properties>
       <property name="processor" value="MorganaXProc-IIIse"/>
-      <property name="version" value="0.9.3.5-beta"/>
+      <property name="version" value="0.9.3.7-beta"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.0"/>
@@ -655,6 +655,10 @@
    <testcase name="ab-http-request-110.xml"/>
    <testcase name="ab-http-request-111.xml"/>
    <testcase name="ab-http-request-112.xml"/>
+   <testcase name="ab-http-request-113.xml"/>
+   <testcase name="ab-http-request-114.xml"/>
+   <testcase name="ab-http-request-115.xml"/>
+   <testcase name="ab-http-request-116.xml"/>
    <testcase name="ab-if-001.xml"/>
    <testcase name="ab-if-002.xml"/>
    <testcase name="ab-if-003.xml"/>
@@ -837,6 +841,7 @@
    <testcase name="ab-load-006.xml"/>
    <testcase name="ab-load-007.xml"/>
    <testcase name="ab-load-008.xml"/>
+   <testcase name="ab-load-009.xml"/>
    <testcase name="ab-namespace-delete-001.xml"/>
    <testcase name="ab-namespace-delete-002.xml"/>
    <testcase name="ab-namespace-delete-003.xml"/>
@@ -1063,6 +1068,7 @@
    <testcase name="ab-p-document038.xml"/>
    <testcase name="ab-p-document039.xml"/>
    <testcase name="ab-p-document040.xml"/>
+   <testcase name="ab-p-document041.xml"/>
    <testcase name="ab-p-pipe-020.xml"/>
    <testcase name="ab-p-pipe-021.xml"/>
    <testcase name="ab-p-pipe-022.xml"/>
@@ -1696,6 +1702,11 @@
    <testcase name="ab-with-input-064.xml"/>
    <testcase name="ab-with-input-065.xml"/>
    <testcase name="ab-with-input-066.xml"/>
+   <testcase name="ab-with-input-067.xml"/>
+   <testcase name="ab-with-input-068.xml"/>
+   <testcase name="ab-with-input-069.xml"/>
+   <testcase name="ab-with-input-070.xml"/>
+   <testcase name="ab-with-input-071.xml"/>
    <testcase name="ab-with-input-select-001.xml"/>
    <testcase name="ab-with-input-select-002.xml"/>
    <testcase name="ab-with-input-select-003.xml"/>
