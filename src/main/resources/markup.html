@@ -396,7 +396,7 @@ and may have <code>schematron</code> tests to verify the results.
     <span style="color: #bf360c;">element</span> t:test <span style="color: #707183;">{</span>
         testattr
       &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">expected</span> <span style="color: #7388d6;">{</span> <span style="color: #6C3082;">"pass"</span> <span style="color: #7388d6;">}</span>
-      &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">platform</span> <span style="color: #707183;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #707183;">}</span>?
+      &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">platform</span> <span style="color: #707183;">{</span> (<span style="color: #6C3082;">"Linux"</span> | <span style="color: #6C3082;">"MacOS"</span> | <span style="color: #6C3082;">"Windows"</span>) <span style="color: #707183;">}</span>?
       &amp; <span style="color: #7388d6;">(</span>info, description?,
          <span style="color: #909183;">(</span>property* &amp; input* &amp; option* &amp; pipeline? &amp; schematron?<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
     <span style="color: #707183;">}</span>
@@ -414,27 +414,21 @@ and must specify one or more expected error conditions.
         testattr
       &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">expected</span> <span style="color: #7388d6;">{</span> <span style="color: #6C3082;">"fail"</span> <span style="color: #7388d6;">}</span>
       &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">code</span> <span style="color: #7388d6;">{</span> xsd:NMTOKENS <span style="color: #7388d6;">}</span>
-      &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">platform</span> <span style="color: #707183;">{</span> <span style="color: #bf360c;">text</span> <span style="color: #707183;">}</span>?
+      &amp; <span style="color: #bf360c;">attribute</span> <span style="color: #455A64;">platform</span> <span style="color: #707183;">{</span> (<span style="color: #6C3082;">"Linux"</span> | <span style="color: #6C3082;">"MacOS"</span> | <span style="color: #6C3082;">"Windows"</span>) <span style="color: #707183;">}</span>?
       &amp; <span style="color: #7388d6;">(</span>info, description?,
          <span style="color: #909183;">(</span>property* &amp; input* &amp; option* &amp; pipeline?<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
     <span style="color: #707183;">}</span>
 </pre>
 </div>
 
-<p>
-Broadly speaking, the test harness sets the specified properties and
-runs the specified pipeline with the specified inputs and options. A
-passing test must complete without error, or it must be recorded as a
-failure. If it completes, its output is tested against any Schematron
-rules provided. No assertions must be raised.
-</p>
+<p> Broadly speaking, the test harness sets the specified properties and runs the specified pipeline
+                        with the specified inputs and options. A passing test must complete without
+                        error, or it must be recorded as a failure. If it completes, its output is
+                        tested against any Schematron rules provided. No assertions must be raised. </p>
 
-<p>
-The platform attribute on a test marks this test to be run  on the
-named platform(s) only and to be skipped otherwise. The attribute's value is expected
-to be a whitespace separated list of platform identifiers such as
-<code>Windows</code>, <code>Linux</code>, and/or <code>MacOS</code>.
-</p>
+<p> The platform attribute on a test marks this test to be run on the named platform only and to be
+                        skipped otherwise. The attribute's value is expected to be one of  “Linux”,
+                        “MacOS”, or “Windows”. </p>
     
 <p>
 If a failing test raises one of the specified error codes, it is a
