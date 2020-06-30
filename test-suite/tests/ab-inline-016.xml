@@ -1,0 +1,40 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>ab-inline-016</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-06-30</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests element exclusion on p:inline</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests element exclusion on p:inline</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+          <p:identity>
+            <p:with-input>
+               <p:inline use-when="true()"><result>true</result></p:inline>
+               <p:inline use-when="false()"><result>false</result></p:inline>
+            </p:with-input>
+         </p:identity>      
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The document root is not result.</s:assert>
+               <s:assert test="/result/text()='true'">The result string is not correct.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
