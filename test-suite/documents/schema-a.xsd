@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    version="1.0"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:a="http://dummy/a"
+    xmlns:b="http://dummy/b"
+    targetNamespace="http://dummy/a"
+>
+    <xs:import namespace="http://dummy/b" schemaLocation="schema-b.xsd"/>
+    <xs:element name="foo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="b:bar"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
