@@ -1,0 +1,54 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass"
+        features="p-validate-with-xsd">
+  <t:info>
+    <t:title>ab-validate-with-xsd-016</t:title>
+    <t:revision-history>
+      <t:revision>
+        <t:date>2020-07-03</t:date>
+        <t:author>
+          <t:name>Achim Berndzen</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Added test</p>
+        </t:description>
+      </t:revision>
+    </t:revision-history>
+  </t:info>
+  <t:description xmlns="http://www.w3.org/1999/xhtml">
+    <p>Test p:validate-with-xml-schema with importing schemas via namespace.</p>
+  </t:description>
+  <t:pipeline>
+    <p:declare-step
+      version="3.0"
+      xmlns:p="http://www.w3.org/ns/xproc">
+      <p:input port="source">
+        <p:inline content-type="application/xml">
+          <a:foo xmlns:a="http://dummy/a">
+            <b:bar xmlns:b="http://dummy/b"/>
+          </a:foo>
+        </p:inline>
+      </p:input>
+      
+      <p:output port="result"/>
+      
+      <p:validate-with-xml-schema name="main">
+        <p:with-input port="schema">
+          <p:document href="../documents/schema-a.xsd"/>
+        </p:with-input>
+      </p:validate-with-xml-schema>
+    </p:declare-step>
+</t:pipeline>
+
+  <t:schematron>
+    <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+      <s:ns prefix="a" uri="http://dummy/a" />
+      <s:ns prefix="b" uri="http://dummy/b" />
+      <s:pattern>
+        <s:rule context="/">
+          <s:assert test="a:foo">The element root is not “a:foo”.</s:assert>
+          <s:assert test="a:foo/b:bar">There is no child element b:bar.</s:assert>
+        </s:rule>
+      </s:pattern>
+    </s:schema>
+  </t:schematron>
+</t:test>
