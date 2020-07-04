@@ -3,6 +3,15 @@
       <t:title>AB-xslt-043</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2020-07-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Change test so it does not rely on document order of port "secondary".</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-10-20</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -49,11 +58,11 @@
          <p:for-each>
             <p:with-input pipe="secondary"/>
             
-            <p:identity>
-               <p:with-input>
-                  <result>{p:document-property(.,'base-uri')}</result>
+            <p:insert position="first-child" match="/*">
+               <p:with-input port="insertion">
+                  <uri>{p:document-property(.,'base-uri')}</uri>
                </p:with-input>
-            </p:identity>
+            </p:insert>
          </p:for-each>
          
          <p:wrap-sequence wrapper="wrapper" />
@@ -64,8 +73,8 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="/wrapper">The document root is not 'wrapper'.</s:assert>
-               <s:assert test="/wrapper/result[1]/text()='http://xproc-test/xslt/one.xml'">Element 'result[1]' does not have a text child 'http://xproc-test/xslt/one.xml'.</s:assert>
-               <s:assert test="/wrapper/result[2]/text()='http://xproc-test/xslt/two.xml'">Element 'result[2]' does not have a text child 'http://xproc-test/two/one.xml'.</s:assert>               
+               <s:assert test="/wrapper/one/uri/text()='http://xproc-test/xslt/one.xml'">Element 'one' does not have a text child 'http://xproc-test/xslt/one.xml'.</s:assert>
+               <s:assert test="/wrapper/two/uri/text()='http://xproc-test/xslt/two.xml'">Element 'two' does not have a text child 'http://xproc-test/two/one.xml'.</s:assert>               
             </s:rule>
          </s:pattern>
       </s:schema>
