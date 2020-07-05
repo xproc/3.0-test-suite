@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="XProc Test Suite"
-           tests="1978"
+           tests="1989"
            errors="0"
            failures="0"
            skipped="0"
-           timestamp="2020-06-27T10:58:12">
+           timestamp="2020-07-05T16:14:38">
    <properties>
       <property name="processor" value="MorganaXProc-IIIse"/>
-      <property name="version" value="0.9.3.7-beta"/>
+      <property name="version" value="0.9.3.9-beta"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.0"/>
       <property name="xpathVersion" value="3.1"/>
       <property name="psviSupported" value="false"/>
-  </properties>
+   </properties>
    <testcase name="ab-add-attribute-001.xml"/>
    <testcase name="ab-add-attribute-002.xml"/>
    <testcase name="ab-add-attribute-003.xml"/>
@@ -707,6 +707,11 @@
    <testcase name="ab-inline-010.xml"/>
    <testcase name="ab-inline-011.xml"/>
    <testcase name="ab-inline-012.xml"/>
+   <testcase name="ab-inline-013.xml"/>
+   <testcase name="ab-inline-014.xml"/>
+   <testcase name="ab-inline-015.xml"/>
+   <testcase name="ab-inline-016.xml"/>
+   <testcase name="ab-inline-017.xml"/>
    <testcase name="ab-input-001.xml"/>
    <testcase name="ab-input-002.xml"/>
    <testcase name="ab-input-003.xml"/>
@@ -1510,6 +1515,8 @@
    <testcase name="ab-validate-with-relax-ng-016.xml"/>
    <testcase name="ab-validate-with-relax-ng-017.xml"/>
    <testcase name="ab-validate-with-relax-ng-018.xml"/>
+   <testcase name="ab-validate-with-relax-ng-019.xml"/>
+   <testcase name="ab-validate-with-relax-ng-020.xml"/>
    <testcase name="ab-validate-with-schematron-001.xml"/>
    <testcase name="ab-validate-with-schematron-002.xml"/>
    <testcase name="ab-validate-with-schematron-003.xml"/>
@@ -1522,6 +1529,7 @@
    <testcase name="ab-validate-with-schematron-011.xml"/>
    <testcase name="ab-validate-with-schematron-012.xml"/>
    <testcase name="ab-validate-with-schematron-013.xml"/>
+   <testcase name="ab-validate-with-schematron-014.xml"/>
    <testcase name="ab-validate-with-xsd-001.xml"/>
    <testcase name="ab-validate-with-xsd-002.xml"/>
    <testcase name="ab-validate-with-xsd-003.xml"/>
@@ -1536,6 +1544,9 @@
    <testcase name="ab-validate-with-xsd-012.xml"/>
    <testcase name="ab-validate-with-xsd-013.xml"/>
    <testcase name="ab-validate-with-xsd-014.xml"/>
+   <testcase name="ab-validate-with-xsd-015.xml"/>
+   <testcase name="ab-validate-with-xsd-016.xml"/>
+   <testcase name="ab-validate-with-xsd-017.xml"/>
    <testcase name="ab-variable-001.xml"/>
    <testcase name="ab-variable-002.xml"/>
    <testcase name="ab-variable-003.xml"/>
