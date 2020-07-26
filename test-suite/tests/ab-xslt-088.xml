@@ -3,6 +3,15 @@
       <t:title>AB-xslt-088</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2020-07-26</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed test by removing @required on xsl:param.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-10-04</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -23,7 +32,7 @@
             <p:with-input><doc /></p:with-input>
             <p:with-input port="stylesheet">       
                <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-                  <xsl:param name="value" required="yes" />
+                  <xsl:param name="value"  />
                   <xsl:template match="doc">
                      <answer><xsl:value-of select="$value" /></answer>
                   </xsl:template>
