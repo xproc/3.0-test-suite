@@ -1,0 +1,39 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XS0043">
+   <t:info>
+      <t:title>XS0043 002 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-08-23</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for XS0043</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests for XS0043: Attribute port not allowed on p:with-input</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+                      xmlns:c="http://www.w3.org/ns/xproc-step" version="3.0">
+         <p:output port="result"/>        
+
+         <p:viewport match="p">
+            <p:with-input port="source">
+               <doc>
+                  <p>Text</p>
+                  <p>Text</p>
+               </doc>
+            </p:with-input>
+            <p:add-attribute attribute-name="att" attribute-value="42" />
+         </p:viewport>
+         
+            <p:wrap-sequence wrapper="wrapper" />
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
