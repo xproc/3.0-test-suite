@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="XProc Test Suite"
+           tests="2008"
+           errors="0"
+           failures="0"
+           skipped="2008"
+           timestamp="2020-09-02T16:38:27">
+   <properties>
+      <property name="processor" value="MorganaXProc-IIIse"/>
+      <property name="version" value="0.9.4.6-beta"/>
+      <property name="vendor" value="&lt;xml-project /&gt;"/>
+      <property name="vendorURI" value="https://www.xml-project.com"/>
+      <property name="xprocVersion" value="3.0"/>
+      <property name="xpathVersion" value="3.1"/>
+      <property name="psviSupported" value="false"/>
+   </properties>
+</testsuite>
