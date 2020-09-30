@@ -1,0 +1,51 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>Output port 37 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-09-28</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added new tests</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests that documents appear in the right order on p:output.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+        <p:output port="result" />
+         
+        <p:viewport match="element">
+           <p:with-input>
+              <result>
+                 <element />
+              </result>
+           </p:with-input>
+           <p:output port="result" sequence="true">
+              <p:pipe step="producer" />
+              <p:inline><doc1/></p:inline>
+           </p:output>
+           <p:identity name="producer">
+              <p:with-input><doc2 /></p:with-input>
+           </p:identity>
+        </p:viewport>
+        
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The document root is not 'result'.</s:assert>
+               <s:assert test="result/*[1]/name()='doc2'">The first child element of result is not named doc2.</s:assert>
+               <s:assert test="result/*[2]/name()='doc1'">The second child element of result is not named doc1.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
