@@ -1,0 +1,47 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0072">
+   <t:info>
+      <t:title>p:try 027 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-09-28</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added new tests</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests that XS0072 is raised p:finally has a port name used in p:try/p:catch</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result" sequence="true"/>
+         
+         <p:try>
+            <p:output port="result" />
+            <p:identity>
+               <p:with-input><doc /></p:with-input>
+            </p:identity>
+            
+           <p:catch name="catch">
+              <p:output port="catcher" />
+              <p:identity>
+                 <p:with-input pipe="error@catch" />
+              </p:identity>
+           </p:catch>
+           <p:finally>
+              <p:output port="catcher" primary="false" pipe="@finally"/>
+              <p:identity name="finally">
+                 <p:with-input>
+                    <finally1 />
+                 </p:with-input>
+              </p:identity>
+           </p:finally>
+         </p:try>
+         
+      </p:declare-step>
+   </t:pipeline>
+</t:test>

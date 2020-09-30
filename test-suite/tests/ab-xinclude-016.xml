@@ -1,0 +1,45 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:xinclude 016 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-09-30</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Additional tests for p:xinclude.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:xinclude: Tests include of an XML document with parse="text" is handled correctly.</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+         <p:output port="result"/>
+         
+         <p:xinclude>
+            <p:with-input>
+               <document>
+                  <xi:include xmlns:xi='http://www.w3.org/2001/XInclude'
+                     href="../documents/ab-doc.xml" parse="text"/>
+                  
+               </document>
+            </p:with-input> 
+         </p:xinclude>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="document">Root element is not 'document'.</s:assert>
+               <s:assert test="contains(document/text(),'&lt;doc /&gt;')">The element is not correctly escaped.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
