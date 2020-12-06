@@ -1,0 +1,74 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" features="xslt-3">
+   <t:info>
+      <t:title>AB-xslt-123</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-12-05</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests to check nodes are correctly returned in arrays/maps.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests nodes are correctly returned in arrays/maps. (Thanks to Martin for the test's blueprint).</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+         xmlns:xs="http://www.w3.org/2001/XMLSchema" version="3.0">
+         <p:output port="result"/>
+         
+         <p:xslt version="3.0" template-name="start" name="xslt">
+            <p:with-input port="source"><p:empty /></p:with-input>
+            <p:with-input port="stylesheet" expand-text="false">
+               <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                  <xsl:output build-tree="no"/>
+                  <xsl:template name="start">
+                     <xsl:result-document href="dummy.xml">
+                        <xsl:variable name="some-elements">
+                           <doc>
+                              <one>one</one>
+                              <two>two</two>
+                           </doc>
+                        </xsl:variable>
+                        <xsl:sequence select="map{'one' : $some-elements/doc/one/text(), 'two' : $some-elements/doc/two/text() }"/>
+                     </xsl:result-document>
+                     <primary />
+                  </xsl:template>
+               </xsl:stylesheet>
+            </p:with-input>
+         </p:xslt>
+         <p:identity>
+            <p:with-input pipe="secondary" />
+         </p:identity>
+         <p:identity xmlns:map="http://www.w3.org/2005/xpath-functions/map">
+            <p:with-input>
+               <result>
+                  <map-check>{. instance of map(*)}</map-check>
+                  <map-size-check>{map:size(.)}</map-size-check>
+                  <map-of-nodes-check>{. instance of map(xs:string, node())}</map-of-nodes-check>
+                  <map-of-text-check>{. instance of map(xs:string, text())}</map-of-text-check>
+                  <map-item-is-text-check>{every $item in .?* satisfies $item instance of text()}</map-item-is-text-check> 
+               </result>
+            </p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The document root is not 'result'.</s:assert>
+               <s:assert test="result/map-check/text()='true'">The value of map-check is not "true".</s:assert>
+               <s:assert test="result/map-size-check/text()='2'">The value of map-size-check is not "2".</s:assert>
+               <s:assert test="result/map-of-nodes-check/text()='true'">The value of map-of-nodes-check is not "true".</s:assert>
+               <s:assert test="result/map-of-text-check/text()='true'">The value of map-of-text-check is not "true".</s:assert>
+               <s:assert test="result/map-item-is-text-check/text()='true'">The value of map-item-is-text-check is not "true".</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
