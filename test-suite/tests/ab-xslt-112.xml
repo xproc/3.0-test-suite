@@ -1,0 +1,71 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" features="xslt-3">
+   <t:info>
+      <t:title>AB-xslt-112</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-12-05</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests to check nodes are correctly returned in arrays/maps.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests nodes are correctly returned in arrays/maps. (Thanks to Martin for the test's blueprint).</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+         
+         <p:xslt version="3.0" template-name="start" name="xslt">
+            <p:with-input port="source"><p:empty /></p:with-input>
+            <p:with-input port="stylesheet" expand-text="false">
+               <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                  <xsl:output build-tree="no"/>
+                  <xsl:template name="start">
+                     <xsl:result-document href="dummy.xml">
+                        <xsl:variable name="some-elements" as="element()*">
+                           <a/>
+                           <b/>
+                        </xsl:variable>
+                        <xsl:sequence select="array{ $some-elements }"/>
+                     </xsl:result-document>
+                     <primary />
+                  </xsl:template>
+               </xsl:stylesheet>
+            </p:with-input>
+         </p:xslt>
+         <p:identity>
+            <p:with-input pipe="secondary" />
+         </p:identity>
+         <p:identity xmlns:array="http://www.w3.org/2005/xpath-functions/array">
+            <p:with-input>
+               <result>
+                  <array-check>{. instance of array(*)}</array-check>
+                  <array-size-check>{array:size(.)}</array-size-check>
+                  <array-of-nodes-check>{. instance of array(node())}</array-of-nodes-check>
+                  <array-of-elements-check>{. instance of array(element())}</array-of-elements-check>
+                  <array-item-is-element-check>{every $item in .?* satisfies $item instance of element()}</array-item-is-element-check> 
+               </result>
+            </p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The document root is not 'result'.</s:assert>
+               <s:assert test="result/array-check/text()='true'">The value of array-check is not "true".</s:assert>
+               <s:assert test="result/array-size-check/text()='2'">The value of array-size-check is not "2".</s:assert>
+               <s:assert test="result/array-of-nodes-check/text()='true'">The value of array-of-nodes-check is not "true".</s:assert>
+               <s:assert test="result/array-of-elements-check/text()='true'">The value of array-of-elements-check is not "true".</s:assert>
+               <s:assert test="result/array-item-is-element-check/text()='true'">The value of array-item-is-element-check is not "true".</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
