@@ -13,7 +13,7 @@ buildscript {
   repositories {
     mavenLocal()
     mavenCentral()
-    maven { url "http://maven.restlet.org" }
+    maven { url "https://maven.restlet.talend.com" }
   }
 
   dependencies {
