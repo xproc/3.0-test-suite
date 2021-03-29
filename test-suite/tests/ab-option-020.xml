@@ -3,6 +3,15 @@
       <t:title>Option declaration 020</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2021-03-29</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed test: No casting but function conversion rules.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-07-20</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -23,17 +32,17 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Checks not required option with default value is type casted.</p>
+      <p>Checks not required option with default value uses function conversion rules.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
                       xmlns:xs="http://www.w3.org/2001/XMLSchema" version="3.0">
             <p:output port="result"/>
-            <p:option name="option" required="false" select="'false'" as="xs:boolean"/>
+            <p:option name="option" required="false" select="xs:integer(3)" as="xs:double"/>
             
             <p:identity>
                 <p:with-input>
-                    <doc>{$option}</doc>
+                    <doc>{$option instance of xs:double}</doc>
                 </p:with-input>
             </p:identity>
         </p:declare-step>
@@ -45,7 +54,7 @@
                <s:assert test="doc">The pipeline root is not doc.</s:assert>
                <s:assert test="count(doc/node())=1">The root element does not have exactly one child.</s:assert>
                <s:assert test="count(doc/text())=1">The root element does not have exactly one text child.</s:assert>
-               <s:assert test="doc/text()='false'">The root element does not have a text child 'Some value'.</s:assert>
+               <s:assert test="doc/text()='true'">The root element does not have a text child 'true'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>

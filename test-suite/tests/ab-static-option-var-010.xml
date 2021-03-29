@@ -3,6 +3,15 @@
         <t:title>Static variables/option 010</t:title>
         <t:revision-history>
             <t:revision>
+                <t:date>2021-03-28</t:date>
+                <t:author>
+                    <t:name>Achim Berndzen</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>Fixed typing bug in test.</p>
+                </t:description>
+            </t:revision>
+            <t:revision>
                 <t:date>2018-10-11T18:16:00+02:00</t:date>
                 <t:author>
                     <t:name>Achim Berndzen</t:name>
@@ -19,7 +28,7 @@
     <t:pipeline>
         <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="main" version="3.0">
             <p:output port="result"/>
-            <p:option static="true" name="static-option" select="18"/>
+            <p:option static="true" name="static-option" select="'18'"/>
 
             <p:add-attribute match="/doc" attribute-name="a">
                 <p:with-option name="attribute-value" select="$static-option"/>
