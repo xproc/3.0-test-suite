@@ -3,6 +3,15 @@
       <t:title>With-option 007</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2021-03-28</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed typing error in test.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2018-09-15T11:06:16+02:00</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -19,7 +28,7 @@
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="main" version="3.0">
             <p:output port="result"/>
-            <p:variable name="att-value" select="5"/>
+            <p:variable name="att-value" select="'5'"/>
             
             <p:add-attribute attribute-name="att">
                 <p:with-option name="attribute-value" select="$att-value"/>

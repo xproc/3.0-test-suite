@@ -1,0 +1,33 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+   xmlns:err="http://www.w3.org/ns/xproc-error"  expected="fail" code="err:XD0036">
+   <t:info>
+      <t:title>Option declaration 020a</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-03-29</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed test: No casting but function conversion rules.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Checks not required option with default value raises error for non convertible type.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+                      xmlns:xs="http://www.w3.org/2001/XMLSchema" version="3.0">
+            <p:output port="result"/>
+            <p:option name="option" required="false" select="'false'" as="xs:boolean"/>
+            
+            <p:identity>
+                <p:with-input>
+                    <doc>{$option}</doc>
+                </p:with-input>
+            </p:identity>
+        </p:declare-step>
+   </t:pipeline>
+</t:test>
