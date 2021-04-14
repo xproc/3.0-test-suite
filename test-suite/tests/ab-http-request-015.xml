@@ -20,7 +20,7 @@
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result" />
          
-         <p:http-request href="http://tests.xproc.org/service/fixed-multipart">
+         <p:http-request href="http://localhost:8246/service/fixed-multipart">
             <p:with-input><p:empty/></p:with-input>
          </p:http-request>
          
@@ -44,7 +44,7 @@
           <s:pattern>
             <s:rule context="/">
                <s:assert test="result">The root element is not 'result'.</s:assert>
-               <s:assert test="count(result/doc/base-uri[.='http://tests.xproc.org/service/fixed-multipart'])=2">There are not two docs with the right uri. </s:assert>
+               <s:assert test="count(result/doc/base-uri[.='http://localhost:8246/service/fixed-multipart'])=2">There are not two docs with the right uri. </s:assert>
                <s:assert test="result/doc/content-type = 'text/html'">There is no entry with content-type 'text/html'.</s:assert>
                <s:assert test="result/doc/content-type = 'image/png'">There is no entry with content-type 'image/png'.</s:assert>
             </s:rule>

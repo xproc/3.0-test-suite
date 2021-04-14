@@ -373,3 +373,43 @@ This repository is organized in the following way:
     └── tests
         └── …                    # Individual tests
 ```
+
+## Docker configuration
+
+Some tests require access to a configured server. For example, the
+HTTP tests require access to an HTTP server running scripts that
+respond in the expected way to requests.
+
+This used to be accomplished by running the services on
+`tests.xproc.org`. However, that site runs on shared infrastructure
+and changes to that infrastructure caused a number of tests to fail.
+It also had the disadvantage that only Norm had access to the scripts
+and the server configuration.
+
+Starting in April, 2021, the services required for running tests are
+provided by a Docker container. To run the tests, you will need to
+have [Docker](https://docker.com/) and `docker-compose`.
+
+Before running the tests, you must start the container. You can do
+this by running `./gradlew start`. Or, if you prefer, by running
+`docker-compose` directly in the `docker` directory. The container is
+downloaded from GitHub automatically, but the build script for the
+container is in `docker/xproctest`. When the tests finish, you can
+stop the container by running `./gradlew stop` or, again, with
+`docker-compose` directly.
+
+At the time of this writing, the container only supports the HTTP
+tests. Over time, additional services such as SMTP mocking may be
+added to the container to facilitate testing more steps.
+
+### A note about port numbers
+
+Access to the tests in the running container is provided through port
+mapping. At the moment, the mapping for HTTP is hard-coded to port
+`8246`. In other words, `http://localhost:8246` is mapped to port 80
+in the container.
+
+It’s possible to make this configurable, but it would require some
+effort and it isn’t clear if it’s necessary. If you are running the
+tests and you find that using port `8246` on `localhost` is
+problematic, please open an issue.

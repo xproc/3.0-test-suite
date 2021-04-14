@@ -1,0 +1,18 @@
+#!/usr/bin/perl -- # -*- Perl -*-
+
+use strict;
+use English;
+use CGI::Carp qw(fatalsToBrowser);
+use CGI::Cookie;
+
+my $CGI = exists $ENV{'GATEWAY_INTERFACE'} ? 1 : 0;
+
+my $cookie = new CGI::Cookie(-name => "IKnowYou", -value => "I Really Do!");
+
+my $redirect = "http://" . $ENV{'HTTP_HOST'} . "/service/over-there";
+
+print "Set-Cookie: $cookie\n";
+print "Status: 302 Moved\n";
+print "Location: $redirect\n\n";
+
+exit(0);

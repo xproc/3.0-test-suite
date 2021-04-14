@@ -20,7 +20,7 @@
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result" />
          
-         <p:http-request href="http://tests.xproc.org/service/fixed-rdf">
+         <p:http-request href="http://localhost:8246/service/fixed-rdf">
             <p:with-input><p:empty/></p:with-input>
          </p:http-request>
          
@@ -41,7 +41,7 @@
           <s:pattern>
             <s:rule context="/">
                <s:assert test="result">The root element is not 'result'.</s:assert>
-               <s:assert test="result/base-uri/text()='http://tests.xproc.org/service/fixed-rdf'">The base-uri is not right.</s:assert>
+               <s:assert test="result/base-uri/text()='http://localhost:8246/service/fixed-rdf'">The base-uri is not right.</s:assert>
                <s:assert test="result/content-type/text()='application/rdf+xml'">The content-type is not right.</s:assert>
             </s:rule>
          </s:pattern>

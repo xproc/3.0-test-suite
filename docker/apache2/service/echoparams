@@ -1,0 +1,90 @@
+#!/usr/bin/perl -- # -*- Perl -*-
+
+use strict;
+use English;
+use CGI::Carp qw(fatalsToBrowser);
+
+my $CGI = exists $ENV{'GATEWAY_INTERFACE'} ? 1 : 0;
+my %params = ();
+
+if ($CGI) {
+    %params = &parse_cgi_query();
+} else {
+    %params = ("na" => "ran from command line")
+}
+
+#open (F, ">/tmp/echoparams.log");
+#foreach my $key (sort keys %params) {
+#    print F "<param name='$key'>", $params{$key}, "</param>\n";
+#}
+#close (F);
+
+print "Content-type: application/xml\n\n";
+print "<params>\n";
+
+foreach my $key (sort keys %params) {
+    print "<param name='$key'>", $params{$key}, "</param>\n";
+}
+
+print "</params>\n";
+
+exit(0);
+
+# ----------------------------------------------------------------------
+
+sub parse_cgi_query {
+    # Parse a CGI query and return an associative array of the fields
+    # defined by the query.  This code expects URLs of the form
+    # http:///script?field1=value1&field2=value2...either as GETs or
+    # POSTS.
+    #
+    my %FIELD;
+    my ($var, $value);
+    local $_;
+
+    %FIELD = ();
+
+    $_ = &get_cgi_query();
+
+    my @fields = split(/&/, $_);
+    foreach $_ (@fields) {
+	s/\+/ /g;
+
+	if (/%(..)/) {
+	    my $unescaped = "";
+	    while (/%(..)/) {
+		$unescaped .= $PREMATCH . sprintf("%c", hex($1));
+		$_ = $POSTMATCH;
+	    }
+	    $_ = $unescaped . $_;
+	}
+
+	next if !/^([^=]*)=/;
+	$var = $1;
+	$value = substr($_, length($var)+1);
+
+#	print "$var=$value\n";
+
+	if (defined($FIELD{$var})) {
+	    $FIELD{$var} .= "\0$value";
+	} else {
+	    $FIELD{$var}=$value;
+	}
+    }
+
+    %FIELD;
+}
+
+sub get_cgi_query {
+    local $_;
+
+    if ($ENV{'REQUEST_METHOD'} eq 'POST') {
+	read(STDIN, $_, $ENV{'CONTENT_LENGTH'});
+    } else {
+	$_ = $ENV{'QUERY_STRING'};
+    }
+
+    return $_;
+}
+
+

@@ -1,0 +1,30 @@
+#!/usr/bin/perl -- # -*- Perl -*-
+
+use strict;
+use English;
+use CGI::Carp qw(fatalsToBrowser);
+use CGI::Cookie;
+
+my $CGI = exists $ENV{'GATEWAY_INTERFACE'} ? 1 : 0;
+
+my $cookie = new CGI::Cookie(-name => "IKnowYou", -value => "I Really Do!");
+
+my $redirect = "http://" . $ENV{'HTTP_HOST'} . "/service/over-there";
+
+my @MONTHS = ('Jan','Feb','Mar','Apr','May','Jun',
+              'Jul','Aug','Sep','Oct','Nov','Dec');
+my @DAYS = ('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
+
+my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = gmtime(time());
+
+my $date = sprintf("%s, %d %s %d %d:%02d:%02d GMT",
+                   $DAYS[$wday], $mday, $MONTHS[$mon], $year+1900,
+                   $hour, $min, $sec);
+
+print "Status: 302 Redirect\n";
+print "Server: Apache-Coyote/1.1\n";
+print "Location: $redirect\n";
+print "Content-Length: 0\n";
+print "Date: $date\n\n";
+
+exit(0);
