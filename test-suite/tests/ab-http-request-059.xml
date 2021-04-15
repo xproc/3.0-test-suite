@@ -29,7 +29,7 @@
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result" />
          
-         <p:http-request href="http://tests.xproc.org/service/echo" method="post"
+         <p:http-request href="http://localhost:8246/service/echo" method="post"
             headers="map{'content-type' : 'text/csv' }">
             <p:with-input>
                <p:inline content-type='text/plain'>1 , 2, 3</p:inline>

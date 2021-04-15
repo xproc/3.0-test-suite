@@ -22,7 +22,7 @@
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result" />
          
-         <p:http-request href="htxtp://tests.xproc.org/service/fixed-xml">
+         <p:http-request href="htxtp://localhost:8246/service/fixed-xml">
             <p:with-input>
                <p:empty />
             </p:with-input>

@@ -20,7 +20,7 @@
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result" />
          
-         <p:http-request href="http://tests.xproc.org/service/echo" method="post" 
+         <p:http-request href="http://localhost:8246/service/echo" method="post" 
             headers="map{'content-type' : 'multipart/fixed'}">
             <p:with-input>
                <doc1 />
@@ -45,7 +45,7 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="properties">The document root is not response.</s:assert>
-               <s:assert test="count(properties/prop[@uri='http://tests.xproc.org/service/echo'])=2">The base-uri is not correct.</s:assert>
+               <s:assert test="count(properties/prop[@uri='http://localhost:8246/service/echo'])=2">The base-uri is not correct.</s:assert>
                <s:assert test="count(properties/prop[@content-type='application/xml'])=2">The content-type is not correct.</s:assert>
             </s:rule>
          </s:pattern>

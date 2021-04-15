@@ -20,7 +20,7 @@
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result" />
          
-         <p:http-request href="http://tests.xproc.org/service/fixed-binary">
+         <p:http-request href="http://localhost:8246/service/fixed-binary">
             <p:with-input><p:empty/></p:with-input>
          </p:http-request>
          <p:cast-content-type content-type="application/xml" />
