@@ -1,0 +1,19 @@
+#!/usr/bin/perl -- # -*- Perl -*-
+
+use strict;
+use English;
+use CGI;
+use CGI::Carp qw(fatalsToBrowser);
+use CGI::Cookie;
+
+my $query = new CGI;
+
+my $cookie = $query->cookie("IKnowYou");
+
+print "Content-type: application/xml; charset=UTF-8\n\n";
+
+print "<doc>\n";
+print "<IKnowYou>", $cookie, "</IKnowYou>\n";
+print "</doc>\n";
+
+exit(0);

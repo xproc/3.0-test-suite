@@ -1,0 +1,34 @@
+#!/usr/bin/perl -- # -*- Perl -*-
+
+use strict;
+use English;
+use CGI::Carp qw(fatalsToBrowser);
+use CGI::Cookie;
+
+my $CGI = exists $ENV{'GATEWAY_INTERFACE'} ? 1 : 0;
+
+my %cookies = fetch CGI::Cookie;
+
+print "Content-type: application/xml\n\n";
+
+print "<cookies>\n";
+
+foreach my $name (keys %cookies) {
+    my $cookie = $cookies{$name};
+    dumpCookie($cookie);
+}
+
+print "</cookies>\n";
+
+exit(0);
+
+sub dumpCookie {
+    my $cookie = shift;
+
+    print "<cookie ";
+    print "name='", $cookie->name(), "' ";
+    print "value='", $cookie->value(), "' ";
+    print "domain='", $cookie->domain(), "' ";
+    print "path='", $cookie->path(), "' ";
+    print "expires='", $cookie->expires(), "'/>\n";
+}

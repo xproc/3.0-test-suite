@@ -20,7 +20,7 @@
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result" />
          
-         <p:http-request href="http://tests.xproc.org/service/echo" method="post">
+         <p:http-request href="http://localhost:8246/service/echo" method="post">
             <p:with-input>
                <p:document content-type="image/png" href="../documents/Kanava.png" />
             </p:with-input>
@@ -42,7 +42,7 @@
            <s:pattern>
             <s:rule context="/">
                <s:assert test="result">The root element is not 'result'.</s:assert>
-               <s:assert test="result/base-uri='http://tests.xproc.org/service/echo'">The URI is not right.</s:assert>
+               <s:assert test="result/base-uri='http://localhost:8246/service/echo'">The URI is not right.</s:assert>
                <s:assert test="result/content-type/text()= 'image/png'">The content type is not right.</s:assert>
             </s:rule>
          </s:pattern>

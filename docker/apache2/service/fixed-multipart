@@ -1,0 +1,36 @@
+#!/usr/bin/perl -- # -*- Perl -*-
+
+use strict;
+use English;
+use CGI::Carp qw(fatalsToBrowser);
+
+my $boundary = "=-=-=-=-=";
+
+print "Content-type: multipart/related; boundary=\"$boundary\"\r\n\r\n";
+
+print "--$boundary\r\n";
+
+my $file = "/usr/local/apache2/htdocs/docs/helloworld.html";
+print "Content-type: text/html\r\n";
+print "Content-length: ", -s $file, "\r\n";
+print "\r\n";
+open (F, "/usr/local/apache2/htdocs/docs/helloworld.html");
+while (<F>) {
+    print $_;
+}
+close (F);
+
+print "\r\n--$boundary\r\n";
+
+$file = "/usr/local/apache2/htdocs/docs/helloworld.png";
+print "Content-type: image/png\r\n";
+print "Content-length: ", -s $file, "\r\n";
+print "\r\n";
+open (F, "/usr/local/apache2/htdocs/docs/helloworld.png");
+binmode F;
+while (read(F, $_, 4096)) {
+    print $_;
+}
+close (F);
+
+print "\r\n--${boundary}--\r\n";

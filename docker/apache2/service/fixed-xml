@@ -1,0 +1,17 @@
+#!/usr/bin/perl -- # -*- Perl -*-
+
+use strict;
+use English;
+use CGI::Carp qw(fatalsToBrowser);
+
+# To satisfy Apache, always read the input
+if ($ENV{'REQUEST_METHOD'} eq 'POST') {
+    read(STDIN, $_, $ENV{'CONTENT_LENGTH'});
+}
+
+print "Content-type: application/xml\n\n";
+print "<doc><title>Sample document</title>\n";
+print "<p>Hello world!</p>\n";
+print "</doc>\n";
+
+exit(0);

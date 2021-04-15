@@ -21,7 +21,7 @@
             xmlns:c="http://www.w3.org/ns/xproc-step">
          <p:output port="result" />
          
-         <p:http-request href="http://tests.xproc.org/service/fixed-rdf" method="post">
+         <p:http-request href="http://localhost:8246/service/fixed-rdf" method="post">
             <p:with-input><c:content /></p:with-input>
          </p:http-request>
          

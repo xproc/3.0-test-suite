@@ -22,7 +22,7 @@
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result" />
          
-         <p:http-request method="get" href="http://tests.xproc.org/docs/basic-auth/"
+         <p:http-request method="get" href="http://localhost:8246/docs/basic-auth/"
             auth="map{'auth-method' : 'i-am-not-a-known-auth-method'}">
             <p:with-input><p:empty /></p:with-input>
          </p:http-request>

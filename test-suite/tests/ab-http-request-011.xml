@@ -21,7 +21,7 @@
          xmlns:c="http://www.w3.org/ns/xproc-step">
          <p:output port="result" />
          
-         <p:http-request href="http://tests.xproc.org/service/fixed-text" method="post">
+         <p:http-request href="http://localhost:8246/service/fixed-text" method="post">
             <p:with-input><c:body/></p:with-input>
          </p:http-request>
          <p:wrap-sequence wrapper="result" />

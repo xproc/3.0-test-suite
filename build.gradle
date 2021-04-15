@@ -46,6 +46,11 @@ dependencies {
   )
 }
 
+ext {
+  containers = [:]
+  c_xproctest = "xproctests"
+}
+
 defaultTasks 'website'
 
 apply plugin: 'com.xmlcalabash.task'
@@ -62,6 +67,59 @@ def getenv(String name) {
   } else {
     return System.getenv(name)
   }
+}
+
+def docker_stdout = new ByteArrayOutputStream()
+exec {
+  commandLine "docker", "ps", "-a", "--format={{.ID}} {{.Names}} {{.Status}}"
+  standardOutput = docker_stdout;
+}
+
+docker_stdout.toString().split("\n").each { line ->
+  def parts = line.split(" ")
+  if (parts.length > 2) {
+    def id = parts[0]
+    def name = parts[1]
+    def status = parts[2]
+
+    if (name.contains(":")) {
+      name = name.split(":")[0];
+    }
+
+    if (!status.startsWith("Exited")) {
+      containers[name] = id
+    }
+  }
+}
+
+task dockerup() {
+  doLast {
+    if (!containers.containsKey(c_xproctest)) {
+      throw new GradleException("Docker containers are not available")
+    }
+  }
+}
+
+task dockerdown() {
+  doLast {
+    if (containers.containsKey(c_xproctest)) {
+        throw new GradleException("Docker containers already running?")
+    }
+  }
+}
+
+task start(type: Exec, dependsOn: ["do_start"]) {
+  commandLine "docker", "ps", "-a", "--format={{.ID}} {{.Names}} {{.Status}}"
+}
+
+task do_start(type: Exec) {
+  workingDir "docker"
+  commandLine "docker-compose", "up", "-d"
+}
+
+task stop(type: Exec) {
+  workingDir "docker"
+  commandLine "docker-compose", "down"
 }
 
 // ======================================================================

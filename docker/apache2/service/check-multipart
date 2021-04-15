@@ -1,0 +1,100 @@
+#!/usr/bin/perl -- # -*- Perl -*-
+
+use strict;
+use English;
+use CGI::Carp qw(fatalsToBrowser);
+use MIME::Base64;
+
+if ($ENV{'REQUEST_METHOD'} eq 'POST') {
+    read(STDIN, $_, $ENV{'CONTENT_LENGTH'});
+} else {
+    $_ = $ENV{'QUERY_STRING'};
+}
+
+my @lines = split(/\r\n/, $_);
+
+#open (F, ">/tmp/check-multipart.data");
+#foreach my $key (sort keys %ENV) {
+#    print F $key, "=", $ENV{$key}, "\n";
+#}
+#foreach my $line (@lines) {
+#    print F $line, "\n";
+#}
+#close (F);
+
+my $contentType = $ENV{'CONTENT_TYPE'};
+my $boundary = "";
+
+if ($contentType =~ /^(.*)(;\s*boundary=([^;\s]+))\s*(.*)$/) {
+    $contentType = $1 . $4;
+    $boundary = $3;
+
+    $boundary = $2 if $boundary =~ /^([\'\"])(.*)\1$/;
+}
+
+print "Content-type: application/xml\r\n\r\n";
+
+while (@lines && $lines[0] ne "--$boundary") {
+    shift @lines;
+}
+shift @lines; # skip the boundary
+
+print "<check-multipart boundary='$boundary' content-type='$contentType'>\n";
+
+my %skipHeader = ('accept' => 1,
+                  'boundary' => 1,
+                  'host' => 1,
+                  'connection' => 1,
+                  'bluecoat_via' => 1,
+                  'user_agent' => 1);
+foreach my $key (sort keys %ENV) {
+    next if $key !~ /^HTTP_(.*)$/;
+    my $name = lc($1);
+    my $value = $ENV{$key};
+    next if exists $skipHeader{$name};
+    print "<header name='", $name, "'>", $value, "</header>\n";
+}
+
+my $partType = "application/octet-stream";
+my $partEncoding = undef;
+my @headers = ();
+my $body = undef;
+while (@lines) {
+    my $line = shift @lines;
+    if ($line eq '') {
+        $body = "";
+        next;
+    }
+
+    if ($line eq "--$boundary" || $line eq "--$boundary--") {
+        print "<part>\n";
+        foreach my $header (sort { lc($a) cmp lc($b) } @headers) {
+            $header =~ /^(\S+)\s*:\s*(.*)$/;
+            print "<header name='$1'>$2</header>\n";
+        }
+
+        if (defined($partEncoding)
+            || $partType =~ /^text\//
+            || $partType =~ /\/xml/
+            || $partType =~ /\+xml/) {
+            print "<body>$body</body>\n";
+        } else {
+            print "<body>", encode_base64($body), "</body>\n";
+        }
+        print "</part>\n";
+        @headers = ();
+        $body = undef;
+        $partType = "application/octet-stream";
+        $partEncoding = undef;
+    } else {
+        if (defined($body)) {
+            $body .= $line . "\n";
+        } else {
+            $partType = $1 if $line =~ /^Content-Type:\s*([^\;]+)/i;
+            $partEncoding = $1 if $line =~ /^Content-Transfer-Encoding:\s*(\S+)/i;
+            push(@headers, $line);
+        }
+    }
+}
+
+print "</check-multipart>\n";
