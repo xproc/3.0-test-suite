@@ -1,0 +1,51 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>ab-option-042</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-04-24</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added new tests.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Testing reference to options as default value for other options.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+                      xmlns:test="http://test" version="3.0">
+         <p:output port="result"/>
+         
+         <p:declare-step type="test:step">
+            <p:option name="opt1"  select="'text'"/>
+            <p:option name="opt2" select="concat($opt1,'_1')" />
+            <p:option name="opt3" select="concat($opt2,'_2')" />
+            <p:output port="result" />
+            
+            <p:identity>
+               <p:with-input>
+                  <result>{$opt1} {$opt2} {$opt3}</result>
+               </p:with-input>
+            </p:identity> 
+         </p:declare-step>
+         
+         <test:step opt1="option1" opt2="option2"/>
+         
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The document root is not 'result'.</s:assert>
+               <s:assert test="result/text()='option1 option2 option2_2'"></s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
