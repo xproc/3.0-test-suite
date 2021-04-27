@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="XProc Test Suite"
-           tests="2084"
+           tests="2105"
            errors="0"
            failures="0"
            skipped="0"
-           timestamp="2020-12-06T13:05:03">
+           timestamp="2021-04-27T17:49:59">
    <properties>
       <property name="processor" value="MorganaXProc-IIIse"/>
-      <property name="version" value="0.9.5.3-beta"/>
+      <property name="version" value="0.9.5.8-beta"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.0"/>
@@ -911,6 +911,7 @@
    <testcase name="ab-option-018.xml"/>
    <testcase name="ab-option-019.xml"/>
    <testcase name="ab-option-020.xml"/>
+   <testcase name="ab-option-020a.xml"/>
    <testcase name="ab-option-021.xml"/>
    <testcase name="ab-option-022.xml"/>
    <testcase name="ab-option-023.xml"/>
@@ -927,6 +928,25 @@
    <testcase name="ab-option-035.xml"/>
    <testcase name="ab-option-036.xml"/>
    <testcase name="ab-option-037.xml"/>
+   <testcase name="ab-option-038.xml"/>
+   <testcase name="ab-option-039.xml"/>
+   <testcase name="ab-option-040.xml"/>
+   <testcase name="ab-option-041.xml"/>
+   <testcase name="ab-option-042.xml"/>
+   <testcase name="ab-option-043.xml"/>
+   <testcase name="ab-option-044.xml"/>
+   <testcase name="ab-option-045.xml"/>
+   <testcase name="ab-option-046.xml"/>
+   <testcase name="ab-option-047.xml"/>
+   <testcase name="ab-option-048.xml"/>
+   <testcase name="ab-option-049.xml"/>
+   <testcase name="ab-option-050.xml"/>
+   <testcase name="ab-option-051.xml"/>
+   <testcase name="ab-option-052.xml"/>
+   <testcase name="ab-option-053.xml"/>
+   <testcase name="ab-option-054.xml"/>
+   <testcase name="ab-option-055.xml"/>
+   <testcase name="ab-option-056.xml"/>
    <testcase name="ab-output-001.xml"/>
    <testcase name="ab-output-002.xml"/>
    <testcase name="ab-output-003.xml"/>
@@ -1807,6 +1827,7 @@
    <testcase name="ab-with-option-005.xml"/>
    <testcase name="ab-with-option-006.xml"/>
    <testcase name="ab-with-option-007.xml"/>
+   <testcase name="ab-with-option-007a.xml"/>
    <testcase name="ab-with-option-008.xml"/>
    <testcase name="ab-with-option-009.xml"/>
    <testcase name="ab-wrap-001.xml"/>
