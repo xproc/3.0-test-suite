@@ -1,7 +1,18 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>JSON join 005(AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-09-06</t:date>
             <t:author>
@@ -17,9 +28,9 @@
       <p>Tests simple p:JSON-join with mixed entries: 'flatten-to-depth' = 'unbounded'</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
-         <p:output port="result" />
-         
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
          <p:json-join flatten-to-depth="unbounded">
             <p:with-input>
                <p:inline content-type="application/json">[ "A", 1]</p:inline>
@@ -27,13 +38,14 @@
                <p:inline content-type="application/json">[42, ["D", true]]</p:inline>
             </p:with-input>
          </p:json-join>
-         
-         <p:cast-content-type content-type="application/xml" />
+         <p:cast-content-type content-type="application/xml"/>
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
-         <s:ns prefix="xpath" uri="http://www.w3.org/2005/xpath-functions"/>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:ns prefix="xpath"
+               uri="http://www.w3.org/2005/xpath-functions"/>
          <s:pattern>
             <s:rule context="/">
                <s:assert test="xpath:array">The document root is not 'array'.</s:assert>

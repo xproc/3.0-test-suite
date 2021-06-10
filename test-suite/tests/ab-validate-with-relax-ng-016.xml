@@ -1,35 +1,49 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" 
-  features="p-validate-with-relax-ng dtd-id-ref-warning">
-  <t:info>
-    <t:title>ab-validate-with-relax-ng-016</t:title>
-    <t:revision-history>
-      <t:revision>
-        <t:date>2019-08-18</t:date>
-        <t:author>
-          <t:name>Achim Berndzen</t:name>
-        </t:author>
-        <t:description xmlns="http://www.w3.org/1999/xhtml">
-          <p>Initial publication</p>
-        </t:description>
-      </t:revision>
-    </t:revision-history>
-  </t:info>
-  <t:description xmlns="http://www.w3.org/1999/xhtml">
-    <p>Testing dtd-id-idref-warnings: set to true, source is valid.</p>
-  </t:description>
-  <t:pipeline>
-<p:declare-step name="pipeline" xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
-  <p:output port="result"/>
-  <p:validate-with-relax-ng dtd-id-idref-warnings="true">
-    <p:with-input port="source">
-      <doc>
-        <title>Title</title>
-        <p id="foo">Some paragraph.</p>
-        <p idref="foo">Some other paragraph</p>
-      </doc>
-    </p:with-input>
-    <p:with-input port="schema">
-      <p:inline content-type="text/plain" expand-text="false">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        features="p-validate-with-relax-ng dtd-id-ref-warning"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>ab-validate-with-relax-ng-016</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-08-18</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial publication</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Testing dtd-id-idref-warnings: set to true, source is valid.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="pipeline"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:validate-with-relax-ng dtd-id-idref-warnings="true">
+            <p:with-input port="source">
+               <doc>
+                  <title>Title</title>
+                  <p id="foo">Some paragraph.</p>
+                  <p idref="foo">Some other paragraph</p>
+               </doc>
+            </p:with-input>
+            <p:with-input port="schema">
+               <p:inline content-type="text/plain"
+                         expand-text="false">
         namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
         
         element doc {
@@ -45,20 +59,21 @@
         }*
         }
       </p:inline>
-    </p:with-input>
-  </p:validate-with-relax-ng>
-</p:declare-step>
-</t:pipeline>
-  
-  <t:schematron>
-    <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
-      <s:pattern>
-        <s:rule context="/">
-          <s:assert test="doc">The element root is not “doc”.</s:assert>
-          <s:assert test="doc/title">The element root does not have a child 'title'.</s:assert>
-          <s:assert test="doc/p">Element root does not have child 'p'.</s:assert>
-        </s:rule>
-      </s:pattern>
-    </s:schema>
-  </t:schematron>
+            </p:with-input>
+         </p:validate-with-relax-ng>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="doc">The element root is not “doc”.</s:assert>
+               <s:assert test="doc/title">The element root does not have a child 'title'.</s:assert>
+               <s:assert test="doc/p">Element root does not have child 'p'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
 </t:test>

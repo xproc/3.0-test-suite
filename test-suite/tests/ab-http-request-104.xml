@@ -1,7 +1,18 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"  expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>http-request-104 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2020-01-18</t:date>
             <t:author>
@@ -17,31 +28,31 @@
       <p>Tests multipart request: Two xml documents, content-type: multipart/fixed.(checking properties).</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
-         <p:output port="result" />
-         
-         <p:http-request href="http://localhost:8246/service/echo" method="post" 
-            headers="map{'content-type' : 'multipart/fixed'}">
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:http-request href="http://localhost:8246/service/echo"
+                         method="post"
+                         headers="map{'content-type' : 'multipart/fixed'}">
             <p:with-input>
-               <doc1 />
-               <doc2 />
+               <doc1/>
+               <doc2/>
             </p:with-input>
          </p:http-request>
-         
          <p:for-each>
             <p:identity>
                <p:with-input>
-                  <prop uri="{p:document-property(.,'base-uri')}" 
-                     content-type="{p:document-property(.,'content-type')}" />
+                  <prop uri="{p:document-property(.,'base-uri')}"
+                        content-type="{p:document-property(.,'content-type')}"/>
                </p:with-input>
             </p:identity>
          </p:for-each>
-         <p:wrap-sequence wrapper="properties" />
+         <p:wrap-sequence wrapper="properties"/>
       </p:declare-step>
    </t:pipeline>
-   
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron">
          <s:pattern>
             <s:rule context="/">
                <s:assert test="properties">The document root is not response.</s:assert>

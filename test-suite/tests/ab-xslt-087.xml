@@ -1,7 +1,19 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" features="xslt-1 xslt-1-output-base-uri">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        features="xslt-1 xslt-1-output-base-uri"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>AB-xslt-087</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-10-04</t:date>
             <t:author>
@@ -17,14 +29,19 @@
       <p>Tests output base uri.</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result"/>
-         <p:xslt version="1.0" output-base-uri="http://base.uri/doc.xml">
-            <p:with-input><doc /></p:with-input>
-            <p:with-input port="stylesheet">       
-               <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+         <p:xslt version="1.0"
+                 output-base-uri="http://base.uri/doc.xml">
+            <p:with-input>
+               <doc/>
+            </p:with-input>
+            <p:with-input port="stylesheet">
+               <xsl:stylesheet version="1.0"
+                               xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                   <xsl:template match="doc">
-                     <xsl:copy-of select="." />
+                     <xsl:copy-of select="."/>
                   </xsl:template>
                </xsl:stylesheet>
             </p:with-input>
@@ -33,12 +50,13 @@
             <p:with-input>
                <uri>{p:document-property(., 'base-uri')}</uri>
             </p:with-input>
-         </p:identity>         
-         
+         </p:identity>
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
          <s:pattern>
             <s:rule context="/">
                <s:assert test="/uri">The document root is not 'uri'.</s:assert>

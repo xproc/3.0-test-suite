@@ -1,7 +1,18 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>AB for-each 005</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-07-20</t:date>
             <t:author>
@@ -23,14 +34,14 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Test evaluation of variables in the context of a <code>p:for-each</code> (ported from 1.0-testsuite/for-each-005)</p>
+      <p>Test evaluation of variables in the context of a 
+         <code>p:for-each</code> (ported from 1.0-testsuite/for-each-005)</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
-                      xmlns:xs="http://www.w3.org/2001/XMLSchema" version="3.0">
-            
-         <p:output port="result" />
-         
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:xs="http://www.w3.org/2001/XMLSchema">
+         <p:output port="result"/>
          <p:input port="source">
             <p:inline>
                <doc>
@@ -40,14 +51,14 @@
                </doc>
             </p:inline>
          </p:input>
-         
          <p:for-each name="loop">
             <p:with-input select="/doc/para"/>
-            
-            <p:variable name="q" select="/para/@id" as="xs:string">
-               <p:pipe step="loop" port="current"/>
+            <p:variable name="q"
+                        select="/para/@id"
+                        as="xs:string">
+               <p:pipe step="loop"
+                       port="current"/>
             </p:variable>
-            
             <p:choose>
                <p:when test="$q = 'x2'">
                   <p:identity/>
@@ -61,16 +72,16 @@
                </p:otherwise>
             </p:choose>
          </p:for-each>
-         
          <p:wrap-sequence wrapper="newdoc"/>
       </p:declare-step>
    </t:pipeline>
-   
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
          <s:pattern>
             <s:rule context="/">
-               <s:assert test="newdoc">The document root is not 'newdoc'.</s:assert>            
+               <s:assert test="newdoc">The document root is not 'newdoc'.</s:assert>
                <s:assert test="newdoc/para">The root element does not have a child 'para'</s:assert>
                <s:assert test="count(newdoc/para)=1">The root element does not have ONE child 'para'.</s:assert>
                <s:assert test="newdoc/para/@id='x2'">The para element with @id='x2' was not selected.</s:assert>

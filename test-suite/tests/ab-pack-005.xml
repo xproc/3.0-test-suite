@@ -1,7 +1,18 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>pack 005 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-05-06</t:date>
             <t:author>
@@ -17,33 +28,31 @@
       <p>Testing p:pack</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
-         <p:output port="result" />
-         
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
          <p:pack wrapper="Q{{http://test}}wrapper">
             <p:with-input port="source">
-               <doc1 />
+               <doc1/>
             </p:with-input>
             <p:with-input port="alternate">
-               <doc2 />
+               <doc2/>
             </p:with-input>
          </p:pack>
-         
-         <p:wrap-sequence wrapper="sequence-wrapper" />
+         <p:wrap-sequence wrapper="sequence-wrapper"/>
       </p:declare-step>
    </t:pipeline>
-   
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
-         <s:ns uri="http://test" prefix="test"/>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:ns uri="http://test"
+               prefix="test"/>
          <s:pattern>
             <s:rule context="/">
                <s:assert test="sequence-wrapper">The document root is not sequence-wrapper.</s:assert>
-               
                <s:assert test="sequence-wrapper/test:wrapper[1]/*[1][local-name()='doc1']">test:wrapper[1] is not correct.</s:assert>
                <s:assert test="sequence-wrapper/test:wrapper[1]/*[2][local-name()='doc2']">test:wrapper[1] is not correct.</s:assert>
-               
-               <s:assert test="count(sequence-wrapper/test:wrapper[1]/*)=2">wrapper[1] does not have exactly 0 child elements.</s:assert>         
+               <s:assert test="count(sequence-wrapper/test:wrapper[1]/*)=2">wrapper[1] does not have exactly 0 child elements.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>

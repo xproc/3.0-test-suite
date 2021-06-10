@@ -1,7 +1,18 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>viewport-007 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-09-18</t:date>
             <t:author>
@@ -14,13 +25,17 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Test <code>p:viewport</code> with <code>p:output</code>
+      <p>Test 
+         <code>p:viewport</code> with 
+         <code>p:output</code>
          that is bound to a sequence of (inline) documents.</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result"/>
-         <p:viewport match="para" name="viewport">
+         <p:viewport match="para"
+                     name="viewport">
             <p:with-input>
                <doc>
                   <para>Some paragraph.</para>
@@ -30,14 +45,21 @@
                      <para>Nested paragraph.</para>
                   </para>
                </doc>
-            </p:with-input>    
-            <p:output port="tmp" sequence="true">
-               <p:inline><foo/></p:inline>
-               <p:inline><bar/></p:inline>
+            </p:with-input>
+            <p:output port="tmp"
+                      sequence="true">
+               <p:inline>
+                  <foo/>
+               </p:inline>
+               <p:inline>
+                  <bar/>
+               </p:inline>
             </p:output>
             <p:identity>
                <p:with-input port="source">
-                  <p:inline><baz/></p:inline>
+                  <p:inline>
+                     <baz/>
+                  </p:inline>
                </p:with-input>
             </p:identity>
             <p:sink/>
@@ -45,7 +67,9 @@
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
          <s:pattern>
             <s:rule context="/">
                <s:assert test="doc">The document root is not 'doc'.</s:assert>
@@ -56,9 +80,9 @@
                <s:assert test="doc/*[5]/name()='foo'">Fifth child is not 'foo'.</s:assert>
                <s:assert test="doc/*[6]/name()='bar'">Sixth child is not 'bar'.</s:assert>
                <s:assert test="doc/*[7]/name()='foo'">Seventh child is not 'foo'.</s:assert>
-               <s:assert test="doc/*[8]/name()='bar'">Eighth child is not 'bar'.</s:assert>-->
+               <s:assert test="doc/*[8]/name()='bar'">Eighth child is not 'bar'.</s:assert>--&gt;
             </s:rule>
-          </s:pattern>
+         </s:pattern>
       </s:schema>
    </t:schematron>
 </t:test>

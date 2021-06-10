@@ -1,7 +1,19 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error">
    <t:info>
       <t:title>Declare-step-016 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2021-05-02</t:date>
             <t:author>
@@ -17,36 +29,36 @@
       <p>Checks scoping rules for step types: Inner declare shadows outer step names.</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step type="dummy:step" version="3.0" 
-         xmlns:p="http://www.w3.org/ns/xproc"
-         xmlns:dummy="http://dummy">
-         <p:input port="source" sequence="true">
-            <result />
+      <p:declare-step type="dummy:step"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:dummy="http://dummy">
+         <p:input port="source"
+                  sequence="true">
+            <result/>
          </p:input>
-         <p:output port="result" />
-         
+         <p:output port="result"/>
          <p:declare-step type="dummy:step">
-            <p:input port="source" />
-            <p:output port="result" />
-            
-            <p:identity />
+            <p:input port="source"/>
+            <p:output port="result"/>
+            <p:identity/>
          </p:declare-step>
-         
-         <p:variable name="prevloops" select="count(/*/*)" />
-        
+         <p:variable name="prevloops"
+                     select="count(/*/*)"/>
          <p:if test="$prevloops != 3">
-            <p:insert match="/*" position="last-child">
+            <p:insert match="/*"
+                      position="last-child">
                <p:with-input port="insertion">
-                  <entry />
+                  <entry/>
                </p:with-input>
-            </p:insert>      
-            <dummy:step />
-         </p:if>         
+            </p:insert>
+            <dummy:step/>
+         </p:if>
       </p:declare-step>
    </t:pipeline>
-   
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron">
          <s:pattern>
             <s:rule context="/">
                <s:assert test="result">The document root is not 'result'.</s:assert>

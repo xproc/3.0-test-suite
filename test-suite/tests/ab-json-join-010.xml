@@ -1,7 +1,18 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>JSON join 010(AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-10-07</t:date>
             <t:author>
@@ -17,21 +28,23 @@
       <p>Tests simple p:JSON-join with doc, text, and json entries.</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc"
-                      xmlns:map="http://www.w3.org/2005/xpath-functions/map"
-                      xmlns:array="http://www.w3.org/2005/xpath-functions/array">
-         <p:output port="result" />
-         
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:array="http://www.w3.org/2005/xpath-functions/array"
+                      xmlns:map="http://www.w3.org/2005/xpath-functions/map">
+         <p:output port="result"/>
          <p:json-join>
             <p:with-input>
-               <p:inline><node /></p:inline>
-               <p:inline content-type="text/plain" >This is a text.</p:inline>
-               <p:inline content-type="application/json" expand-text="false">{"json" : "value"}</p:inline>
+               <p:inline>
+                  <node/>
+               </p:inline>
+               <p:inline content-type="text/plain">This is a text.</p:inline>
+               <p:inline content-type="application/json"
+                         expand-text="false">{"json" : "value"}</p:inline>
             </p:with-input>
          </p:json-join>
-         
-         <p:variable name="key" select="map:keys(array:get(., 3))[1]" />
-         
+         <p:variable name="key"
+                     select="map:keys(array:get(., 3))[1]"/>
          <p:identity>
             <p:with-input>
                <result>
@@ -44,7 +57,8 @@
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron">
          <s:pattern>
             <s:rule context="/">
                <s:assert test="result">The document node is not 'result'.</s:assert>
