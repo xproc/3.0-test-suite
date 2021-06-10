@@ -35,9 +35,7 @@
          <p:cast-content-type content-type="text/plain"
                               name="caster">
             <p:with-input>
-               <p:inline document-properties="map{'base-uri' : 'http://xproc-test.org',                         'serialization' : map{'omit-xml-declaration' : true()},                         'additional' : 'property'}">
-                  <doc/>
-               </p:inline>
+               <p:inline document-properties="map{'base-uri' : 'http://xproc-test.org',                         'serialization' : map{'omit-xml-declaration' : true()},                         'additional' : 'property'}"><doc xmlns=""/></p:inline>
             </p:with-input>
          </p:cast-content-type>
          <p:wrap-sequence wrapper="text"

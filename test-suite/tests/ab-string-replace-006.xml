@@ -34,8 +34,7 @@
          <p:string-replace match="element"
                            replace="'text'">
             <p:with-input>
-               <p:inline>This is a 
-                  <element/>.</p:inline>
+               <p:inline>This is a <element xmlns=""/>.</p:inline>
             </p:with-input>
          </p:string-replace>
          <p:wrap-sequence wrapper="result"/>

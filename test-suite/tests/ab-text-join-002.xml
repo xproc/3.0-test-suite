@@ -31,7 +31,7 @@
       <p:declare-step version="3.0"
                       xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result"/>
-         <p:text-join separator="">
+         <p:text-join separator=" ">
             <p:with-input>
                <p:inline content-type="text/plain">First</p:inline>
                <p:inline content-type="text/plain">second</p:inline>

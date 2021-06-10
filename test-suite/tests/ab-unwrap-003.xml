@@ -27,13 +27,10 @@
    <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Tests p:unwrap</p>
    </t:description>
-   <t:input port="source">
-      <doc>
-         <?pi target ?>
-         <para>a</para>
-         <!-- comment -->
-      </doc>
-   </t:input>
+   <t:input port='source'><doc><?pi target ?>
+      <para>a</para>
+      <!-- comment -->
+   </doc></t:input>
    <t:pipeline>
       <p:declare-step name="pipeline"
                       version="3.0"

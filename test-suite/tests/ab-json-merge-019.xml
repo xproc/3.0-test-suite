@@ -36,12 +36,8 @@
                <p:inline content-type="application/json">{"key1" : "value1"}</p:inline>
                <p:inline content-type="application/json">[1, 2]</p:inline>
                <p:inline content-type="text/plain">This is a text document.</p:inline>
-               <p:inline>
-                  <xml/>
-               </p:inline>
-               <p:inline content-type="text/html">
-                  <html/>
-               </p:inline>
+               <p:inline><xml xmlns=""/></p:inline>
+               <p:inline content-type="text/html"><html xmlns=""/></p:inline>
             </p:with-input>
          </p:json-merge>
          <p:cast-content-type content-type="application/xml"/>

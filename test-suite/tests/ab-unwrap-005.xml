@@ -28,9 +28,7 @@
       <p>Tests p:unwrap</p>
    </t:description>
    <t:input port="source">
-      <doc>Some 
-         <doc>text.</doc>
-      </doc>
+      <doc>Some <doc>text.</doc></doc>
    </t:input>
    <t:pipeline>
       <p:declare-step name="pipeline"

@@ -36,8 +36,7 @@
                  match="/doc/p/processing-instruction() | /doc/p/comment()">
             <p:with-input>
                <doc>
-                  <p>
-                     <?pi target?> text <!-- comment --></p>
+                  <p><?pi target?> text <!-- comment --></p>
                </doc>
             </p:with-input>
          </p:hash>

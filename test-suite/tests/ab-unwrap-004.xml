@@ -29,10 +29,7 @@
    </t:description>
    <t:input port="source">
       <doc>
-         <para>a
-            <doc>
-               <doc>b</doc>c</doc>
-         </para>
+         <para>a<doc><doc>b</doc>c</doc></para>
       </doc>
    </t:input>
    <t:pipeline>

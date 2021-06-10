@@ -46,8 +46,7 @@
                   <xsl:template match="/">
                      <result>
                         <xsl:value-of select="$var1"/>
-                        <xsl:text>
-                        </xsl:text>
+                        <xsl:text> </xsl:text>
                         <xsl:value-of select="$var2"/>
                      </result>
                   </xsl:template>

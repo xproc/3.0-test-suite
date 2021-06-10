@@ -33,8 +33,7 @@
          <p:output port="result"/>
          <p:delete match="element">
             <p:with-input>
-               <p:inline>This is 
-                  <element/>a text.</p:inline>
+               <p:inline>This is <element xmlns=""/>a text.</p:inline>
             </p:with-input>
          </p:delete>
          <p:wrap-sequence wrapper="result"/>

@@ -33,12 +33,8 @@
          <p:output port="result"/>
          <p:json-merge key="concat('label-',.)">
             <p:with-input>
-               <p:inline>
-                  <doc>1</doc>
-               </p:inline>
-               <p:inline>
-                  <doc>2</doc>
-               </p:inline>
+               <p:inline><doc xmlns="">1</doc></p:inline>
+               <p:inline><doc xmlns="">2</doc></p:inline>
             </p:with-input>
          </p:json-merge>
          <p:cast-content-type content-type="application/xml"/>
