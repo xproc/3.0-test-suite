@@ -1,7 +1,19 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" features="xslt-3">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        features="xslt-3"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>AB-xslt-021</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-08-04</t:date>
             <t:author>
@@ -17,43 +29,48 @@
       <p>Tests mixed output modes: build-tree=true on primary, build-tree=false on secondary (3.0)</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result"/>
-         <p:xslt version="3.0" name="xslt">
+         <p:xslt version="3.0"
+                 name="xslt">
             <p:with-input port="source">
-               <doc />
+               <doc/>
             </p:with-input>
             <p:with-input port="stylesheet">
-               <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-                  <xsl:output build-tree="yes" />
+               <xsl:stylesheet version="3.0"
+                               xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                  <xsl:output build-tree="yes"/>
                   <xsl:template match="/">
-                     <xsl:sequence select="1, 'a', true()" />
-                     <xsl:result-document href="secondary" build-tree="false">
-                        <xsl:sequence select="1, 'a', true()" />
+                     <xsl:sequence select="1, 'a', true()"/>
+                     <xsl:result-document href="secondary"
+                                          build-tree="false">
+                        <xsl:sequence select="1, 'a', true()"/>
                      </xsl:result-document>
                   </xsl:template>
                </xsl:stylesheet>
             </p:with-input>
          </p:xslt>
-         
          <p:for-each>
-            <p:with-input pipe="secondary" />
-            <p:cast-content-type content-type="application/xml" />
+            <p:with-input pipe="secondary"/>
+            <p:cast-content-type content-type="application/xml"/>
          </p:for-each>
-         
-         <p:wrap-sequence wrapper="secondary" name="secondary"/>
-         
-         <p:wrap-sequence wrapper="result" >
+         <p:wrap-sequence wrapper="secondary"
+                          name="secondary"/>
+         <p:wrap-sequence wrapper="result">
             <p:with-input>
-               <p:pipe step="xslt" />
-               <p:pipe step="secondary" />
+               <p:pipe step="xslt"/>
+               <p:pipe step="secondary"/>
             </p:with-input>
          </p:wrap-sequence>
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
-         <s:ns prefix="j" uri="http://www.w3.org/2005/xpath-functions" />
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="j"
+               uri="http://www.w3.org/2005/xpath-functions"/>
          <s:pattern>
             <s:rule context="/">
                <s:assert test="result">The document root is not 'result'.</s:assert>

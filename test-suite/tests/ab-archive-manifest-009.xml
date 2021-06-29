@@ -1,7 +1,18 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>p:archive-manifest 009 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-11-24</t:date>
             <t:author>
@@ -16,19 +27,22 @@
    <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Tests p:archive-manifest: Relative-to creates absolute uris for href.</p>
    </t:description>
-   
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+      <p:declare-step name="pipeline"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result"/>
-         
          <p:archive-manifest relative-to="http://xproc.org/ns/testsuite/3.0/">
-            <p:with-input href="../documents/archive.zip" />
+            <p:with-input href="../documents/archive.zip"/>
          </p:archive-manifest>
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
-         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"></s:ns>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="c"
+               uri="http://www.w3.org/ns/xproc-step"/>
          <s:pattern>
             <s:rule context="/">
                <s:assert test="c:archive">Root element is not 'c:archive'.</s:assert>
@@ -38,13 +52,11 @@
                <s:assert test="c:archive/c:entry/@href='http://xproc.org/ns/testsuite/3.0/html.html'">Value 'href' for 'html.html' is wrong.</s:assert>
                <s:assert test="c:archive/c:entry/@href='http://xproc.org/ns/testsuite/3.0/json.json'">Value 'href' for 'json.json' is wrong.</s:assert>
                <s:assert test="c:archive/c:entry/@href='http://xproc.org/ns/testsuite/3.0/text.txt'">Value 'href' for 'text.txt' is wrong.</s:assert>
-
                <s:assert test="c:archive/c:entry/@href='http://xproc.org/ns/testsuite/3.0/folder/doc.xml'">Value 'href' for 'folder/doc.xml' is wrong.</s:assert>
                <s:assert test="c:archive/c:entry/@href='http://xproc.org/ns/testsuite/3.0/folder/fish.jpg'">Value 'href' for 'folder/fish.jpg' is wrong.</s:assert>
                <s:assert test="c:archive/c:entry/@href='http://xproc.org/ns/testsuite/3.0/folder/html.html'">Value 'href' for 'folder/html.html' is wrong.</s:assert>
                <s:assert test="c:archive/c:entry/@href='http://xproc.org/ns/testsuite/3.0/folder/json.json'">Value 'href' for 'folder/json.json' is wrong.</s:assert>
                <s:assert test="c:archive/c:entry/@href='http://xproc.org/ns/testsuite/3.0/folder/text.txt'">Value 'href' for 'folder/text.txt' is wrong.</s:assert>
-               
                <s:assert test="count(c:archive/c:entry/@name)=10">Every c:entry must have an attribute 'name'.</s:assert>
             </s:rule>
          </s:pattern>

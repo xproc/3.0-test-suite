@@ -1,7 +1,18 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>p:text-head 006 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-05-31</t:date>
             <t:author>
@@ -16,12 +27,12 @@
    <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Tests p:text-head</p>
    </t:description>
-   
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result"/>
-            
-         <p:text-head count="-9" name="head">
+         <p:text-head count="-9"
+                      name="head">
             <p:with-input>
                <p:inline content-type="text/plain">This
 is
@@ -34,26 +45,27 @@ nine
 lines.</p:inline>
             </p:with-input>
          </p:text-head>
-         
          <p:text-count name="counter"/>
-         
-         <p:wrap-sequence wrapper="text" >
-            <p:with-input pipe="@head" />
+         <p:wrap-sequence wrapper="text">
+            <p:with-input pipe="@head"/>
          </p:wrap-sequence>
          <p:add-attribute attribute-name="counter">
-            <p:with-option name="attribute-value" select="/*:result/text()" pipe="@counter" />
+            <p:with-option name="attribute-value"
+                           select="/*:result/text()"
+                           pipe="@counter"/>
          </p:add-attribute>
-         
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
          <s:pattern>
             <s:rule context="/">
                <s:assert test="text">Root element is not 'text'.</s:assert>
                <s:assert test="text/@counter='0'">Attribute 'counter' is not '0'.</s:assert>
                <s:assert test="count(text/text())=0">There should be no text here.</s:assert>
-             </s:rule>
+            </s:rule>
          </s:pattern>
       </s:schema>
    </t:schematron>

@@ -1,7 +1,18 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>p:set-properties-026 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-12-14</t:date>
             <t:author>
@@ -25,19 +36,20 @@
    <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Tests value for key 'serialization' in document properties is map{xs:QName, item()*}.</p>
    </t:description>
-   
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
-                      xmlns:xs="http://www.w3.org/2001/XMLSchema" version="3.0"
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:xs="http://www.w3.org/2001/XMLSchema"
                       xmlns:map="http://www.w3.org/2005/xpath-functions/map">
          <p:output port="result"/>
-            
-         <p:set-properties properties="map{'serialization' : map{'indent' : true() }}" merge="true">
+         <p:set-properties properties="map{'serialization' : map{'indent' : true() }}"
+                           merge="true">
             <p:with-input>
-               <p:inline><doc /></p:inline>
+               <p:inline>
+                  <doc/>
+               </p:inline>
             </p:with-input>
          </p:set-properties>
-         
          <p:identity>
             <p:with-input>
                <result>{map:get(p:document-property(., xs:QName('serialization')), xs:QName('indent'))}</result>
@@ -46,7 +58,9 @@
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
          <s:pattern>
             <s:rule context="/">
                <s:assert test="result">The document root is not result.</s:assert>

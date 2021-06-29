@@ -1,7 +1,18 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>p:set-attributes-004 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-06-23</t:date>
             <t:author>
@@ -26,19 +37,26 @@
       <p>Tests p:set-attributes</p>
    </t:description>
    <t:input port="source">
-      <doc att1="3" a:att1="4" xmlns:a="http://xproc.org/ns/testsuite/attributes"/>
+      <doc att1="3"
+           a:att1="4"
+            xmlns:a="http://xproc.org/ns/testsuite/attributes"/>
    </t:input>
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
-         <p:input port="source" />
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:input port="source"/>
          <p:output port="result"/>
-            
-         <p:set-attributes match="*" attributes="map{'att':'1', 'a:att':'2'}" xmlns:a="http://xproc.org/ns/testsuite/attributes" />
+         <p:set-attributes match="*"
+                           attributes="map{'att':'1', 'a:att':'2'}"
+                           xmlns:a="http://xproc.org/ns/testsuite/attributes"/>
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
-         <s:ns uri="http://xproc.org/ns/testsuite/attributes" prefix="a" />
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns uri="http://xproc.org/ns/testsuite/attributes"
+               prefix="a"/>
          <s:pattern>
             <s:rule context="/">
                <s:assert test="doc">Root element is not 'doc'.</s:assert>
@@ -46,7 +64,6 @@
                <s:assert test="/doc/@a:att='2'">Root element does not have an attribute Q{http://xproc.org/ns/testsuite/attributes}att with value '2'.</s:assert>
                <s:assert test="/doc/@att1='3'">Root element does not have an attribute 'att' with value '3'.</s:assert>
                <s:assert test="/doc/@a:att1='4'">Root element does not have an attribute Q{http://xproc.org/ns/testsuite/attributes}att1 with value '4'.</s:assert>
-               
             </s:rule>
          </s:pattern>
       </s:schema>

@@ -1,7 +1,18 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>AB-namespace-delete-004</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-10-05</t:date>
             <t:author>
@@ -17,12 +28,14 @@
       <p>Removing explicit namespace does not harm elements/attribute in other namespace.</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result"/>
-         
-         <p:namespace-delete prefixes="pre" xmlns:pre="http://dummy">
+         <p:namespace-delete prefixes="pre"
+                             xmlns:pre="http://dummy">
             <p:with-input>
-               <dummy:doc xmlns:dummy="http://dummy" xmlns:other="http://other">
+               <dummy:doc xmlns:dummy="http://dummy"
+                          xmlns:other="http://other">
                   <dummy:section other:id="one">
                      <other:par>This is a para.</other:par>
                      <other:par>This is another para.</other:par>
@@ -34,12 +47,14 @@
                </dummy:doc>
             </p:with-input>
          </p:namespace-delete>
-         
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
-         <s:ns prefix="other" uri="http://other" />
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="other"
+               uri="http://other"/>
          <s:pattern>
             <s:rule context="/">
                <s:assert test="/doc">The document root is not 'doc'.</s:assert>

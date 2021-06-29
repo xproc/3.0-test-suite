@@ -1,7 +1,18 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>p:xquery 005 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-09-13</t:date>
             <t:author>
@@ -16,7 +27,6 @@
    <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Tests p:xquery</p>
    </t:description>
-   
    <t:input port="source">
       <authors>
          <author>
@@ -33,13 +43,13 @@
          </author>
       </authors>
    </t:input>
-   
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
-         <p:input port="source" />
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:input port="source"/>
          <p:output port="result"/>
-         
-         <p:xquery parameters="map{'str' : 'Will', 'test:str' : 'Chris'}" xmlns:test="http://www.test.com">
+         <p:xquery parameters="map{'str' : 'Will', 'test:str' : 'Chris'}"
+                   xmlns:test="http://www.test.com">
             <p:with-input port="query">
                <c:query xmlns:c="http://www.w3.org/ns/xproc-step">
                   declare namespace test = "http://www.test.com";
@@ -49,15 +59,16 @@
                   for $author in //author[contains(firstname, $str) or contains(firstname, $test:str)]
                   order by $author/firstname
                   return $author
-               </c:query>               
+               </c:query>
             </p:with-input>
          </p:xquery>
-         
-         <p:wrap-sequence wrapper="wrapper" />
+         <p:wrap-sequence wrapper="wrapper"/>
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
          <s:pattern>
             <s:rule context="/">
                <s:assert test="wrapper">Root element is not 'wrapper'.</s:assert>
