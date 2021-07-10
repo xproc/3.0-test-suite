@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 if [ "$CIRCLE_BRANCH" = "master" ]; then
     echo "Deploying website updates for master branch"
 else
@@ -22,6 +24,9 @@ git config --global user.name $GIT_USER
 
 # Remember the SHA of the current build.
 SHA=$(git rev-parse --verify HEAD)
+
+ls build
+ls build/html
 
 # Save the website files
 cd build/html
