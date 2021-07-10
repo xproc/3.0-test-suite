@@ -42,12 +42,9 @@ git rebase origin/gh-pages
 tar zxf /tmp/website.$$.tar.gz
 rm /tmp/website.$$.tar.gz
 
-pwd
-ls -laR
-
 # Push the changes back to the repo
 git add .
-#git commit -m "Deploy gh-pages for ${CIRCLE_PROJECT_USERNAME}: ${SHA}"
+git commit -m "Deploy gh-pages for ${CIRCLE_PROJECT_USERNAME}: ${SHA}"
 #git push -q origin HEAD
 
 # Go back to the main branch
