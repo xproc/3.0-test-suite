@@ -39,6 +39,12 @@ jobs:
           root: build
           paths:
             - html
+            - specs
+
+      - store_artifacts:
+          path: build/html
+
+      - run: ./.circleci/publish.sh
 
 workflows:
   version: 2
