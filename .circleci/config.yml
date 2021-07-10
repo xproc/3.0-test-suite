@@ -16,7 +16,8 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "c7:20:4d:fe:ae:a7:70:39:d2:88:91:c3:68:8b:f8:85"
+            - "86:ac:7c:fd:0c:f9:40:71:20:9f:8f:99:41:7b:d8:5a"
+            - "c2:cf:9f:3a:28:c5:3d:b1:c6:62:18:52:16:d8:16:9a"
 
       - checkout
 
@@ -37,21 +38,13 @@ jobs:
       - persist_to_workspace:
           root: build
           paths:
-            - distributions
+            - html
 
 workflows:
   version: 2
-  check:
+  publish:
     jobs:
       - build:
           filters:
             branches:
               ignore: gh-pages
-  deploy:
-    jobs:
-      - build:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /.+/
