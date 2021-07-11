@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -x
-
 if [ "$CIRCLE_BRANCH" = "master" ]; then
     echo "Deploying website updates for master branch"
 else
