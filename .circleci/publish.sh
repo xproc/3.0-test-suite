@@ -1,36 +1,54 @@
 #!/bin/bash
 
-set | grep TRAVIS
+set -x
 
-if [ "$TRAVIS_REPO_SLUG" == "$GIT_PUB_REPO" ]; then
-    echo -e "Setting up for publication...\n"
-
-    mkdir $HOME/pubroot
-    cp -R build/html/* $HOME/pubroot
-
-    cd $HOME
-    git config --global user.email ${GIT_EMAIL}
-    git config --global user.name ${GIT_NAME}
-    git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/${GIT_PUB_REPO} gh-pages
-
-    if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-        echo -e "Publishing test-suite...\n"
-
-        TIP=${TRAVIS_TAG:="head"}
-
-        cd gh-pages
-        rsync -var --exclude .git --delete $HOME/pubroot/ ./
-
-        if [ "$GITHUB_CNAME" != "" ]; then
-            echo $GITHUB_CNAME > CNAME
-        fi
-
-        git add -f .
-        git commit -m "Successful travis build $TRAVIS_BUILD_NUMBER"
-        git push -fq origin gh-pages > /dev/null
-
-        echo -e "Published test-suite to gh-pages.\n"
-    else
-        echo -e "Publication cannot be performed on pull requests.\n"
-    fi
+if [ "$CIRCLE_BRANCH" = "master" ]; then
+    echo "Deploying website updates for master branch"
+else
+    echo "Website updates are not published for $CIRCLE_BRANCH commits"
+    exit
 fi
+
+if [ `git branch -r | grep "origin/gh-pages" | wc -l` = 0 ]; then
+    echo "No gh-pages branch for publication"
+    exit
+fi
+
+if [ `set | grep GIT_EMAIL | wc -l` = 0 -o `set | grep GIT_USER | wc -l` = 0 ]; then
+    echo "No identity configured with GIT_USER/GIT_EMAIL"
+    exit
+fi
+
+git config --global user.email $GIT_EMAIL
+git config --global user.name $GIT_USER
+
+# Remember the SHA of the current build.
+SHA=$(git rev-parse --verify HEAD)
+
+ls build
+ls build/html
+
+# Save the website files
+cd build/html
+tar cf - . | gzip > /tmp/website.$$.tar.gz
+cd ../..
+
+# Switch to the gh-pages branch
+git checkout --track origin/gh-pages
+git fetch origin
+git rebase origin/gh-pages
+
+# Delete any untracked files
+git clean -d -f
+
+# Unpack the website files
+tar zxf /tmp/website.$$.tar.gz
+rm /tmp/website.$$.tar.gz
+
+# Push the changes back to the repo
+git add .
+git commit -m "Deploy gh-pages for ${CIRCLE_PROJECT_USERNAME}: ${SHA}"
+git push -q origin HEAD
+
+# Go back to the master branch
+git checkout master
