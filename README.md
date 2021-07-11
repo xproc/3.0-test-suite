@@ -112,10 +112,10 @@ from [examples/fail.xml](examples/fail.xml]).
 
 ## Continuous integration
 
-![Build Status](https://travis-ci.org/xproc/3.0-test-suite.svg?branch=master)
+[![Build Status](https://circleci.com/gh/xproc/3.0-test-suite.svg?style=shield)](https://circleci.com/gh/xproc/3.0-test-suite.svg?style=shield)
 
 The [test suite](https://xproc.github.io/3.0-test-suite/) is published
-automatically by [Travis CI](https://travis-ci.org). All submissions 
+automatically by [CircleCI](https://circleci.com). All submissions 
 are made through pull requests. Pull requests are automatically
 tested for conformance to the schemas and a few other ad hoc rules (all
 test titles must be unique, for example).

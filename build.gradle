@@ -1,8 +1,6 @@
-// Note: when this script is run by Travis on a modern OS, the current
-// directory is not available. If you use getAbsolutePath(), what you
-// get back is something like this: /home/travis/build/[secure]/
-// and that's not useful. Consequently, all of the paths in this project
-// have been made relative.
+// Note: when this script is run by CircleCI on a modern OS, the
+// current directory may not be available. Consequently, all of the
+// paths in this project have been made relative.
 //
 // Note also: relative paths are tricky because options to XSL stylesheets
 // and pipelines will be resolved *relative to the stylesheet or pipeline*.
@@ -237,15 +235,15 @@ tasks.register("copy_rsrcs", Copy) {
 tasks.register("make_index", XMLCalabashTask) {
   dependsOn "copy_rsrcs","get_specs"
 
-  inputs.file "tools/xsl/travis-patch.xsl"
+  inputs.file "tools/xsl/circleci-patch.xsl"
   inputs.file "tools/xpl/run-xslt-html.xpl"
   input("source", "src/main/resources/index.html")
   output("result", "build/html/index.html")
   pipeline "tools/xpl/run-xslt-html.xpl"
-  option("stylesheet", "../xsl/travis-patch.xsl")
-  param("travis", getenv('TRAVIS'))
-  param("travis-build", getenv('TRAVIS_BUILD_NUMBER'))
-  param("travis-commit", getenv('TRAVIS_COMMIT'))
+  option("stylesheet", "../xsl/circleci-patch.xsl")
+  param("circleci", getenv('CIRCLECI'))
+  param("circleci-build", getenv('CIRCLE_BUILD_NUMBER'))
+  param("circleci-commit", getenv('CIRCLE_SHA1'))
   doFirst {
     mkdir("build/html")
   }
