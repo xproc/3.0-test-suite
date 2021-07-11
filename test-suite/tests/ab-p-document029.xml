@@ -1,7 +1,18 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>p:document 029</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2018-10-05T08:21:42-05:00</t:date>
             <t:author>
@@ -44,20 +55,23 @@
       <p>Tests p:document with json document is correctly loaded.</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
-            <p:output port="result"/>
-            
-            <p:cast-content-type content-type="application/xml">
-                <p:with-input>
-                    <p:document href="../documents/JSon-doc1.json" content-type="application/json"/>
-                </p:with-input> 
-            </p:cast-content-type>
-            
-        </p:declare-step>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:cast-content-type content-type="application/xml">
+            <p:with-input>
+               <p:document href="../documents/JSon-doc1.json"
+                           content-type="application/json"/>
+            </p:with-input>
+         </p:cast-content-type>
+      </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
-         <s:ns uri="http://www.w3.org/2005/xpath-functions" prefix="x"/>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns uri="http://www.w3.org/2005/xpath-functions"
+               prefix="x"/>
          <s:pattern>
             <s:rule context="/">
                <s:assert test="x:map">There is no root element 'map' (in xpath-functions-namespace).</s:assert>

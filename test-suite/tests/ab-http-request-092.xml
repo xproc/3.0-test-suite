@@ -1,7 +1,18 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>http-request-092 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2020-01-16</t:date>
             <t:author>
@@ -14,24 +25,26 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>This test checks to see if an <code>p:http-request</code>
+      <p>This test checks to see if an 
+         <code>p:http-request</code>
          preserves cookies across an HTTP redirect.(Ported from http-request-012)</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
-         <p:output port="result" />
-         
-         <p:http-request method="get" href="http://localhost:8246/service/over-here">
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:http-request method="get"
+                         href="http://localhost:8246/service/over-here">
             <p:with-input>
-               <p:empty />
+               <p:empty/>
             </p:with-input>
          </p:http-request>
-         
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
-          <s:pattern>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:pattern>
             <s:rule context="/">
                <s:assert test="doc">The root element is not 'doc'.</s:assert>
                <s:assert test="doc/IKnowYou/text()='I Really Do!'">The cookie is not processed correctly.</s:assert>
@@ -39,5 +52,4 @@
          </s:pattern>
       </s:schema>
    </t:schematron>
-   
 </t:test>

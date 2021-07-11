@@ -1,7 +1,18 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>pack 007 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-07-25</t:date>
             <t:author>
@@ -35,33 +46,32 @@
       <p>Testing correct handling of non element nodes by p:pack.</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
-         <p:output port="result" />
-         
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
          <p:pack wrapper="wrap">
             <p:with-input port="source">
                <p:inline>
                   <!-- comment1 -->
-                  <doc1 />
+                  <doc1/>
                   <?pi1 target?>
                </p:inline>
             </p:with-input>
             <p:with-input port="alternate">
                <p:inline>
                   <?pi2 ?>
-                  <doc2 />
+                  <doc2/>
                   <!-- comment2 -->
                </p:inline>
             </p:with-input>
          </p:pack>
-         
-         <p:wrap-sequence wrapper="doc" />
+         <p:wrap-sequence wrapper="doc"/>
       </p:declare-step>
    </t:pipeline>
-   
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
-          <s:pattern>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:pattern>
             <s:rule context="/">
                <s:assert test="doc">The document root is not doc.</s:assert>
                <s:assert test="doc/wrap/child::node()[1] instance of text()">First child of wrap should be a text.</s:assert>
@@ -77,8 +87,7 @@
                <s:assert test="doc/wrap/child::node()[11] instance of text()">Eleventh child of wrap should be an element.</s:assert>
                <s:assert test="doc/wrap/child::node()[12] instance of comment()">Twelfth child of wrap should be a comment.</s:assert>
                <s:assert test="doc/wrap/child::node()[13] instance of text()">Thirteenths child of wrap should be a text.</s:assert>
-               
-               <s:assert test="count(doc/wrap/child::node())=13">Element 'wrap' should have 10 children.</s:assert>              
+               <s:assert test="count(doc/wrap/child::node())=13">Element 'wrap' should have 10 children.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>

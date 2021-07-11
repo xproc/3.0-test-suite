@@ -1,56 +1,74 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
-  <t:info>
-    <t:title>Viewport 001</t:title>
-    <t:revision-history>
-      <t:revision>
-        <t:date>2019-09-07</t:date>
-        <t:author>
-          <t:name>Achim Berndzen</t:name>
-        </t:author>
-        <t:description xmlns="http://www.w3.org/1999/xhtml">
-          <p>Fix test so it fails if there is no ex:p.</p>
-        </t:description>
-      </t:revision>
-      <t:revision>
-        <t:date>2019-07-08</t:date>
-        <t:author initials="ndw">
-          <t:name>Norman Walsh</t:name>
-        </t:author>
-        <t:description xmlns="http://www.w3.org/1999/xhtml">
-          <p>Initial publication</p>
-        </t:description>
-      </t:revision>
-    </t:revision-history>
-  </t:info>
-  <t:description xmlns="http://www.w3.org/1999/xhtml">
-    <p>Smoke test for p:viewport.</p>
-  </t:description>
-  <t:input port="source" src="../documents/sample.xml"/>
-  <t:pipeline>
-    <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
-      <p:output port="result"/>
-      <p:input port="source"/>
-
-      <p:viewport match="ex:p" xmlns:ex="http://example.com/sample">
-        <p:add-attribute attribute-name="v" attribute-value="true" match="/*"/>
-      </p:viewport>
-    </p:declare-step>
-  </t:pipeline>
-  <t:schematron>
-    <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
-      <s:ns prefix="ex" uri="http://example.com/sample"/>
-      <s:pattern>
-        <s:rule context="/">
-          <s:assert test="ex:doc">The pipeline root is not “doc”.</s:assert>
-          <s:assert test="count(ex:doc//ex:p)=2">The pipeline root does not have two descendants "ex:p".</s:assert>
-        </s:rule>
-        <s:rule context="ex:p">
-          <s:assert test=".[@v='true']">The ‘p’ elements don’t have the correct ‘v’ attributes.</s:assert>
-        </s:rule>
-        <s:rule context="*[not(self::ex:p)]">
-          <s:assert test=".[not(@v)]">The ‘v’ attribute appears on the wrong element(s).</s:assert>
-        </s:rule>
-      </s:pattern>
-    </s:schema>
-  </t:schematron>
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>Viewport 001</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-09-07</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fix test so it fails if there is no ex:p.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-07-08</t:date>
+            <t:author initials="ndw">
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial publication</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Smoke test for p:viewport.</p>
+   </t:description>
+   <t:input port="source"
+            src="../documents/sample.xml"/>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:input port="source"/>
+         <p:viewport match="ex:p"
+                     xmlns:ex="http://example.com/sample">
+            <p:add-attribute attribute-name="v"
+                             attribute-value="true"
+                             match="/*"/>
+         </p:viewport>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="ex"
+               uri="http://example.com/sample"/>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="ex:doc">The pipeline root is not “doc”.</s:assert>
+               <s:assert test="count(ex:doc//ex:p)=2">The pipeline root does not have two descendants "ex:p".</s:assert>
+            </s:rule>
+            <s:rule context="ex:p">
+               <s:assert test=".[@v='true']">The ‘p’ elements don’t have the correct ‘v’ attributes.</s:assert>
+            </s:rule>
+            <s:rule context="*[not(self::ex:p)]">
+               <s:assert test=".[not(@v)]">The ‘v’ attribute appears on the wrong element(s).</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
 </t:test>

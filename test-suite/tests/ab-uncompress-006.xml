@@ -1,7 +1,18 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>AB-uncompress-006</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-12-14</t:date>
             <t:author>
@@ -10,7 +21,7 @@
             <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Changed expected content-type from application/binary to application/octet-stream.</p>
             </t:description>
-         </t:revision> 
+         </t:revision>
          <t:revision>
             <t:date>2019-11-18</t:date>
             <t:author>
@@ -19,7 +30,7 @@
             <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Change test from p:document-properties-document() to p:document-properties()</p>
             </t:description>
-         </t:revision> 
+         </t:revision>
          <t:revision>
             <t:date>2019-10-04</t:date>
             <t:author>
@@ -32,25 +43,29 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests document-properties uncompress result: no content-type ->application/octet-stream</p>
+      <p>Tests document-properties uncompress result: no content-type -&gt;application/octet-stream</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result"/>
-         
          <p:uncompress>
             <p:with-input>
-               <p:document href="../documents/simpletext.gz" document-properties="map{'additional' : 'bogus'}"/>
+               <p:document href="../documents/simpletext.gz"
+                           document-properties="map{'additional' : 'bogus'}"/>
             </p:with-input>
          </p:uncompress>
          <p:cast-content-type content-type="application/xml">
-            <p:with-input select="p:document-properties(.)" />
+            <p:with-input select="p:document-properties(.)"/>
          </p:cast-content-type>
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
-         <s:ns prefix="j" uri="http://www.w3.org/2005/xpath-functions" />
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="j"
+               uri="http://www.w3.org/2005/xpath-functions"/>
          <s:pattern>
             <s:rule context="/">
                <s:assert test="j:map">The document root is not 'map'.</s:assert>

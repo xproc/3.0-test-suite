@@ -1,40 +1,55 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" 
-  features="p-validate-with-schematron">
-  <t:info>
-    <t:title>ab-validate-with-schematron-002</t:title>
-    <t:revision-history>
-      <t:revision>
-        <t:date>2019-08-18</t:date>
-        <t:author>
-          <t:name>Achim Berndzen</t:name>
-        </t:author>
-        <t:description xmlns="http://www.w3.org/1999/xhtml">
-          <p>Initial publication: Test ported from 1.0 test suite</p>
-        </t:description>
-      </t:revision>
-    </t:revision-history>
-  </t:info>
-  <t:description xmlns="http://www.w3.org/1999/xhtml">
-    <p>Testing schematron validation: invalid doc, but assert-valid=false, so result should be equal to source.</p>
-  </t:description>
-  <t:pipeline>
-<p:declare-step name="pipeline" xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
-  <p:output port="result"/>
-  
-  <p:validate-with-schematron assert-valid="false">
-    <p:with-input port="source" href="../documents/docbook-invalid.xml" />
-    <p:with-input port="schema" href="../documents/docbook.sch" />
-  </p:validate-with-schematron>
-</p:declare-step>
-</t:pipeline>
-  
-  <t:schematron>
-    <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
-      <s:pattern>
-        <s:rule context="/">
-          <s:assert test="deep-equal(., doc('../documents/docbook-invalid.xml'))">The document is not equal to the source document.</s:assert>
-        </s:rule>
-      </s:pattern>
-    </s:schema>
-  </t:schematron>
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        features="p-validate-with-schematron"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>ab-validate-with-schematron-002</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-08-18</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial publication: Test ported from 1.0 test suite</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Testing schematron validation: invalid doc, but assert-valid=false, so result should be equal to source.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="pipeline"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:validate-with-schematron assert-valid="false">
+            <p:with-input port="source"
+                          href="../documents/docbook-invalid.xml"/>
+            <p:with-input port="schema"
+                          href="../documents/docbook.sch"/>
+         </p:validate-with-schematron>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="deep-equal(., doc('../documents/docbook-invalid.xml'))">The document is not equal to the source document.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
 </t:test>

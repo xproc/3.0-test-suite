@@ -1,7 +1,19 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass" features="xslt-3">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        features="xslt-3"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>AB-xslt-120</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2020-12-05</t:date>
             <t:author>
@@ -17,20 +29,33 @@
       <p>Tests nodes are correctly returned in arrays/maps. (Thanks to Martin for the test's blueprint).</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
-         xmlns:xs="http://www.w3.org/2001/XMLSchema" version="3.0">
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:xs="http://www.w3.org/2001/XMLSchema">
          <p:output port="result"/>
-         
-         <p:xslt version="3.0" template-name="start" name="xslt">
-            <p:with-input port="source"><p:empty /></p:with-input>
-            <p:with-input port="stylesheet" expand-text="false">
-               <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+         <p:xslt version="3.0"
+                 template-name="start"
+                 name="xslt">
+            <p:with-input port="source">
+               <p:empty/>
+            </p:with-input>
+            <p:with-input port="stylesheet"
+                          expand-text="false">
+               <xsl:stylesheet version="3.0"
+                               xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                   <xsl:output build-tree="no"/>
-                  <xsl:template name="start" as="map(xs:string, processing-instruction())">
+                  <xsl:template name="start"
+                                as="map(xs:string, processing-instruction())">
                      <xsl:variable name="document">
                         <doc>
-                           <one><xsl:processing-instruction name="pi" select="'target'" /></one>
-                           <two><xsl:processing-instruction name="pi" select="'target'" /></two>
+                           <one>
+                              <xsl:processing-instruction name="pi"
+                                                          select="'target'"/>
+                           </one>
+                           <two>
+                              <xsl:processing-instruction name="pi"
+                                                          select="'target'"/>
+                           </two>
                         </doc>
                      </xsl:variable>
                      <xsl:sequence select="map{'one' : $document/doc/one/processing-instruction(), 'two' : $document/doc/two/processing-instruction() }"/>
@@ -45,14 +70,16 @@
                   <map-size-check>{map:size(.)}</map-size-check>
                   <map-of-nodes-check>{. instance of map(xs:string, node())}</map-of-nodes-check>
                   <map-of-pi-check>{. instance of map(xs:string, processing-instruction())}</map-of-pi-check>
-                  <map-item-is-pi-check>{every $item in .?* satisfies $item instance of processing-instruction()}</map-item-is-pi-check> 
+                  <map-item-is-pi-check>{every $item in .?* satisfies $item instance of processing-instruction()}</map-item-is-pi-check>
                </result>
             </p:with-input>
          </p:identity>
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
          <s:pattern>
             <s:rule context="/">
                <s:assert test="result">The document root is not 'result'.</s:assert>

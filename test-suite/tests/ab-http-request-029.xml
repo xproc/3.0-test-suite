@@ -1,7 +1,18 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>http-request-029 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2020-01-12</t:date>
             <t:author>
@@ -17,22 +28,22 @@
       <p>Tests p:http-request: post with text payload to a responder.</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
-         <p:output port="result" />
-         
-         <p:http-request href="http://localhost:8246/service/echo" method="post">
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:http-request href="http://localhost:8246/service/echo"
+                         method="post">
             <p:with-input>
-               <p:inline content-type='text/plain'>This is jüst söme encoded text.</p:inline>
+               <p:inline content-type="text/plain">This is jüst söme encoded text.</p:inline>
             </p:with-input>
          </p:http-request>
-         
-         <p:wrap-sequence wrapper="doc" />
+         <p:wrap-sequence wrapper="doc"/>
       </p:declare-step>
    </t:pipeline>
-   
    <t:schematron>
-      <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
-           <s:pattern>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:pattern>
             <s:rule context="/">
                <s:assert test="doc">The root element is not 'doc'.</s:assert>
                <s:assert test="doc/text()='This is jüst söme encoded text.'">The text is not right.</s:assert>
