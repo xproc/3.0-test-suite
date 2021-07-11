@@ -35,14 +35,15 @@ jobs:
 
       - run: ./gradlew website
 
-      - persist_to_workspace:
-          root: build
-          paths:
-            - html
-            - specs
-
-      - store_artifacts:
-          path: build/html
+# Is there really any value in this?
+#      - persist_to_workspace:
+#          root: build
+#          paths:
+#            - html
+#            - specs
+#
+#      - store_artifacts:
+#          path: build/html
 
       - run: ./.circleci/publish.sh
 

@@ -48,8 +48,7 @@ rm /tmp/website.$$.tar.gz
 # Push the changes back to the repo
 git add .
 git commit -m "Deploy gh-pages for ${CIRCLE_PROJECT_USERNAME}: ${SHA}"
-#git push -q origin HEAD
+git push -q origin HEAD
 
-# Go back to the main branch
-#git checkout main
-
+# Go back to the master branch
+git checkout master
