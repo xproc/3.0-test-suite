@@ -38,6 +38,9 @@ git checkout --track origin/gh-pages
 git fetch origin
 git rebase origin/gh-pages
 
+# Delete any untracked files
+git clean -d -f
+
 # Unpack the website files
 tar zxf /tmp/website.$$.tar.gz
 rm /tmp/website.$$.tar.gz
