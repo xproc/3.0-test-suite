@@ -5,16 +5,16 @@
 		exclude-result-prefixes="h xs"
                 version="2.0">
 
-<xsl:param name="travis" select="''"/>
-<xsl:param name="travis-build" select="''"/>
-<xsl:param name="travis-commit" select="''"/>
+<xsl:param name="circleci" select="''"/>
+<xsl:param name="circleci-build" select="''"/>
+<xsl:param name="circleci-commit" select="''"/>
 
 <xsl:variable name="Z" select="xs:dayTimeDuration('PT0H')"/>
 
-<xsl:template match="*[@x-travis]">
-  <xsl:if test="not(@x-travis = 'true') or ($travis = 'true')">
+<xsl:template match="*[@x-circleci]">
+  <xsl:if test="not(@x-circleci = 'true') or ($circleci = 'true')">
     <xsl:copy>
-      <xsl:apply-templates select="@* except @x-travis"/>
+      <xsl:apply-templates select="@* except @x-circleci"/>
       <xsl:apply-templates select="node()"/>
     </xsl:copy>
   </xsl:if>
@@ -27,11 +27,11 @@
   </time>
 </xsl:template>
 
-<xsl:template match="h:span[@class='travis-build']">
+<xsl:template match="h:span[@class='circleci-build']">
   <xsl:copy>
     <xsl:apply-templates select="@* except @title"/>
-    <xsl:attribute name="title" select="concat('Commit hash ', $travis-commit)"/>
-    <xsl:value-of select="$travis-build"/>
+    <xsl:attribute name="title" select="concat('Commit hash ', $circleci-commit)"/>
+    <xsl:value-of select="$circleci-build"/>
   </xsl:copy>
 </xsl:template>
 
