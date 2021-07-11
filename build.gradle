@@ -242,7 +242,7 @@ tasks.register("make_index", XMLCalabashTask) {
   pipeline "tools/xpl/run-xslt-html.xpl"
   option("stylesheet", "../xsl/circleci-patch.xsl")
   param("circleci", getenv('CIRCLECI'))
-  param("circleci-build", getenv('CIRCLE_BUILD_NUMBER'))
+  param("circleci-build", getenv('CIRCLE_BUILD_NUM'))
   param("circleci-commit", getenv('CIRCLE_SHA1'))
   doFirst {
     mkdir("build/html")
