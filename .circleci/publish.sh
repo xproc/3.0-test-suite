@@ -23,9 +23,6 @@ git config --global user.name $GIT_USER
 # Remember the SHA of the current build.
 SHA=$(git rev-parse --verify HEAD)
 
-ls build
-ls build/html
-
 # Save the website files
 cd build/html
 tar cf - . | gzip > /tmp/website.$$.tar.gz
