@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="fail" code="err:XS0077" xmlns:err="http://www.w3.org/ns/xproc-error"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>p:variable-046 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-08-26</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>New test.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Test @collection="{XPath-expression}" on p:variable is an error.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:xs="http://www.w3.org/2001/XMLSchema">
+         <p:output port="result"/>
+         <p:variable name="selector" collection="{true()}"
+                     select="false()"
+                     as="xs:boolean">
+            <doc />
+         </p:variable>
+         <p:identity>
+            <p:with-input>
+               <doc1/>
+            </p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
