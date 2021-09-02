@@ -1,0 +1,15 @@
+#!/usr/bin/perl -- # -*- Perl -*-
+
+use strict;
+use English;
+use CGI;
+
+my $cgi = CGI->new;
+
+if ($cgi->request_method eq 'PUT') {
+    print $cgi->header('text/plain', '202 Accepted');
+    print "OK\n";
+} else {
+    print $cgi->header('text/plain', '405 Method Not Allowed');
+    print "This endpoint only accepts PUT requests\n";
+}

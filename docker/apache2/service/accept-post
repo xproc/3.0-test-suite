@@ -1,0 +1,15 @@
+#!/usr/bin/perl -- # -*- Perl -*-
+
+use strict;
+use English;
+use CGI;
+
+my $cgi = CGI->new;
+
+if ($cgi->request_method eq 'POST') {
+    print $cgi->header('text/plain', '201 Created');
+    print "OK\n";
+} else {
+    print $cgi->header('text/plain', '405 Method Not Allowed');
+    print "This endpoint only accepts POST requests\n";
+}
