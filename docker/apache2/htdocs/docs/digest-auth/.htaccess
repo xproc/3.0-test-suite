@@ -1,0 +1,8 @@
+AuthType Digest
+AuthName TestDigestAuthentication
+AuthDigestProvider file
+AuthUserFile /usr/local/apache2/cache/tests.xproc.digest-auth.passwd
+AuthGroupFile /dev/null
+<Limit GET POST>
+require valid-user
+</Limit>

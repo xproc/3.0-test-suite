@@ -1,0 +1,12 @@
+#!/usr/bin/perl -- # -*- Perl -*-
+
+use strict;
+use English;
+use CGI;
+
+my $cgi = CGI->new;
+
+print "Content-type: application/xml\n";
+print "Content-Disposition: attachment; filename=download-test.xml\n";
+print "\n";
+print "<doc><p>This is a test.</p></doc>\n";

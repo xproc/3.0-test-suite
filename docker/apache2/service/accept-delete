@@ -1,0 +1,15 @@
+#!/usr/bin/perl -- # -*- Perl -*-
+
+use strict;
+use English;
+use CGI;
+
+my $cgi = CGI->new;
+
+if ($cgi->request_method eq 'DELETE') {
+    print $cgi->header('text/plain', '204 No Content');
+    print "OK\n";
+} else {
+    print $cgi->header('text/plain', '405 Method Not Allowed');
+    print "This endpoint only accepts DELETE requests\n";
+}
