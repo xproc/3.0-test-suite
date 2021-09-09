@@ -1,0 +1,19 @@
+#!/usr/bin/perl -- # -*- Perl -*-
+
+use strict;
+use English;
+use CGI;
+
+my $cgi = CGI->new;
+
+my $bodySent = exists($ENV{'CONTENT_LENGTH'});
+
+if ($cgi->request_method eq 'HEAD') {
+    if ($bodySent) {
+        print $cgi->header('text/plain', '202 Accepted');
+    } else {
+        print $cgi->header('text/plain', '400 Bad Request');
+    }
+} else {
+    print $cgi->header('text/plain', '405 Method Not Allowed');
+}
