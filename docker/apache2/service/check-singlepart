@@ -1,0 +1,58 @@
+#!/usr/bin/perl -- # -*- Perl -*-
+
+use strict;
+use English;
+#use CGI::Carp qw(fatalsToBrowser);
+use MIME::Base64;
+
+my $contentType = $ENV{'CONTENT_TYPE'};
+my $method = $ENV{'REQUEST_METHOD'};
+my $bodySent = exists($ENV{'CONTENT_LENGTH'});
+my $contentLength = undef;
+
+my $content = "";
+if ($bodySent) {
+    $contentLength = $ENV{'CONTENT_LENGTH'};
+    read(STDIN, $content, $contentLength);
+} elsif ($method eq 'POST' or $method eq 'PUT') {
+    $content = $ENV{'QUERY_STRING'};
+}
+
+my $decl = undef;
+if ($content ne '' && $contentType =~ /xml/) {
+    if ($content =~ /^\s*<\?(xml.*?)\?>(.*)$/si) {
+        $decl = $1;
+        $content = $2;
+        $decl =~ s/'/&apos;/g;
+    }
+}
+
+print "Content-type: application/xml\r\n\r\n";
+
+print "<check-singlepart method='$method' content-type='$contentType'";
+if (defined($decl)) {
+    print " xml-declaration='$decl'";
+}
+print ">\n";
+
+my %skipHeader = ('accept' => 1,
+                  'accept_encoding' => 1,
+                  'boundary' => 1,
+                  'host' => 1,
+                  'connection' => 1,
+                  'bluecoat_via' => 1,
+                  'user_agent' => 1);
+foreach my $key (sort keys %ENV) {
+    next if $key !~ /^HTTP_(.*)$/;
+    my $name = lc($1);
+    #my $name = lc($key);
+    my $value = $ENV{$key};
+    next if exists $skipHeader{$name};
+    print "<header name='", $name, "'>", $value, "</header>\n";
+}
+
+if ($bodySent) {
+    print "<body>$content</body>\n";
+}
+
+print "</check-singlepart>\n";
