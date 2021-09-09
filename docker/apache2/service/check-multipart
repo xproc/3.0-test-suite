@@ -13,16 +13,8 @@ if ($ENV{'REQUEST_METHOD'} eq 'POST') {
 
 my @lines = split(/\r\n/, $_);
 
-#open (F, ">/tmp/check-multipart.data");
-#foreach my $key (sort keys %ENV) {
-#    print F $key, "=", $ENV{$key}, "\n";
-#}
-#foreach my $line (@lines) {
-#    print F $line, "\n";
-#}
-#close (F);
-
 my $contentType = $ENV{'CONTENT_TYPE'};
+my $method = $ENV{'REQUEST_METHOD'};
 my $boundary = "";
 
 if ($contentType =~ /^(.*)(;\s*boundary=([^;\s]+))\s*(.*)$/) {
@@ -39,7 +31,7 @@ while (@lines && $lines[0] ne "--$boundary") {
 }
 shift @lines; # skip the boundary
 
-print "<check-multipart boundary='$boundary' content-type='$contentType'>\n";
+print "<check-multipart method='$method' boundary='$boundary' content-type='$contentType'>\n";
 
 my %skipHeader = ('accept' => 1,
                   'boundary' => 1,
@@ -77,7 +69,16 @@ while (@lines) {
             || $partType =~ /^text\//
             || $partType =~ /\/xml/
             || $partType =~ /\+xml/) {
-            print "<body>$body</body>\n";
+            if ($body =~ /^\s*<\?(xml.*?)\?>(.*)$/si) {
+                my $decl = $1;
+                $body = $2;
+
+                $decl =~ s/'/&apos;/g;
+
+                print "<body xml-declaration='$decl'>$body</body>\n";
+            } else {        
+                print "<body>$body</body>\n";
+            }
         } else {
             print "<body>", encode_base64($body), "</body>\n";
         }
