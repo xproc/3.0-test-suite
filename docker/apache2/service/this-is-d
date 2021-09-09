@@ -1,0 +1,24 @@
+#!/usr/bin/perl -- # -*- Perl -*-
+
+use strict;
+use English;
+use CGI;
+use CGI::Carp qw(fatalsToBrowser);
+use CGI::Cookie;
+
+my $query = new CGI;
+
+my $cookiea = $query->cookie("a-goes-to");
+my $cookieb = $query->cookie("b-goes-to");
+my $cookiec = $query->cookie("c-goes-to");
+
+print "Content-type: application/xml; charset=UTF-8\n\n";
+
+print "<doc>\n";
+print "<location>This is d</location>\n";
+print "<a-goes-to>", $cookiea, "</a-goes-to>\n";
+print "<b-goes-to>", $cookieb, "</b-goes-to>\n";
+print "<c-goes-to>", $cookiec, "</c-goes-to>\n";
+print "</doc>\n";
+
+exit(0);
