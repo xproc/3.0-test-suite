@@ -2,7 +2,7 @@
         xmlns:err="http://www.w3.org/ns/xproc-error"
         expected="fail" code="err:XC0203">
    <t:info>
-      <t:title>p:http-request 117 (NW)</t:title>
+      <t:title>p:http-request 118 (NW)</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2021-09-09</t:date>
