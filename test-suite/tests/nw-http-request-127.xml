@@ -1,0 +1,63 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="pass">
+   <t:info>
+      <t:title>p:http-request 127 (NW)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-09-09</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Check multipart serialization properties.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>If no content-type is provided, multipart/mixed must be used.</p>
+   </t:description>
+   <t:pipeline>
+     <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+                     xmlns:c="http://www.w3.org/ns/xproc-step"
+                     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                     exclude-inline-prefixes="c xs" version="3.0">
+       <p:output port="result"/>
+
+  <p:http-request href="http://localhost:8246/service/check-multipart" method="post">
+    <p:with-input>
+      <p:inline document-properties="map{'serialization': map {'encoding': 'iso-8859-1'}}">
+        <doc1 xmlns="">These characters will be encoded as ISO Latin 1, but will
+        be returned in the middle of a UTF-8 document by check-multipart. So don’t
+        actually put any characters in here that would be invalid UTF-8 sequences when
+        encoded in ISO Latin 1.</doc1>
+      </p:inline>
+      <p:inline document-properties="map{'serialization': map {'encoding': 'utf-8'}}">
+        <doc2 xmlns="">Résumé</doc2>
+      </p:inline>
+    </p:with-input>
+  </p:http-request>
+
+     </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="p"
+               uri="http://www.w3.org/ns/xproc"/>
+         <s:ns prefix="c"
+               uri="http://www.w3.org/ns/xproc-step"/>
+         <s:pattern>
+            <s:rule context="/*">
+               <s:assert test="self::check-multipart">The root is not check-multipart.</s:assert>
+               <s:assert test="contains(part[1]/header[lower-case(@name) = 'content-type'], '8859')"
+                         >The first part has the wrong charset.</s:assert>
+               <s:assert test="contains(lower-case(part[2]/header[lower-case(@name) = 'content-type']), 'utf-8')"
+                         >The second part has the wrong charset.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

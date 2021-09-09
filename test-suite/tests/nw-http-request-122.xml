@@ -1,0 +1,56 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="pass">
+   <t:info>
+      <t:title>p:http-request 122 (NW)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-09-09</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Multipart boundary test for p:http-request.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>If you don’t specify a boundary, one will be created for you.</p>
+   </t:description>
+   <t:pipeline>
+     <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+                     xmlns:c="http://www.w3.org/ns/xproc-step"
+                     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                     exclude-inline-prefixes="c xs" version="3.0">
+       <p:output port="result"/>
+
+       <p:http-request href="http://localhost:8246/service/check-multipart" method="post"
+                       headers="map{
+                         'content-type': 'multipart/alternative'
+                       }">
+         <p:with-input>
+           <p:inline><doc1 xmlns=""/></p:inline>
+           <p:inline><doc2 xmlns=""/></p:inline>
+         </p:with-input>
+       </p:http-request>
+     </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="p"
+               uri="http://www.w3.org/ns/xproc"/>
+         <s:ns prefix="c"
+               uri="http://www.w3.org/ns/xproc-step"/>
+         <s:pattern>
+            <s:rule context="/*">
+               <s:assert test="self::check-multipart">The pipeline root is not check-multipart.</s:assert>
+               <s:assert test="string(@boundary) != ''">The boundary is wrong.</s:assert>
+               <s:assert test="@content-type = 'multipart/alternative'">The content-type is wrong.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
