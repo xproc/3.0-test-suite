@@ -5,6 +5,17 @@
       <t:title>p:http-request 131 (NW)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2021-09-10</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Reworked the test. A redirect no longer returns a document, so
+there’s no base URI. Instead, the test assumes the base URI will be in the
+map produced on the report port.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-09-09</t:date>
             <t:author>
                <t:name>Norman Walsh</t:name>
@@ -25,37 +36,26 @@
                      exclude-inline-prefixes="c xs" version="3.0">
        <p:output port="result"/>
 
-       <p:http-request name="httpget"
-                       method="get" href="http://localhost:8246/service/this-is-a"
+       <p:http-request method="get" href="http://localhost:8246/service/this-is-a"
                        parameters="map{'follow-redirect': 2}">
          <p:with-input>
            <p:empty/>
          </p:with-input>
        </p:http-request>
 
-       <p:identity name="base">
-         <p:with-input>
-           <base-uri>{base-uri(.)}</base-uri>
-         </p:with-input>
-       </p:identity>
-
        <p:identity>
-         <p:with-input pipe="report@httpget"/>
+         <p:with-input pipe="report"/>
        </p:identity>
 
        <p:identity name="status">
          <p:with-input>
            <code>{.?status-code}</code>
+           <base-uri>{.?base-uri}</base-uri>
            <location>{.?headers?location}</location>
          </p:with-input>
        </p:identity>
 
-       <p:wrap-sequence wrapper="wrap">
-         <p:with-input>
-           <p:pipe step="base"/>
-           <p:pipe step="status"/>
-         </p:with-input>
-       </p:wrap-sequence>
+       <p:wrap-sequence wrapper="wrap"/>
 
      </p:declare-step>
    </t:pipeline>
