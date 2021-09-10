@@ -5,6 +5,17 @@
       <t:title>p:http-request 116 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2021-09-09</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed the value of the <code>href</code> option to an HTTP URI.
+               The value isn’t relevant to the test, but processors are allowed to reject
+               schemes other than <code>http(s):</code>.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2020-06-23</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -22,7 +33,8 @@
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
             <p:output port="result"/>
             
-            <p:http-request href="file" parameters="map{'override-content-type' : 'surely-not-correct'}">
+            <p:http-request href="http://localhost:8246/service/fixed-xml"
+                            parameters="map{'override-content-type' : 'surely-not-correct'}">
                <p:with-input>
                   <p:empty />
                </p:with-input>
