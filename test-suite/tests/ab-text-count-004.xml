@@ -47,7 +47,7 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="c:result">Root element is not 'c:result'.</s:assert>
-               <s:assert test="c:result/text()=2">Content of result does not equal 0.</s:assert>
+               <s:assert test="c:result/text()=2">Content of result does not equal 2.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
