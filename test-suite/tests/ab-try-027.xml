@@ -27,7 +27,10 @@
             </p:identity>
             
            <p:catch name="catch">
-              <p:output port="catcher" />
+              <p:output port="result" primary="true"/>
+              <p:output port="catcher">
+                 <p:empty/>
+              </p:output>
               <p:identity>
                  <p:with-input pipe="error@catch" />
               </p:identity>
