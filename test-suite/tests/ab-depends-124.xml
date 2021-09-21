@@ -6,6 +6,15 @@
       <t:title>depends 124 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2021-09-21</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed faulty avt in p:error/@code.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -38,7 +47,7 @@
          <p:variable name="path"
                      select="*:result/text()"/>
          <p:try name="identity">
-            <p:error code="Q{}some-error"/>
+            <p:error code="some-error"/>
             <p:catch>
                <p:add-attribute match="/*"
                                 attribute-name="att"
