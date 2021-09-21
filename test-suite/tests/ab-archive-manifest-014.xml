@@ -5,6 +5,15 @@
       <t:title>p:archive-manifest 014 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2021-09-20</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Corrected base URI so that resolution occurs as expected.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -39,7 +48,7 @@
                </p:inline>
             </p:with-input>
          </p:archive>
-         <p:set-properties properties="map{'base-uri' : 'http://xproc.org/ns/testsuite'}"/>
+         <p:set-properties properties="map{'base-uri' : 'http://xproc.org/ns/testsuite/'}"/>
          <p:archive-manifest/>
       </p:declare-step>
    </t:pipeline>
