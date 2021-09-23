@@ -5,6 +5,15 @@
       <t:title>p:http-request 124 (NW)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2021-09-23</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test so that returned headers don't make the test fail.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-09-09</t:date>
             <t:author>
                <t:name>Norman Walsh</t:name>
@@ -43,7 +52,7 @@
          <s:pattern>
             <s:rule context="/*">
                <s:assert test="self::check-singlepart">The pipeline root is not check-singlepart.</s:assert>
-               <s:assert test="empty(*)">Request included a body.</s:assert>
+               <s:assert test="empty(body)">Request included a body.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
