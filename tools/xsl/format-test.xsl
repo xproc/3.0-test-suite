@@ -6,9 +6,10 @@
                 xmlns:h="http://www.w3.org/1999/xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
 		exclude-result-prefixes="h p t xs"
-                version="2.0">
+                version="3.0">
 
 <xsl:import href="functions.xsl"/>
+<xsl:import href="xml2text.xsl"/>
 
 <xsl:output method="html" encoding="utf-8" omit-xml-declaration="yes"/>
 
@@ -399,13 +400,10 @@
     <code>
       <xsl:choose>
         <xsl:when test="@src">
-          <xsl:apply-templates mode="copy" select="doc(resolve-uri(@src, base-uri(.)))"/>
+          <xsl:sequence select="t:format-markup(doc(resolve-uri(@src, base-uri(.)))/*)"/>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:variable name="content" as="node()*">
-            <xsl:apply-templates select="node()" mode="namespace-shelter"/>
-          </xsl:variable>
-          <xsl:apply-templates mode="copy" select="$content"/>
+          <xsl:sequence select="* ! t:format-markup(.)"/>
         </xsl:otherwise>
       </xsl:choose>
     </code>
@@ -502,66 +500,6 @@
     </xsl:if>
   </xsl:for-each>
 
-  <xsl:variable name="pdef" select="string(parent::*/namespace::*[local-name(.) = ''])"/>
-  <xsl:variable name="tdef" select="string(./namespace::*[local-name(.) = ''])"/>
-
-  <xsl:if test="parent::* and $pdef != $tdef and $tdef ne 'http://test.xproc.org/placeholder/'">
-    <xsl:text> </xsl:text>
-    <span class="attr nsattr">
-      <span class="aname">
-        <xsl:text>xmlns</xsl:text>
-      </span>
-      <span class="aeq">=</span>
-      <span class="aq">"</span>
-      <span class="avalue">
-        <xsl:value-of select="$tdef"/>
-      </span>
-      <span class="aq">"</span>
-    </span>
-  </xsl:if>
-
-  <xsl:for-each select="@*">
-    <xsl:text> </xsl:text>
-    <span class="attr">
-      <span class="aname{if (namespace-uri(.) = 'http://www.w3.org/ns/xproc') then ' paname' else ''}">
-        <xsl:value-of select="node-name(.)"/>
-      </span>
-      <span class="aeq">=</span>
-      <span class="aq">"</span>
-      <span class="avalue">
-        <xsl:value-of select="."/>
-      </span>
-      <span class="aq">"</span>
-    </span>
-  </xsl:for-each>
-</xsl:template>
-
-<xsl:template name="x-attributes">
-  <!--
-      <xsl:message>=== <xsl:value-of select="node-name(.)"/></xsl:message>
-  -->
-  <xsl:variable name="ancestors" select="ancestor::*"/>
-  <xsl:for-each select="namespace::*">
-    <xsl:if test="not(t:ancestor-namespace($ancestors, .))">
-      <xsl:text> </xsl:text>
-      <span class="attr nsattr">
-        <span class="aname">
-          <xsl:text>xmlns</xsl:text>
-          <xsl:if test="local-name(.) ne ''">
-            <xsl:text>:</xsl:text>
-            <xsl:value-of select="local-name(.)"/>
-          </xsl:if>
-        </span>
-        <span class="aeq">=</span>
-        <span class="aq">"</span>
-        <span class="avalue">
-          <xsl:value-of select="."/>
-        </span>
-        <span class="aq">"</span>
-      </span>
-    </xsl:if>
-  </xsl:for-each>
-    
   <xsl:variable name="pdef" select="string(parent::*/namespace::*[local-name(.) = ''])"/>
   <xsl:variable name="tdef" select="string(./namespace::*[local-name(.) = ''])"/>
 

@@ -5,6 +5,17 @@
 		exclude-result-prefixes="xs"
                 version="2.0">
 
+<xsl:param name="baseuri" as="xs:string?"/>
+
+<xsl:template match="/*">
+  <xsl:copy>
+    <xsl:if test="exists($baseuri)">
+      <xsl:attribute name="xml:base" select="$baseuri"/>
+    </xsl:if>
+    <xsl:apply-templates select="@*,node()"/>
+  </xsl:copy>
+</xsl:template>
+
 <xsl:template match="*[@src]">
   <xsl:copy>
     <xsl:apply-templates select="@* except @src"/>

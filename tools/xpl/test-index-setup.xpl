@@ -19,23 +19,14 @@
     <p:with-option name="href" select="$baseuri"/>
   </p:load>
 
-  <!-- Some of the tests include invalid base URIs. That causes the
-       add-attribute step to fail. Just ignore it in those cases. -->
-  <p:try>
-    <p:group>
-      <p:add-attribute attribute-name="xml:base" match="/*">
-        <p:with-option name="attribute-value" select="$baseuri"/>
-      </p:add-attribute>
-    </p:group>
-    <p:catch>
-      <p:identity/>
-    </p:catch>
-  </p:try>
-
+  <!-- You'd like tou se p:add-attribute to add the xml:base attribute,
+       but some of the examples contain invalid base URIs and that
+       causes the step to fail. We cheat and use XSLT instead. -->
   <p:xslt>
     <p:input port="stylesheet">
       <p:document href="../xsl/inline-src.xsl"/>
     </p:input>
+    <p:with-param name="baseuri" select="$baseuri"/>
   </p:xslt>
   <p:xslt>
     <p:input port="stylesheet">
