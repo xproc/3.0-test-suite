@@ -7,7 +7,7 @@
                 xmlns:h="http://www.w3.org/1999/xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 exclude-result-prefixes="c h p t xs"
-                version="2.0">
+                version="3.0">
 <xsl:import href="functions.xsl"/>
 <xsl:output method="xml" encoding="utf-8" omit-xml-declaration="yes"/>
 
@@ -608,6 +608,7 @@
   <html>
     <head>
       <xsl:sequence select="t:head('Implementation index')"/>
+      <script src="js/filter.js"/>
     </head>
     <body>
       <nav>
@@ -700,7 +701,7 @@
                     <td class="pass" align="center">pass</td>
                   </xsl:when>
                   <xsl:otherwise>
-                    <td align="center">(no report)</td>
+                    <td class="unknown" align="center">(no report)</td>
                   </xsl:otherwise>
                 </xsl:choose>
               </xsl:for-each>
