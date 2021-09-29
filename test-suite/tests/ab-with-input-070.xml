@@ -3,6 +3,15 @@
       <t:title>with-input-070</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2021-09-29</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Replace <code>&lt;true/></code> with <code>&lt;p:identity/></code>.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2020-06-21</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -25,7 +34,7 @@
                <p:with-input port="source">
                   <doc />
                </p:with-input>
-               <true />
+               <p:identity/>
             </p:when>
          </p:choose>
       </p:declare-step>
