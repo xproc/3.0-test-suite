@@ -391,6 +391,12 @@
 <xsl:template match="t:schematron">
   <div class="schematron">
     <h2>Schematron validation</h2>
+
+    <xsl:if xmlns:s="http://purl.oclc.org/dsdl/schematron"
+            test=".//s:pattern[count(s:rule) gt 1]">
+      <xsl:message>Suspicious schematron rules</xsl:message>
+    </xsl:if>
+
     <xsl:call-template name="insert-content"/>
   </div>
 </xsl:template>
