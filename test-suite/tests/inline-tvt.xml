@@ -5,6 +5,15 @@
       <t:title>Inline TVTs</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2021-10-01</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Updated the underlying pipeline to use <code>p:inline-expand-text</code>.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
