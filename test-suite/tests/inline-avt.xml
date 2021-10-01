@@ -3,6 +3,16 @@
       <t:title>Inline AVTs</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2021-10-01</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Updated the underlying pipeline to use <code>p:inline-expand-text</code>.
+               Inlined the Schematron.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2017-09-24T17:47:42+01:00</t:date>
             <t:author>
                <t:name>Norman Walsh</t:name>
@@ -14,5 +24,18 @@
       </t:revision-history>
    </t:info>
    <t:pipeline src="../pipelines/inline-avt.xpl"/>
-   <t:schematron src="../schematron/inline-avt.sch"/>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+        <s:ns prefix="p"
+              uri="http://www.w3.org/ns/xproc"/>
+        <s:pattern>
+          <s:rule context="/*">
+            <s:assert test="self::doc">The pipeline root is not doc.</s:assert>
+            <s:assert test="@count = 3">The number of nodes in the AVT is incorrect.</s:assert>
+          </s:rule>
+        </s:pattern>
+      </s:schema>
+   </t:schematron>
 </t:test>

@@ -19,7 +19,7 @@
       <p:inline>
         <doc count="{$bar}">Counts the number of nodes.
         The number of the nodes is <number>{$bar}</number>.
-        <toggle class="{$bar}" p:expand-text="false">{$bar}</toggle>
+        <toggle class="{$bar}" p:inline-expand-text="false">{$bar}</toggle>
         </doc>
       </p:inline>
     </p:with-input>
