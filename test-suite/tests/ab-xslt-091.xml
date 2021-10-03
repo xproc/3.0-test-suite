@@ -6,6 +6,15 @@
       <t:title>AB-xslt-091</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2021-10-03</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Corrected count to 1. This test defaults to build-tree=true.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -59,7 +68,7 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="/c:result">The document root is not 'count'.</s:assert>
-               <s:assert test="/c:result/text()='0'">The text in count is not '0'.</s:assert>
+               <s:assert test="/c:result/text()='1'">The text in count is not '1'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
