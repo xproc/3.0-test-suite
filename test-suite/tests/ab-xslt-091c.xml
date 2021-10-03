@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <t:test expected="pass"
-        features="xslt-2"
+        features="xslt-3"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
-      <t:title>AB-xslt-090</t:title>
+      <t:title>AB-xslt-091b</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2021-10-03</t:date>
@@ -11,7 +11,7 @@
                <t:name>Norman Walsh</t:name>
             </t:author>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>Corrected count to 1. There’s no equivalent of build-tree=false in 2.0.</p>
+               <p>For JSON output, build-tree should default to false.</p>
             </t:description>
          </t:revision>
          <t:revision>
@@ -29,7 +29,7 @@
                <t:name>Achim Berndzen</t:name>
             </t:author>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>Added tests for p:xslt with version="2.0".</p>
+               <p>Added tests for p:xslt with version="3.0".</p>
             </t:description>
          </t:revision>
       </t:revision-history>
@@ -41,15 +41,16 @@
       <p:declare-step version="3.0"
                       xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result"/>
-         <p:xslt version="2.0">
+         <p:xslt version="3.0">
             <p:with-input>
                <doc/>
             </p:with-input>
             <p:with-input port="stylesheet">
-               <xsl:stylesheet version="2.0"
+               <xsl:stylesheet version="3.0"
                                xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                  <xsl:output method="json"/>
                   <xsl:template match="/">
-                     <xsl:result-document href="secondary">
+                     <xsl:result-document href="secondary" method="xml">
                         <doc/>
                      </xsl:result-document>
                   </xsl:template>
@@ -68,7 +69,7 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="/c:result">The document root is not 'count'.</s:assert>
-               <s:assert test="/c:result/text()='1'">The text in count is not '1'.</s:assert>
+               <s:assert test="/c:result/text()='0'">The text in count is not '0'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
