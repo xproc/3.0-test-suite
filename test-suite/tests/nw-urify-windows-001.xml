@@ -37,7 +37,7 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="result">Root element is not 'result'.</s:assert>
-               <s:assert test="string(result)= 'https://wiki.acme.com/fr/#B'">Incorrect URI in result.</s:assert>
+               <s:assert test="string(result)= 'https://wiki.acme.com/fr/categories.html#B'">Incorrect URI in result.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>

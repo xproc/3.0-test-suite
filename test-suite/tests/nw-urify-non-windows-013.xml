@@ -25,7 +25,7 @@
          <p:identity>
             <p:with-input>
                <result>{p:urify("#B",
-                                "file://path/to/file")}</result>
+                                "file:///path/to/file")}</result>
             </p:with-input>
          </p:identity>
       </p:declare-step>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        features="urify-windows"
+        features="urify-non-windows"
         expected="pass">
    <t:info>
-      <t:title>nw-urify-windows-014</t:title>
+      <t:title>nw-urify-non-windows-014</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2021-10-06</t:date>
@@ -11,13 +11,13 @@
                <t:name>Norman Walsh</t:name>
             </t:author>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>Test for the <code>p:urify()</code> function on Windows.</p>
+               <p>Test for the <code>p:urify()</code> function not on Windows.</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Test resolving a relative URI against an absolute file URI.</p>
+      <p>Test resolving a relative URI against an a UNC path.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
@@ -25,7 +25,7 @@
          <p:identity>
             <p:with-input>
                <result>{p:urify("#B",
-                                "file:///path/to/file")}</result>
+                                "//path/to/file")}</result>
             </p:with-input>
          </p:identity>
       </p:declare-step>
