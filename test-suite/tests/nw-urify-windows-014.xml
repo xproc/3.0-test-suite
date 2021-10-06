@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        features="urify-non-windows"
+        features="urify-windows"
         expected="pass">
    <t:info>
-      <t:title>nw-urify-non-windows-001</t:title>
+      <t:title>nw-urify-windows-014</t:title>
       <t:revision-history>
          <t:revision>
-            <t:date>2021-10-05</t:date>
+            <t:date>2021-10-06</t:date>
             <t:author>
                <t:name>Norman Walsh</t:name>
             </t:author>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>Test for the <code>p:urify()</code> function not on Windows.</p>
+               <p>Test for the <code>p:urify()</code> function on Windows.</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Test resolving a relative URI against an absolute HTTP URI.</p>
+      <p>Test resolving a relative URI against an absolute file URI.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
@@ -25,7 +25,7 @@
          <p:identity>
             <p:with-input>
                <result>{p:urify("#B",
-                                "https://wiki.acme.com/fr/categories.html")}</result>
+                                "file://path/to/file")}</result>
             </p:with-input>
          </p:identity>
       </p:declare-step>
@@ -37,7 +37,7 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="result">Root element is not 'result'.</s:assert>
-               <s:assert test="string(result)= 'https://wiki.acme.com/fr/#B'">Incorrect URI in result.</s:assert>
+               <s:assert test="string(result)= 'file:///path/to/%23B'">Incorrect URI in result.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>

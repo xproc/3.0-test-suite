@@ -17,7 +17,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Test against a relative URI beginning with #.</p>
+      <p>Test resolving a relative URI against an absolute HTTP URI.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
@@ -37,7 +37,7 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="result">Root element is not 'result'.</s:assert>
-               <s:assert test="string(result)= 'https://wiki.acme.com/fr/%23B'">Incorrect URI in result.</s:assert>
+               <s:assert test="string(result)= 'https://wiki.acme.com/fr/#B'">Incorrect URI in result.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
