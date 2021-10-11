@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<t:test xmlns:err="http://www.w3.org/ns/xproc-error"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        features="urify-non-windows"
+        expected="fail"
+        code="err:XD0074">
+   <t:info>
+      <t:title>nw-urify-non-windows-112</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-10-10</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Test for the <code>p:urify()</code> function not on Windows.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description>Resolve a string with an explicit file URI scheme with a relative path
+ against a relative file URI.</t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+         <p:output port="result"/>
+         <p:identity>
+            <p:with-input>
+               <result>{p:urify("file:C:/Users/Jane/Documents and Files/Thing",
+                             "file:not-absolute")}</result>
+            </p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
