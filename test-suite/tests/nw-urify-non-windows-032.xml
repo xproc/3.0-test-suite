@@ -18,8 +18,10 @@
          </t:revision>
       </t:revision-history>
    </t:info>
-   <t:description>Resolve a string with an explicit C URI scheme with a relative path
- against an absolute http: URI.</t:description>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Resolve a string with an explicit C URI scheme with a relative path
+ against an absolute http: URI.</p>
+   </t:description>
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
          <p:output port="result"/>

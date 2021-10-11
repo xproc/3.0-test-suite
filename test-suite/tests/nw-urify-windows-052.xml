@@ -16,8 +16,10 @@
          </t:revision>
       </t:revision-history>
    </t:info>
-   <t:description>Resolve a string with an implicit scheme with an absolute path
- with an authority against an absolute file URI with an authority.</t:description>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Resolve a string with an implicit scheme with an absolute path
+ with an authority against an absolute file URI with an authority.</p>
+   </t:description>
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
          <p:output port="result"/>
