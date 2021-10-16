@@ -5,6 +5,15 @@
       <t:title>p:wrap-sequence 010 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2021-10-16</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Remove spurious whitespace from input document.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -27,9 +36,7 @@
    <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Tests p:wrap-sequence</p>
    </t:description>
-   <t:input port="source">
-      <doc/>
-   </t:input>
+   <t:input port="source"><doc/></t:input>
    <t:pipeline>
       <p:declare-step name="pipeline"
                       version="3.0"
