@@ -4,7 +4,7 @@
         features="file-steps"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
-      <t:title>err-s0002-11 (AB)</t:title>
+      <t:title>err-s0002-12 (AB)</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2021-10-16</t:date>
