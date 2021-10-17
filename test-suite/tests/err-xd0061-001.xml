@@ -1,7 +1,17 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XD0061">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XD0061">
    <t:info>
       <t:title>Error XD0061</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-10-17</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>A few editorial changes without substantive effect on the test.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-07-20</t:date>
             <t:author>
@@ -17,7 +27,8 @@
                <t:name>Achim Berndzen</t:name>
             </t:author>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>Error should now be XS0061, since we now have a more specific code. (Was originally name 'err-xd0036-001.xml')</p>
+               <p>Error should now be <code>err:XD0061</code>,
+               since we now have a more specific code. (Was originally name 'err-xd0036-001.xml')</p>
             </t:description>
          </t:revision>
          <t:revision>
