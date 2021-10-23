@@ -1,9 +1,18 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
         xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail" code="err:XC0085">
+        expected="fail" code="err:XD0011">
    <t:info>
       <t:title>p:archive 078 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-10-23</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed error code from XC0085 to XD0011.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2021-10-20</t:date>
             <t:author>
