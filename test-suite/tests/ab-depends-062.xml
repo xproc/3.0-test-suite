@@ -5,6 +5,16 @@
       <t:title>depends 062 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2021-11-20</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Removed error unrelated to this test where there was no binding
+               for an input and no default readable port.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2020-01-02</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -27,7 +37,9 @@
                <p:with-input><doc /></p:with-input>
            </p:identity>
            <p:catch>
-              <p:identity name="not-inscope"/>
+              <p:identity name="not-inscope">
+                <p:with-input><doc /></p:with-input>
+              </p:identity>
            </p:catch>
         </p:try>
          
