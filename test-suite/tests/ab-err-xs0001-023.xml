@@ -1,9 +1,17 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-      xmlns:err="http://www.w3.org/ns/xproc-error"
-      expected="fail" code="err:XS0001">
+        expected="pass">
    <t:info>
       <t:title>XS 001 -23 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-11-23</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test according to 3.0-specification#1043: Pipeline doesn't construct a loop.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2020-04-11</t:date>
             <t:author>
@@ -20,7 +28,8 @@
    </t:description>
    
    <t:pipeline>
-      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema">
          <p:output port="result" />
          
          <p:identity depends="adder">
@@ -28,7 +37,7 @@
          </p:identity>
          
          <p:add-attribute name="adder" match="/*" attribute-name="att">
-            <p:with-option name="attribute-value" select="40+2" />
+            <p:with-option name="attribute-value" select="xs:string(40+2)" />
             <p:with-input>
                <doc />
             </p:with-input>
@@ -36,4 +45,17 @@
          
       </p:declare-step>
    </t:pipeline>
+   <t:schematron>
+      <s:schema xmlns="http://www.w3.org/1999/xhtml"
+         xmlns:s="http://purl.oclc.org/dsdl/schematron"
+         queryBinding="xslt2">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="doc">The root element is not doc.</s:assert>
+               <s:assert test="doc/@att">There is no attribute "att" on doc.</s:assert>
+               <s:assert test="doc/@att='42'">The attribute value of att is not 42.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
 </t:test>
