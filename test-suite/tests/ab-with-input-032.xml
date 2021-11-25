@@ -1,7 +1,16 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0022">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0090">
    <t:info>
       <t:title>with-input-032</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-11-25</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed error code back to XS0090 because the token is invalid. Changed port name to remove confusion.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2021-11-24T18:37:57Z</t:date>
             <t:author>
@@ -55,7 +64,7 @@
          </p:identity>
       
          <p:identity>
-            <p:with-input pipe="one@"/>
+            <p:with-input pipe="result@"/>
          </p:identity>
       </p:declare-step>
    </t:pipeline>
