@@ -1,7 +1,17 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0090">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0022">
    <t:info>
       <t:title>with-input-032</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2021-11-24T18:37:57Z</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed error code to err:XS0022 for this error; err:XS0090
+               is for invalid tokens, not bad connections.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2018-07-12T17:21:57+02:00</t:date>
             <t:author>
