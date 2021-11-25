@@ -3,6 +3,15 @@
       <t:title>Option declaration 024</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2021-11-25</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed @select expression, so it is statically invalid.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-01-26</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -37,7 +46,7 @@
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
             <p:output port="result"/>
-            <p:option name="option" required="false" select="5+false()"/>
+            <p:option name="option" required="false" select="5+$undeclared"/>
             
             <p:identity>
                 <p:with-input>
