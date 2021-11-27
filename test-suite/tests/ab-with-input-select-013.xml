@@ -5,6 +5,15 @@
       <t:title>with-input-select-013</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2021-11-27</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed test as consequence of pr#1042.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -42,7 +51,7 @@
          <p:output port="result"/>
          <p:identity>
             <p:with-input select="array{'value'}">
-               <p:empty/>
+               <doc />
             </p:with-input>
          </p:identity>
          <p:identity>

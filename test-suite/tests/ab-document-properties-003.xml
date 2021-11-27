@@ -5,6 +5,15 @@
       <t:title>ab-document-properties-003</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2021-11-27</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed test as consequence of pr#1042.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -54,7 +63,7 @@
          <p:output port="result"/>
          <p:cast-content-type content-type="application/xml">
             <p:with-input select="p:document-properties(doc('../documents/ab-doc.xml'))">
-               <p:empty/>
+               <doc />
             </p:with-input>
          </p:cast-content-type>
       </p:declare-step>
