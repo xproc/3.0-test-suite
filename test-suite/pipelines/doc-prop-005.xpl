@@ -9,7 +9,7 @@
 
   <p:cast-content-type content-type="application/xml">
     <p:with-input port="source" select="p:document-properties($a)">
-      <p:empty/>
+      <doc />
     </p:with-input>
   </p:cast-content-type>
 
