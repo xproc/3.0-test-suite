@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>Pipeinfo 005 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-01-14</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Test added.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:pipeinfo is handled correctly.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="main"
+         version="3.0"
+         xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:option name="opt" select="42" />
+         
+         <p:identity>
+            <p:pipeinfo>This should not change anything</p:pipeinfo>
+            <p:with-input><result>{$opt}</result></p:with-input>
+         </p:identity>
+         
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+         xmlns:s="http://purl.oclc.org/dsdl/schematron"
+         xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The document root is not “result”.</s:assert>
+               <s:assert test="result/text()='42'">The text child of result is not '42'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron> 
+</t:test>
