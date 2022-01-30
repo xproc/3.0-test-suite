@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+    xmlns:t="http://xproc.org/ns/testsuite/3.0">
+    <t:info>
+        <t:title>Import-015 (AB)</t:title>
+        <t:revision-history>
+            <t:revision>
+                <t:date>2022-01-30</t:date>
+                <t:author>
+                    <t:name>Achim Berndzen</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>Added test.</p>
+                </t:description>
+            </t:revision>
+        </t:revision-history>
+    </t:info>
+    <t:description xmlns="http://www.w3.org/1999/xhtml">
+        <p>Tests repeated import of library with static option.</p>
+    </t:description>
+    <t:pipeline>
+        <p:declare-step version="3.0"
+            xmlns:p="http://www.w3.org/ns/xproc"
+            xmlns:test="http://test">
+            <p:import href="../pipelines/ab-library-027.xpl" />
+            <p:import href="../pipelines/ab-step-decl-001.xpl" />
+            <p:output port="result"/>
+            
+            <test:step />
+            <p:add-attribute match="/*" attribute-name="att" attribute-value="{$imported-option}" />
+            
+        </p:declare-step>
+    </t:pipeline>
+    <t:schematron>
+        <s:schema queryBinding="xslt2"
+            xmlns:s="http://purl.oclc.org/dsdl/schematron">
+            <s:pattern>
+                <s:rule context="/">
+                    <s:assert test="doc">The root element is not 'doc'.</s:assert>
+                    <s:assert test="doc/text()='42'">The text child of doc is not the correct answer.</s:assert>
+                    <s:assert test="doc/@att='42'">There is no attribute 'att' or @att does not give the right answer.</s:assert>
+                </s:rule>
+            </s:pattern>
+        </s:schema>
+    </t:schematron>
+</t:test>
