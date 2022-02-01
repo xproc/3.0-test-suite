@@ -1,0 +1,50 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+    expected="pass" 
+    features="p-validate-with-schematron">
+  <t:info>
+    <t:title>ab-validate-with-schematron-016</t:title>
+    <t:revision-history>
+      <t:revision>
+        <t:date>2022-02-01</t:date>
+        <t:author>
+          <t:name>Achim Berndzen</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Initial commit</p>
+        </t:description>
+      </t:revision>
+    </t:revision-history>
+  </t:info>
+  <t:description xmlns="http://www.w3.org/1999/xhtml">
+    <p>Testing that XC0054 is raised if documents is not valid.</p>
+  </t:description>
+  <t:pipeline>
+  <p:declare-step name="pipeline" xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+    <p:output port="result"/>
+    
+    <p:validate-with-schematron>
+      <p:with-input port="source">
+        <doc />
+      </p:with-input>
+      <p:with-input port="schema">
+        <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
+          <sch:pattern>
+            <sch:rule context="/">
+              <sch:report test="false()">Text</sch:report>
+            </sch:rule>
+          </sch:pattern>
+        </sch:schema>
+      </p:with-input>
+    </p:validate-with-schematron>
+  </p:declare-step>
+  </t:pipeline>
+  <t:schematron>
+    <s:schema xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
+        <s:pattern>
+          <s:rule context="/">
+            <s:assert test="doc">Document element is not 'doc'.</s:assert>
+          </s:rule>
+        </s:pattern>
+    </s:schema>
+  </t:schematron>
+</t:test>
