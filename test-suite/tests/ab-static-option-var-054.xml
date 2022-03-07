@@ -1,0 +1,45 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+    <t:info>
+        <t:title>Static options 054</t:title>
+        <t:revision-history>
+            <t:revision>
+                <t:date>2022-02-01</t:date>
+                <t:author>
+                    <t:name>Achim Berndzen</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>Test added.</p>
+                </t:description>
+            </t:revision>
+        </t:revision-history>
+    </t:info>
+    <t:description xmlns="http://www.w3.org/1999/xhtml">
+        <p>Tests static option set by test runner.</p>
+    </t:description>
+    <t:option name="static" select="42" static="true"/>
+    <t:pipeline>
+        <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="main" version="3.0">
+            <p:output port="result"/>
+            
+            <p:option name="static" static="true" select="99"/>
+            
+            <p:identity>
+                <p:with-input>
+                    <doc>{$static}</doc>
+                </p:with-input>
+            </p:identity>
+        </p:declare-step>
+    </t:pipeline>
+    <t:schematron>
+        <s:schema queryBinding="xslt2"
+            xmlns:s="http://purl.oclc.org/dsdl/schematron"
+            xmlns="http://www.w3.org/1999/xhtml">
+            <s:pattern>
+                <s:rule context="/">
+                    <s:assert test="doc">The document root is not 'doc'.</s:assert>
+                    <s:assert test="doc/text()='42'">The text value of doc is not the right answer.</s:assert>
+                </s:rule>
+            </s:pattern>
+        </s:schema>
+    </t:schematron>
+</t:test>
