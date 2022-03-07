@@ -9,7 +9,7 @@
 
 * Introduction
 :PROPERTIES:
-:CUSTOM_ID: introduction
+:CUSTOM_ID: s.introduction
 :END:
 
 The XProc Test Suite consists of a set of test suite documents and
@@ -33,7 +33,7 @@ start = test | test-suite | test-div
 
 * Metadata
 :PROPERTIES:
-:CUSTOM_ID: metadata
+:CUSTOM_ID: s.metadata
 :END:
 
 All tests, test suites, and divisions begin with a required metadata
@@ -53,7 +53,7 @@ info =
 
 ** Revision history
 :PROPERTIES:
-:CUSTOM_ID: revision-history
+:CUSTOM_ID: s.revision-history
 :END:
 
 A revision history is a collection of one or more revisions.
@@ -98,7 +98,7 @@ author =
 
 *** Author initials
 :PROPERTIES:
-:CUSTOM_ID: author-initials
+:CUSTOM_ID: s.author-initials
 :END:
 
 Repeating all of the author information in each revision can be
@@ -133,7 +133,7 @@ revisions have the same authorship:
 
 ** Specref
 :PROPERTIES:
-:CUSTOM_ID: specref
+:CUSTOM_ID: s.specref
 :END:
 
 If a test, or set of tests, relates to a particular aspect of a
@@ -156,7 +156,7 @@ specref =
 
 * Description
 :PROPERTIES:
-:CUSTOM_ID: description
+:CUSTOM_ID: s.description
 :END:
 
 The description can contain any mixture of text and HTML elements. HTML elements
@@ -165,7 +165,7 @@ src_emacs-lisp[:noweb yes :exports results]{"<<html_namespace>>"}{{{results(=htt
 
 * Test suites and divisions
 :PROPERTIES:
-:CUSTOM_ID: test-suites
+:CUSTOM_ID: s.test-suites
 :END:
 
 The ~test-suite~ and ~div~ elements serve to group tests together.
@@ -191,7 +191,7 @@ test-div =
 
 * Common attributes
 :PROPERTIES:
-:CUSTOM_ID: common-attributes
+:CUSTOM_ID: s.common-attributes
 :END:
 
 Each ~test~ (and ~test-suite~) has attributes to identify the features
@@ -244,8 +244,10 @@ The attributes should be interpreted as follows:
 
 * Tests
 :PROPERTIES:
-:CUSTOM_ID: tests
+:CUSTOM_ID: s.tests
 :END:
+
+If a test specifies a particular =platform=, it is only run on that platform.
 
 There are two kinds of tests, passing tests and failing tests.
 
@@ -268,6 +270,7 @@ passingTest =
     element t:test {
         testattr
       & attribute expected { "pass" }
+      & attribute platform { ("Linux" | "MacOS" | "Windows") }?
       & (info, description?,
          (property* & input* & option* & pipeline? & schematron?))
     }
@@ -283,6 +286,7 @@ failingTest =
         testattr
       & attribute expected { "fail" }
       & attribute code { xsd:NMTOKENS }
+      & attribute platform { ("Linux" | "MacOS" | "Windows") }?
       & (info, description?,
          (property* & input* & option* & pipeline?))
     }
@@ -304,7 +308,7 @@ content.
 
 ** Properties
 :PROPERTIES:
-:CUSTOM_ID: properties
+:CUSTOM_ID: s.properties
 :END:
 
 A property is a name/value pair. These must be made available to the
@@ -324,7 +328,7 @@ On the Java platform, these are system properties.
 
 ** Inputs
 :PROPERTIES:
-:CUSTOM_ID: inputs
+:CUSTOM_ID: s.inputs
 :END:
 
 Each ~input~ element identifies the input for a source port on the pipeline.
@@ -347,7 +351,7 @@ input =
 
 ** Options
 :PROPERTIES:
-:CUSTOM_ID: options
+:CUSTOM_ID: s.options
 :END:
 
 Each ~option~ element identifies the value for a pipeline option. If a
@@ -356,11 +360,17 @@ Evaluating that expression gives the value of the option. If the
 ~select~ attribute is not provided, the contents of the element is the
 value of the option.
 
+If =static= is specified, and =true=, the option is a static option and
+must be provided to the processor at compile time. Options which do
+not specify a value for =static=, or that specify the value =false=, are
+dynamic options passed to the processor at runtime with the pipeline.
+
 #+NAME: option
 #+BEGIN_SRC rnc
 option =
     element t:option {
         attribute name { text }
+      & attribute static { xsd:boolean }?
       & attribute select { text }?
       & any*
     }
@@ -368,7 +378,7 @@ option =
 
 ** Pipeline
 :PROPERTIES:
-:CUSTOM_ID: pipeline
+:CUSTOM_ID: s.pipeline
 :END:
 
 The ~pipeline~ element, which can only occur once, provides the pipeline
@@ -386,7 +396,7 @@ pipeline =
 
 ** Schematron
 :PROPERTIES:
-:CUSTOM_ID: schematron
+:CUSTOM_ID: s.schematron
 :END:
 
 The ~schematron~ element contains Schematron rules. Assertions in the
@@ -403,7 +413,7 @@ schematron =
 
 * Namespaces
 :PROPERTIES:
-:CUSTOM_ID: namespaces
+:CUSTOM_ID: s.namespaces
 :END:
 
 The following namespaces are defined in this schema.
@@ -423,7 +433,7 @@ http://www.w3.org/1999/xhtml
 
 * Relax NG Schema
 :PROPERTIES:
-:CUSTOM_ID: composed-schema
+:CUSTOM_ID: s.composed-schema
 :END:
 
 These fragments are stitched together (with a few other fragments)
