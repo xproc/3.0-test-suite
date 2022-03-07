@@ -370,7 +370,7 @@ dynamic options passed to the processor at runtime with the pipeline.
 option =
     element t:option {
         attribute name { text }
-      & attribute static { xsd:boolean }
+      & attribute static { xsd:boolean }?
       & attribute select { text }?
       & any*
     }
