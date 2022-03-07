@@ -111,6 +111,7 @@ input =
 option =
     element t:option {
         attribute name { text }
+      & attribute static { xsd:boolean }
       & attribute select { text }?
       & any*
     }
