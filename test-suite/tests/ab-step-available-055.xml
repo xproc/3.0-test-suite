@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XS0116"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>Step available 055 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-03-05</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Test added.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests function p:step-available with use-when.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="main"
+         version="3.0"
+         xmlns:p="http://www.w3.org/ns/xproc"
+         xmlns:ex="http://extension-step.org">
+         
+         <p:output port="result"/>
+         
+         
+         
+         <p:declare-step type="ex:test">
+            <p:output port="result" />
+            <p:identity use-when="p:step-available('ex:test')">
+               <p:with-input><doc /></p:with-input>
+            </p:identity>
+         </p:declare-step>
+         
+         <p:identity>
+            <p:with-input>
+               <result>
+                  <test>{p:step-available('ex:test')}</test>
+               </result></p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
