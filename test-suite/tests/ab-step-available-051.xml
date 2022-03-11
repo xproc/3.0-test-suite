@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test expected="pass"
+<t:test expected="fail"  xmlns:err="http://www.w3.org/ns/xproc-error" code="err:XS0115"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>Step available 051 (AB)</t:title>
@@ -26,7 +26,7 @@
          
          <p:output port="result"/>
          
-         <p:declare-step type="ex:test" use-when="p:step-available('ex:test')">
+         <p:declare-step type="ex:test" use-when="p:step-available('ex:test1')">
             <p:output port="result" />
             <p:identity>
                <p:with-input><doc /></p:with-input>
@@ -49,17 +49,4 @@
          </p:identity>
       </p:declare-step>
    </t:pipeline>
-   <t:schematron>
-      <s:schema queryBinding="xslt2"
-         xmlns:s="http://purl.oclc.org/dsdl/schematron"
-         xmlns="http://www.w3.org/1999/xhtml">
-         <s:pattern>
-            <s:rule context="/">
-               <s:assert test="result">The document root is not “result”.</s:assert>
-               <s:assert test="result/test/text()='true'">p:step-available for 'ex:test' is wrong.</s:assert>
-               <s:assert test="result/test1/text()='true'">p:step-available for 'ex:test1' is wrong.</s:assert>
-            </s:rule>
-         </s:pattern>
-      </s:schema>
-   </t:schematron> 
 </t:test>
