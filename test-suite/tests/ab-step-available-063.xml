@@ -23,7 +23,7 @@
          version="3.0"
          xmlns:p="http://www.w3.org/ns/xproc"
          xmlns:imp="http://test">
-         <p:import href="../pipelines/ab-library-007.xpl" use-when="p:step-available('ex:one')"/>
+         <p:import href="../pipelines/ab-library-007.xpl" use-when="p:step-available('imp:one')"/>
          <p:import href="../pipelines/ab-library-002.xpl" />
          
          <p:output port="result"/>

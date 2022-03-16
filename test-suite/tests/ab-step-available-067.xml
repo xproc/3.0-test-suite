@@ -2,10 +2,10 @@
 <t:test expected="pass"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
-      <t:title>Step available 062 (AB)</t:title>
+      <t:title>Step available 067 (AB)</t:title>
       <t:revision-history>
          <t:revision>
-            <t:date>2022-03-12</t:date>
+            <t:date>2022-03-16</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
@@ -23,14 +23,24 @@
          version="3.0"
          xmlns:p="http://www.w3.org/ns/xproc"
          xmlns:imp="http://test">
-         <p:import href="../pipelines/ab-library-002.xpl" />
-         <p:import href="../pipelines/ab-library-007.xpl" use-when="p:step-available('imp:one')"/>
          <p:output port="result"/>
          
+         <p:declare-step type="imp:a" use-when="not(p:step-available('imp:b'))">
+            <p:output port="result" />
+            <p:identity>
+               <p:with-input><doc-A /></p:with-input>
+            </p:identity>    
+         </p:declare-step>
+         <p:declare-step type="imp:b" use-when="true()">
+            <p:output port="result" />
+            <p:identity>
+               <p:with-input><doc-B /></p:with-input>
+            </p:identity>    
+         </p:declare-step>
          <p:identity>
             <p:with-input>
                <result>
-                  <test>{p:step-available('imp:step1')}</test>
+                  <a>{p:step-available('imp:a')}</a>
                </result>
             </p:with-input>
          </p:identity>
@@ -43,7 +53,7 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="result">The document root is not “result”.</s:assert>
-               <s:assert test="result/test/text()='true'">p:step-available for 'x:step1' is wrong.</s:assert>
+               <s:assert test="result/test/text()='false'">p:step-available for 'test:step1' is wrong.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>

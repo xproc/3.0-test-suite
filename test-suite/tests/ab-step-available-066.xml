@@ -2,10 +2,10 @@
 <t:test expected="pass"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
-      <t:title>Step available 062 (AB)</t:title>
+      <t:title>Step available 066 (AB)</t:title>
       <t:revision-history>
          <t:revision>
-            <t:date>2022-03-12</t:date>
+            <t:date>2022-03-14</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
@@ -22,15 +22,28 @@
       <p:declare-step name="main"
          version="3.0"
          xmlns:p="http://www.w3.org/ns/xproc"
-         xmlns:imp="http://test">
-         <p:import href="../pipelines/ab-library-002.xpl" />
-         <p:import href="../pipelines/ab-library-007.xpl" use-when="p:step-available('imp:one')"/>
+         xmlns:test="http://test">
+         <p:import href="../pipelines/ab-library-001.xpl" use-when="p:step-available('test:step2')"/>
          <p:output port="result"/>
+         
+         <p:declare-step type="test:step1" use-when="p:step-available('test:one')"> 
+            <p:output port="result" />
+            <p:identity>
+               <p:with-input><doc /></p:with-input>
+            </p:identity>
+         </p:declare-step>
+         
+         <p:declare-step type="test:step2">
+            <p:output port="result" />
+            <p:identity>
+               <p:with-input><doc /></p:with-input>
+            </p:identity>
+         </p:declare-step>
          
          <p:identity>
             <p:with-input>
                <result>
-                  <test>{p:step-available('imp:step1')}</test>
+                  <test>{p:step-available('test:step1')}</test>
                </result>
             </p:with-input>
          </p:identity>
@@ -43,7 +56,7 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="result">The document root is not “result”.</s:assert>
-               <s:assert test="result/test/text()='true'">p:step-available for 'x:step1' is wrong.</s:assert>
+               <s:assert test="result/test/text()='true'">p:step-available for 'test:step' is wrong.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
