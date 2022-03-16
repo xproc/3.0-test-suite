@@ -40,7 +40,7 @@
          <p:identity>
             <p:with-input>
                <result>
-                  <a>{p:step-available('imp:a')}</a>
+                  <test>{p:step-available('imp:a')}</test>
                </result>
             </p:with-input>
          </p:identity>
