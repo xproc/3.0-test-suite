@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>Pipe 029 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-03-28</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Test added.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests order of p:pipes</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="main" version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:input port="source">
+            <doc1 />
+         </p:input>
+         <p:input port="secondary">
+            <doc2 />
+         </p:input>
+         <p:output port="result"/>
+         
+         <p:if test="local-name(collection()[1]/*)='doc2' and local-name(collection()[2]/*)='doc1'" collection="true">
+            <p:with-input pipe="secondary@main source@main" />
+            <p:identity>
+               <p:with-input><right /></p:with-input>
+            </p:identity>
+         </p:if>
+         <p:wrap-sequence wrapper="result" />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+         xmlns:s="http://purl.oclc.org/dsdl/schematron"
+         xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The document root is not “result”.</s:assert>
+               <s:assert test="result/right">The result is not right.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron> 
+</t:test>
