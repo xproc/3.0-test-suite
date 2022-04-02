@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>Pipe 023 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-03-27</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Test added.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests order of p:pipes</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="main" version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:input port="source">
+            <doc1 />
+         </p:input>
+         <p:input port="secondary">
+            <doc2 />
+         </p:input>
+         <p:output port="result"/>
+         
+         <p:choose>
+            <p:when test="true()">
+               <p:wrap-sequence wrapper="result">
+                  <p:with-input pipe="secondary@main source@main" />
+               </p:wrap-sequence>
+            </p:when>
+            <p:otherwise>
+               <p:wrap-sequence wrapper="result">
+                  <p:with-input pipe="source@main secondary@main" />
+               </p:wrap-sequence>
+            </p:otherwise>
+         </p:choose>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+         xmlns:s="http://purl.oclc.org/dsdl/schematron"
+         xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The document root is not “result”.</s:assert>
+               <s:assert test="local-name(result/*[1])='doc2'">First child of result is not named 'doc2'.</s:assert>
+               <s:assert test="local-name(result/*[2])='doc1'">Second child of result is not named 'doc1'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron> 
+</t:test>
