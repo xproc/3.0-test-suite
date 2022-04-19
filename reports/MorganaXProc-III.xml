@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="XProc Test Suite"
-           tests="2530"
+           tests="2548"
            errors="0"
            failures="0"
            skipped="0"
-           timestamp="2022-03-21T16:23:55">
+           timestamp="2022-04-19T16:10:11">
    <properties>
       <property name="processor" value="MorganaXProc-IIIse"/>
-      <property name="version" value="0.9.9.9-beta"/>
+      <property name="version" value="0.9.12-beta"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.0"/>
@@ -89,6 +89,10 @@
    <testcase name="ab-avt-010.xml"/>
    <testcase name="ab-avt-011.xml"/>
    <testcase name="ab-avt-012.xml"/>
+   <testcase name="ab-base-uri-001.xml"/>
+   <testcase name="ab-base-uri-002.xml"/>
+   <testcase name="ab-base-uri-003.xml"/>
+   <testcase name="ab-base-uri-004.xml"/>
    <testcase name="ab-cast-content-type-001.xml"/>
    <testcase name="ab-cast-content-type-002.xml"/>
    <testcase name="ab-cast-content-type-003.xml"/>
@@ -1213,6 +1217,19 @@
    <testcase name="ab-pipe-017.xml"/>
    <testcase name="ab-pipe-018.xml"/>
    <testcase name="ab-pipe-019.xml"/>
+   <testcase name="ab-pipe-020.xml"/>
+   <testcase name="ab-pipe-021.xml"/>
+   <testcase name="ab-pipe-022.xml"/>
+   <testcase name="ab-pipe-023.xml"/>
+   <testcase name="ab-pipe-024.xml"/>
+   <testcase name="ab-pipe-025.xml"/>
+   <testcase name="ab-pipe-026.xml"/>
+   <testcase name="ab-pipe-027.xml"/>
+   <testcase name="ab-pipe-028.xml"/>
+   <testcase name="ab-pipe-029.xml"/>
+   <testcase name="ab-pipe-030.xml"/>
+   <testcase name="ab-pipe-031.xml"/>
+   <testcase name="ab-pipe-032.xml"/>
    <testcase name="ab-pipeinfo-001.xml"/>
    <testcase name="ab-pipeinfo-002.xml"/>
    <testcase name="ab-pipeinfo-003.xml"/>
@@ -1922,6 +1939,7 @@
    <testcase name="ab-with-option-008.xml"/>
    <testcase name="ab-with-option-009.xml"/>
    <testcase name="ab-with-option-010.xml"/>
+   <testcase name="ab-with-option-011.xml"/>
    <testcase name="ab-wrap-001.xml"/>
    <testcase name="ab-wrap-002.xml"/>
    <testcase name="ab-wrap-003.xml"/>
