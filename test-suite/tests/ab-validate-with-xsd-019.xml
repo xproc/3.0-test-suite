@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        features="p-validate-with-xsd">
+   <t:info>
+      <t:title>ab-validate-with-xsd-019</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-05-24</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial version.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:validate-with-xml-schema with use-location-hints.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      exclude-inline-prefixes="#all">
+         <p:output port="result"/>
+         <p:validate-with-xml-schema use-location-hints="true">
+            <p:with-input>
+               <test:doc xmlns:test="http://test.test"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://test.test ../documents/test.xsd" />
+            </p:with-input>
+            <p:with-input port="schema"><p:empty /></p:with-input>
+         </p:validate-with-xml-schema>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:ns uri="http://test.test" prefix="pre"/>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="pre:doc">The root element is not 'doc'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
