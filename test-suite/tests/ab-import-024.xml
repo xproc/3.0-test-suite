@@ -1,0 +1,43 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:import-024 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-05-31</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial test</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:import gets scope right: test:step-a is not visible in test:step-b </p>
+   </t:description>
+   
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+         xmlns:test="http://test" name="pipeline" version="3.0">
+        <p:import href="../pipelines/import-lib-024.xpl" />
+        <p:import href="../pipelines/import-023b.xpl" />
+        <p:output port="result"/>
+         
+         <test:step-b />
+      </p:declare-step>
+   </t:pipeline>
+   
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+         xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="is-visible">Root element should be 'is-visible'.</s:assert>
+               <s:assert test="is-visible/text()='false'">Element 'is-visible' should have text 'false'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
