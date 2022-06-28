@@ -22,12 +22,17 @@
    <span class="stag"><span class="sto">&lt;</span><span class="gi">s:pattern</span><span class="eto">&gt;</span></span>
       <span class="stag"><span class="sto">&lt;</span><span class="gi">s:rule</span> <span class="attr"><span class="aname">context</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">/</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
          <span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result</span><span class="aq">"</span></span><span class="eto">&gt;</span></span><span class="text">The root element is not 'result'.</span><span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span>
-         <span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result/content-type/text()='text/plain'</span><span class="aq">"</span></span><span class="eto">&gt;</span></span><span class="text">The result's content-type is not "text/plain".</span><span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span>
+         <span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result/content-type/text()='application/xml'</span><span class="aq">"</span></span><span class="eto">&gt;</span></span><span class="text">The result's content-type is not "application/xml".</span><span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span>
          <span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result/children/text()='0'</span><span class="aq">"</span></span><span class="eto">&gt;</span></span><span class="text">The result's number of children is not 0.</span><span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span>
       <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:rule</span><span class="etc">&gt;</span></span>
    <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:pattern</span><span class="etc">&gt;</span></span>
 <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:schema</span><span class="etc">&gt;</span></span>
 </code></pre></div><dl class="revision-history"><h2>Revision history</h2>
+         <dt>23 Jun 2022, 
+               <span class="name">Achim Berndzen</span>
+            </dt><dd><div class="description">
+               <p>Changed expected result as a consequence of change to spec.</p>
+            </div></dd>
          <dt>08 May 2022, 
                <span class="name">Achim Berndzen</span>
             </dt><dd><div class="description">
