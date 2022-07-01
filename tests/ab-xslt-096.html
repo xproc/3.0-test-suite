@@ -5,10 +5,18 @@
    <span class="stag"><span class="sto">&lt;</span><span class="gi">p:output</span> <span class="attr"><span class="aname">port</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
    <span class="stag"><span class="sto">&lt;</span><span class="gi">p:xslt</span> <span class="attr"><span class="aname">version</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">3.0</span><span class="aq">"</span></span> <span class="attr"><span class="aname">name</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">xslt</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
       <span class="stag"><span class="sto">&lt;</span><span class="gi">p:with-input</span> <span class="attr"><span class="aname">port</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">source</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
-         <span class="stag"><span class="sto">&lt;</span><span class="gi">a/</span><span class="eto">&gt;</span></span>
-         <span class="stag"><span class="sto">&lt;</span><span class="gi">b/</span><span class="eto">&gt;</span></span>
-         <span class="stag"><span class="sto">&lt;</span><span class="gi">c/</span><span class="eto">&gt;</span></span>
-         <span class="stag"><span class="sto">&lt;</span><span class="gi">d/</span><span class="eto">&gt;</span></span>
+         <span class="stag"><span class="sto">&lt;</span><span class="gi">p:inline</span> <span class="attr"><span class="aname">document-properties</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">map{'base-uri' : 'http://xproctest.org/a'}</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+            <span class="stag"><span class="sto">&lt;</span><span class="gi">a/</span><span class="eto">&gt;</span></span>
+         <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:inline</span><span class="etc">&gt;</span></span>
+         <span class="stag"><span class="sto">&lt;</span><span class="gi">p:inline</span> <span class="attr"><span class="aname">document-properties</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">map{'base-uri' : 'http://xproctest.org/b'}</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+            <span class="stag"><span class="sto">&lt;</span><span class="gi">b/</span><span class="eto">&gt;</span></span>
+         <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:inline</span><span class="etc">&gt;</span></span>
+         <span class="stag"><span class="sto">&lt;</span><span class="gi">p:inline</span> <span class="attr"><span class="aname">document-properties</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">map{'base-uri' : 'http://xproctest.org/c'}</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+            <span class="stag"><span class="sto">&lt;</span><span class="gi">c/</span><span class="eto">&gt;</span></span>
+         <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:inline</span><span class="etc">&gt;</span></span>
+         <span class="stag"><span class="sto">&lt;</span><span class="gi">p:inline</span> <span class="attr"><span class="aname">document-properties</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">map{'base-uri' : 'http://xproctest.org/d'}</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+            <span class="stag"><span class="sto">&lt;</span><span class="gi">d/</span><span class="eto">&gt;</span></span>
+         <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:inline</span><span class="etc">&gt;</span></span>
       <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:with-input</span><span class="etc">&gt;</span></span>
       <span class="stag"><span class="sto">&lt;</span><span class="gi">p:with-input</span> <span class="attr"><span class="aname">port</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">stylesheet</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
          <span class="stag"><span class="sto">&lt;</span><span class="gi">xsl:stylesheet</span> <span class="attr nsattr"><span class="aname">xmlns:xsl</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">http://www.w3.org/1999/XSL/Transform</span><span class="aq">"</span></span> <span class="attr"><span class="aname">version</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">3.0</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
@@ -31,6 +39,11 @@
    <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:pattern</span><span class="etc">&gt;</span></span>
 <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:schema</span><span class="etc">&gt;</span></span>
 </code></pre></div><dl class="revision-history"><h2>Revision history</h2>
+         <dt>01 Jul 2022, 
+               <span class="name">Achim Berndzen</span>
+            </dt><dd><div class="description">
+               <p>Added base-uri to source documents to make sure every doc in default collection has a different one.</p>
+            </div></dd>
          <dt>10 Jun 2021, 
                <span class="name">Achim Berndzen</span>
             </dt><dd><div class="description">

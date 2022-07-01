@@ -5,6 +5,15 @@
       <t:title>p:xquery 006 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2022-07-01</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added base-uri to source documents to make sure every doc in default collection has a different one.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -27,31 +36,21 @@
    <t:description xmlns="http://www.w3.org/1999/xhtml">
       <p>Tests p:xquery</p>
    </t:description>
-   <t:input port="source">
-      <document>
-         <title>Some Title</title>
-         <para>Some paragraph.</para>
-      </document>
-   </t:input>
-   <t:input port="secondary">
-      <document>
-         <title>Some Other Title</title>
-         <para>Some other paragraph.</para>
-      </document>
-   </t:input>
    <t:pipeline>
       <p:declare-step name="pipeline"
                       version="3.0"
                       xmlns:p="http://www.w3.org/ns/xproc">
-         <p:input port="source"/>
-         <p:input port="secondary"/>
          <p:output port="result"/>
          <p:xquery>
             <p:with-input port="source">
-               <p:pipe step="pipeline"
-                       port="source"/>
-               <p:pipe step="pipeline"
-                       port="secondary"/>
+               <p:inline document-properties="map{'base-uri' : 'http://xproc-test/primary'}"><document>
+                     <title>Some Title</title>
+                     <para>Some paragraph.</para>
+                  </document></p:inline>
+               <p:inline document-properties="map{'base-uri' : 'http://xproc-test/secondary'}"><document>
+                     <title>Some Other Title</title>
+                     <para>Some other paragraph.</para>
+                  </document></p:inline>
             </p:with-input>
             <p:with-input port="query">
                <c:query xmlns:c="http://www.w3.org/ns/xproc-step">
