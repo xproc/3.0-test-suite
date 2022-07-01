@@ -6,6 +6,15 @@
       <t:title>AB-xslt-063</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2022-07-01</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added base-uri to source documents to make sure every doc in default collection has a different one.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -26,7 +35,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests all document on port source are collection.</p>
+      <p>Tests call document on port source are collection.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step version="3.0"
@@ -34,9 +43,9 @@
          <p:output port="result"/>
          <p:xslt version="2.0">
             <p:with-input>
-               <doc1/>
-               <doc2/>
-               <doc3/>
+               <p:inline document-properties="map{'base-uri' : 'http://xproc-test/doc1'}"><doc1/></p:inline>
+               <p:inline document-properties="map{'base-uri' : 'http://xproc-test/doc2'}"><doc2/></p:inline>
+               <p:inline document-properties="map{'base-uri' : 'http://xproc-test/doc3'}"><doc3/></p:inline>
             </p:with-input>
             <p:with-input port="stylesheet">
                <xsl:stylesheet version="2.0"
