@@ -64,7 +64,7 @@ revision-history =
     element t:revision-history {
         revision+
     }
-#+END_SRC
+#+End_Src
 
 Revisions /must/ be listed in reverse chronological order, so the most
 recent revision appears first. Each revision consists of a ~date~, an ~author~,
@@ -258,7 +258,7 @@ test = passingTest | failingTest
 
 Passing and failing tests are mostly the same. Tests have [[*Common attributes][common
 attributes]], [[*Metadata][metadata]], and a [[*Description][description]]. The body of the test in each
-case consists of ~property~, ~input~, ~output~, and ~pipeline~
+case consists of ~property~, ~filetest–, ~input~, ~output~, and ~pipeline~
 elements.
 
 A passing test has an ~expected~ attribute (that must have the value be ~pass~)
@@ -272,7 +272,7 @@ passingTest =
       & attribute expected { "pass" }
       & attribute platform { ("Linux" | "MacOS" | "Windows") }?
       & (info, description?,
-         (property* & input* & option* & pipeline? & schematron?))
+         (property* & file-environment? & input* & option* & pipeline? & schematron?))
     }
 #+END_SRC
 
@@ -288,7 +288,7 @@ failingTest =
       & attribute code { xsd:NMTOKENS }
       & attribute platform { ("Linux" | "MacOS" | "Windows") }?
       & (info, description?,
-         (property* & input* & option* & pipeline?))
+         (property* & file-environment? & input* & option* & pipeline?))
     }
 #+END_SRC
 
@@ -325,6 +325,45 @@ property =
 #+END_SRC
 
 On the Java platform, these are system properties.
+
+** File environment
+:PROPERTIES:
+:CUSTOM_ID: s.file-environment
+:END:
+
+The optional ~file-environment~ element defines a test environment in the local 
+filesystem to run tests for steps from the file steps specification. The
+~file~ element specifies that a file with the the given path (and the
+requested properties) should be created. The ~folder~ element specifies the same
+for folders. All pathes must be relative. The test harness has to resolve them 
+agains a folder "testfolder". This folder is located in the parent folder of the
+~test~ element. The test harness is required to create "testfolder" when a 
+~file-environment~ element is present and delete it after the test is finished.
+
+#+NAME: file-environment
+#+BEGIN_SRC rnc
+file-environment =
+    element t:file-environment{
+        (file* & folder*)
+    }
+file = 
+    element t:file{
+        filetest-attr
+        & filetest-content?
+    }
+filetest-content = text
+folder = 
+    element t:folder{
+        filetest-attr
+    }
+filetest-attr = 
+    attribute path {xsd:anyURI} 
+    & attribute last-modified {xsd:dateTime}?
+    & attribute readable {xsd:boolean}?
+    & attribute writable {xsd:boolean}?
+    & attribute hidden {xsd:boolean}?
+#+END_SRC
+
 
 ** Inputs
 :PROPERTIES:
@@ -451,6 +490,8 @@ into a complete schema.
 <<passingTest>>
 
 <<failingTest>>
+
+<<file-environment>>
 
 <<test-div>>
 
