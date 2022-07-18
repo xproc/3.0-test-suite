@@ -24,7 +24,7 @@ passingTest =
       & attribute expected { "pass" }
       & attribute platform { ("Linux" | "MacOS" | "Windows") }?
       & (info, description?,
-         (property* & input* & option* & pipeline? & schematron?))
+         (property* & file-environment? & input* & option* & pipeline? & schematron?))
     }
 
 failingTest =
@@ -34,8 +34,29 @@ failingTest =
       & attribute code { xsd:NMTOKENS }
       & attribute platform { ("Linux" | "MacOS" | "Windows") }?
       & (info, description?,
-         (property* & input* & option* & pipeline?))
+         (property* & file-environment? & input* & option* & pipeline?))
     }
+
+file-environment =
+    element t:file-environment{
+        (file* & folder*)
+    }
+file = 
+    element t:file{
+        filetest-attr
+        & filetest-content?
+    }
+filetest-content = text
+folder = 
+    element t:folder{
+        filetest-attr
+    }
+filetest-attr = 
+    attribute path {xsd:anyURI} 
+    & attribute last-modified {xsd:dateTime}?
+    & attribute readable {xsd:boolean}?
+    & attribute writable {xsd:boolean}?
+    & attribute hidden {xsd:boolean}?
 
 test-div =
     element t:div {

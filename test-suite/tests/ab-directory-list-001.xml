@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test expected="pass"
+<t:test expected="pass" features="p:directory-list"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
-      <t:title>p:direcotry-list 001 (AB)</t:title>
+      <t:title>p:directory-list 001 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2022-07-18</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Corrected spelling in title and added features attribute.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
