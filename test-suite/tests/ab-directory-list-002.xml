@@ -2,7 +2,7 @@
 <t:test expected="pass" features="p:directory-list"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
-      <t:title>p:directory-list 001 (AB)</t:title>
+      <t:title>p:directory-list 002 (AB)</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2021-06-10</t:date>
