@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="fail" features="p:directory-list" code="err:XD0028"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>p:directory-list 021 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-07-24</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>First shot</p>
+            </t:description>
+         </t:revision>       
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:directory-list: Wrong value for max-depth</p>
+   </t:description>
+ 
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:c="http://www.w3.org/ns/xproc-step">
+         <p:output port="result"/>
+         <p:directory-list path="../testfolder" max-depth="unlimited"/>
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
