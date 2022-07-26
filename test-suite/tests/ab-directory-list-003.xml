@@ -2,10 +2,10 @@
 <t:test expected="pass" features="p:directory-list"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
-      <t:title>p:directory-list 002 (AB)</t:title>
+      <t:title>p:directory-list 003 (AB)</t:title>
       <t:revision-history>
          <t:revision>
-            <t:date>2022-07-10</t:date>
+            <t:date>2022-07-18</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
@@ -20,7 +20,7 @@
    </t:description>
    
    <t:file-environment>
-      <t:file path="file.txt" />
+      <t:folder path="folder" />
    </t:file-environment>
    
    <t:pipeline>
@@ -42,7 +42,7 @@
                <s:assert test="c:directory">Root element is not c:directory.</s:assert>
                <s:assert test="count(c:directory/c:*)=1">Root element does not have one child with prefix 'c'.</s:assert>
                <s:assert test="c:directory/@name='testfolder'">Root does not have attribute 'name' with 'testfolder'.</s:assert>
-               <s:assert test="c:directory/c:file[@name='file.txt']">Root does not have a 'file' child with @name equals 'file.txt'.</s:assert>
+               <s:assert test="c:directory/c:directory[@name='folder']">Root does not have a 'directory' child with @name equals 'folder'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>

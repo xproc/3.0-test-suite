@@ -2,10 +2,10 @@
 <t:test expected="pass" features="p:directory-list"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
-      <t:title>p:directory-list 002 (AB)</t:title>
+      <t:title>p:directory-list 016 (AB)</t:title>
       <t:revision-history>
          <t:revision>
-            <t:date>2022-07-10</t:date>
+            <t:date>2022-07-24</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
@@ -16,11 +16,12 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests p:directory-list</p>
+      <p>Tests p:directory-list: max-depth=unbounded</p>
    </t:description>
    
    <t:file-environment>
-      <t:file path="file.txt" />
+      <t:file path="folder1/file1.txt"/>
+      <t:file path="folder2/file1.txt"/>
    </t:file-environment>
    
    <t:pipeline>
@@ -28,7 +29,7 @@
                       xmlns:p="http://www.w3.org/ns/xproc"
                       xmlns:c="http://www.w3.org/ns/xproc-step">
          <p:output port="result"/>
-         <p:directory-list path="../testfolder" />
+         <p:directory-list path="../testfolder" max-depth="unbounded"/>
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
@@ -40,9 +41,14 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="c:directory">Root element is not c:directory.</s:assert>
-               <s:assert test="count(c:directory/c:*)=1">Root element does not have one child with prefix 'c'.</s:assert>
+               <s:assert test="count(c:directory/c:*)=2">Root element does not have two children with prefix 'c'.</s:assert>
                <s:assert test="c:directory/@name='testfolder'">Root does not have attribute 'name' with 'testfolder'.</s:assert>
-               <s:assert test="c:directory/c:file[@name='file.txt']">Root does not have a 'file' child with @name equals 'file.txt'.</s:assert>
+               <s:assert test="c:directory/c:directory/@name='folder1'">Second level directory does not have @name with 'folder1'.</s:assert>
+               <s:assert test="c:directory/c:directory/@name='folder2'">Second level directory does not have @name with 'folder2'.</s:assert>
+               <s:assert test="count(c:directory/c:directory[@name='folder1']/c:*)=1">Second level directory does not have one c:-child.</s:assert>
+               <s:assert test="count(c:directory/c:directory[@name='folder2']/c:*)=1">Second level directory does not have one c:-child.</s:assert>
+               <s:assert test="c:directory/c:directory[@name='folder1']/c:file[@name='file1.txt']">c:directory for folder1 does not have entry for file1.txt.</s:assert>
+               <s:assert test="c:directory/c:directory[@name='folder2']/c:file[@name='file1.txt']">c:directory for folder2 does not have entry for file1.txt.</s:assert> 
             </s:rule>
          </s:pattern>
       </s:schema>

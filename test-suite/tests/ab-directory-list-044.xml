@@ -2,10 +2,10 @@
 <t:test expected="pass" features="p:directory-list"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
-      <t:title>p:directory-list 002 (AB)</t:title>
+      <t:title>p:directory-list 044 (AB)</t:title>
       <t:revision-history>
          <t:revision>
-            <t:date>2022-07-10</t:date>
+            <t:date>2022-07-26</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
@@ -28,7 +28,7 @@
                       xmlns:p="http://www.w3.org/ns/xproc"
                       xmlns:c="http://www.w3.org/ns/xproc-step">
          <p:output port="result"/>
-         <p:directory-list path="../testfolder" />
+         <p:directory-list path="../testfolder" detailed="true"/>
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
@@ -43,6 +43,7 @@
                <s:assert test="count(c:directory/c:*)=1">Root element does not have one child with prefix 'c'.</s:assert>
                <s:assert test="c:directory/@name='testfolder'">Root does not have attribute 'name' with 'testfolder'.</s:assert>
                <s:assert test="c:directory/c:file[@name='file.txt']">Root does not have a 'file' child with @name equals 'file.txt'.</s:assert>
+               <s:assert test="//c:file/@size='0'">Element 'file.txt' does not have @size with value '0'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
