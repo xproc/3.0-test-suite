@@ -5,6 +5,15 @@
       <t:title>p:directory-list 045 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2022-07-28</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Setting timezone for last-modified explicitly.</p>
+            </t:description>
+         </t:revision>     
+         <t:revision>
             <t:date>2022-07-26</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -20,7 +29,7 @@
    </t:description>
    
    <t:file-environment>
-      <t:file path="file.txt" last-modified="1981-02-21T13:02:22"/>
+      <t:file path="file.txt" last-modified="1981-02-21T12:00:00Z"/>
    </t:file-environment>
    
    <t:pipeline>
@@ -43,7 +52,7 @@
                <s:assert test="count(c:directory/c:*)=1">Root element does not have one child with prefix 'c'.</s:assert>
                <s:assert test="c:directory/@name='testfolder'">Root does not have attribute 'name' with 'testfolder'.</s:assert>
                <s:assert test="c:directory/c:file[@name='file.txt']">Root does not have a 'file' child with @name equals 'file.txt'.</s:assert>
-               <s:assert test="//c:file/@last-modified='1981-02-21T12:02:22Z'">Element 'file.txt' does not have @last-modified with value '1981-02-21T12:02:22Z'.</s:assert>
+               <s:assert test="//c:file/@last-modified='1981-02-21T12:00:00Z'">Element 'file.txt' does not have @last-modified with value '1981-02-21T12:00:00Z'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
