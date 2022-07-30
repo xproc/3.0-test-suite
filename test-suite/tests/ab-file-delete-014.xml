@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass" features="p:file-delete"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error">
+   <t:info>
+      <t:title>p:file-delete-014 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-07-30</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit</p>
+            </t:description>
+         </t:revision>       
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:file-delete</p>
+   </t:description>
+   
+   <t:file-environment>
+      <t:file path="folder/inner-folder/file1.txt" />
+      <t:file path="folder/inner-folder/file2.txt" />
+   </t:file-environment>
+   
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:c="http://www.w3.org/ns/xproc-step">
+         <p:output port="result"/>
+         <p:file-delete href="../testfolder/folder/inner-folder" recursive="true"/>
+      </p:declare-step>
+   </t:pipeline>
+   
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+         xmlns:s="http://purl.oclc.org/dsdl/schematron"
+         xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns uri="http://www.w3.org/ns/xproc-step" prefix="c"/>
+         <s:ns uri="http://www.w3.org/2001/XMLSchema" prefix="ns" />
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="c:result">Root element is not c:result.</s:assert>
+               <s:assert test="ends-with(c:result/text(),'testfolder/folder/inner-folder')">The path in c:result does not end with 'testfolder/folder/inner-folder'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
