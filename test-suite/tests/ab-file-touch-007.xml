@@ -43,7 +43,7 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="c:file">Root element is not c:file.</s:assert>
-               <s:assert test="c:file/@name='file.txt'">c:directory/@name is not 'file.txt'.</s:assert>
+               <s:assert test="c:file/@name='file.txt'">c:file/@name is not 'file.txt'.</s:assert>
                <s:assert test="adjust-dateTime-to-timezone(xs:dateTime(c:file/@last-modified), xs:dayTimeDuration('PT0H')) =          
                                  xs:dateTime('1981-02-21T12:00:00Z')">c:file/@last-modified is not '1981-02-21T12:00:00Z'.</s:assert>
             </s:rule>

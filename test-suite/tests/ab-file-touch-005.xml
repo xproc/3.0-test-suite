@@ -42,7 +42,7 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="c:file">Root element is not c:file.</s:assert>
-               <s:assert test="c:file/@name='file.txt'">c:directory/@name is not 'file.txt'.</s:assert>
+               <s:assert test="c:file/@name='file.txt'">c:file/@name is not 'file.txt'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
