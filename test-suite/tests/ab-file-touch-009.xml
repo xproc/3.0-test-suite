@@ -6,6 +6,15 @@
       <t:title>p:file-touch-009 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2022-07-31</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed test.</p>
+            </t:description>
+         </t:revision>       
+         <t:revision>
             <t:date>2022-07-29</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -45,7 +54,7 @@
                <s:assert test="c:file">Root element is not c:file.</s:assert>
                <s:assert test="c:file/@name='file.txt'">c:file/@name is not 'file.txt'.</s:assert>
                <s:assert test="adjust-dateTime-to-timezone(xs:dateTime(c:file/@last-modified),xs:dayTimeDuration('PT0H'))
-                  &lt;= adjust-dateTime-to-timezone(current-dateTime(),xs:dayTimeDuration('PT0H'))">c:file/@last-modified set correctly.</s:assert>
+                  &gt; xs:dateTime('2022-07-31T08:00:00Z')">c:file/@last-modified set correctly.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
