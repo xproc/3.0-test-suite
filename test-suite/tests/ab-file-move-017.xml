@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="fail" features="p:file-move" code="err:XC0115"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error">
+   <t:info>
+      <t:title>p:file-move 017 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-08-02</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit</p>
+            </t:description>
+         </t:revision>       
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:file-move</p>
+   </t:description>
+ 
+   <t:file-environment>
+      <t:file path="file.txt" />
+      <t:file path="target.txt" />
+   </t:file-environment>
+   
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:c="http://www.w3.org/ns/xproc-step">
+         <p:output port="result"/>
+         <p:file-move href="../testfolder/file.txt" target="../testfolder/target.txt" fail-on-error="true"/>
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
