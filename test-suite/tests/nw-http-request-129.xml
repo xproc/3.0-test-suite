@@ -1,6 +1,8 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
-        xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test features="p:http-request"
+        expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error">
    <t:info>
       <t:title>p:http-request 129 (NW)</t:title>
       <t:revision-history>
@@ -19,18 +21,20 @@
       <p>If send-body-anyway is explicitly true, the body is sent. This tests GET.</p>
    </t:description>
    <t:pipeline>
-     <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
-                     xmlns:c="http://www.w3.org/ns/xproc-step"
-                     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                     exclude-inline-prefixes="c xs" version="3.0">
-       <p:output port="result"/>
-
-       <p:http-request href="http://localhost:8246/service/check-singlepart"
-                       method="get"
-                       parameters="map{'send-body-anyway': true()}">
-         <p:with-input><doc1/></p:with-input>
-       </p:http-request>
-     </p:declare-step>
+      <p:declare-step exclude-inline-prefixes="c xs"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:c="http://www.w3.org/ns/xproc-step"
+                      xmlns:xs="http://www.w3.org/2001/XMLSchema">
+         <p:output port="result"/>
+         <p:http-request href="http://localhost:8246/service/check-singlepart"
+                         method="get"
+                         parameters="map{'send-body-anyway': true()}">
+            <p:with-input>
+               <doc1/>
+            </p:with-input>
+         </p:http-request>
+      </p:declare-step>
    </t:pipeline>
    <t:schematron>
       <s:schema queryBinding="xslt2"

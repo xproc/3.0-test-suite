@@ -1,6 +1,9 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail" code="err:XC0126">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test features="p:http-request"
+        expected="fail"
+        code="err:XC0126"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error">
    <t:info>
       <t:title>http-request-057 (AB)</t:title>
       <t:revision-history>
@@ -19,12 +22,14 @@
       <p>Tests p:http-request with 'assert' testing header.</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
-         <p:output port="result" />
-         
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
          <p:http-request href="http://localhost:8246/service/fixed-xml"
-               assert =".?headers?CONTENT-TYPE= 'application/json'">
-            <p:with-input><p:empty /></p:with-input>
+                         assert=".?headers?CONTENT-TYPE= 'application/json'">
+            <p:with-input>
+               <p:empty/>
+            </p:with-input>
          </p:http-request>
       </p:declare-step>
    </t:pipeline>
