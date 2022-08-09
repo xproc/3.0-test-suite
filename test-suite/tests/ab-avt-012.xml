@@ -1,9 +1,18 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
         xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail" code="err:XD0030">
+        expected="fail" code="err:XD0051">
    <t:info>
       <t:title>Attribute value templates 012 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2022-08-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed generict error code XD0030 to more specific XD0051.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2020-04-13</t:date>
             <t:author>
