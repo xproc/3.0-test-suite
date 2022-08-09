@@ -38,7 +38,6 @@
          xmlns:s="http://purl.oclc.org/dsdl/schematron"
          xmlns="http://www.w3.org/1999/xhtml">
          <s:ns uri="http://www.w3.org/ns/xproc-step" prefix="c"/>
-         <s:ns uri="http://www.w3.org/2001/XMLSchema" prefix="ns" />
          <s:pattern>
             <s:rule context="/">
                <s:assert test="c:error">Root element is not c:error.</s:assert>
