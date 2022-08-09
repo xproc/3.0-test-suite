@@ -21,7 +21,7 @@
    </t:description>
    
    <t:file-environment>
-     
+     <t:file path="file.txt" />
    </t:file-environment>
    
    <t:pipeline>
@@ -39,13 +39,13 @@
          xmlns:s="http://purl.oclc.org/dsdl/schematron"
          xmlns="http://www.w3.org/1999/xhtml">
          <s:ns uri="http://www.w3.org/ns/xproc-step" prefix="c"/>
-         <s:ns uri="http://www.w3.org/2001/XMLSchema" prefix="ns" />
+         <s:ns uri="http://www.w3.org/2001/XMLSchema" prefix="xs" />
          <s:pattern>
             <s:rule context="/">
                <s:assert test="c:file">Root element is not c:file.</s:assert>
                <s:assert test="c:file/@name='file.txt'">c:file/@name is not 'file.txt'.</s:assert>
                <s:assert test="adjust-dateTime-to-timezone(xs:dateTime(c:file/@last-modified),xs:dayTimeDuration('PT0H'))
-                  &lt;= adjust-dateTime-to-timezone(current-dateTime(),xs:dayTimeDuration('PT0H'))">c:file/@last-modified set correctly.</s:assert>
+                  &lt;= adjust-dateTime-to-timezone(current-dateTime(),xs:dayTimeDuration('PT0H'))">c:file/@last-modified not set correctly.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
