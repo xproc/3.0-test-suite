@@ -1,6 +1,8 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
-        xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test features="p:http-request"
+        expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error">
    <t:info>
       <t:title>p:http-request 130 (NW)</t:title>
       <t:revision-history>
@@ -19,28 +21,28 @@
       <p>If send-body-anyway is explicitly true, the body is sent. This tests HEAD.</p>
    </t:description>
    <t:pipeline>
-     <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
-                     xmlns:c="http://www.w3.org/ns/xproc-step"
-                     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                     exclude-inline-prefixes="c xs" version="3.0">
-       <p:output port="result"/>
-
-       <p:http-request href="http://localhost:8246/service/head-with-body"
-                       method="head"
-                       parameters="map{'send-body-anyway': true()}">
-         <p:with-input><doc1/></p:with-input>
-       </p:http-request>
-
-       <p:identity>
-         <p:with-input pipe="report"/>
-       </p:identity>
-
-       <p:identity>
-         <p:with-input>
-           <result>{.?status-code}</result>
-         </p:with-input>
-       </p:identity>
-     </p:declare-step>
+      <p:declare-step exclude-inline-prefixes="c xs"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:c="http://www.w3.org/ns/xproc-step"
+                      xmlns:xs="http://www.w3.org/2001/XMLSchema">
+         <p:output port="result"/>
+         <p:http-request href="http://localhost:8246/service/head-with-body"
+                         method="head"
+                         parameters="map{'send-body-anyway': true()}">
+            <p:with-input>
+               <doc1/>
+            </p:with-input>
+         </p:http-request>
+         <p:identity>
+            <p:with-input pipe="report"/>
+         </p:identity>
+         <p:identity>
+            <p:with-input>
+               <result>{.?status-code}</result>
+            </p:with-input>
+         </p:identity>
+      </p:declare-step>
    </t:pipeline>
    <t:schematron>
       <s:schema queryBinding="xslt2"

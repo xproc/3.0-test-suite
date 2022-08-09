@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test expected="pass"
+<t:test features="p:http-request"
+        expected="pass"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>http-request-014 (AB)</t:title>

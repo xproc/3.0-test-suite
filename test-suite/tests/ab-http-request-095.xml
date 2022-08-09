@@ -1,6 +1,9 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
-        xmlns:err="http://www.w3.org/ns/xproc-error" 
-        expected="fail" code="err:XC0124">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test features="p:http-request"
+        expected="fail"
+        code="err:XC0124"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error">
    <t:info>
       <t:title>http-request-095 (AB)</t:title>
       <t:revision-history>
@@ -19,16 +22,16 @@
       <p>Test parameter "timeout" must be a non-negative xs:decimal.</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
-         <p:output port="result" />
-         
-         <p:http-request method="get" href="http://localhost:8246/service/fixed-xml"
-            parameters="map{'timeout' : -1}">
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:http-request method="get"
+                         href="http://localhost:8246/service/fixed-xml"
+                         parameters="map{'timeout' : -1}">
             <p:with-input>
-               <p:empty />
+               <p:empty/>
             </p:with-input>
          </p:http-request>
-         
       </p:declare-step>
    </t:pipeline>
 </t:test>
