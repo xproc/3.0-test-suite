@@ -1,6 +1,8 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
-        xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test features="p:http-request"
+        expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error">
    <t:info>
       <t:title>p:http-request 128 (NW)</t:title>
       <t:revision-history>
@@ -21,32 +23,25 @@
       become headers.</p>
    </t:description>
    <t:pipeline>
-     <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
-                     xmlns:c="http://www.w3.org/ns/xproc-step"
-                     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                     exclude-inline-prefixes="c xs" version="3.0">
-       <p:output port="result"/>
-
-  <p:http-request xmlns:chttp="http://www.w3.org/ns/xproc-http"
-                  href="http://localhost:8246/service/check-multipart" method="post">
-    <p:with-input>
-      <p:inline document-properties="map{
-                   'chttp:content-id': 'abcdefg',
-                   'chttp:content-description': 'First document'
-                }">
-        <doc1 xmlns=""/>
-      </p:inline>
-      <p:inline document-properties="map{
-                   'chttp:content-description': 'Second document',
-                   'chttp:content-disposition': 'attachment; filename=abc.xml',
-                   'chttp:random-header': 'value'
-                }">
-        <doc2 xmlns=""/>
-      </p:inline>
-    </p:with-input>
-  </p:http-request>
-
-     </p:declare-step>
+      <p:declare-step exclude-inline-prefixes="c xs"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:c="http://www.w3.org/ns/xproc-step"
+                      xmlns:xs="http://www.w3.org/2001/XMLSchema">
+         <p:output port="result"/>
+         <p:http-request href="http://localhost:8246/service/check-multipart"
+                         method="post"
+                         xmlns:chttp="http://www.w3.org/ns/xproc-http">
+            <p:with-input>
+               <p:inline document-properties="map{                    'chttp:content-id': 'abcdefg',                    'chttp:content-description': 'First document'                 }">
+                  <doc1/>
+               </p:inline>
+               <p:inline document-properties="map{                    'chttp:content-description': 'Second document',                    'chttp:content-disposition': 'attachment; filename=abc.xml',                    'chttp:random-header': 'value'                 }">
+                  <doc2/>
+               </p:inline>
+            </p:with-input>
+         </p:http-request>
+      </p:declare-step>
    </t:pipeline>
    <t:schematron>
       <s:schema queryBinding="xslt2"
@@ -59,17 +54,11 @@
          <s:pattern>
             <s:rule context="/*">
                <s:assert test="self::check-multipart">The root is not check-multipart.</s:assert>
-<s:assert test="part[1]/header[lower-case(@name) = 'content-description'] = 'First document'"
->The content-description of the first part is incorrect.</s:assert>
-<s:assert test="part[1]/header[lower-case(@name) = 'content-id'] = 'abcdefg'"
->The content-id of the first part is incorrect.</s:assert>
-<s:assert test="part[2]/header[lower-case(@name) = 'content-description'] = 'Second document'"
->The content-description of the second part is incorrect.</s:assert>
-<s:assert test="part[2]/header[lower-case(@name) = 'content-disposition']
-                = 'attachment; filename=abc.xml'"
->The content-disposition of the second part is incorrect.</s:assert>
-<s:assert test="part[2]/header[lower-case(@name) = 'random-header'] = 'value'"
->The random-header of the second part is incorrect.</s:assert>
+               <s:assert test="part[1]/header[lower-case(@name) = 'content-description'] = 'First document'">The content-description of the first part is incorrect.</s:assert>
+               <s:assert test="part[1]/header[lower-case(@name) = 'content-id'] = 'abcdefg'">The content-id of the first part is incorrect.</s:assert>
+               <s:assert test="part[2]/header[lower-case(@name) = 'content-description'] = 'Second document'">The content-description of the second part is incorrect.</s:assert>
+               <s:assert test="part[2]/header[lower-case(@name) = 'content-disposition']                 = 'attachment; filename=abc.xml'">The content-disposition of the second part is incorrect.</s:assert>
+               <s:assert test="part[2]/header[lower-case(@name) = 'random-header'] = 'value'">The random-header of the second part is incorrect.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>

@@ -1,6 +1,8 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
-        xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="pass">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test features="p:http-request"
+        expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error">
    <t:info>
       <t:title>p:http-request 131 (NW)</t:title>
       <t:revision-history>
@@ -30,34 +32,31 @@ map produced on the report port.</p>
       <p>Only follow the first <code>follow-redirect</code> redirections.</p>
    </t:description>
    <t:pipeline>
-     <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
-                     xmlns:c="http://www.w3.org/ns/xproc-step"
-                     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                     exclude-inline-prefixes="c xs" version="3.0">
-       <p:output port="result"/>
-
-       <p:http-request method="get" href="http://localhost:8246/service/this-is-a"
-                       parameters="map{'follow-redirect': 2}">
-         <p:with-input>
-           <p:empty/>
-         </p:with-input>
-       </p:http-request>
-
-       <p:identity>
-         <p:with-input pipe="report"/>
-       </p:identity>
-
-       <p:identity name="status">
-         <p:with-input>
-           <code>{.?status-code}</code>
-           <base-uri>{.?base-uri}</base-uri>
-           <location>{.?headers?location}</location>
-         </p:with-input>
-       </p:identity>
-
-       <p:wrap-sequence wrapper="wrap"/>
-
-     </p:declare-step>
+      <p:declare-step exclude-inline-prefixes="c xs"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:c="http://www.w3.org/ns/xproc-step"
+                      xmlns:xs="http://www.w3.org/2001/XMLSchema">
+         <p:output port="result"/>
+         <p:http-request method="get"
+                         href="http://localhost:8246/service/this-is-a"
+                         parameters="map{'follow-redirect': 2}">
+            <p:with-input>
+               <p:empty/>
+            </p:with-input>
+         </p:http-request>
+         <p:identity>
+            <p:with-input pipe="report"/>
+         </p:identity>
+         <p:identity name="status">
+            <p:with-input>
+               <code>{.?status-code}</code>
+               <base-uri>{.?base-uri}</base-uri>
+               <location>{.?headers?location}</location>
+            </p:with-input>
+         </p:identity>
+         <p:wrap-sequence wrapper="wrap"/>
+      </p:declare-step>
    </t:pipeline>
    <t:schematron>
       <s:schema queryBinding="xslt2"
@@ -70,12 +69,9 @@ map produced on the report port.</p>
          <s:pattern>
             <s:rule context="/*">
                <s:assert test="self::wrap">The root is not wrap.</s:assert>
-               <s:assert test="base-uri = 'http://localhost:8246/service/this-is-c'"
-                         >The base-uri is incorrect.</s:assert>
-               <s:assert test="code = 302"
-                         >The status-code is incorrect.</s:assert>
-               <s:assert test="location = 'http://localhost:8246/service/this-is-d'"
-                         >The redirect location is incorrect.</s:assert>
+               <s:assert test="base-uri = 'http://localhost:8246/service/this-is-c'">The base-uri is incorrect.</s:assert>
+               <s:assert test="code = 302">The status-code is incorrect.</s:assert>
+               <s:assert test="location = 'http://localhost:8246/service/this-is-d'">The redirect location is incorrect.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>

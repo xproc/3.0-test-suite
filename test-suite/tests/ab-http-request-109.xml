@@ -1,6 +1,9 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns:err="http://www.w3.org/ns/xproc-error"
-   expected="fail" code="err:XD0079">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test features="p:http-request"
+        expected="fail"
+        code="err:XD0079"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error">
    <t:info>
       <t:title>http-request-109 (AB)</t:title>
       <t:revision-history>
@@ -28,13 +31,13 @@
       <p>Tests p:http-request: Error needs to be raised if value of header content-type is not correct.</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
-         <p:output port="result" />
-         
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
          <p:http-request href="http://localhost:8246/service/fixed-xml"
-            headers="map{'content-type' : 'surely-not-correct'}">
+                         headers="map{'content-type' : 'surely-not-correct'}">
             <p:with-input>
-               <p:empty />
+               <p:empty/>
             </p:with-input>
          </p:http-request>
       </p:declare-step>

@@ -1,6 +1,9 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
-        xmlns:err="http://www.w3.org/ns/xproc-error"
-   expected="fail" code="err:XC0133">
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test features="p:http-request"
+        expected="fail"
+        code="err:XC0133"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error">
    <t:info>
       <t:title>http-request-112 (AB)</t:title>
       <t:revision-history>
@@ -19,14 +22,15 @@
       <p>Tests p:http-request: Error needs to be raised more than one doc appears and content-type is not multipart.</p>
    </t:description>
    <t:pipeline>
-      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
-         <p:output port="result" />
-         
-         <p:http-request href="http://localhost:8246/service/echo" method="post" 
-            headers="map{'content-type' : 'application/xml'}">
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:http-request href="http://localhost:8246/service/echo"
+                         method="post"
+                         headers="map{'content-type' : 'application/xml'}">
             <p:with-input>
-               <doc1 />
-               <doc2 />
+               <doc1/>
+               <doc2/>
             </p:with-input>
          </p:http-request>
       </p:declare-step>
