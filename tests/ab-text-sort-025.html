@@ -1,0 +1,33 @@
+<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><title>p:text-sort-025 (AB)</title><link href="../css/prism.css" rel="stylesheet" type="text/css"><link href="../css/db-prism.css" rel="stylesheet" type="text/css"><link rel="stylesheet" type="text/css" href="../css/base.css"><link rel="stylesheet" type="text/css" href="../css/xproc.css"><link rel="stylesheet" type="text/css" href="../css/base.css"><link href="../css/all.css" rel="stylesheet" type="text/css"><link href="../css/testsuite.css" rel="stylesheet" type="text/css"><script type="text/javascript" src="../js/dbmodnizr.js"></script></head><body><nav><a href="ab-text-sort-024.html"><i class="fas fa-chevron-circle-left"></i></a>&nbsp;<a href="ab-text-sort-026.html"><i class="fas fa-chevron-circle-right"></i></a>&nbsp;<a href="../"><i class="fa fa-chevron-circle-up"></i></a></nav><h1>p:text-sort-025 (AB)</h1><div class="description">
+      <p>Tests p:text-sort: Lower case first is default for German</p>
+   </div><p class="expected">Test <a class="testuri" href="../test-suite/tests/ab-text-sort-025.xml">ab-text-sort-025.xml</a> is expected to pass.</p><div class="pipeline"><h2>The pipeline</h2><pre class="programlisting line-numbers language-markup" data-language="Markup"><code>
+<span class="stag"><span class="sto">&lt;</span><span class="gi">p:declare-step</span> <span class="attr nsattr"><span class="aname">xmlns:p</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">http://www.w3.org/ns/xproc</span><span class="aq">"</span></span> <span class="attr"><span class="aname">version</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">3.0</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+   <span class="stag"><span class="sto">&lt;</span><span class="gi">p:output</span> <span class="attr"><span class="aname">port</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+   <span class="stag"><span class="sto">&lt;</span><span class="gi">p:text-sort</span> <span class="attr"><span class="aname">lang</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">de</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+      <span class="stag"><span class="sto">&lt;</span><span class="gi">p:with-input</span><span class="eto">&gt;</span></span>
+         <span class="stag"><span class="sto">&lt;</span><span class="gi">p:inline</span> <span class="attr"><span class="aname">content-type</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">text/plain</span><span class="aq">"</span></span><span class="eto">&gt;</span></span><span class="text">b
+a
+ä
+B
+A
+Ä</span><span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:inline</span><span class="etc">&gt;</span></span>
+      <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:with-input</span><span class="etc">&gt;</span></span>
+   <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:text-sort</span><span class="etc">&gt;</span></span>
+   <span class="stag"><span class="sto">&lt;</span><span class="gi">p:wrap-sequence</span> <span class="attr"><span class="aname">wrapper</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">wrapper</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:declare-step</span><span class="etc">&gt;</span></span>
+</code></pre></div><div class="schematron"><h2>Schematron validation</h2><pre class="programlisting line-numbers language-markup" data-language="Markup"><code>
+<span class="stag"><span class="sto">&lt;</span><span class="gi">s:schema</span> <span class="attr nsattr"><span class="aname">xmlns</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">http://www.w3.org/1999/xhtml</span><span class="aq">"</span></span> <span class="attr nsattr"><span class="aname">xmlns:s</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">http://purl.oclc.org/dsdl/schematron</span><span class="aq">"</span></span> <span class="attr"><span class="aname">queryBinding</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">xslt2</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+   <span class="stag"><span class="sto">&lt;</span><span class="gi">s:pattern</span><span class="eto">&gt;</span></span>
+      <span class="stag"><span class="sto">&lt;</span><span class="gi">s:rule</span> <span class="attr"><span class="aname">context</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">/</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+         <span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">wrapper</span><span class="aq">"</span></span><span class="eto">&gt;</span></span><span class="text">The root element is not wrapper.</span><span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span>
+         <span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">wrapper/text()='a&amp;#xA;A&amp;#xA;ä&amp;#xA;Ä&amp;#xA;b&amp;#xA;B&amp;#xA;'</span><span class="aq">"</span></span><span class="eto">&gt;</span></span><span class="text">Text is not sorted correctly.</span><span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span>
+      <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:rule</span><span class="etc">&gt;</span></span>
+   <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:pattern</span><span class="etc">&gt;</span></span>
+<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:schema</span><span class="etc">&gt;</span></span>
+</code></pre></div><dl class="revision-history"><h2>Revision history</h2>
+         <dt>03 Sep 2022, 
+               <span class="name">Achim Berndzen</span>
+            </dt><dd><div class="description">
+               <p>Initial commit</p>
+            </div></dd>
+      </dl><script src="../js/prism.js"></script></body></html>
