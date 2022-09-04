@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="fail" code="err:XC0164" features="p-validate-with-json-schema"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error">
+   <t:info>
+      <t:title>p:validate-with-json-schema 008 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-09-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:validate-with-json-schema: Error raised because document on port "schema" is no valid JSON schema.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:validate-with-json-schema>
+            <p:with-input href="../documents/valid.json" />
+            <p:with-input port="schema" href="../documents/schema-invalid.json" />
+         </p:validate-with-json-schema>
+         
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
