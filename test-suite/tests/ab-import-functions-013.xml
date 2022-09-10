@@ -2,7 +2,7 @@
 <t:test expected="pass" features="xslt-function-import"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
-      <t:title>ab-import-functions-011</t:title>
+      <t:title>ab-import-functions-013</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2022-09-10</t:date>
