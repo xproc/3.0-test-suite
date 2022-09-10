@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="fail" code="err:XS0107" features="xslt-function-import"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>ab-import-functions-005</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-09-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:import-function</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:import-functions: Test function imported locally imported function is not visible globally.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:test="http://xproc.org/ns/testsuite/3.0/function-test">
+         <p:output port="result" />
+         
+         <p:declare-step type="test:step">
+            <p:import-functions href="../documents/xslt-functions.xsl" content-type="application/xslt+xml" />
+            <p:output port="result"/>
+            <p:identity>
+               <p:with-input>
+                  <result>{test:function1()}</result>
+               </p:with-input>
+            </p:identity>
+         </p:declare-step>
+         
+         <p:identity>
+            <p:with-input>
+               <result>{test:function1()}</result>
+            </p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
