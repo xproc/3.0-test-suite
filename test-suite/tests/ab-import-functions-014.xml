@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="fail" code="err:XS0106" features="xslt-function-import"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>ab-import-functions-014</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-09-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:import-function</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:import-functions: Resource does not exist.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:test="http://xproc.org/ns/testsuite/3.0/function-test">
+         <p:import-functions href="../documents/i-do-not-exist" content-type="application/xslt+xml" />
+         <p:output port="result" />
+         
+         <p:identity>
+            <p:with-input><result>{test:function()}</result></p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
