@@ -83,7 +83,12 @@
       <xsl:sequence select="substring-before($text,' ')"/>
     </span>
     <xsl:sequence select="t:attr(substring-after($text,' '))"/>
-    <span class="eto">&gt;</span>
+    <span class="eto">
+      <xsl:if test="ends-with($text, '/')">
+        <xsl:text>/</xsl:text>
+      </xsl:if>
+      <xsl:text>&gt;</xsl:text>
+    </span>
   </span>
 </xsl:function>
 
@@ -143,7 +148,7 @@
         <span class="aeq">=</span>
         <span class="aq">"</span>
         <span class="avalue">
-          <xsl:value-of select="normalize-space($value)"/>
+          <xsl:value-of select="$value"/>
         </span>
         <span class="aq">"</span>
       </span>
