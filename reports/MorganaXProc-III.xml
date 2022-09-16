@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="XProc Test Suite"
-           tests="2826"
+           tests="2863"
            errors="0"
            failures="0"
-           skipped="0"
-           timestamp="2022-09-09T10:24:47">
+           skipped="33"
+           timestamp="2022-09-16T08:07:02">
    <properties>
       <property name="processor" value="MorganaXProc-IIIse"/>
-      <property name="version" value="0.9.19-beta"/>
+      <property name="version" value="1.0"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.0"/>
@@ -782,6 +782,16 @@
    <testcase name="ab-for-each-018.xml"/>
    <testcase name="ab-for-each-019.xml"/>
    <testcase name="ab-for-each-020.xml"/>
+   <testcase name="ab-function-library-importable-001.xml"/>
+   <testcase name="ab-function-library-importable-002.xml"/>
+   <testcase name="ab-function-library-importable-003.xml"/>
+   <testcase name="ab-function-library-importable-004.xml"/>
+   <testcase name="ab-function-library-importable-005.xml">
+      <skipped>Unsupported feature: xslt-function-import</skipped>
+   </testcase>
+   <testcase name="ab-function-library-importable-006.xml">
+      <skipped>Unsupported feature: xquery-function-import</skipped>
+   </testcase>
    <testcase name="ab-hash-001.xml"/>
    <testcase name="ab-hash-002.xml"/>
    <testcase name="ab-hash-003.xml"/>
@@ -965,6 +975,99 @@
    <testcase name="ab-import-023.xml"/>
    <testcase name="ab-import-024.xml"/>
    <testcase name="ab-import-025.xml"/>
+   <testcase name="ab-import-functions-001.xml">
+      <skipped>Unsupported feature: xslt-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-002.xml">
+      <skipped>Unsupported feature: xslt-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-003.xml">
+      <skipped>Unsupported feature: xslt-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-004.xml">
+      <skipped>Unsupported feature: xslt-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-005.xml">
+      <skipped>Unsupported feature: xslt-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-006.xml">
+      <skipped>Unsupported feature: xslt-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-007.xml">
+      <skipped>Unsupported feature: xslt-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-008.xml">
+      <skipped>Unsupported feature: xslt-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-009.xml">
+      <skipped>Unsupported feature: xslt-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-010.xml">
+      <skipped>Unsupported feature: xslt-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-011.xml">
+      <skipped>Unsupported feature: xslt-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-012.xml">
+      <skipped>Unsupported feature: xslt-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-013.xml">
+      <skipped>Unsupported feature: xslt-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-014.xml">
+      <skipped>Unsupported feature: xslt-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-015.xml">
+      <skipped>Unsupported feature: xquery-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-016.xml">
+      <skipped>Unsupported feature: xquery-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-017.xml">
+      <skipped>Unsupported feature: xquery-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-018.xml">
+      <skipped>Unsupported feature: xquery-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-019.xml">
+      <skipped>Unsupported feature: xquery-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-020.xml">
+      <skipped>Unsupported feature: xquery-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-021.xml">
+      <skipped>Unsupported feature: xquery-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-022.xml">
+      <skipped>Unsupported feature: xquery-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-023.xml">
+      <skipped>Unsupported feature: xquery-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-024.xml">
+      <skipped>Unsupported feature: xquery-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-025.xml">
+      <skipped>Unsupported feature: xquery-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-026.xml">
+      <skipped>Unsupported feature: xquery-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-027.xml">
+      <skipped>Unsupported feature: xquery-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-028.xml">
+      <skipped>Unsupported feature: xquery-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-029.xml">
+      <skipped>Unsupported feature: xquery-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-030.xml">
+      <skipped>Unsupported feature: xslt-function-import</skipped>
+   </testcase>
+   <testcase name="ab-import-functions-031.xml">
+      <skipped>Unsupported feature: xslt-function-import</skipped>
+   </testcase>
    <testcase name="ab-inline-001.xml"/>
    <testcase name="ab-inline-002.xml"/>
    <testcase name="ab-inline-003.xml"/>
