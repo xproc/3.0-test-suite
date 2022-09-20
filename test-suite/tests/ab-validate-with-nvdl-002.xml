@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        features="p-validate-with-nvdl"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>ab-validate-with-nvdl-002</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-09-20</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Testing nvdl validation: Invalid document, but assert valid=false, so result should be equal to source.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="pipeline"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:validate-with-nvdl assert-valid="false">
+            <p:with-input port="source"
+                          href="../documents/NDVL-Book-invalid.xml"/>
+            <p:with-input port="nvdl"
+                          href="../documents/NVDL.nvdl"/>
+         </p:validate-with-nvdl>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="deep-equal(., doc('../documents/NDVL-Book-invalid.xml'))">The document is not equal to the source document.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
