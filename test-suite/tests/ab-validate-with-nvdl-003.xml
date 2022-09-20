@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="fail" code="err:XC0053"
+        features="p-validate-with-nvdl"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>ab-validate-with-nvdl-003</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-09-20</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Testing nvdl validation: Invalid document, so error should be raised.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="pipeline"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:validate-with-nvdl>
+            <p:with-input port="source"
+                          href="../documents/NDVL-Book-invalid.xml"/>
+            <p:with-input port="nvdl"
+                          href="../documents/NVDL.nvdl"/>
+         </p:validate-with-nvdl>
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
