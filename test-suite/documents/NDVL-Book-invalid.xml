@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<Book1 xmlns="http://xproc.org/ns/testsuite/3.0/book">
+    <Title>XProc 3.0. Programmers reference</Title>
+    <Author>Erik Siegel</Author>
+    <comments xmlns="http://xproc.org/ns/testsuite/3.0/comments">
+        <par>A recommended introduction to XProc 3.0.</par>
+    </comments>
+</Book1>
