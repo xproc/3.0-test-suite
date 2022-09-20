@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<element name="Book" xmlns="http://relaxng.org/ns/structure/1.0"
+    ns="http://xproc.org/ns/testsuite/3.0/book">
+      <element name="Title">
+          <text/>
+      </element>
+      <element name="Author">
+          <text/>
+      </element>
+</element>
