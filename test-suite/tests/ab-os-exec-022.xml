@@ -1,0 +1,52 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
+        expected="pass" features="os-exec mac/linux">
+   <t:info>
+      <t:title>p:os-exec-022</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-09-23</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:os-exec</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:os-exec: Tests failure-threshold.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:try>
+            <p:os-exec command="/bin/cat" failure-threshold="-100000">
+               <p:with-input>
+                  <p:inline content-type="text/plain">Some text.</p:inline>
+               </p:with-input>
+            </p:os-exec>
+            <p:identity>
+               <p:with-input><failure /></p:with-input>
+            </p:identity>
+            
+            <p:catch code="err:XC0064" xmlns:err="http://www.w3.org/ns/xproc-error">
+               <p:identity>
+                  <p:with-input><success /></p:with-input>
+               </p:identity>
+            </p:catch>
+         </p:try>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+         xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="success">The document root is not 'success'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
