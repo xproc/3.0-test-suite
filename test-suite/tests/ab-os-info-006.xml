@@ -1,0 +1,40 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
+        expected="pass" features="os-info">
+   <t:info>
+      <t:title>p:os-info-006</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-09-23</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests for p:os-exec</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:os-info: Tests c:environment have name and value.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:os-info />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+         xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step" />
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="c:result">The document root is not 'c:result'.</s:assert>
+               <s:assert test="c:result/c:environment/@name">There is a c:environment without @name.</s:assert>
+               <s:assert test="c:result/c:environment/@value">There is a c:environment with @value.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

@@ -1,0 +1,46 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
+        expected="pass" features="os-info">
+   <t:info>
+      <t:title>p:os-info-003</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-09-23</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests for p:os-exec</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:os-info: Tests required attributes are present.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:os-info />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+         xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step" />
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="c:result">The document root is not 'c:result'.</s:assert>
+               <s:assert test="c:result/@file-separator">There is no attribute 'file-separator'.</s:assert>
+               <s:assert test="c:result/@path-separator">There is no attribute 'path-separator'.</s:assert>
+               <s:assert test="c:result/@os-architecture">There is no attribute 'os-architecture'.</s:assert>
+               <s:assert test="c:result/@os-name">There is no attribute 'os-name'.</s:assert>
+               <s:assert test="c:result/@os-version">There is no attribute 'os-version'.</s:assert>
+               <s:assert test="c:result/@cwd">There is no attribute 'cwd'.</s:assert>
+               <s:assert test="c:result/@user-name">There is no attribute 'user-name'.</s:assert>
+               <s:assert test="c:result/@user-home">There is no attribute 'user-home'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
