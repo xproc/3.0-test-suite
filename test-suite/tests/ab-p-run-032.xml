@@ -1,0 +1,38 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="error" features="p-run">
+   <t:info>
+      <t:title>p:run-032</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-09-28</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests for p:run</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:run: Tests runtime errors are handled correctly.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:run>
+            <p:with-input>
+               <p:inline>
+                  <p:declare-step version="3.0">
+                     <p:output port="result" />
+                     <p:error code="error">
+                        <p:with-input><p:inline>empty /></p:inline></p:with-input>
+                     </p:error>
+                  </p:declare-step>
+               </p:inline>
+            </p:with-input>
+            <p:output port="result" />
+         </p:run>    
+      </p:declare-step>
+   </t:pipeline>
+</t:test>

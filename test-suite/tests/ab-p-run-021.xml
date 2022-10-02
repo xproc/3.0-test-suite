@@ -1,0 +1,39 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XS0086" features="p-run">
+   <t:info>
+      <t:title>p:run-021</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-09-25</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests for p:run</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:run: Input port is bound twice</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:run>
+            <p:with-input>
+               <p:inline>
+                  <p:declare-step version="3.0">
+                     <p:output port="result" />
+                     <p:identity>
+                        <p:with-input><doc /></p:with-input>
+                     </p:identity>
+                  </p:declare-step>
+               </p:inline>
+            </p:with-input>
+            <p:run-input port="source"><doc1/></p:run-input>
+            <p:run-input port="source"><doc2/></p:run-input>
+         </p:run>    
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
