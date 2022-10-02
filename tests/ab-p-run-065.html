@@ -1,0 +1,29 @@
+<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><title>p:run-065</title><link href="../css/prism.css" rel="stylesheet" type="text/css"><link href="../css/db-prism.css" rel="stylesheet" type="text/css"><link rel="stylesheet" type="text/css" href="../css/base.css"><link rel="stylesheet" type="text/css" href="../css/xproc.css"><link rel="stylesheet" type="text/css" href="../css/base.css"><link href="../css/all.css" rel="stylesheet" type="text/css"><link href="../css/testsuite.css" rel="stylesheet" type="text/css"><script type="text/javascript" src="../js/dbmodnizr.js"></script></head><body><nav><a href="ab-p-run-064.html"><i class="fas fa-chevron-circle-left"></i></a>&nbsp;<a href="ab-p-run-066.html"><i class="fas fa-chevron-circle-right"></i></a>&nbsp;<a href="../"><i class="fa fa-chevron-circle-up"></i></a></nav><h1>p:run-065</h1><div class="description">
+      <p>Tests p:run: Checks error is raised, if p:run supplies sequence to a non-sequence pipeline port.</p>
+   </div><p class="expected">Test <a class="testuri" href="../test-suite/tests/ab-p-run-065.xml">ab-p-run-065.xml</a> is expected to fail with error code <code><a href="http://spec.xproc.org/master/head/xproc/#err.D0006">err:XD0006</a></code>.</p><p class="features">It requires the following features: p-run.</p><div class="pipeline"><h2>The pipeline</h2><pre class="programlisting line-numbers language-markup" data-language="Markup"><code>
+<span class="stag"><span class="sto">&lt;</span><span class="gi">p:declare-step</span> <span class="attr nsattr"><span class="aname">xmlns:err</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">http://www.w3.org/ns/xproc-error</span><span class="aq">"</span></span> <span class="attr nsattr"><span class="aname">xmlns:p</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">http://www.w3.org/ns/xproc</span><span class="aq">"</span></span> <span class="attr"><span class="aname">version</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">3.0</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+   <span class="stag"><span class="sto">&lt;</span><span class="gi">p:output</span> <span class="attr"><span class="aname">port</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result</span><span class="aq">"</span></span><span class="eto">/&gt;</span></span>
+   <span class="stag"><span class="sto">&lt;</span><span class="gi">p:run</span><span class="eto">&gt;</span></span>
+      <span class="stag"><span class="sto">&lt;</span><span class="gi">p:with-input</span><span class="eto">&gt;</span></span>
+         <span class="stag"><span class="sto">&lt;</span><span class="gi">p:inline</span><span class="eto">&gt;</span></span>
+            <span class="stag"><span class="sto">&lt;</span><span class="gi">p:declare-step</span> <span class="attr"><span class="aname">version</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">3.0</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+               <span class="stag"><span class="sto">&lt;</span><span class="gi">p:input</span> <span class="attr"><span class="aname">port</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">source</span><span class="aq">"</span></span><span class="eto">/&gt;</span></span>
+               <span class="stag"><span class="sto">&lt;</span><span class="gi">p:output</span> <span class="attr"><span class="aname">port</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result</span><span class="aq">"</span></span><span class="eto">/&gt;</span></span>
+               <span class="stag"><span class="sto">&lt;</span><span class="gi">p:identity/</span><span class="eto">&gt;</span></span>
+            <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:declare-step</span><span class="etc">&gt;</span></span>
+         <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:inline</span><span class="etc">&gt;</span></span>
+      <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:with-input</span><span class="etc">&gt;</span></span>
+      <span class="stag"><span class="sto">&lt;</span><span class="gi">p:run-input</span> <span class="attr"><span class="aname">port</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">source</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+         <span class="stag"><span class="sto">&lt;</span><span class="gi">doc1/</span><span class="eto">&gt;</span></span>
+         <span class="stag"><span class="sto">&lt;</span><span class="gi">doc2/</span><span class="eto">&gt;</span></span>
+      <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:run-input</span><span class="etc">&gt;</span></span>
+      <span class="stag"><span class="sto">&lt;</span><span class="gi">p:output</span> <span class="attr"><span class="aname">port</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result</span><span class="aq">"</span></span><span class="eto">/&gt;</span></span>
+   <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:run</span><span class="etc">&gt;</span></span>
+<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:declare-step</span><span class="etc">&gt;</span></span>
+</code></pre></div><dl class="revision-history"><h2>Revision history</h2>
+         <dt>02 Oct 2022, 
+               <span class="name">Achim Berndzen</span>
+            </dt><dd><div class="description">
+               <p>Added tests for p:run</p>
+            </div></dd>
+      </dl><script src="../js/prism.js"></script></body></html>

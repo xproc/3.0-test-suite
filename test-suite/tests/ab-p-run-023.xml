@@ -1,0 +1,54 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
+        expected="pass" features="p-run">
+   <t:info>
+      <t:title>p:run-023</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-09-26</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests for p:run</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:run: Simple pipeline run, bind xml doc to input port.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         <p:identity>
+            <p:with-input>
+               <p:inline>
+                  <p:declare-step version="3.0">
+                     <p:input port="source" />
+                     <p:output port="result" />
+                     <p:identity />
+                  </p:declare-step>
+               </p:inline>
+            </p:with-input>
+         </p:identity>
+         
+         <p:run>
+            <p:with-input pipe="result" />
+            <p:run-input port="source">
+               <doc />
+            </p:run-input>
+            <p:output port="result"/>
+         </p:run>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+         xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="doc">The root element is not doc.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
