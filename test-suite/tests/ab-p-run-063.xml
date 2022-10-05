@@ -5,6 +5,15 @@
       <t:title>p:run-063</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2022-10-05</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Modified test to prevent other errors to be reported.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2022-10-01</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -25,8 +34,8 @@
             <p:with-input>
                <p:inline>
                   <p:declare-step version="3.0">
-                     <p:output port="result" primary="false"/>
-                     <p:identity >
+                     <p:output port="result" primary="false" pipe="result@id"/>
+                     <p:identity name="id">
                         <p:with-input><result >42</result></p:with-input>
                      </p:identity>
                   </p:declare-step>
