@@ -1,8 +1,17 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
-         expected="pass" features="mac/linux">
+   expected="pass" features="os-exec mac/linux">
    <t:info>
       <t:title>p:os-exec-005</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2022-10-08</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added dependency 'os-exec'.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2022-09-21</t:date>
             <t:author>
