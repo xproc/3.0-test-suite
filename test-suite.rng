@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar ns="http://www.w3.org/1999/xhtml" xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <start>
+    <choice>
+      <ref name="test"/>
+      <ref name="test-suite"/>
+      <ref name="test-div"/>
+    </choice>
+  </start>
+  <define name="testattr">
+    <interleave>
+      <optional>
+        <attribute name="features">
+          <list>
+            <oneOrMore>
+              <data type="token"/>
+            </oneOrMore>
+          </list>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="when"/>
+      </optional>
+      <optional>
+        <attribute name="src"/>
+      </optional>
+      <optional>
+        <attribute name="version"/>
+      </optional>
+    </interleave>
+  </define>
+  <define name="test-suite">
+    <element name="t:test-suite">
+      <ref name="testattr"/>
+      <group>
+        <ref name="info"/>
+        <optional>
+          <ref name="description"/>
+        </optional>
+        <zeroOrMore>
+          <ref name="property"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="test"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="test-div"/>
+        </zeroOrMore>
+      </group>
+    </element>
+  </define>
+  <define name="passingTest">
+    <element name="t:test">
+      <interleave>
+        <ref name="testattr"/>
+        <attribute name="expected">
+          <value>pass</value>
+        </attribute>
+        <optional>
+          <attribute name="platform">
+            <choice>
+              <value>Linux</value>
+              <value>MacOS</value>
+              <value>Windows</value>
+            </choice>
+          </attribute>
+        </optional>
+        <group>
+          <ref name="info"/>
+          <optional>
+            <ref name="description"/>
+          </optional>
+          <interleave>
+            <zeroOrMore>
+              <ref name="property"/>
+            </zeroOrMore>
+            <optional>
+              <ref name="file-environment"/>
+            </optional>
+            <zeroOrMore>
+              <ref name="input"/>
+            </zeroOrMore>
+            <zeroOrMore>
+              <ref name="option"/>
+            </zeroOrMore>
+            <optional>
+              <ref name="pipeline"/>
+            </optional>
+            <optional>
+              <ref name="schematron"/>
+            </optional>
+          </interleave>
+        </group>
+      </interleave>
+    </element>
+  </define>
+  <define name="failingTest">
+    <element name="t:test">
+      <interleave>
+        <ref name="testattr"/>
+        <attribute name="expected">
+          <value>fail</value>
+        </attribute>
+        <attribute name="code">
+          <data type="NMTOKENS"/>
+        </attribute>
+        <optional>
+          <attribute name="platform">
+            <choice>
+              <value>Linux</value>
+              <value>MacOS</value>
+              <value>Windows</value>
+            </choice>
+          </attribute>
+        </optional>
+        <group>
+          <ref name="info"/>
+          <optional>
+            <ref name="description"/>
+          </optional>
+          <interleave>
+            <zeroOrMore>
+              <ref name="property"/>
+            </zeroOrMore>
+            <optional>
+              <ref name="file-environment"/>
+            </optional>
+            <zeroOrMore>
+              <ref name="input"/>
+            </zeroOrMore>
+            <zeroOrMore>
+              <ref name="option"/>
+            </zeroOrMore>
+            <optional>
+              <ref name="pipeline"/>
+            </optional>
+          </interleave>
+        </group>
+      </interleave>
+    </element>
+  </define>
+  <define name="file-environment">
+    <element name="t:file-environment">
+      <interleave>
+        <zeroOrMore>
+          <ref name="file"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="folder"/>
+        </zeroOrMore>
+      </interleave>
+    </element>
+  </define>
+  <define name="file">
+    <element name="t:file">
+      <interleave>
+        <ref name="filetest-attr"/>
+        <optional>
+          <ref name="filetest-content"/>
+        </optional>
+      </interleave>
+    </element>
+  </define>
+  <define name="filetest-content">
+    <text/>
+  </define>
+  <define name="folder">
+    <element name="t:folder">
+      <ref name="filetest-attr"/>
+    </element>
+  </define>
+  <define name="filetest-attr">
+    <interleave>
+      <attribute name="path">
+        <data type="anyURI"/>
+      </attribute>
+      <optional>
+        <attribute name="last-modified">
+          <data type="dateTime"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="readable">
+          <data type="boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="writable">
+          <data type="boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="hidden">
+          <data type="boolean"/>
+        </attribute>
+      </optional>
+    </interleave>
+  </define>
+  <define name="test-div">
+    <element name="t:div">
+      <ref name="info"/>
+      <optional>
+        <ref name="description"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="property"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="test"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="test-div"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="info">
+    <element name="t:info">
+      <interleave>
+        <ref name="title"/>
+        <ref name="revision-history"/>
+        <zeroOrMore>
+          <ref name="specref"/>
+        </zeroOrMore>
+      </interleave>
+    </element>
+  </define>
+  <define name="author">
+    <element name="t:author">
+      <interleave>
+        <optional>
+          <attribute name="initials"/>
+        </optional>
+        <optional>
+          <ref name="name"/>
+        </optional>
+        <optional>
+          <ref name="email"/>
+        </optional>
+        <optional>
+          <ref name="uri"/>
+        </optional>
+      </interleave>
+    </element>
+  </define>
+  <define name="name">
+    <element name="t:name">
+      <text/>
+    </element>
+  </define>
+  <define name="email">
+    <element name="t:email">
+      <text/>
+    </element>
+  </define>
+  <define name="uri">
+    <element name="t:uri">
+      <data type="anyURI"/>
+    </element>
+  </define>
+  <define name="revision-history">
+    <element name="t:revision-history">
+      <oneOrMore>
+        <ref name="revision"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="revision">
+    <element name="t:revision">
+      <optional>
+        <attribute name="initials"/>
+      </optional>
+      <ref name="date"/>
+      <optional>
+        <ref name="author"/>
+      </optional>
+      <ref name="description"/>
+    </element>
+  </define>
+  <define name="title">
+    <element name="t:title">
+      <text/>
+    </element>
+  </define>
+  <define name="date">
+    <element name="t:date">
+      <choice>
+        <data type="date"/>
+        <data type="dateTime"/>
+      </choice>
+    </element>
+  </define>
+  <define name="specref">
+    <element name="t:specref">
+      <interleave>
+        <optional>
+          <attribute name="spec">
+            <choice>
+              <value>xproc</value>
+              <value>steps</value>
+            </choice>
+          </attribute>
+        </optional>
+        <attribute name="linkend">
+          <data type="NMTOKEN"/>
+        </attribute>
+        <empty/>
+      </interleave>
+    </element>
+  </define>
+  <define name="test">
+    <choice>
+      <ref name="passingTest"/>
+      <ref name="failingTest"/>
+    </choice>
+  </define>
+  <define name="pipeline">
+    <element name="t:pipeline">
+      <interleave>
+        <optional>
+          <attribute name="src"/>
+        </optional>
+        <zeroOrMore>
+          <ref name="any"/>
+        </zeroOrMore>
+      </interleave>
+    </element>
+  </define>
+  <define name="schematron">
+    <element name="t:schematron">
+      <interleave>
+        <optional>
+          <attribute name="src"/>
+        </optional>
+        <zeroOrMore>
+          <ref name="any"/>
+        </zeroOrMore>
+      </interleave>
+    </element>
+  </define>
+  <define name="input">
+    <element name="t:input">
+      <interleave>
+        <attribute name="port"/>
+        <optional>
+          <attribute name="src"/>
+        </optional>
+        <zeroOrMore>
+          <ref name="any"/>
+        </zeroOrMore>
+      </interleave>
+    </element>
+  </define>
+  <define name="option">
+    <element name="t:option">
+      <interleave>
+        <attribute name="name"/>
+        <optional>
+          <attribute name="static">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="select"/>
+        </optional>
+        <zeroOrMore>
+          <ref name="any"/>
+        </zeroOrMore>
+      </interleave>
+    </element>
+  </define>
+  <define name="any">
+    <element>
+      <anyName/>
+      <interleave>
+        <zeroOrMore>
+          <attribute>
+            <anyName/>
+          </attribute>
+        </zeroOrMore>
+        <zeroOrMore>
+          <choice>
+            <text/>
+            <ref name="any"/>
+          </choice>
+        </zeroOrMore>
+      </interleave>
+    </element>
+  </define>
+  <define name="anyhtml">
+    <element>
+      <nsName/>
+      <interleave>
+        <zeroOrMore>
+          <attribute>
+            <anyName/>
+          </attribute>
+        </zeroOrMore>
+        <zeroOrMore>
+          <choice>
+            <text/>
+            <ref name="anyhtml"/>
+          </choice>
+        </zeroOrMore>
+      </interleave>
+    </element>
+  </define>
+  <define name="description">
+    <element name="t:description">
+      <oneOrMore>
+        <ref name="anyhtml"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="property">
+    <element name="t:property">
+      <interleave>
+        <attribute name="name"/>
+        <attribute name="value"/>
+      </interleave>
+    </element>
+  </define>
+</grammar>
