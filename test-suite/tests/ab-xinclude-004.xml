@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>p:xinclude 004 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-08-25</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial tests for p:xinclude. Ported for 1.0 test suite</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:xinclude</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="pipeline"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:xinclude>
+            <p:with-input>
+               <document>
+                  <xi:include href="../documents/xpath-xinclude-doc.xml"
+                              xpointer="xpath(/doc/p[contains(.,'^(') and contains(.,'^)')])"
+                              xmlns:xi="http://www.w3.org/2001/XInclude"/>
+               </document>
+            </p:with-input>
+         </p:xinclude>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="document">The root element is not 'document'.</s:assert>
+               <s:assert test="document/p">The root element does not have a child 'p'.</s:assert>
+               <s:assert test="document/p/text()='Parenthetical (in content, I mean) p'">The text child of 'p' is not 'Parenthetical (in content, I mean) p'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

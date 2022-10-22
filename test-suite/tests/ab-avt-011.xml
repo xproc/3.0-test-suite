@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="fail" code="err:XD0051"  
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>Attribute value templates 011 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-08-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Making test fail with XD0051 because arrays are not allowed in AVTs.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2020-04-13</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>New test</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests AVTs.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:add-attribute match="/*"
+                          attribute-name="avt"
+                          attribute-value="{[1, 2, 3]} {4 to 5}">
+            <p:with-input>
+               <doc/>
+            </p:with-input>
+         </p:add-attribute>
+      </p:declare-step>
+   </t:pipeline>
+</t:test>

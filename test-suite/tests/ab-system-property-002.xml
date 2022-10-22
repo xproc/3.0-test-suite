@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>ab-system-property-002</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2020-03-31</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Replaced double curly brackets in TVT with single ones.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-07-14</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests for p:system-property</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:system-property().</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:identity>
+            <p:with-input>
+               <result>
+                  <episode>{p:system-property('Q{http://www.w3.org/ns/xproc}episode')}</episode>
+                  <locale>{p:system-property('Q{http://www.w3.org/ns/xproc}locale')}</locale>
+                  <product-name>{p:system-property('Q{http://www.w3.org/ns/xproc}product-name')}</product-name>
+                  <product-version>{p:system-property('Q{http://www.w3.org/ns/xproc}product-version')}</product-version>
+                  <vendor>{p:system-property('Q{http://www.w3.org/ns/xproc}vendor')}</vendor>
+                  <vendor-uri>{p:system-property('Q{http://www.w3.org/ns/xproc}vendor-uri')}</vendor-uri>
+                  <version>{p:system-property('Q{http://www.w3.org/ns/xproc}version')}</version>
+                  <xpath-version>{p:system-property('Q{http://www.w3.org/ns/xproc}xpath-version')}</xpath-version>
+                  <psvi-supported>{p:system-property('Q{http://www.w3.org/ns/xproc}psvi-supported')}</psvi-supported>
+               </result>
+            </p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The document root is not result.</s:assert>
+               <s:assert test="string-length(result/episode/text()) !=0">Text node of result/episode is empty string.</s:assert>
+               <s:assert test="string-length(result/locale/text()) !=0">Text node of result/locale is empty string.</s:assert>
+               <s:assert test="string-length(result/product-name/text()) !=0">Text node of result/product-name is empty string.</s:assert>
+               <s:assert test="string-length(result/product-version/text()) !=0">Text node of result/product-version is empty string.</s:assert>
+               <s:assert test="string-length(result/vendor/text()) !=0">Text node of result/vendor is empty string.</s:assert>
+               <s:assert test="string-length(result/vendor-uri/text()) !=0">Text node of result/vendor-uri is empty string.</s:assert>
+               <s:assert test="string-length(result/version/text()) !=0">Text node of result/version is empty string.</s:assert>
+               <s:assert test="string-length(result/xpath-version/text()) !=0">Text node of result/xpath-version is empty string.</s:assert>
+               <s:assert test="string-length(result/psvi-supported/text()) !=0">Text node of result/psvi-supported is empty string.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

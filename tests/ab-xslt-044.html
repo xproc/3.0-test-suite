@@ -1,0 +1,66 @@
+<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><title>AB-xslt-044</title><link href="../css/prism.css" rel="stylesheet" type="text/css"><link href="../css/db-prism.css" rel="stylesheet" type="text/css"><link rel="stylesheet" type="text/css" href="../css/base.css"><link rel="stylesheet" type="text/css" href="../css/xproc.css"><link rel="stylesheet" type="text/css" href="../css/base.css"><link href="../css/all.css" rel="stylesheet" type="text/css"><link href="../css/testsuite.css" rel="stylesheet" type="text/css"><script type="text/javascript" src="../js/dbmodnizr.js"></script></head><body><nav><a href="ab-xslt-043.html"><i class="fas fa-chevron-circle-left"></i></a>&nbsp;<a href="ab-xslt-045.html"><i class="fas fa-chevron-circle-right"></i></a>&nbsp;<a href="../"><i class="fa fa-chevron-circle-up"></i></a></nav><h1>AB-xslt-044</h1><div class="description">
+      <p>Tests no output-base-uri: base uri of first doc on source is used. (3.0)</p>
+   </div><p class="expected">Test <a class="testuri" href="../test-suite/tests/ab-xslt-044.xml">ab-xslt-044.xml</a> is expected to pass.</p><p class="features">It requires the following features: xslt-3.</p><div class="pipeline"><h2>The pipeline</h2><pre class="programlisting line-numbers language-markup" data-language="Markup"><code>
+<span class="stag"><span class="sto">&lt;</span><span class="gi">p:declare-step</span> <span class="attr nsattr"><span class="aname">xmlns:p</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">http://www.w3.org/ns/xproc</span><span class="aq">"</span></span> <span class="attr"><span class="aname">version</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">3.0</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+   <span class="stag"><span class="sto">&lt;</span><span class="gi">p:output</span> <span class="attr"><span class="aname">port</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result</span><span class="aq">"</span></span><span class="eto">/&gt;</span></span>
+   <span class="stag"><span class="sto">&lt;</span><span class="gi">p:xslt</span> <span class="attr"><span class="aname">version</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">3.0</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+      <span class="stag"><span class="sto">&lt;</span><span class="gi">p:with-input</span> <span class="attr"><span class="aname">port</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">source</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+         <span class="stag"><span class="sto">&lt;</span><span class="gi">p:inline</span> <span class="attr"><span class="aname">xml:base</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">http://xproc-test/xslt/</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+            <span class="stag"><span class="sto">&lt;</span><span class="gi">doc/</span><span class="eto">&gt;</span></span>
+         <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:inline</span><span class="etc">&gt;</span></span>
+      <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:with-input</span><span class="etc">&gt;</span></span>
+      <span class="stag"><span class="sto">&lt;</span><span class="gi">p:with-input</span> <span class="attr"><span class="aname">port</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">stylesheet</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+         <span class="stag"><span class="sto">&lt;</span><span class="gi">xsl:stylesheet</span> <span class="attr nsattr"><span class="aname">xmlns:xsl</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">http://www.w3.org/1999/XSL/Transform</span><span class="aq">"</span></span> <span class="attr"><span class="aname">version</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">3.0</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+            <span class="stag"><span class="sto">&lt;</span><span class="gi">xsl:template</span> <span class="attr"><span class="aname">match</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">/</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+               <span class="stag"><span class="sto">&lt;</span><span class="gi">xsl:result-document</span> <span class="attr"><span class="aname">href</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">one.xml</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+                  <span class="stag"><span class="sto">&lt;</span><span class="gi">one/</span><span class="eto">&gt;</span></span>
+               <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">xsl:result-document</span><span class="etc">&gt;</span></span>
+               <span class="stag"><span class="sto">&lt;</span><span class="gi">xsl:result-document</span> <span class="attr"><span class="aname">href</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">two.xml</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+                  <span class="stag"><span class="sto">&lt;</span><span class="gi">two/</span><span class="eto">&gt;</span></span>
+               <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">xsl:result-document</span><span class="etc">&gt;</span></span>
+            <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">xsl:template</span><span class="etc">&gt;</span></span>
+         <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">xsl:stylesheet</span><span class="etc">&gt;</span></span>
+      <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:with-input</span><span class="etc">&gt;</span></span>
+   <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:xslt</span><span class="etc">&gt;</span></span>
+   <span class="stag"><span class="sto">&lt;</span><span class="gi">p:for-each</span><span class="eto">&gt;</span></span>
+      <span class="stag"><span class="sto">&lt;</span><span class="gi">p:with-input</span> <span class="attr"><span class="aname">pipe</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">secondary</span><span class="aq">"</span></span><span class="eto">/&gt;</span></span>
+      <span class="stag"><span class="sto">&lt;</span><span class="gi">p:insert</span> <span class="attr"><span class="aname">position</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">first-child</span><span class="aq">"</span></span> <span class="attr"><span class="aname">match</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">/*</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+         <span class="stag"><span class="sto">&lt;</span><span class="gi">p:with-input</span> <span class="attr"><span class="aname">port</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">insertion</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+            <span class="stag"><span class="sto">&lt;</span><span class="gi">uri</span><span class="eto">&gt;</span></span><span class="text">{base-uri(.)}</span><span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">uri</span><span class="etc">&gt;</span></span>
+         <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:with-input</span><span class="etc">&gt;</span></span>
+      <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:insert</span><span class="etc">&gt;</span></span>
+   <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:for-each</span><span class="etc">&gt;</span></span>
+   <span class="stag"><span class="sto">&lt;</span><span class="gi">p:wrap-sequence</span> <span class="attr"><span class="aname">wrapper</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">wrapper</span><span class="aq">"</span></span><span class="eto">/&gt;</span></span>
+<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:declare-step</span><span class="etc">&gt;</span></span>
+</code></pre><div class="implbanners"><span class="morganaxproc"><a href="../implementation.html#ab-xslt-044"><img src="../img/mx-pass.svg" alt="MorganaXProc passing"></a></span> <span class="xmlcalabash"><a href="../implementation.html#ab-xslt-044"><img src="../img/xc-pass.svg" alt="XML Calabash passing"></a></span></div></div><div class="schematron"><h2>Schematron validation</h2><pre class="programlisting line-numbers language-markup" data-language="Markup"><code>
+<span class="stag"><span class="sto">&lt;</span><span class="gi">s:schema</span> <span class="attr nsattr"><span class="aname">xmlns</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">http://www.w3.org/1999/xhtml</span><span class="aq">"</span></span> <span class="attr nsattr"><span class="aname">xmlns:s</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">http://purl.oclc.org/dsdl/schematron</span><span class="aq">"</span></span> <span class="attr"><span class="aname">queryBinding</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">xslt2</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+   <span class="stag"><span class="sto">&lt;</span><span class="gi">s:pattern</span><span class="eto">&gt;</span></span>
+      <span class="stag"><span class="sto">&lt;</span><span class="gi">s:rule</span> <span class="attr"><span class="aname">context</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">/</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
+         <span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">/wrapper</span><span class="aq">"</span></span><span class="eto">&gt;</span></span><span class="text">The document root is not 'wrapper'.</span><span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span>
+         <span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">/wrapper/one/uri/text()='http://xproc-test/xslt/one.xml'</span><span class="aq">"</span></span><span class="eto">&gt;</span></span><span class="text">Element 'one' does not have a text child 'http://xproc-test/xslt/one.xml'.</span><span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span>
+         <span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">/wrapper/two/uri/text()='http://xproc-test/xslt/two.xml'</span><span class="aq">"</span></span><span class="eto">&gt;</span></span><span class="text">Element 'two' does not have a text child 'http://xproc-test/two/one.xml'.</span><span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span>
+      <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:rule</span><span class="etc">&gt;</span></span>
+   <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:pattern</span><span class="etc">&gt;</span></span>
+<span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:schema</span><span class="etc">&gt;</span></span>
+</code></pre></div><dl class="revision-history"><h2>Revision history</h2>
+         <dt>10 Jun 2021, 
+               <span class="name">Achim Berndzen</span>
+            </dt><dd><div class="description">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </div></dd>
+         <dt>04 Jul 2020, 
+               <span class="name">Achim Berndzen</span>
+            </dt><dd><div class="description">
+               <p>Change test so it does not rely on document order of port "secondary".</p>
+            </div></dd>
+         <dt>20 Oct 2019, 
+               <span class="name">Achim Berndzen</span>
+            </dt><dd><div class="description">
+               <p>Fixed test by setting document's base uri instead of root element's base uri.</p>
+            </div></dd>
+         <dt>04 Aug 2019, 
+               <span class="name">Achim Berndzen</span>
+            </dt><dd><div class="description">
+               <p>Initial commit</p>
+            </div></dd>
+      </dl><script src="../js/prism.js"></script></body></html>

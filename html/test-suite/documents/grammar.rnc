@@ -1,4 +1,0 @@
-element doc {
-          element title { text }?,
-          element p { text }*
-          }

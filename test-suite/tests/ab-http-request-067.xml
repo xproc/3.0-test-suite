@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test features="p:http-request"
+        expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>http-request-067 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2020-01-30</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed headers to lower-case, fixed typo.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2020-01-14</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added new tests for p:http-request.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:http-request: Testing parameter 'override-content-type'.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:http-request href="http://localhost:8246/service/echo"
+                         method="post"
+                         parameters="map{'override-content-type' : 'text/plain'}">
+            <p:with-input>
+               <p:inline>
+                  <doc/>
+               </p:inline>
+            </p:with-input>
+         </p:http-request>
+         <p:identity>
+            <p:with-input pipe="report"/>
+         </p:identity>
+         <p:identity>
+            <p:with-input>
+               <result>{.?headers?content-type}</result>
+            </p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The root element is not 'result'.</s:assert>
+               <s:assert test="result/text()='application/xml'">The content type is not correct.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        features="xslt-3 xslt-serialization"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>AB-xslt-051</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-08-05</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added feature xslt-serialization to test.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-08-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests serialization option are represented as document property (3.0)</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:xslt version="3.0"
+                 template-name="start">
+            <p:with-input port="source">
+               <empty/>
+            </p:with-input>
+            <p:with-input port="stylesheet">
+               <xsl:stylesheet version="3.0"
+                               xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                  <xsl:output method="xml"
+                              indent="true"
+                              encoding="UTF-8"/>
+                  <xsl:template name="start">
+                     <doc/>
+                  </xsl:template>
+               </xsl:stylesheet>
+            </p:with-input>
+         </p:xslt>
+         <p:cast-content-type content-type="application/xml">
+            <p:with-input select="p:document-property(., 'serialization')"/>
+         </p:cast-content-type>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="j"
+               uri="http://www.w3.org/2005/xpath-functions"/>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="j:map">The document root is not 'map'.</s:assert>
+               <s:assert test="j:map/j:boolean/@key='indent'">There is no boolean entry for key 'indent'.</s:assert>
+               <s:assert test="j:map/j:boolean[@key='indent']/text()='true'">Value for boolean entry @key='indent' is not 'true'.</s:assert>
+               <s:assert test="j:map/j:string/@key='method'">There is no string entry for key 'method'.</s:assert>
+               <s:assert test="j:map/j:string[@key='method']/text()='xml'">Value for string entry @key='method' is not 'xml'.</s:assert>
+               <s:assert test="j:map/j:string/@key='encoding'">There is no string entry for key 'encoding'.</s:assert>
+               <s:assert test="j:map/j:string[@key='encoding']/text()='UTF-8'">Value for string entry @key='encoding' is not 'UTF-8'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

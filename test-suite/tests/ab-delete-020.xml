@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>Test for p:delete 020 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-11-23</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test from p:document-properties-document() to p:document-properties().</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-06-14</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added test for the new "text-document" ruling.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests delete switches correctly to text document.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:delete match="element">
+            <p:with-input>
+               <p:inline document-properties="map{'serialization':map{},                         'bonus-prop':'prop',                         'base-uri': 'http://base'}">This is 
+                  <element/>a text.</p:inline>
+            </p:with-input>
+         </p:delete>
+         <p:cast-content-type content-type="application/xml">
+            <p:with-input select="p:document-properties(.)"/>
+         </p:cast-content-type>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="j"
+               uri="http://www.w3.org/2005/xpath-functions"/>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="j:map">Root element is not 'j:map'.</s:assert>
+               <s:assert test="j:map/j:string[@key='base-uri']/text()='http://base'">Base-uri properties is not 'http://base'.</s:assert>
+               <s:assert test="j:map/j:string[@key='bonus-prop']/text()='prop'">Property 'bonus-prop' is not preserved.</s:assert>
+               <s:assert test="j:map/j:string[@key='content-type']/text()='text/plain'">Content type is not 'text/plain'.</s:assert>
+               <s:assert test="not(j:map/*[@key='serialization'])">There should be no element 'serialization'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test features="p:http-request"
+        expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>http-request-019 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2020-01-12</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added new tests for p:http-request (Ported from 1.0).</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:http-request: get with multi-part response.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:http-request href="http://localhost:8246/service/fixed-alternative">
+            <p:with-input>
+               <p:empty/>
+            </p:with-input>
+         </p:http-request>
+         <p:for-each>
+            <p:choose>
+               <p:when test="p:document-property(., 'content-type')='text/plain'">
+                  <p:wrap-sequence wrapper="text-wrapper"/>
+               </p:when>
+               <p:otherwise>
+                  <p:cast-content-type content-type="application/xml"/>
+               </p:otherwise>
+            </p:choose>
+         </p:for-each>
+         <p:wrap-sequence wrapper="result"/>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:ns prefix="html"
+               uri="http://www.w3.org/1999/xhtml"/>
+         <s:ns prefix="c"
+               uri="http://www.w3.org/ns/xproc-step"/>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The root element is not 'result'.</s:assert>
+               <s:assert test="count(result/html:html)=2">There is two children 'html:html'.</s:assert>
+               <s:assert test="count(result/html:html/html:head/html:title[. ='Hello world!'])=2">There are not two documents with title 'Hello world!'</s:assert>
+               <s:assert test="count(result/html:html/html:body/html:h1/html:img[@src='helloworld.png'])=2">There a is not two document with 'helloworld.png' in body/h1/img.</s:assert>
+               <s:assert test="result/c:data">The root element is not 'c:data'.</s:assert>
+               <s:assert test="result/c:data/@content-type='image/png'">Content-Type is not 'image/png'.</s:assert>
+               <s:assert test="result/c:data/@encoding='base64'">Encoding is not 'base64'.</s:assert>
+               <s:assert test="starts-with(result/c:data/text(),'iVBORw0KGgoAAAANSUhEUgAAAPwAAABJCAYAAAAZrEuhAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A') and                   ends-with(result/c:data/text(), '/f8AMGN9ADsjEr4AAAAASUVORK5CYII=')">Content is not right.</s:assert>
+               <s:assert test="starts-with(result/text-wrapper/text(),'Hello world!') and contains(result/text-wrapper/text(),'This is a hello world document.')">There is no text document with the right text.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

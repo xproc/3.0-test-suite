@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test features="p:http-request"
+        expected="fail"
+        code="err:XC0203"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error">
+   <t:info>
+      <t:title>p:http-request 117 (NW)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-09-09</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Multipart boundary test for p:http-request.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Its a dynamic error, if the boundary is invalid.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step exclude-inline-prefixes="c xs"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:c="http://www.w3.org/ns/xproc-step"
+                      xmlns:xs="http://www.w3.org/2001/XMLSchema">
+         <p:output port="result"/>
+         <p:http-request href="http://localhost:8246/service/check-multipart"
+                         method="post"
+                         headers="map{                          'content-type': 'multipart/mixed; boundary=--not-an-acceptable-boundary'                        }">
+            <p:with-input>
+               <p:inline>
+                  <doc1/>
+               </p:inline>
+               <p:inline>
+                  <doc2/>
+               </p:inline>
+            </p:with-input>
+         </p:http-request>
+      </p:declare-step>
+   </t:pipeline>
+</t:test>

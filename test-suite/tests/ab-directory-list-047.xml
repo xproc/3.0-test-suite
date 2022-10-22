@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass" features="p:directory-list"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>p:directory-list 047 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-07-26</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>First shot</p>
+            </t:description>
+         </t:revision>       
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:directory-list</p>
+   </t:description>
+   
+   <t:file-environment>
+      <t:file path="file.txt" readable="false"/>
+   </t:file-environment>
+   
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:c="http://www.w3.org/ns/xproc-step">
+         <p:output port="result"/>
+         <p:directory-list path="../testfolder" detailed="true"/>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns uri="http://www.w3.org/ns/xproc-step"
+               prefix="c"/>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="c:directory">Root element is not c:directory.</s:assert>
+               <s:assert test="count(c:directory/c:*)=1">Root element does not have one child with prefix 'c'.</s:assert>
+               <s:assert test="c:directory/@name='testfolder'">Root does not have attribute 'name' with 'testfolder'.</s:assert>
+               <s:assert test="c:directory/c:file[@name='file.txt']">Root does not have a 'file' child with @name equals 'file.txt'.</s:assert>
+               <s:assert test="not(//c:file/@readable) or //c:file/@readable='false'">Element 'file.txt' does have @readable with does not is 'false'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

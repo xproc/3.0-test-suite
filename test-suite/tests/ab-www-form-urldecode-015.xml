@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>p:www-form-urldecode 015 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-09-12</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Corrected: Test is now supposed to pass.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2021-07-22</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>New test added.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:www-form-urldecode</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="pipeline"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:www-form-urldecode>
+            <p:with-option name="value" select="'key=value&amp;'" />
+         </p:www-form-urldecode>
+         <p:cast-content-type content-type="application/xml" />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+         xmlns:s="http://purl.oclc.org/dsdl/schematron"
+         xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="map" uri="http://www.w3.org/2005/xpath-functions" />
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="map:map">Root element is not 'map:map'.</s:assert>
+               <s:assert test="map:map/map:string[@key='key']">There is no 'string' child with @key='key'.</s:assert>
+               <s:assert test="map:map/map:string[@key='key']/text()='value'">The value of element 'key' is not 'value'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

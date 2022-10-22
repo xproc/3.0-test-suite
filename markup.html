@@ -1,0 +1,760 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-07-18 Mon 15:10 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>XProc Test Suite markup</title>
+<meta name="author" content="Achim Berndzen" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="css/org.css"/>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">XProc Test Suite markup</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#s.introduction">1. Introduction</a></li>
+<li><a href="#s.metadata">2. Metadata</a>
+<ul>
+<li><a href="#s.revision-history">2.1. Revision history</a>
+<ul>
+<li><a href="#s.author-initials">2.1.1. Author initials</a></li>
+</ul>
+</li>
+<li><a href="#s.specref">2.2. Specref</a></li>
+</ul>
+</li>
+<li><a href="#s.description">3. Description</a></li>
+<li><a href="#s.test-suites">4. Test suites and divisions</a></li>
+<li><a href="#s.common-attributes">5. Common attributes</a></li>
+<li><a href="#s.tests">6. Tests</a>
+<ul>
+<li><a href="#s.properties">6.1. Properties</a></li>
+<li><a href="#s.file-environment">6.2. File environment</a></li>
+<li><a href="#s.inputs">6.3. Inputs</a></li>
+<li><a href="#s.options">6.4. Options</a></li>
+<li><a href="#s.pipeline">6.5. Pipeline</a></li>
+<li><a href="#s.schematron">6.6. Schematron</a></li>
+</ul>
+</li>
+<li><a href="#s.namespaces">7. Namespaces</a></li>
+<li><a href="#s.composed-schema">8. Relax NG Schema</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-s.introduction" class="outline-2">
+<h2 id="s.introduction"><span class="section-number-2">1.</span> Introduction</h2>
+<div class="outline-text-2" id="text-s.introduction">
+<p>
+The XProc Test Suite consists of a set of test suite documents and
+assorted ancillary files. The test suite documents are defined by the
+schema described in this document.
+</p>
+
+<p>
+The test suite schema is normatively defined in RELAX NG Compact
+Syntax, but it isn’t necessary for an implementation to use this
+schema for validation.
+</p>
+
+<p>
+Each individual test is defined by a <code>test</code> element. Tests can be grouped
+together with <code>div</code> elements and/or collected together in a <code>test-suite</code>.
+A test suite document must begin with one of these elements.
+All of the test suite elements are in the test suite namespace, see 
+<a href="#s.namespaces">Namespaces</a>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="orgb8ce131">start = test | test-suite | test-div
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-s.metadata" class="outline-2">
+<h2 id="s.metadata"><span class="section-number-2">2.</span> Metadata</h2>
+<div class="outline-text-2" id="text-s.metadata">
+<p>
+All tests, test suites, and divisions begin with a required metadata
+element named <code>info</code>. Metadata consists of a <code>title</code>, a simple string
+with inline markup, a <code>revision-history</code> that documents changes to the
+test, and optional <code>specref</code> elements.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org503ec8f">info =
+    element t:info {
+	title
+	&amp; revision-history
+	&amp; specref*
+    }
+</pre>
+</div>
+</div>
+
+<div id="outline-container-s.revision-history" class="outline-3">
+<h3 id="s.revision-history"><span class="section-number-3">2.1.</span> Revision history</h3>
+<div class="outline-text-3" id="text-s.revision-history">
+<p>
+A revision history is a collection of one or more revisions.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org6714025">revision-history =
+    element t:revision-history {
+	revision+
+    }
+</pre>
+</div>
+
+<p>
+Revisions <i>must</i> be listed in reverse chronological order, so the most
+recent revision appears first. Each revision consists of a <code>date</code>, an <code>author</code>,
+and a <code>description</code> of the revision (see <a href="#s.description">Description</a>).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="orgfb0ff2b">revision =
+    element t:revision {
+	attribute initials { text }?,
+	date,
+	author?,
+	description
+    }
+</pre>
+</div>
+
+<p>
+The <code>date</code> must be an ISO 8601 <i>date</i> or <i>dateTime</i>. An <code>author</code>
+has a <code>name</code> and an optional <code>email</code> address and <code>uri</code>. The <code>description</code>
+should describe what has been changed and why.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org7d8beb9">author =
+    element t:author {
+	attribute initials { text }?
+      &amp; name?
+      &amp; email?
+      &amp; uri?
+    }
+</pre>
+</div>
+</div>
+
+<div id="outline-container-s.author-initials" class="outline-4">
+<h4 id="s.author-initials"><span class="section-number-4">2.1.1.</span> Author initials</h4>
+<div class="outline-text-4" id="text-s.author-initials">
+<p>
+Repeating all of the author information in each revision can be
+tedious. The <code>initials</code> attribute can simplify the markup: it acts as
+an ID/IDREF link. The first time an author is mentioned, provide as
+much information as possible and mark that author with a (unique) set
+of initials. In other revisions, specify the author initials but leave
+the author element otherwise empty. For example, both of these
+revisions have the same authorship:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-xml">&lt;t:revision&gt;
+  &lt;t:date&gt;2020—01-04&lt;/t:date&gt;
+  &lt;t:author initials="jd"/&gt;
+  &lt;t:description xmlns="http://www.w3.org/1999/xhtml"&gt;
+    &lt;p&gt;Corrected typo in test.&lt;/p&gt;
+  &lt;/t:description&gt;
+&lt;/t:revision&gt;
+
+&lt;t:revision&gt;
+  &lt;t:date&gt;2019-12—31&lt;/t:date&gt;
+  &lt;t:author initials="jd"&gt;
+    &lt;t:name&gt;Jane Doe&lt;/t:name&gt;
+    &lt;t:email&gt;jane@example.com&lt;/t:email&gt;
+    &lt;t:uri&gt;https://example.com/jane/&lt;/t:uri&gt;
+  &lt;/t:author&gt;
+  &lt;t:description xmlns="http://www.w3.org/1999/xhtml"&gt;
+    &lt;p&gt;Initial checkin.&lt;/p&gt;
+  &lt;/t:description&gt;
+&lt;/t:revision&gt;
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-s.specref" class="outline-3">
+<h3 id="s.specref"><span class="section-number-3">2.2.</span> Specref</h3>
+<div class="outline-text-3" id="text-s.specref">
+<p>
+If a test, or set of tests, relates to a particular aspect of a
+particular specification, a link can be provided. The link consists of
+a <code>spec</code> attribute that identifies the specification and a <code>linkend</code>
+attribute that must contain the ID value in the specification with
+which this test is associated.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org3d61642">specref =
+    element t:specref {
+	attribute spec { "xproc" | "steps" }?
+      &amp; attribute linkend { xsd:NMTOKEN }
+      &amp; empty
+    }
+</pre>
+</div>
+
+<p>
+(It’s not clear if this turned out to be as useful in practice as it was in theory.)
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-s.description" class="outline-2">
+<h2 id="s.description"><span class="section-number-2">3.</span> Description</h2>
+<div class="outline-text-2" id="text-s.description">
+<p>
+The description can contain any mixture of text and HTML elements. HTML elements
+must be in the HTML namespace:
+<code>http://www.w3.org/1999/xhtml</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-s.test-suites" class="outline-2">
+<h2 id="s.test-suites"><span class="section-number-2">4.</span> Test suites and divisions</h2>
+<div class="outline-text-2" id="text-s.test-suites">
+<p>
+The <code>test-suite</code> and <code>div</code> elements serve to group tests together.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org2a4c0c0">test-suite =
+    element t:test-suite {
+	testattr,
+	(info, description?, property*, test*, test-div*)
+    }
+</pre>
+</div>
+
+<p>
+Divisions may be nested.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org3923538">test-div =
+    element t:div {
+	(info, description?, property*, test*, test-div*)
+    }
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-s.common-attributes" class="outline-2">
+<h2 id="s.common-attributes"><span class="section-number-2">5.</span> Common attributes</h2>
+<div class="outline-text-2" id="text-s.common-attributes">
+<p>
+Each <code>test</code> (and <code>test-suite</code>) has attributes to identify the features
+it requires and the circumstances under which it should be run.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org0a9346c">testattr = attribute features {
+	       list { xsd:token+ }
+	   } ?
+	   &amp; attribute when { text }?
+	   &amp; attribute src { text }?
+	   &amp; attribute version { text }?
+</pre>
+</div>
+
+<p>
+The attributes should be interpreted as follows:
+</p>
+
+<ul class="org-ul">
+<li><p>
+<code>features</code> is a set of one or more feature tokens. Feature tokens identify
+features that the implementation must support in order for this test to pass.
+The test should be skipped if it identifies any unsupported features.
+</p>
+
+<p>
+The set of feature tokens is a bit ad hoc. Here’s a summary of the feature
+tokens at the time this document was written:
+</p>
+
+<ul class="org-ul">
+<li><code>archive-order</code>, ???</li>
+<li><code>dtd-id-ref-warning</code>, a RELAX NG validator capable of reporting
+DTD-based ID/IDREF warnings is required.</li>
+<li><code>lazy-eval</code>, lazy evaluation of variable bindings is required.</li>
+<li><code>p-validate-with-relax-ng</code>, a RELAX NG validator is required.</li>
+<li><code>p-validate-with-schematron</code>, a Schematron validator is required.</li>
+<li><code>p-validate-with-xsd</code>, a W3C XML Schema validator is required.</li>
+<li><code>webaccess</code>, access to the web is required (this test cannot be run offline).</li>
+<li><code>xquery_1_0</code>, an XQuery 1.0 processor is required.</li>
+<li><code>xquery_3_0</code>, an XQuery 3.0 processor is required.</li>
+<li><code>xquery_3_1</code>, an XQuery 3.1 processor is required.</li>
+<li><code>xslt-1</code>, an XSLT 1.0 processor is required.</li>
+<li><code>xslt-1-output-base-uri</code>, ???</li>
+<li><code>xslt-2</code>, an XSLT 2.0 processor is required.</li>
+<li><code>xslt-3</code>, an XSLT 3.0 processor is required.</li>
+<li><code>xslt-serialization</code>, ???</li>
+</ul></li>
+
+<li><code>when</code> specifies an XPath expression that can be evaluated statically by
+the test processor. If the effective boolean value of the result is <code>false()</code>, the
+test is ignored.</li>
+
+<li><code>src</code> specifies a URI where the <code>test</code> (or <code>test-suite</code>) is located. If this
+attribute is specified, the element on which it occurs must be empty.</li>
+
+<li><code>version</code> specifies the version of the XProc processor required for this test.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-s.tests" class="outline-2">
+<h2 id="s.tests"><span class="section-number-2">6.</span> Tests</h2>
+<div class="outline-text-2" id="text-s.tests">
+<p>
+If a test specifies a particular <code>platform</code>, it is only run on that platform.
+</p>
+
+<p>
+There are two kinds of tests, passing tests and failing tests.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org99932bd">test = passingTest | failingTest
+</pre>
+</div>
+
+<p>
+Passing and failing tests are mostly the same. Tests have <a href="#s.common-attributes">common
+attributes</a>, <a href="#s.metadata">metadata</a>, and a <a href="#s.description">description</a>. The body of the test in each
+case consists of <code>property</code>, <code>filetest–, ~input</code>, <code>output</code>, and <code>pipeline</code>
+elements.
+</p>
+
+<p>
+A passing test has an <code>expected</code> attribute (that must have the value be <code>pass</code>)
+and may have <code>schematron</code> tests to verify the results.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org75d598c">passingTest =
+    element t:test {
+	testattr
+      &amp; attribute expected { "pass" }
+      &amp; attribute platform { ("Linux" | "MacOS" | "Windows") }?
+      &amp; (info, description?,
+	 (property* &amp; file-environment? &amp; input* &amp; option* &amp; pipeline? &amp; schematron?))
+    }
+</pre>
+</div>
+
+<p>
+A failing test has an <code>expected</code> attribute (that must have the value be <code>fail</code>)
+and must specify one or more expected error conditions.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="orgd49ddc4">failingTest =
+    element t:test {
+	testattr
+      &amp; attribute expected { "fail" }
+      &amp; attribute code { xsd:NMTOKENS }
+      &amp; attribute platform { ("Linux" | "MacOS" | "Windows") }?
+      &amp; (info, description?,
+	 (property* &amp; file-environment? &amp; input* &amp; option* &amp; pipeline?))
+    }
+</pre>
+</div>
+
+<p>
+Broadly speaking, the test harness sets the specified properties and
+runs the specified pipeline with the specified inputs and options. A
+passing test must complete without error, or it must be recorded as a
+failure. If it completes, its output is tested against any Schematron
+rules provided. No assertions must be raised.
+</p>
+
+<p>
+If a failing test raises one of the specified error codes, it is a
+“pass” from the perspective of the test suite, otherwise it must be
+recorded as a failure.
+</p>
+
+<p>
+Like tests and test-suites, inputs, pipelines, and Schematron rules
+can be specified inline or with a <code>src</code> attribute that points to their
+content.
+</p>
+</div>
+
+<div id="outline-container-s.properties" class="outline-3">
+<h3 id="s.properties"><span class="section-number-3">6.1.</span> Properties</h3>
+<div class="outline-text-3" id="text-s.properties">
+<p>
+A property is a name/value pair. These must be made available to the
+implementation, but the precise mechanism is necessarily
+implementation defined.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org157bf5f">property =
+    element t:property {
+	attribute name { text }
+      &amp; attribute value { text }
+    }
+</pre>
+</div>
+
+<p>
+On the Java platform, these are system properties.
+</p>
+</div>
+</div>
+
+<div id="outline-container-s.file-environment" class="outline-3">
+<h3 id="s.file-environment"><span class="section-number-3">6.2.</span> File environment</h3>
+<div class="outline-text-3" id="text-s.file-environment">
+<p>
+The optional <code>file-environment</code> element defines a test environment in the local 
+filesystem to run tests for steps from the file steps specification. The
+<code>file</code> element specifies that a file with the the given path (and the
+requested properties) should be created. The <code>folder</code> element specifies the same
+for folders. All pathes must be relative. The test harness has to resolve them 
+agains a folder "testfolder". This folder is located in the parent folder of the
+<code>test</code> element. The test harness is required to create "testfolder" when a 
+<code>file-environment</code> element is present and delete it after the test is finished.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="orgd570872">file-environment =
+    element t:file-environment{
+	(file* &amp; folder*)
+    }
+file = 
+    element t:file{
+	filetest-attr
+	&amp; filetest-content?
+    }
+filetest-content = text
+folder = 
+    element t:folder{
+	filetest-attr
+    }
+filetest-attr = 
+    attribute path {xsd:anyURI} 
+    &amp; attribute last-modified {xsd:dateTime}?
+    &amp; attribute readable {xsd:boolean}?
+    &amp; attribute writable {xsd:boolean}?
+    &amp; attribute hidden {xsd:boolean}?
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-s.inputs" class="outline-3">
+<h3 id="s.inputs"><span class="section-number-3">6.3.</span> Inputs</h3>
+<div class="outline-text-3" id="text-s.inputs">
+<p>
+Each <code>input</code> element identifies the input for a source port on the pipeline.
+XML and text documents can be placed inline; other media types must be
+stored externally and identified by URI.
+</p>
+
+<p>
+If several inputs identify the same <code>port</code>, then the sequence of
+documents identified appears on that port, in document order of the <code>input</code>
+elements in the test.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="org9eb87a3">input =
+    element t:input {
+	attribute port { text }
+      &amp; attribute src { text }?
+      &amp; any*
+    }
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-s.options" class="outline-3">
+<h3 id="s.options"><span class="section-number-3">6.4.</span> Options</h3>
+<div class="outline-text-3" id="text-s.options">
+<p>
+Each <code>option</code> element identifies the value for a pipeline option. If a
+<code>select</code> attribute is provided, it must be an XPath expression.
+Evaluating that expression gives the value of the option. If the
+<code>select</code> attribute is not provided, the contents of the element is the
+value of the option.
+</p>
+
+<p>
+If <code>static</code> is specified, and <code>true</code>, the option is a static option and
+must be provided to the processor at compile time. Options which do
+not specify a value for <code>static</code>, or that specify the value <code>false</code>, are
+dynamic options passed to the processor at runtime with the pipeline.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="orgf8682db">option =
+    element t:option {
+	attribute name { text }
+      &amp; attribute static { xsd:boolean }?
+      &amp; attribute select { text }?
+      &amp; any*
+    }
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-s.pipeline" class="outline-3">
+<h3 id="s.pipeline"><span class="section-number-3">6.5.</span> Pipeline</h3>
+<div class="outline-text-3" id="text-s.pipeline">
+<p>
+The <code>pipeline</code> element, which can only occur once, provides the pipeline
+to be tested. The pipeline must be written so that it has only a single, primary
+output port named <code>result</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="orga9f6155">pipeline =
+    element t:pipeline {
+	attribute src { text }?
+      &amp; any*
+    }
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-s.schematron" class="outline-3">
+<h3 id="s.schematron"><span class="section-number-3">6.6.</span> Schematron</h3>
+<div class="outline-text-3" id="text-s.schematron">
+<p>
+The <code>schematron</code> element contains Schematron rules. Assertions in the
+Schematron are tested against the results of the pipeline.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="orgb894ddd">schematron =
+    element t:schematron {
+	attribute src { text }?
+      &amp; any*
+    }
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-s.namespaces" class="outline-2">
+<h2 id="s.namespaces"><span class="section-number-2">7.</span> Namespaces</h2>
+<div class="outline-text-2" id="text-s.namespaces">
+<p>
+The following namespaces are defined in this schema.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc" id="orgea86dfd">namespace rng  = "http://relaxng.org/ns/structure/1.0"
+namespace t = "http://xproc.org/ns/testsuite/3.0"
+namespace h = "http://www.w3.org/1999/xhtml"
+default namespace = "http://xproc.org/ns/testsuite/3.0"
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-s.composed-schema" class="outline-2">
+<h2 id="s.composed-schema"><span class="section-number-2">8.</span> Relax NG Schema</h2>
+<div class="outline-text-2" id="text-s.composed-schema">
+<p>
+These fragments are stitched together (with a few other fragments)
+into a complete schema.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rnc">namespace rng  = "http://relaxng.org/ns/structure/1.0"
+namespace t = "http://xproc.org/ns/testsuite/3.0"
+namespace h = "http://www.w3.org/1999/xhtml"
+default namespace = "http://xproc.org/ns/testsuite/3.0"
+
+start = test | test-suite | test-div
+
+testattr = attribute features {
+	       list { xsd:token+ }
+	   } ?
+	   &amp; attribute when { text }?
+	   &amp; attribute src { text }?
+	   &amp; attribute version { text }?
+
+test-suite =
+    element t:test-suite {
+	testattr,
+	(info, description?, property*, test*, test-div*)
+    }
+
+passingTest =
+    element t:test {
+	testattr
+      &amp; attribute expected { "pass" }
+      &amp; attribute platform { ("Linux" | "MacOS" | "Windows") }?
+      &amp; (info, description?,
+	 (property* &amp; file-environment? &amp; input* &amp; option* &amp; pipeline? &amp; schematron?))
+    }
+
+failingTest =
+    element t:test {
+	testattr
+      &amp; attribute expected { "fail" }
+      &amp; attribute code { xsd:NMTOKENS }
+      &amp; attribute platform { ("Linux" | "MacOS" | "Windows") }?
+      &amp; (info, description?,
+	 (property* &amp; file-environment? &amp; input* &amp; option* &amp; pipeline?))
+    }
+
+file-environment =
+    element t:file-environment{
+	(file* &amp; folder*)
+    }
+file = 
+    element t:file{
+	filetest-attr
+	&amp; filetest-content?
+    }
+filetest-content = text
+folder = 
+    element t:folder{
+	filetest-attr
+    }
+filetest-attr = 
+    attribute path {xsd:anyURI} 
+    &amp; attribute last-modified {xsd:dateTime}?
+    &amp; attribute readable {xsd:boolean}?
+    &amp; attribute writable {xsd:boolean}?
+    &amp; attribute hidden {xsd:boolean}?
+
+test-div =
+    element t:div {
+	(info, description?, property*, test*, test-div*)
+    }
+
+info =
+    element t:info {
+	title
+	&amp; revision-history
+	&amp; specref*
+    }
+
+author =
+    element t:author {
+	attribute initials { text }?
+      &amp; name?
+      &amp; email?
+      &amp; uri?
+    }
+
+name = element t:name { text }
+email = element t:email { text }
+uri = element t:uri { xsd:anyURI }
+
+revision-history =
+    element t:revision-history {
+	revision+
+    }
+
+revision =
+    element t:revision {
+	attribute initials { text }?,
+	date,
+	author?,
+	description
+    }
+
+title =
+    element t:title { text }
+
+date =
+    element t:date { xsd:date|xsd:dateTime }
+
+specref =
+    element t:specref {
+	attribute spec { "xproc" | "steps" }?
+      &amp; attribute linkend { xsd:NMTOKEN }
+      &amp; empty
+    }
+
+test = passingTest | failingTest
+
+pipeline =
+    element t:pipeline {
+	attribute src { text }?
+      &amp; any*
+    }
+
+schematron =
+    element t:schematron {
+	attribute src { text }?
+      &amp; any*
+    }
+
+input =
+    element t:input {
+	attribute port { text }
+      &amp; attribute src { text }?
+      &amp; any*
+    }
+
+option =
+    element t:option {
+	attribute name { text }
+      &amp; attribute static { xsd:boolean }?
+      &amp; attribute select { text }?
+      &amp; any*
+    }
+
+any =
+    element * {
+	attribute * { text }*
+      &amp; (text | any)*
+    }
+
+anyhtml =
+    element h:* {
+	attribute * { text }*
+      &amp; (text | anyhtml)*
+    }
+
+description =
+    element t:description {
+	anyhtml+
+    }
+
+property =
+    element t:property {
+	attribute name { text }
+      &amp; attribute value { text }
+    }
+</pre>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

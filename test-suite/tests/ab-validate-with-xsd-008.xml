@@ -1,0 +1,42 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XC0156" features="p-validate-with-xsd">
+  <t:info>
+    <t:title>ab-validate-with-xsd-008</t:title>
+    <t:revision-history>
+      <t:revision>
+        <t:date>2020-07-05</t:date>
+        <t:author>
+          <t:name>Achim Berndzen</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Changed expected error code</p>
+        </t:description>
+      </t:revision>
+      <t:revision>
+        <t:date>2019-08-01</t:date>
+        <t:author>
+          <t:name>Achim Berndzen</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Initial publication</p>
+        </t:description>
+      </t:revision>
+    </t:revision-history>
+  </t:info>
+  <t:description xmlns="http://www.w3.org/1999/xhtml">
+    <p>Test p:validate-with-xml-schema with no try-namespaces</p>
+  </t:description>
+  <t:pipeline>
+<p:declare-step name="pipeline" xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+<p:output port="result"/>
+
+  <p:validate-with-xml-schema>
+    <p:with-input port="source" href="../documents/document-ns.xml"/>
+    <p:with-input port="schema">
+      <p:empty/>
+    </p:with-input>
+  </p:validate-with-xml-schema>
+</p:declare-step>
+</t:pipeline>
+</t:test>

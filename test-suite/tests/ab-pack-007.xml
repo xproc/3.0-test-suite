@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>pack 007 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-07-25</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed test: Preceding/trailing whitespace is removed.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-06-30</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed test to cover whitespace correctly.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-05-06</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Additional test for p:pack.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Testing correct handling of non element nodes by p:pack.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:pack wrapper="wrap">
+            <p:with-input port="source">
+               <p:inline>
+                  <!-- comment1 -->
+                  <doc1/>
+                  <?pi1 target?>
+               </p:inline>
+            </p:with-input>
+            <p:with-input port="alternate">
+               <p:inline>
+                  <?pi2 ?>
+                  <doc2/>
+                  <!-- comment2 -->
+               </p:inline>
+            </p:with-input>
+         </p:pack>
+         <p:wrap-sequence wrapper="doc"/>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="doc">The document root is not doc.</s:assert>
+               <s:assert test="doc/wrap/child::node()[1] instance of text()">First child of wrap should be a text.</s:assert>
+               <s:assert test="doc/wrap/child::node()[2] instance of comment()">Second child of wrap should be a comment.</s:assert>
+               <s:assert test="doc/wrap/child::node()[3] instance of text()">Third child of wrap should be a text.</s:assert>
+               <s:assert test="doc/wrap/child::node()[4] instance of element()">Forth child of wrap should be an element.</s:assert>
+               <s:assert test="doc/wrap/child::node()[5] instance of text()">Fifth child of wrap should be a text.</s:assert>
+               <s:assert test="doc/wrap/child::node()[6] instance of processing-instruction()">Sixth child of wrap should be a pi.</s:assert>
+               <s:assert test="doc/wrap/child::node()[7] instance of text()">Seventh child of wrap should be a text.</s:assert>
+               <s:assert test="doc/wrap/child::node()[8] instance of processing-instruction()">Eighth child of wrap should be an pi.</s:assert>
+               <s:assert test="doc/wrap/child::node()[9] instance of text()">Ninth child of wrap should be a text.</s:assert>
+               <s:assert test="doc/wrap/child::node()[10] instance of element()">Tenth child of wrap should be an element.</s:assert>
+               <s:assert test="doc/wrap/child::node()[11] instance of text()">Eleventh child of wrap should be an element.</s:assert>
+               <s:assert test="doc/wrap/child::node()[12] instance of comment()">Twelfth child of wrap should be a comment.</s:assert>
+               <s:assert test="doc/wrap/child::node()[13] instance of text()">Thirteenths child of wrap should be a text.</s:assert>
+               <s:assert test="count(doc/wrap/child::node())=13">Element 'wrap' should have 10 children.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

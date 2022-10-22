@@ -1,0 +1,31 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+   xmlns:err="http://www.w3.org/ns/xproc-error"
+   expected="fail" code="err:XC0085">
+   <t:info>
+      <t:title>p:archive-manifest 008 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-08-25</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial tests for p:archive-manifest</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:archive-manifest: Test XC0085 is raised, format is not an archive/unknown.</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+         <p:output port="result"/>
+         
+         <p:archive-manifest format="i-am-not-the-format-of-an-archive">
+            <p:with-input href="../documents/archive.zip" />
+         </p:archive-manifest>     
+      </p:declare-step>
+   </t:pipeline>
+</t:test>

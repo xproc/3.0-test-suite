@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>p:unwrap 013 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-08-08</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>New test.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:unwrap to change content-type to "text/plain" for empty document node.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="pipeline"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:unwrap match="root">
+            <p:with-input>
+               <p:inline document-properties="map{'base-uri' : 'http://xproc.org/ns/testsuite/3.0',                                                   
+                                                  'serialization' : map{'indent' : true()}}">
+                  <root />
+               </p:inline>
+            </p:with-input>
+         </p:unwrap>
+         <p:identity>
+            <p:with-input><result>{p:document-property(., 'content-type')}</result></p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">The root element is not 'result'.</s:assert>
+               <s:assert test="result/text()='text/plain'">The content-type is not text/plain.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

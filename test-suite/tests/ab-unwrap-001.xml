@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>p:unwrap 001 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-06-16</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:unwrap (Partly ported from 1.0)</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:unwrap</p>
+   </t:description>
+   <t:input port="source">
+      <p:pipeline name="pipeline"
+                  xmlns:p="http://www.w3.org/ns/xproc">
+         <p:unwrap>
+            <p:with-option name="match"
+                           value="p:unwrap"/>
+         </p:unwrap>
+      </p:pipeline>
+   </t:input>
+   <t:pipeline>
+      <p:declare-step name="pipeline"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:input port="source"/>
+         <p:output port="result"/>
+         <p:unwrap match="p:unwrap"/>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="p"
+               uri="http://www.w3.org/ns/xproc"/>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="/p:pipeline">Root element is not 'p:pipeline'.</s:assert>
+               <s:assert test="count(/p:pipeline/*)=1">Root element should have exactly one child.</s:assert>
+               <s:assert test="/p:pipeline/p:with-option">Root element should have child 'p:with-option'.</s:assert>
+               <s:assert test="/p:pipeline/p:with-option/@name='match'">Element 'p:with-option' should have attribute 'name'='match'.</s:assert>
+               <s:assert test="/p:pipeline/p:with-option/@value='p:unwrap'">Element 'p:with-option' should have attribute 'value'='p:unwrap'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

@@ -1,0 +1,48 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XD0011">
+   <t:info>
+      <t:title>p:archive 071 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-06-11</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Setting command to 'create' to make sure the error is raised.</p>
+               <p>This revision is necessary due to step spec change [11].</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-09-01</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:archive</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:archive: XD0011 must be raised if resource mentioned in manifest does not exist.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+                      xmlns:c="http://www.w3.org/ns/xproc-step" version="3.0">
+            <p:output port="result"/>        
+
+            <p:archive format="zip" parameters="map{'command' : 'create'}">
+               <p:with-input port="source"><p:empty /></p:with-input>
+               <p:with-input port="manifest">
+                  <c:archive>
+                     <c:entry name="a.xml" href="i-do-not-exist" />
+                  </c:archive>
+               </p:with-input>
+               <p:with-input port="archive"><p:empty /></p:with-input>
+            </p:archive>
+         
+      </p:declare-step>
+   </t:pipeline>
+</t:test>

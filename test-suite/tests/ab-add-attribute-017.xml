@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>Add-attribute-017 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-11-19</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test from p:document-properties-document() to p:document-properties().</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-02-16</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added new tests for p:add-attribute.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests document-properties are preserved on p:add-attribute.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:identity>
+            <p:with-input>
+               <p:inline document-properties="map{'base-uri' : 'http://base-uri' ,                   'add-prop' : 'some-additional-prop'}">
+                  <doc/>
+               </p:inline>
+            </p:with-input>
+         </p:identity>
+         <p:add-attribute attribute-value="5"
+                          attribute-name="att"/>
+         <p:cast-content-type content-type="application/xml">
+            <p:with-input select="p:document-properties(.)"/>
+         </p:cast-content-type>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:ns prefix="j"
+               uri="http://www.w3.org/2005/xpath-functions"/>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="j:map">The document root is not 'map'.</s:assert>
+               <s:assert test="j:map/j:string[@key='base-uri']/text()='http://base-uri'">Value of element 'base-uri' is not 'http://base-uri'.</s:assert>
+               <s:assert test="j:map/j:string[@key='add-prop']/text()='some-additional-prop'">Value of element 'add-prop' is not 'some-additional-prop'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

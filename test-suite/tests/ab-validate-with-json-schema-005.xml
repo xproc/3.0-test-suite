@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass" features="p-validate-with-json-schema"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>p:validate-with-json-schema 005 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-09-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:validate-with-json-schema: Invalid document is replicated on port "result" if assert-valid=false.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:validate-with-json-schema assert-valid="false">
+            <p:with-input href="../documents/in-valid.json" />
+            <p:with-input port="schema" href="../documents/schema.json" />
+         </p:validate-with-json-schema>
+         
+         <p:cast-content-type content-type="application/xml" />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns uri="http://www.w3.org/2005/xpath-functions" prefix="fn" />
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="fn:map">The root element is not "map".</s:assert>
+               <s:assert test="fn:map/fn:string[@key='first-name']">There is no entry for 'first-name'.</s:assert>
+               <s:assert test="fn:map/fn:string[@key='last-name']">There is no entry for 'last-name'.</s:assert>
+               <s:assert test="fn:map/fn:string[@key='first-name']='Jane'">The string value for first-name is not 'Jane'.</s:assert>
+               <s:assert test="fn:map/fn:string[@key='last-name']='Doe'">The string value for last-name us not 'Doe'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

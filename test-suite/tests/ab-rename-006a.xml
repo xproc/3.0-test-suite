@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>p:rename-006a (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2020-01-03</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test so it doesn't use p:unescape-markup anymore.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-06-28</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fix tests by removing AVT</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-05-18</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Ported tests for p:rename</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:rename</p>
+   </t:description>
+   <t:input port="source">
+      <document>
+         <element/>
+      </document>
+   </t:input>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:input port="source"/>
+         <p:output port="result"/>
+         <p:rename match="element">
+            <p:with-option name="new-name"
+                           select="QName('http://baz.com','baz:foo')"/>
+         </p:rename>
+         <p:cast-content-type content-type="text/plain"/>
+         <p:choose>
+            <p:when test="contains(., '&lt;baz:foo') and contains(., 'xmlns:baz=&#34;http://baz.com&#34;')">
+               <p:identity>
+                  <p:with-input port="source">
+                     <p:inline>
+                        <success/>
+                     </p:inline>
+                  </p:with-input>
+               </p:identity>
+            </p:when>
+            <p:otherwise>
+               <p:identity>
+                  <p:with-input port="source">
+                     <p:inline>
+                        <failure/>
+                     </p:inline>
+                  </p:with-input>
+               </p:identity>
+            </p:otherwise>
+         </p:choose>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="success">The root element is not 'success'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

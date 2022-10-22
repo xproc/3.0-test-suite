@@ -1,0 +1,38 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XS0022">
+   <t:info>
+      <t:title>AB choose-047</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2019-07-21</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial test</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests connections for p:with-input on p:choose.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="pipeline" xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result" />
+         
+         <p:identity name="producer">
+            <p:with-input><doc/></p:with-input>
+         </p:identity>
+         <p:choose>
+            <p:with-input pipe="result1@producer" />
+            <p:when test="true()">
+               <p:identity>
+                  <p:with-input><error /></p:with-input>
+               </p:identity>
+            </p:when>
+         </p:choose>         
+      </p:declare-step>
+   </t:pipeline>
+</t:test>

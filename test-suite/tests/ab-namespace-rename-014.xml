@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>p:namespace-rename-014 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-05-17</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Ported tests for p:namespace-rename</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:namespace-rename</p>
+   </t:description>
+   <t:input port="source">
+      <d:doc d:attr="val"
+              xmlns:d="http://foo.com"/>
+   </t:input>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:input port="source"/>
+         <p:output port="result"/>
+         <p:namespace-rename from="http://foo.com"
+                             to="http://bar.com"
+                             apply-to="attributes"/>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns uri="http://foo.com"
+               prefix="foo"/>
+         <s:ns uri="http://bar.com"
+               prefix="bar"/>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="foo:doc">The root element is not 'Q{http://foo.com}doc'.</s:assert>
+               <s:assert test="*/@bar:attr">Root does not have an attribute Q{http://bar.com}attr.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

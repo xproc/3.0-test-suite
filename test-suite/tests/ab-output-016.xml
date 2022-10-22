@@ -1,0 +1,41 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XD0007">
+   <t:info>
+      <t:title>Output port 016 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2020-09-28</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added new tests</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests that XD0007 is raised if sequence arrives on a non-sequence output port.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result" sequence="true"/>
+         
+         <p:try>
+            <p:output port="result" sequence="false"/>
+            <p:identity>
+               <p:with-input>
+                  <result1 />
+                  <result2 />
+               </p:with-input>
+            </p:identity>
+            <p:catch code="error">
+               <p:output port="result" />
+               <p:identity>
+                  <p:with-input><catch /></p:with-input>
+               </p:identity>
+            </p:catch>
+         </p:try>
+         
+      </p:declare-step>
+   </t:pipeline>
+</t:test>

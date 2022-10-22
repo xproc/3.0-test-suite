@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>p:wrap 005 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-08-25</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:wrap (Partly ported from 1.0)</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:wrap</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="pipeline"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:wrap match="/"
+                 wrapper="foo">
+            <p:with-input>
+               <p:inline>
+                  <?life of pi?>
+                  <doc>
+                     <p attr="value"/>
+                  </doc>
+                  <!-- comment -->
+               </p:inline>
+            </p:with-input>
+         </p:wrap>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="foo">Root element is not 'foo'.</s:assert>
+               <s:assert test="foo/processing-instruction('life')">Root element does not have PI('life') as child.</s:assert>
+               <s:assert test="foo/doc">Root element does not child element 'doc'</s:assert>
+               <s:assert test="foo/doc/p">Element 'doc' does not have child element 'p'.</s:assert>
+               <s:assert test="foo/doc/p/@attr='value'">Element 'p' does not have attribute 'attr' with value 'value'.</s:assert>
+               <s:assert test="foo/comment()=' comment '">Root element does not have comment child with value 'comment'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

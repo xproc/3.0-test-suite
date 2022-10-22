@@ -1,0 +1,26 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XD0062">
+   <t:info>
+      <t:title>Error XD0062-005</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-07-11</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests that XD0062 is raised if document's content-type and entry in document-properties are not the same.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+                      xmlns:xs="http://www.w3.org/2001/XMLSchema" name="main" version="3.0">
+         <p:output port="result" />
+
+         <p:load href="../documents/ab-doc.xml" content-type="application/xml" document-properties="map{'content-type' : 'text/plain'}" />
+
+      </p:declare-step>
+   </t:pipeline>
+</t:test>

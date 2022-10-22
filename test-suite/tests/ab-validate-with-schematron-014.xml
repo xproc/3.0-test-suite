@@ -1,0 +1,33 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+    xmlns:err="http://www.w3.org/ns/xproc-error"
+    expected="fail" code="err:XC0151" 
+    features="p-validate-with-schematron">
+  <t:info>
+    <t:title>ab-validate-with-schematron-014</t:title>
+    <t:revision-history>
+      <t:revision>
+        <t:date>2020-07-04</t:date>
+        <t:author>
+          <t:name>Achim Berndzen</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Initial commit</p>
+        </t:description>
+      </t:revision>
+    </t:revision-history>
+  </t:info>
+  <t:description xmlns="http://www.w3.org/1999/xhtml">
+    <p>Testing that XC0151 is raised if schema is not valid.</p>
+  </t:description>
+  <t:pipeline>
+<p:declare-step name="pipeline" xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+  <p:output port="result"/>
+  
+  <p:validate-with-schematron phase="#DEFAULT">
+    <p:with-input port="source" href="../documents/docbook-valid.xml" />
+    <p:with-input port="schema"><not-schematron /></p:with-input>
+  </p:validate-with-schematron>
+</p:declare-step>
+</t:pipeline>
+  
+</t:test>

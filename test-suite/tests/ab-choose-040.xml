@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="fail" code="err:XS0077" xmlns:err="http://www.w3.org/ns/xproc-error"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>p:choose-040 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-08-26</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test because @collection may no longer be an AVT. Error needs to be raised now.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-07-20</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed test by declaring xs-namespace.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-04-05</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>New tests</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Test @collection="{XPath-expression}" on p:choose/p:when is an error.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:xs="http://www.w3.org/2001/XMLSchema">
+         <p:output port="result"/>
+         <p:variable name="selector"
+                     select="false()"
+                     as="xs:boolean"/>
+         <p:identity>
+            <p:with-input>
+               <doc1/>
+               <doc2/>
+            </p:with-input>
+         </p:identity>
+         <p:choose>
+            <p:when test="count(collection())=2"
+                    collection="{not($selector)}">
+               <p:identity>
+                  <p:with-input>
+                     <correct/>
+                  </p:with-input>
+               </p:identity>
+            </p:when>
+         </p:choose>
+      </p:declare-step>
+   </t:pipeline>
+</t:test>

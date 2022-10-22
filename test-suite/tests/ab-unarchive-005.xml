@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>p:unarchive 005 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-11-22</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test from p:document-properties-document() to p:document-properties(),
+                  and adopted absolute base uris.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-08-25</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial tests for p:unarchive</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:unarchive: Tests option 'parameters' is allowed.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="pipeline"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:unarchive parameters="map{}">
+            <p:with-input href="../documents/archive.zip"/>
+         </p:unarchive>
+         <p:for-each>
+            <p:variable name="base-uri"
+                        select="p:document-property(., 'base-uri')"/>
+            <p:add-attribute attribute-name="content-type"
+                             attribute-value="{p:document-property(., 'content-type')}">
+               <p:with-input>
+                  <entry/>
+               </p:with-input>
+            </p:add-attribute>
+            <p:add-attribute attribute-name="base-uri"
+                             attribute-value="{$base-uri}"/>
+         </p:for-each>
+         <p:wrap-sequence wrapper="result"/>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">Root element is not 'result'.</s:assert>
+               <s:assert test="count(result/entry)=10">Element 'c:archive' does not have 10 children named 'entry'</s:assert>
+               <s:assert test="result/entry[ends-with(@base-uri, 'documents/archive.zip/doc.xml')]/@content-type='application/xml'">There is no entry for 'doc.xml' with 'application/xml'.</s:assert>
+               <s:assert test="result/entry[ends-with(@base-uri, 'documents/archive.zip/text.txt')]/@content-type='text/plain'">Content-type of 'text.text' is not 'text/plain'.</s:assert>
+               <s:assert test="result/entry[ends-with(@base-uri, 'documents/archive.zip/json.json')]/@content-type='application/json'">Content-type of 'json.json' is not 'application/json'.</s:assert>
+               <s:assert test="result/entry[ends-with(@base-uri, 'documents/archive.zip/html.html')]/@content-type='text/html'">Content-type of 'html.html' is not 'text/html'.</s:assert>
+               <s:assert test="result/entry[ends-with(@base-uri, 'documents/archive.zip/fish.jpg')]/@content-type='image/jpeg' or                   result/entry[ends-with(@base-uri, 'documents/archive.zip/fish.jpg')]/@content-type='application/octet-stream'">Content-type of 'fish.jpg' is not 'image/jpg' or 'application/octet-stream'.</s:assert>
+               <s:assert test="result/entry[ends-with(@base-uri, 'documents/archive.zip/folder/doc.xml')]/@content-type='application/xml'">Content-type of 'folder/doc.xml' is not 'application/xml'.</s:assert>
+               <s:assert test="result/entry[ends-with(@base-uri, 'documents/archive.zip/folder/text.txt')]/@content-type='text/plain'">Content-type of 'folder/text.text' is not 'text/plain'.</s:assert>
+               <s:assert test="result/entry[ends-with(@base-uri, 'documents/archive.zip/folder/json.json')]/@content-type='application/json'">Content-type of 'folder/json.json' is not 'application/json'.</s:assert>
+               <s:assert test="result/entry[ends-with(@base-uri, 'documents/archive.zip/folder/html.html')]/@content-type='text/html'">Content-type of 'folder/html.html' is not 'text/html'.</s:assert>
+               <s:assert test="result/entry[ends-with(@base-uri, 'documents/archive.zip/folder/fish.jpg')]/@content-type='image/jpeg' or                   result/entry[ends-with(@base-uri, 'documents/archive.zip/folder/fish.jpg')]/@content-type='application/octet-stream'">Content-type of 'folder/fish.jpg' is not 'image/jpg' or 'application/octet-stream'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

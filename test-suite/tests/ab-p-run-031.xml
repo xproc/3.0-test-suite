@@ -1,0 +1,40 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XS0038" features="p-run">
+   <t:info>
+      <t:title>p:run-031</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-09-27</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added tests for p:run</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:run: @port is required for p:run-input.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
+         <p:run>
+            <p:with-input>
+               <p:inline>
+                  <p:declare-step version="3.0">
+                     <p:input port="source" />
+                     <p:output port="result" />
+                     <p:identity />
+                  </p:declare-step>
+               </p:inline>
+            </p:with-input>
+            <p:run-input>
+               <doc />
+            </p:run-input>
+            <p:output port="result" />
+         </p:run>    
+      </p:declare-step>
+   </t:pipeline>
+</t:test>

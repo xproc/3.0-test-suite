@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>AB-uncompress-003</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-11-19</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test from p:document-properties-document() to p:document-properties()</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2019-10-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial tests for p:compress/p:uncompress</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests document-properties uncompress result.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:uncompress content-type="application/xml"
+                       format="gzip">
+            <p:with-input>
+               <p:document href="../documents/simpledoc.gz"
+                           document-properties="map{'additional' : 'bogus'}"/>
+            </p:with-input>
+         </p:uncompress>
+         <p:cast-content-type content-type="application/xml">
+            <p:with-input select="p:document-properties(.)"/>
+         </p:cast-content-type>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="j"
+               uri="http://www.w3.org/2005/xpath-functions"/>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="j:map">The document root is not 'j:map'.</s:assert>
+               <s:assert test="j:map/j:string[@key='content-type']/text()='application/xml'">Property 'content-type' is not 'application/xml'.</s:assert>
+               <s:assert test="ends-with(j:map/j:string[@key='base-uri']/text(),'simpledoc.gz')">Property 'base-uri' does not end with 'simpledoc.gz'.</s:assert>
+               <s:assert test="j:map/j:string[@key='additional']/text()='bogus'">Property 'additional' is not 'bogus'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>

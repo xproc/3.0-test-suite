@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test features="p:http-request"
+        expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error">
+   <t:info>
+      <t:title>http-request-061 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2021-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added attribute 'queryBinding' to schematron's schema.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2020-03-18</t:date>
+            <t:author>
+               <t:name>Norman Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed the header to be in the correct namespace. Changed the test so
+               that it passes as the spec now explicitly states that the comparisons must
+               be performed in a case-insensitive manner.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2020-01-14</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added new tests for p:http-request.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests that document property headers are only used if the headers option
+      doesn’t specify a header with the same name.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:chttp="http://www.w3.org/ns/xproc-http">
+         <p:output port="result"/>
+         <p:http-request name="one"
+                         href="http://localhost:8246/service/echoheaders"
+                         method="post"
+                         headers="map{'header' : 'value1'}">
+            <p:with-input>
+               <p:inline>
+                  <doc/>
+               </p:inline>
+            </p:with-input>
+         </p:http-request>
+         <p:http-request name="two"
+                         href="http://localhost:8246/service/echoheaders"
+                         method="post">
+            <p:with-input>
+               <p:inline document-properties="map{'chttp:HEADER' : 'value2'}">
+                  <doc/>
+               </p:inline>
+            </p:with-input>
+         </p:http-request>
+         <p:http-request name="three"
+                         href="http://localhost:8246/service/echoheaders"
+                         method="post"
+                         headers="map{'header' : 'value1'}">
+            <p:with-input>
+               <p:inline document-properties="map{'chttp:HEADER' : 'value2'}">
+                  <doc/>
+               </p:inline>
+            </p:with-input>
+         </p:http-request>
+         <p:wrap-sequence wrapper="headers">
+            <p:with-input port="source"
+                          pipe="@one @two @three"/>
+         </p:wrap-sequence>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="headers">The root element is not 'doc'.</s:assert>
+            </s:rule>
+            <s:rule context="/headers">
+               <s:assert test="count(headers)=3">Wrong number of responses.</s:assert>
+               <s:assert test="headers[1]/header[@name='HEADER']/@value = 'value1'">First request gets incorrect header value.</s:assert>
+               <s:assert test="headers[2]/header[@name='HEADER']/@value = 'value2'">Second request gets incorrect header value.</s:assert>
+               <s:assert test="headers[3]/header[@name='HEADER']/@value = 'value1'">Third request gets incorrect header value.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
