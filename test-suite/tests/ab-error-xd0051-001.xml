@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test expected="fail" features="p:file-move" code="err:XD0051"
+<t:test expected="fail" code="err:XD0051"
         xmlns:err="http://www.w3.org/ns/xproc-error"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
