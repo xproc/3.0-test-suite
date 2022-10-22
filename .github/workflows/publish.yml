@@ -19,7 +19,7 @@ jobs:
         if: ${{ env.HAVE_ACCESS_TOKEN == 'true' && github.ref_name == 'master' }}
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: build
+          folder: build/html
           token: ${{ secrets.ACCESS_TOKEN }}
           branch: gh-pages
           target-folder: /
