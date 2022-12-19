@@ -1,0 +1,31 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0036">
+   <t:info>
+      <t:title>Declare step 019 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2022-12-14</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added new tests</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests XS0036 is raised if an imported step in library has the same @type as outer pipeline.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+            xmlns:test="http://test" version="3.0"
+            type="test:step">
+            <p:import href="../pipelines/ab-library-007.xpl" />
+            <p:output port="result"/>
+            
+            <p:identity>
+               <p:with-input><test-failed /></p:with-input>
+            </p:identity>
+        </p:declare-step>
+   </t:pipeline>
+</t:test>
