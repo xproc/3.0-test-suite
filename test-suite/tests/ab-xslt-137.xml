@@ -3,7 +3,7 @@
         features="xslt-3"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
-      <t:title>AB-xslt-126</t:title>
+      <t:title>AB-xslt-137</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2023-01-04</t:date>
