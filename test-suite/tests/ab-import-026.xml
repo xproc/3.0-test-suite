@@ -1,0 +1,47 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" expected="pass">
+   <t:info>
+      <t:title>p:import-026 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2023-01-28</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial test</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:import: Two libraries can import the same step. (Thanks to Erik!)</p>
+   </t:description>
+   
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+         xmlns:test="http://test" name="pipeline" version="3.0">
+         <p:import href="../pipelines/ab-import-026a.xpl"/>
+         <p:import href="../pipelines/ab-import-026b.xpl"/>
+          
+         <p:input port="source">
+            <START/>
+         </p:input>
+         <p:output port="result"/>
+         
+         <test:a/>
+         <test:b/>
+      </p:declare-step>
+   </t:pipeline>
+   
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+         xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="B/general/A/general/START">The result should be B/general/A/general/START.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
