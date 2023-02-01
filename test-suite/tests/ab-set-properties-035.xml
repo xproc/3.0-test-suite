@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>p:set-properties-035 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2023-02-01</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Test for base-uri in p:set-properties</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:set-properties removes base-uri properly</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:set-properties properties="map{}" merge="false">
+            <p:with-input>
+               <doc>
+                  <element xml:base="http://me-string" />
+               </doc>
+            </p:with-input>
+         </p:set-properties>
+         
+         <p:identity>
+            <p:with-input>
+               <result>
+                  <root-uri>{base-uri(/)}</root-uri>
+                  <element-uri>{base-uri(/*)}</element-uri>
+                  <element-with-xml-base>{base-uri(doc/element)}</element-with-xml-base>
+                  <document-prop>{p:document-property(., 'base-uri')}</document-prop>
+               </result>
+            </p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns uri="http://www.w3.org/2005/xpath-functions"
+               prefix="j"/>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="result">Root element is not 'result'.</s:assert>
+               <s:assert test="empty(result/root-uri/text())">The base-uri of root is not right.</s:assert>
+               <s:assert test="empty(result/element-uri/text())">The element-uri of root is not right.</s:assert>
+               <s:assert test="result/element-with-xml-base/text()='http://me-string'">The base-uri of element with xml:base is not right.</s:assert>
+               <s:assert test="empty(result/document-prop/text())">The base-uri document-property is not right.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
