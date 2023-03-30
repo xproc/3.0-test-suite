@@ -4,6 +4,15 @@
       <t:title>p:os-exec-018</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2023-03-30</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test as consequence of step pr #541.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2022-09-21</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -26,6 +35,9 @@
                <p:empty/>
             </p:with-input>
          </p:os-exec>
+         <p:identity>
+            <p:with-input pipe="error" />
+         </p:identity>
          <p:identity>
             <p:with-input><result>{p:document-property(.,'content-type')}</result></p:with-input>
          </p:identity>
