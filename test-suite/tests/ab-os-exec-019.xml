@@ -4,6 +4,15 @@
       <t:title>p:os-exec-019</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2023-03-30</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test as consequence of step pr #541.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2022-09-23</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -15,7 +24,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests p:os-exec: Error due to args</p>
+      <p>Tests p:os-exec: result port is empty because of error</p>
    </t:description>
    <t:pipeline>
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
@@ -26,9 +35,11 @@
                <p:empty/>
             </p:with-input>
          </p:os-exec>
-         <p:identity>
-            <p:with-input><result>{p:document-property(.,'content-type')}</result></p:with-input>
-         </p:identity>
+        <p:if test="count(collection())=0" collection="true">
+           <p:identity>
+              <p:with-input><correct-result /></p:with-input>
+           </p:identity>
+        </p:if>
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
@@ -36,8 +47,7 @@
          xmlns:s="http://purl.oclc.org/dsdl/schematron">
          <s:pattern>
             <s:rule context="/">
-               <s:assert test="result">The document root is not 'result'.</s:assert>
-               <s:assert test="result/text()='text/plain'">Content type is not 'text/plain'.</s:assert>
+               <s:assert test="correct-result">Port "result" is not empty.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
