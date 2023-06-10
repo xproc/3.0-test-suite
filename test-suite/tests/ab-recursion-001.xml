@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>AB-recursion-001</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2023-06-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial check in.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests recursive call of XProc step.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="3.0" 
+         xmlns:test="http://test">
+         
+         <p:output port="result" serialization="map{'indent' : true()}"/>
+         
+         <p:declare-step type="test:recursive" name="recursive">
+            <p:input port="source" sequence="true" />
+            <p:output port="result" sequence="true" />
+            <p:option name="count" as="xs:integer" required="true" />
+            
+            <p:choose>
+               <p:when test="$count=0">
+                  <p:identity />
+               </p:when>
+               <p:otherwise>
+                  <p:identity>
+                     <p:with-input>
+                        <p:pipe step="recursive" port="source" />
+                        <p:inline><entry /></p:inline>
+                     </p:with-input>
+                  </p:identity>
+                  <test:recursive count="{$count -1}" />
+               </p:otherwise>
+            </p:choose>
+         </p:declare-step>
+         
+         <test:recursive count="100" >
+            <p:with-input><p:empty /></p:with-input>
+         </test:recursive>
+         
+         <p:wrap-sequence wrapper="result" />
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="/result">The document root is not 'result'.</s:assert>
+               <s:assert test="count(/result/entry)=100">Root element does not have 100 children named 'entry'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
