@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test expected="fail" features="p:file-move" code="err:XD0051"
+<t:test expected="fail" code="err:XD0051"
         xmlns:err="http://www.w3.org/ns/xproc-error"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>Error XD0051 007 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2023-08-14</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Removed unnecessary feature p:file-move</p>
+            </t:description>
+         </t:revision>       
          <t:revision>
             <t:date>2022-08-04</t:date>
             <t:author>
