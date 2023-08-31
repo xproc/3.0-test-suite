@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test expected="fail" code="err:XD0051"
+<t:test expected="fail" features="HOF" code="err:XD0051"
         xmlns:err="http://www.w3.org/ns/xproc-error"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
-      <t:title>Error XD0051 006 (AB)</t:title>
+      <t:title>Error XD0051 009 (AB)</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2023-08-14</t:date>
-            <t:author>
-               <t:name>Achim Berndzen</t:name>
-            </t:author>
-            <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>Removed unnecessary feature p:file-move</p>
-            </t:description>
-         </t:revision>       
-         <t:revision>
-            <t:date>2022-08-04</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
@@ -26,15 +17,15 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests XD0051</p>
+      <p>Tests XD0051: No functions allowed as result in AVT.</p>
    </t:description>
    
    <t:pipeline>
       <p:declare-step version="3.0"
                       xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result"/>
-         
-         <p:add-attribute attribute-name="att" attribute-value="{ ('text', map{'key' : 'value'}, 'text') }">
+         <p:variable name="func" select="function($a){$a}" />
+         <p:add-attribute attribute-name="att" attribute-value="{ $func }">
             <p:with-input><doc /></p:with-input>
          </p:add-attribute>
       </p:declare-step>
