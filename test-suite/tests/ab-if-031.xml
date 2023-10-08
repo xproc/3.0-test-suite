@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>AB if-031</t:title>
+      <t:revision-history>     
+         <t:revision>
+            <t:date>2023-09-15</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Additional tests for p:if</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests context item on p:if inside p:try</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="pipeline"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:identity>
+            <p:with-input>
+               <doc />
+            </p:with-input>
+         </p:identity>
+         <p:try>            
+            <p:if test="/doc">
+               <p:identity>
+                  <p:with-input><correct /></p:with-input>
+               </p:identity>
+            </p:if>
+            <p:catch>
+               <p:identity>
+                  <p:with-input><wrong /></p:with-input>
+               </p:identity>
+            </p:catch>
+         </p:try>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="correct">The root element is not 'correct'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
