@@ -6,6 +6,15 @@
       <t:title>p:file-touch-011 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2023-10-08</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test because the original test does not test anything.</p>
+            </t:description>
+         </t:revision>       
+         <t:revision>
             <t:date>2022-07-29</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -29,8 +38,13 @@
                       xmlns:p="http://www.w3.org/ns/xproc"
                       xmlns:c="http://www.w3.org/ns/xproc-step">
          <p:output port="result"/>
-         <p:file-touch href="../testfolder/file.txt"  name="touch"/>
-         <p:file-info href="../testfolder/file.txt" depends="touch" />
+         <p:file-touch href="../testfolder/file.txt" name="touch1"/>
+         <p:file-info href="../testfolder/file.txt" name="first-probe" depends="touch1"/>
+         <p:file-touch href="../testfolder/file.txt"  depends="first-probe" name="touch2"/>
+         <p:file-info href="../testfolder/file.txt" name="second-probe" depends="touch2" />
+         <p:wrap-sequence wrapper="result">
+            <p:with-input pipe="@first-probe @second-probe" />
+         </p:wrap-sequence>
       </p:declare-step>
    </t:pipeline>
    
@@ -42,10 +56,10 @@
          <s:ns uri="http://www.w3.org/2001/XMLSchema" prefix="xs" />
          <s:pattern>
             <s:rule context="/">
-               <s:assert test="c:file">Root element is not c:file.</s:assert>
-               <s:assert test="c:file/@name='file.txt'">c:file/@name is not 'file.txt'.</s:assert>
-               <s:assert test="adjust-dateTime-to-timezone(xs:dateTime(c:file/@last-modified),xs:dayTimeDuration('PT0H'))
-                  &lt;= adjust-dateTime-to-timezone(current-dateTime(),xs:dayTimeDuration('PT0H'))">c:file/@last-modified not set correctly.</s:assert>
+               <s:assert test="result">Root element is not result.</s:assert>
+               <s:assert test="result/c:file[1]/@name='file.txt' and result/c:file[2]/@name='file.txt'">result/c:file/@name is not 'file.txt'.</s:assert>
+               <s:assert test="xs:dateTime(result/c:file[1]/@last-modified)
+                  &lt;= xs:dateTime(result/c:file[2]/@last-modified)">Date of file is not correctly changed by p:file-touch.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
