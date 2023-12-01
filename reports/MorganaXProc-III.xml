@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="XProc Test Suite"
-           tests="3009"
+           tests="3020"
            errors="0"
            failures="0"
            skipped="144"
-           timestamp="2023-09-24T17:29:38">
+           timestamp="2023-12-01T16:04:46">
    <properties>
       <property name="processor" value="MorganaXProc-IIIse"/>
-      <property name="version" value="1.2.2"/>
+      <property name="version" value="1.3"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.0"/>
@@ -932,6 +932,17 @@
    <testcase name="ab-http-request-116.xml"/>
    <testcase name="ab-http-request-117.xml"/>
    <testcase name="ab-http-request-118.xml"/>
+   <testcase name="ab-i-xml-001.xml"/>
+   <testcase name="ab-i-xml-002.xml"/>
+   <testcase name="ab-i-xml-003.xml"/>
+   <testcase name="ab-i-xml-004.xml"/>
+   <testcase name="ab-i-xml-005.xml"/>
+   <testcase name="ab-i-xml-006.xml"/>
+   <testcase name="ab-i-xml-007.xml"/>
+   <testcase name="ab-i-xml-008.xml"/>
+   <testcase name="ab-i-xml-009.xml"/>
+   <testcase name="ab-i-xml-010.xml"/>
+   <testcase name="ab-i-xml-011.xml"/>
    <testcase name="ab-if-001.xml"/>
    <testcase name="ab-if-002.xml"/>
    <testcase name="ab-if-003.xml"/>
