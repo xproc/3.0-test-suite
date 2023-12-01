@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="fail" features="p:ixml" code="err:XD0038"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>AB p:ixml 007</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2023-11-25</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial check in.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:ixml: Content type xml not allowed for port 'source'.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+         version="3.0">
+         <p:output port="result"/>
+         
+         <p:ixml fail-on-error="true">
+            <p:with-input port="grammar">
+               <p:inline content-type="text/plain">
+                  date: s?, day, s, month, (s, year)? .
+                  -s: -" "+ .
+                  day: digit, digit? .
+                  -digit: "0"; "1"; "2"; "3"; "4"; "5"; "6"; "7"; "8"; "9".
+                  month: "January"; "February"; "March"; "April";
+                  "May"; "June"; "July"; "August";
+                  "September"; "October"; "November"; "December".
+                  year: (digit, digit)?, digit, digit .
+               </p:inline>
+            </p:with-input>
+            <p:with-input port="source">
+               <p:inline content-type="application/xml"><test /></p:inline>
+            </p:with-input>
+         </p:ixml>
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
