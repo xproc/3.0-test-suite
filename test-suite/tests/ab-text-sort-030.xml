@@ -5,6 +5,15 @@
       <t:title>p:text-sort-030 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2024-03-27</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Corrected URI for Unicode codepoint collation</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2022-09-03</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -22,7 +31,7 @@
       <p:declare-step version="3.0"
                       xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result"/>
-         <p:text-sort lang="de" case-order="upper-first" collation="https://www.w3.org/2005/xpath-functions/collation/codepoint">
+         <p:text-sort lang="de" case-order="upper-first" collation="http://www.w3.org/2005/xpath-functions/collation/codepoint">
             <p:with-input>
                <p:inline content-type="text/plain">b
 a
