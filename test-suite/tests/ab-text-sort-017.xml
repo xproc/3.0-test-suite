@@ -1,6 +1,6 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
         xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail" code="err:XC0098">
+        expected="fail" code="err:XD0030 err:XC0098">
    <t:info>
       <t:title>p:text-sort-017 (AB)</t:title>
       <t:revision-history>
