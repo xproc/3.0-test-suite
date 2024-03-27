@@ -1,0 +1,66 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="pass">
+  <t:info>
+    <t:title>p:compare 003 (NW)</t:title>
+    <t:revision-history>
+      <t:revision>
+        <t:date>2024-03-26</t:date>
+        <t:author>
+          <t:name>Norm Tovey-Walsh</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Created test for p:compare.</p>
+        </t:description>
+      </t:revision>
+    </t:revision-history>
+  </t:info>
+  <t:description xmlns="http://www.w3.org/1999/xhtml">
+    <p>Check if p:compare succeeds when the documents are identical if fail-if-not-equal is true.</p>
+  </t:description>
+  <t:pipeline>
+    <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+                    xmlns:test="http://test" version="3.0">
+      <p:output port="result">
+        <p:pipe step="compare" port="result"/>
+      </p:output>
+
+      <p:identity name="doc-a">
+        <p:with-input>
+          <doc>
+            <element name="first"/>
+            <element/>
+          </doc>
+        </p:with-input>
+      </p:identity>
+
+      <p:identity name="doc-b">
+        <p:with-input>
+          <doc>
+            <element name="first"/>
+            <element/>
+          </doc>
+        </p:with-input>
+      </p:identity>
+
+      <p:compare name="compare" fail-if-not-equal="true">
+        <p:with-input port="source" pipe="@doc-a"/>
+        <p:with-input port="alternate" pipe="@doc-b"/>
+      </p:compare>
+            
+    </p:declare-step>
+  </t:pipeline>
+  <t:schematron>
+    <s:schema queryBinding="xslt2"
+              xmlns:s="http://purl.oclc.org/dsdl/schematron"
+              xmlns="http://www.w3.org/1999/xhtml">
+      <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
+      <s:pattern>
+        <s:rule context="/">
+          <s:assert test="c:result">Root element is not 'c:result'.</s:assert>
+          <s:assert test="string(c:result)='true'">Result is not ‘true’.</s:assert>
+        </s:rule>
+      </s:pattern>
+    </s:schema>
+  </t:schematron>
+</t:test>
