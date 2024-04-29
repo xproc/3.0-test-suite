@@ -1,0 +1,57 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="pass">
+  <t:info>
+    <t:title>p:add-xml-base 005 (NW)</t:title>
+    <t:revision-history>
+      <t:revision>
+        <t:date>2024-04-29</t:date>
+        <t:author>
+          <t:name>Norm Tovey-Walsh</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Created test for p:add-xml-base.</p>
+        </t:description>
+      </t:revision>
+    </t:revision-history>
+  </t:info>
+  <t:description xmlns="http://www.w3.org/1999/xhtml">
+    <p>Test p:add-xml-base where the scheme changes.</p>
+  </t:description>
+  <t:pipeline>
+    <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+                    version="3.0">
+      <p:output port="result"/>
+
+      <p:identity>
+        <p:with-input href="../documents/doc-with-entities.xml"/>
+      </p:identity>
+
+      <p:set-attributes
+          attributes="map {'xml:base': 'https://tests.xproc.org/documents/book.xml'}"/>
+
+      <p:add-xml-base/>
+    </p:declare-step>
+  </t:pipeline>
+  <t:schematron>
+    <s:schema queryBinding="xslt2"
+              xmlns:s="http://purl.oclc.org/dsdl/schematron"
+              xmlns="http://www.w3.org/1999/xhtml">
+      <s:pattern>
+        <s:rule context="/">
+          <s:assert test="book">Root element is not 'book'.</s:assert>
+          <s:assert test="book/@xml:base = 'https://tests.xproc.org/documents/book.xml'">
+                    >Document element base URI is incorrect</s:assert>
+          <s:assert test="empty(book/preface/@xml:base)"
+                    >Preface should not have an xml:base attribute</s:assert>
+          <s:assert test="ends-with(book/chapter[@label='1']/@xml:base,
+                                    '/documents/subdir/chap1.xml')"
+                    >First chapter base URI doesn’t have the correct suffix</s:assert>
+          <s:assert test="ends-with(book/chapter[@label='2']/@xml:base,
+                                    '/documents/chap2.xml')"
+                    >Second chapter base URI doesn’t have the correct suffix</s:assert>
+        </s:rule>
+      </s:pattern>
+    </s:schema>
+  </t:schematron>
+</t:test>
