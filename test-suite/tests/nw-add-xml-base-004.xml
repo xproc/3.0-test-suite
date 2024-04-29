@@ -1,0 +1,34 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XC0058"
+
+>
+  <t:info>
+    <t:title>p:add-xml-base 004 (NW)</t:title>
+    <t:revision-history>
+      <t:revision>
+        <t:date>2024-04-29</t:date>
+        <t:author>
+          <t:name>Norm Tovey-Walsh</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Created test for p:add-xml-base.</p>
+        </t:description>
+      </t:revision>
+    </t:revision-history>
+  </t:info>
+  <t:description xmlns="http://www.w3.org/1999/xhtml">
+    <p>Test p:add-xml-base with all=true and relative=true.</p>
+  </t:description>
+  <t:pipeline>
+    <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+                    version="3.0">
+      <p:output port="result"/>
+
+      <p:add-xml-base relative="false" all="true">
+        <p:with-input href="../documents/doc-with-entities.xml"/>
+      </p:add-xml-base>
+            
+    </p:declare-step>
+  </t:pipeline>
+</t:test>

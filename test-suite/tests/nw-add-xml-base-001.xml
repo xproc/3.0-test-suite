@@ -1,0 +1,51 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="pass">
+  <t:info>
+    <t:title>p:add-xml-base 001 (NW)</t:title>
+    <t:revision-history>
+      <t:revision>
+        <t:date>2024-04-29</t:date>
+        <t:author>
+          <t:name>Norm Tovey-Walsh</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Created test for p:add-xml-base.</p>
+        </t:description>
+      </t:revision>
+    </t:revision-history>
+  </t:info>
+  <t:description xmlns="http://www.w3.org/1999/xhtml">
+    <p>Test p:add-xml-base.</p>
+  </t:description>
+  <t:pipeline>
+    <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+                    version="3.0">
+      <p:output port="result"/>
+
+      <p:add-xml-base>
+        <p:with-input href="../documents/doc-with-entities.xml"/>
+      </p:add-xml-base>
+            
+    </p:declare-step>
+  </t:pipeline>
+  <t:schematron>
+    <s:schema queryBinding="xslt2"
+              xmlns:s="http://purl.oclc.org/dsdl/schematron"
+              xmlns="http://www.w3.org/1999/xhtml">
+      <s:pattern>
+        <s:rule context="/">
+          <s:assert test="book">Root element is not 'book'.</s:assert>
+          <s:assert test="ends-with(book/@xml:base, '/documents/doc-with-entities.xml')"
+                    >Document element base URI doesn’t have the correct suffix</s:assert>
+          <s:assert test="empty(book/preface/@xml:base)"
+                    >Preface should not have an xml:base attribute</s:assert>
+          <s:assert test="book/chapter[@label='1']/@xml:base = 'subdir/chap1.xml'"
+                    >First chapter has wrong xml:base</s:assert>
+          <s:assert test="book/chapter[@label='2']/@xml:base = 'chap2.xml'"
+                    >Second chapter has wrong xml:base</s:assert>
+        </s:rule>
+      </s:pattern>
+    </s:schema>
+  </t:schematron>
+</t:test>
