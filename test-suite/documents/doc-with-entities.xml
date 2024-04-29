@@ -1,0 +1,9 @@
+<!DOCTYPE book [
+<!ENTITY chap1 SYSTEM "subdir/chap1.xml">
+<!ENTITY chap2 SYSTEM "chap2.xml">
+]>
+<book>
+<preface>…</preface>
+&chap1;
+&chap2;
+</book>
