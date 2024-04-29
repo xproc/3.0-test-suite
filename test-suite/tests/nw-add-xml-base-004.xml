@@ -1,8 +1,6 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
         xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail" code="err:XC0058"
-
->
+        expected="fail" code="err:XC0058">
   <t:info>
     <t:title>p:add-xml-base 004 (NW)</t:title>
     <t:revision-history>
@@ -25,7 +23,7 @@
                     version="3.0">
       <p:output port="result"/>
 
-      <p:add-xml-base relative="false" all="true">
+      <p:add-xml-base relative="true" all="true">
         <p:with-input href="../documents/doc-with-entities.xml"/>
       </p:add-xml-base>
             
