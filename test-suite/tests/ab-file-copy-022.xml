@@ -5,12 +5,22 @@
       <t:title>p:file-copy 022 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2024-04-27</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Improving tests description.</p>
+            </t:description>
+         </t:revision>   
+         <t:revision>
             <t:date>2022-08-06</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>Initial commit</p>
+               <p>This test is to check, that a file ("target/source") is not overwriten by 
+               p:file-copy's attempt to copy "source" because @overwrite is false.</p>
             </t:description>
          </t:revision>       
       </t:revision-history>
