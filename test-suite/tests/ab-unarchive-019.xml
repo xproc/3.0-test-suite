@@ -31,7 +31,7 @@
                 </p:with-input>
             </p:archive>
             
-            <p:set-properties properties="map{}" /> <!-- remove base URI -->
+            <p:set-properties properties="map{}" merge="false"/> <!-- remove base URI -->
             
             <p:unarchive/>
         </p:declare-step>
