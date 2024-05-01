@@ -4,6 +4,15 @@
    <t:info>
       <t:title>p:unarchive 001 (AB)</t:title>
       <t:revision-history>
+        <t:revision>
+          <t:date>2024-05-01</t:date>
+          <t:author>
+            <t:name>Norm Tovey-Walsh</t:name>
+          </t:author>
+          <t:description xmlns="http://www.w3.org/1999/xhtml">
+            <p>Fixed typos in the Schematron assertion messages.</p>
+          </t:description>
+        </t:revision>
          <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
