@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>p:filter 005</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2024-05-03</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Test p:filter</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:filter computes the base URI correctly.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:output port="result"/>
+
+         <p:identity>
+           <p:with-input>
+             <book>
+               <chapter xml:base="https://example.com/"/>
+             </book>
+           </p:with-input>
+         </p:identity>
+
+         <p:filter select="/book/chapter"/>
+
+         <p:identity>
+           <p:with-input>
+             <result>{base-uri(.)}</result>
+           </p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="c"
+               uri="http://www.w3.org/ns/xproc-step"/>
+         <s:pattern>
+            <s:rule context="/*">
+               <s:assert test="self::result">The result root is not result.</s:assert>
+               <s:assert test=". = 'https://example.com/'">The base URI is incorrect.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
