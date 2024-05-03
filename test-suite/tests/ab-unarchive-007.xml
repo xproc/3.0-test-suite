@@ -1,9 +1,18 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
    xmlns:err="http://www.w3.org/ns/xproc-error"
-   expected="fail" code="err:XC0085">
+   expected="fail" code="err:XC0081 err:XC0085">
    <t:info>
       <t:title>p:unarchive 007 (AB)</t:title>
       <t:revision-history>
+        <t:revision>
+          <t:date>2024-05-01</t:date>
+          <t:author>
+            <t:name>Norm Tovey-Walsh</t:name>
+          </t:author>
+          <t:description xmlns="http://www.w3.org/1999/xhtml">
+            <p>Allow err:XC0081 as a passing result.</p>
+          </t:description>
+        </t:revision>
          <t:revision>
             <t:date>2019-12-20</t:date>
             <t:author>
@@ -25,7 +34,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests p:unarchive: Test XC0085 is raised, if source is not a zip.</p>
+      <p>Tests p:unarchive: Test XC0081 or XC0085 is raised, if source is not a zip.</p>
    </t:description>
    
    <t:pipeline>

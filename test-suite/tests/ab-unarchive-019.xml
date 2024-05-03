@@ -6,6 +6,16 @@
         <t:title>p:unarchive 019 (AB)</t:title>
         <t:revision-history>
             <t:revision>
+                <t:date>2024-05-01</t:date>
+                <t:author>
+                    <t:name>Norm Tovey-Walsh</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>Specify merge=false on the call to set-properties so that the base URI
+                    is removed.</p>
+                </t:description>
+            </t:revision>
+            <t:revision>
                 <t:date>2019-12-21</t:date>
                 <t:author>
                     <t:name>Achim Berndzen</t:name>
@@ -31,7 +41,7 @@
                 </p:with-input>
             </p:archive>
             
-            <p:set-properties properties="map{}" /> <!-- remove base URI -->
+            <p:set-properties properties="map{}" merge="false"/> <!-- remove base URI -->
             
             <p:unarchive/>
         </p:declare-step>
