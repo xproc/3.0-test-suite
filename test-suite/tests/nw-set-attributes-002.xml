@@ -8,6 +8,15 @@
          <t:revision>
             <t:date>2024-05-04</t:date>
             <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed Q{...} notation to call of function 'QName()'</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2024-05-04</t:date>
+            <t:author>
                <t:name>Norm Tovey-Walsh</t:name>
             </t:author>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
@@ -22,8 +31,7 @@
    <t:pipeline>
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result" />
-         <p:variable name="ns" select="'http://www.w3.org/2000/xmlns/'"/>
-         <p:set-attributes match="/doc" attributes="map { Q{http://www.w3.org/2000/xmlns/}x: '5' }">
+         <p:set-attributes match="/doc" attributes="map { QName('http://www.w3.org/2000/xmlns/','x'): '5' }">
            <p:with-input>
                <doc attribute="3">
                   Some text
