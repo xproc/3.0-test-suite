@@ -123,7 +123,7 @@ tasks.register("test_suite_rng", JavaExec) {
   outputs.file "build/test-suite.rng"
 
   classpath = configurations.tools
-  main = 'com.thaiopensource.relaxng.translate.Driver'
+  mainClass = 'com.thaiopensource.relaxng.translate.Driver'
   args = ["src/main/schema/test-suite.rnc", "build/test-suite.rng"]
 }
 
