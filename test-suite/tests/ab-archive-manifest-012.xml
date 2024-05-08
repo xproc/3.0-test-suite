@@ -18,7 +18,7 @@
     </t:info>
     <t:description xmlns="http://www.w3.org/1999/xhtml">
         <p>Tests XC0120 is raised if the source of p:archive-manifest does not have base URI and
-        option `relative-to`is not present.</p>
+        option “relative-to” is not present.</p>
     </t:description>
     
     <t:pipeline>
@@ -31,7 +31,7 @@
                 </p:with-input>
             </p:archive>
             
-            <p:set-properties properties="map{}" /> <!-- remove base URI -->
+            <p:set-properties properties="map{}" merge="false"/> <!-- remove base URI -->
             
             <p:archive-manifest />
         </p:declare-step>

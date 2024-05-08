@@ -23,7 +23,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests that XD0006 is raised, if default binding for a non-sequence input port contains more than one document and non binding is supplied.</p>
+      <p>Tests that XD0006 is raised, if default binding for a non-sequence input port contains more than one document and no binding is supplied.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" xmlns:test="http://test" version="3.0">
