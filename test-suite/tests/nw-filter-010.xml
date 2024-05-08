@@ -2,7 +2,7 @@
 <t:test expected="pass"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
-      <t:title>p:filter 009 (NW)</t:title>
+      <t:title>p:filter 010 (NW)</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2024-05-08</t:date>
