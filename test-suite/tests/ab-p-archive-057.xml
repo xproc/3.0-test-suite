@@ -1,9 +1,18 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
         xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail" code="err:XC0085">
+        expected="fail" code="err:XC0081">
    <t:info>
       <t:title>p:archive 057 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2024-05-08</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed error code back from XC0085 to XC0081 as a consequence of the change in p:archive 056 (AB)</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-12-20</t:date>
             <t:author>
@@ -25,7 +34,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests p:archive: XC0085 must be raised @format and content-type do not match.</p>
+      <p>Tests p:archive: XC0081 must be raised @format and content-type do not match.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
