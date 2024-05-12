@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>Step available 002 (NW)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2024-04-01</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Test a user-defined step with a body that is conditionally present.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="main"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:ex="http://example.com/ns/xproc-extensions">
+         <p:output port="result"/>
+
+         <p:declare-step type="ex:step1">
+            <p:input port="source"/>
+            <p:output port="result"/>
+            <p:identity use-when="p:step-available('ex:step2')"/>
+         </p:declare-step>
+
+         <p:declare-step type="ex:step2">
+            <p:input port="source"/>
+            <p:output port="result"/>
+            <p:identity/>
+         </p:declare-step>
+
+         <p:identity>
+           <p:with-input>
+             <available>{p:step-available('ex:step1')}</available>
+           </p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="available = 'true'">The step should be available.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
