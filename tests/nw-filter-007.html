@@ -11,7 +11,7 @@
          <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">book</span><span class="etc">&gt;</span></span>
       <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:with-input</span><span class="etc">&gt;</span></span>
    <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:identity</span><span class="etc">&gt;</span></span>
-   <span class="stag"><span class="sto">&lt;</span><span class="gi">p:filter</span> <span class="attr"><span class="aname">select</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">/book/*[local-name(.) = $selection]</span><span class="aq">"</span></span><span class="eto">/&gt;</span></span>
+   <span class="stag"><span class="sto">&lt;</span><span class="gi">p:filter</span> <span class="attr"><span class="aname">select</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">/book/*[local-name(.) = '{$selection}']</span><span class="aq">"</span></span><span class="eto">/&gt;</span></span>
    <span class="stag"><span class="sto">&lt;</span><span class="gi">p:wrap-sequence</span> <span class="attr"><span class="aname">wrapper</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result</span><span class="aq">"</span></span><span class="eto">/&gt;</span></span>
 <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">p:declare-step</span><span class="etc">&gt;</span></span>
 </code></pre></div><div class="schematron"><h2>Schematron validation</h2><pre class="programlisting line-numbers language-markup" data-language="Markup"><code>
@@ -25,6 +25,12 @@
    <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:pattern</span><span class="etc">&gt;</span></span>
 <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:schema</span><span class="etc">&gt;</span></span>
 </code></pre></div><dl class="revision-history"><h2>Revision history</h2>
+         <dt>13 May 2024, 
+               <span class="name">Norm Tovey-Walsh</span>
+            </dt><dd><div class="description">
+               <p>Fixed test to reflect the step XPath context. (Expressions evaluated
+               in the context of a step don’t have access to variables in the pipeline.)</p>
+            </div></dd>
          <dt>08 May 2024, 
                <span class="name">Norm Tovey-Walsh</span>
             </dt><dd><div class="description">
