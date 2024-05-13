@@ -5,6 +5,16 @@
       <t:title>p:filter 008 (NW)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2024-05-13</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed test to reflect the step XPath context. (Expressions evaluated
+               in the context of a step don’t have access to variables in the pipeline.)</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2024-05-08</t:date>
             <t:author>
                <t:name>Norm Tovey-Walsh</t:name>
@@ -33,7 +43,7 @@
            </p:with-input>
          </p:identity>
 
-         <p:filter select="/book/*[local-name(.) = $selection]"/>
+         <p:filter select="/book/*[local-name(.) = '{$selection}']"/>
 
          <p:wrap-sequence wrapper="result"/>
       </p:declare-step>
