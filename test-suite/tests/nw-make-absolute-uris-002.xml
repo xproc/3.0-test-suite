@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test features="p:http-request"
+        expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error">
+   <t:info>
+      <t:title>p:make-absolute-uris 002 (NW)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2024-05-15</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Add test for p:make-absolute-uris.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Replace the content of an element.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step exclude-inline-prefixes="#all"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:c="http://www.w3.org/ns/xproc-step"
+                      xmlns:xs="http://www.w3.org/2001/XMLSchema">
+         <p:output port="result"/>
+
+         <p:make-absolute-uris match="info/@uri">
+           <p:with-input>
+             <doc xml:base="http://example.com/path/">
+               <info uri="to/thing"/>
+             </doc>
+           </p:with-input>
+         </p:make-absolute-uris>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns prefix="p"
+               uri="http://www.w3.org/ns/xproc"/>
+         <s:ns prefix="c"
+               uri="http://www.w3.org/ns/xproc-step"/>
+         <s:pattern>
+            <s:rule context="/*">
+              <s:assert test="self::doc">The root is not doc.</s:assert>
+              <s:assert test="info/@uri = 'http://example.com/path/to/thing'">The uri is incorrect.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
