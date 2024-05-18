@@ -1,0 +1,50 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="pass">
+  <t:info>
+    <t:title>p:markdown-to-text 001 (NW)</t:title>
+    <t:revision-history>
+      <t:revision>
+        <t:date>2024-05-18</t:date>
+        <t:author>
+          <t:name>Norm Tovey-Walsh</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Created test for p:markdown-to-text.</p>
+        </t:description>
+      </t:revision>
+    </t:revision-history>
+  </t:info>
+  <t:description xmlns="http://www.w3.org/1999/xhtml">
+    <p>Smoke test for the p:markdown-to-text step.</p>
+  </t:description>
+  <t:pipeline>
+    <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+                    xmlns:test="http://test" version="3.0">
+      <p:output port="result"/>
+
+      <p:markdown-to-html>
+        <p:with-input>
+          <p:inline content-type="text/plain">This is some *bold* text.</p:inline>
+        </p:with-input>
+      </p:markdown-to-html>
+    </p:declare-step>
+  </t:pipeline>
+  <t:schematron>
+    <s:schema queryBinding="xslt2"
+              xmlns:s="http://purl.oclc.org/dsdl/schematron"
+              xmlns="http://www.w3.org/1999/xhtml">
+      <s:ns prefix="h" uri="http://www.w3.org/1999/xhtml"/>
+      <s:pattern>
+        <s:rule context="/">
+          <s:assert test="h:html">Root element is not 'html'.</s:assert>
+          <s:assert test="h:html/h:head">HTML head element is missing.</s:assert>
+          <s:assert test="h:html/h:body">HTML body element is missing.</s:assert>
+          <s:assert test="h:html/h:body/h:p">HTML body has no paragraph.</s:assert>
+          <s:assert test="h:html/h:body/h:p/(h:em|h:b)">HTML paragraph has no emphasis.</s:assert>
+          <s:assert test="h:html/h:body/h:p[starts-with(., 'This is some')]">HTML paragraph has wrong text.</s:assert>
+        </s:rule>
+      </s:pattern>
+    </s:schema>
+  </t:schematron>
+</t:test>
