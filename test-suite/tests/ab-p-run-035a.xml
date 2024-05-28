@@ -1,7 +1,8 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
-       expected="pass" features="p-run">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+       xmlns:err="http://www.w3.org/ns/xproc-error"
+       code="err:XC0200" expected="fail" features="p-run">
    <t:info>
-      <t:title>p:run-035</t:title>
+      <t:title>p:run-035a</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2024-05-28</t:date>
@@ -9,26 +10,18 @@
                <t:name>Achim Berndzen</t:name>
             </t:author>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>Fixed test by removing attribute "exclude-inline-prefixes".</p>
-            </t:description>
-         </t:revision>
-         <t:revision>
-            <t:date>2022-09-30</t:date>
-            <t:author>
-               <t:name>Achim Berndzen</t:name>
-            </t:author>
-            <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>Added tests for p:run</p>
+               <p>Created new test to check "exclude-inline-prefix" is correctly handled.</p>
             </t:description>
          </t:revision>
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests p:run: Tests prefix "xs" is correctly passed to dynamic pipeline.</p>
+      <p>Tests p:run: Tests exclude-inline-prefixes.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc"
-         xmlns:xs = "http://www.w3.org/2001/XMLSchema">
+         xmlns:xs = "http://www.w3.org/2001/XMLSchema"
+         exclude-inline-prefixes="xs">
          <p:output port="result" />
          <p:run>
             <p:with-input>
@@ -47,15 +40,4 @@
          </p:run>    
       </p:declare-step>
    </t:pipeline>
-   <t:schematron>
-      <s:schema queryBinding="xslt2"
-         xmlns:s="http://purl.oclc.org/dsdl/schematron">
-         <s:pattern>
-            <s:rule context="/">
-               <s:assert test="result">The root element is not result.</s:assert>
-               <s:assert test="result/text()='true'">The text value of 'result' is not 'true'.</s:assert>
-            </s:rule>
-         </s:pattern>
-      </s:schema>
-   </t:schematron>
 </t:test>
