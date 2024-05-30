@@ -1,7 +1,7 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
         expected="pass" features="send-mail">
    <t:info>
-      <t:title>p:send-mail-001</t:title>
+      <t:title>p:send-mail-002</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2024-05-30</t:date>
@@ -15,7 +15,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Test p:send-mail. Requires Sendria server to be running.</p>
+      <p>Test p:send-mail sending HTML mail. </p>
    </t:description>
    <t:pipeline>
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
@@ -29,22 +29,11 @@
 </p:http-request>
 
 <!-- Make sure that succeeded -->
-<p:cast-content-type content-type="application/xml"/>
-<p:validate-with-schematron>
-  <p:with-input port="schema">
-    <s:schema xmlns:s="http://purl.oclc.org/dsdl/schematron">
-      <s:ns prefix="fn" uri="http://www.w3.org/2005/xpath-functions"/>
-      <s:pattern name="Root must be map">
-        <s:rule context="/fn:map">
-          <s:assert test="fn:string[@key='code'] = 'OK'">Code must be 'OK'</s:assert>
-        </s:rule>
-      </s:pattern>
-    </s:schema>
-  </p:with-input>
-</p:validate-with-schematron>
+<p:if test=".?code != 'OK'">
+  <p:error code="Q{http://example.com/}irrelevant"/>
+</p:if>
 
-<!-- Send the email message -->
-<p:send-mail parameters="map{'host':'localhost', 'port':1025,'debug':false()}"
+<p:send-mail parameters="map{'host':'localhost', 'port':1025}"
              auth="map{'username':'username','password':'password'}">
   <p:with-input>
     <p:inline>
@@ -63,9 +52,17 @@
             <emx:name>Another User</emx:name>
           </emx:Address>
         </rfc822:to>
-        <rfc822:subject>Plain text email</rfc822:subject>
+        <rfc822:subject>HTML Email</rfc822:subject>
         <emx:content type='text/plain'>
-          Do that thing.
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+              <title>Hello, World</title>
+            </head>
+            <body>
+              <h1>Hello, World!</h1>
+              <p>This is an email message encoded in HTML. This is <em>evil</em>. Don’t do this.</p>
+            </body>
+          </html>
         </emx:content>
       </emx:Message>
     </p:inline>
@@ -73,6 +70,8 @@
 </p:send-mail>
 
 <!-- Check the Sendria log -->
+<p:http-request href="http://localhost:1080/api/messages/" method="get"/>
+<p:http-request href="http://localhost:1080/api/messages/" method="get"/>
 <p:http-request href="http://localhost:1080/api/messages/" method="get"/>
 <p:cast-content-type content-type="application/xml"/>
 
@@ -86,7 +85,9 @@
           <s:rule context="/fn:map">
             <s:assert test="fn:string[@key='code'] = 'OK'">Code must be 'OK'</s:assert>
             <s:assert test="fn:array[@key='data']/fn:map/fn:string[@key='subject']
-                            = 'Plain text email'">The subject must be correct</s:assert>
+                            = 'HTML Email'">The subject must be correct</s:assert>
+            <s:assert test="fn:array[@key='data']/fn:map/fn:string[@key='type']
+                            = 'text/html'">The content type must be HTML</s:assert>
           </s:rule>
         </s:pattern>
       </s:schema>
