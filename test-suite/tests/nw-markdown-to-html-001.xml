@@ -1,9 +1,18 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" features="markdown-to-html"
         xmlns:err="http://www.w3.org/ns/xproc-error"
         expected="pass">
   <t:info>
     <t:title>p:markdown-to-text 001 (NW)</t:title>
     <t:revision-history>
+      <t:revision>
+        <t:date>2024-06-15</t:date>
+        <t:author>
+          <t:name>Achim Berndzen</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Just added features attribute to mark depencies.</p>
+        </t:description>
+      </t:revision>
       <t:revision>
         <t:date>2024-05-18</t:date>
         <t:author>
