@@ -1,9 +1,19 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
         xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail" code="err:XC0202" features="p-run">
+        expected="fail" code="err:XC0207" features="p-run">
    <t:info>
       <t:title>p:run-008</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2024-05-24</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed expected error code from XC0202 -> XC0207 as a 
+               consequence of step repo issue #567.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2022-09-24</t:date>
             <t:author>
