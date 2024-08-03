@@ -4,6 +4,15 @@
       <t:title>p:run-039</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2024-08-03</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test (and description) as now the specs says default value of options are used.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2022-10-01</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -15,7 +24,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests p:run: Tests unbound options get () as value.</p>
+      <p>Tests p:run: Tests unbound options gets default value.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
@@ -25,9 +34,9 @@
                <p:inline>
                   <p:declare-step version="3.0" xmlns:fn="http://www.w3.org/2005/xpath-functions">
                      <p:output port="result" />
-                     <p:option name="opt"  required="true"/>
+                     <p:option name="opt"  select="42"/>
                      <p:identity>
-                        <p:with-input><result>{fn:empty($opt)}</result></p:with-input>
+                        <p:with-input><result>{$opt}</result></p:with-input>
                      </p:identity>
                   </p:declare-step>
                </p:inline>
@@ -42,7 +51,7 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="result">The root element is not result.</s:assert>
-               <s:assert test="result/text()='true'">The text value of 'result' is not 'true'.</s:assert>
+               <s:assert test="result/text()='42'">The text value of 'result' is not '42'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
