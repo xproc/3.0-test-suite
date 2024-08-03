@@ -1,9 +1,18 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
         xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail" code="err:XD0036" features="p-run">
+        expected="fail" code="err:XS0018" features="p-run">
    <t:info>
       <t:title>p:run-040</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2024-08-02</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test (and description) as now the specs says required options have to be bound.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2022-10-01</t:date>
             <t:author>
@@ -16,7 +25,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests p:run: Tests unbound options get () as value.</p>
+      <p>Tests p:run: Error to be raised if required option is not bound.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
