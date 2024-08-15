@@ -5,6 +5,15 @@
       <t:title>p:archive 056 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2024-05-09</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Just for the records: Expected error was changed back to XC0081.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-12-14</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
