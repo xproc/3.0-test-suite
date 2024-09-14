@@ -2,8 +2,17 @@
 <t:test expected="pass" features="p:ixml"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
-      <t:title>AB p:ixml 004</t:title>
+      <t:title>AB p:invisible-xml 004</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2024-09-14</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed step's name to p:invisible-xml</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2023-11-25</t:date>
             <t:author>
@@ -16,13 +25,13 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests p:ixml (Example 4 from spec)</p>
+      <p>Tests p:invisible-xml (Example 4 from spec)</p>
    </t:description>
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
          version="3.0">
          <p:output port="result"/>        
-         <p:ixml>
+         <p:invisible-xml>
             <p:with-input port="grammar">
                <p:inline content-type="text/plain">
                   letters: X, (A; B; C) .
@@ -36,7 +45,7 @@
             <p:with-input port="source">
                <p:inline content-type="text/plain">a123</p:inline>
             </p:with-input>
-         </p:ixml>     
+         </p:invisible-xml>     
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
