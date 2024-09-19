@@ -6,6 +6,15 @@
       <t:title>p:document 002</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2024-09-19</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed expected document title due to change of website.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -66,7 +75,7 @@
                prefix="html"/>
          <s:pattern>
             <s:rule context="/">
-               <s:assert test="html:html/html:head/html:title='XProc 3.0 - Learning'">Element hmtl/head/title is not 'XProc 3.0 - Learning'.</s:assert>
+               <s:assert test="html:html/html:head/html:title='XProc - Learning'">Element hmtl/head/title is not 'XProc - Learning'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
