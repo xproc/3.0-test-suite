@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>p:namespace-rename-021 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2024-09-28</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added test.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:namespace-rename renames attributes correctly. (Implicit 'all')</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+         <p:input port="source">
+            <some-document >
+               <contents a="b"/>
+            </some-document>
+         </p:input>
+         <p:output port="result"/>
+         
+         <p:namespace-rename  to="#some-namespace"/>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:ns uri="#some-namespace"
+               prefix="bar"/>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="bar:some-document">The root element is not 'Q{#some-namespace}some-document'.</s:assert>
+               <s:assert test="bar:some-document/bar:contents">There is no child element 'Q{#some-namespace}contents'.</s:assert>
+               <s:assert test="bar:some-document/bar:contents/@bar:a">There is attribute 'Q{#some-namespace}a' on element '*:contents'.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
