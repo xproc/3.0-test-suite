@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test expected="fail" code="err:XD0030"
+<t:test expected="fail" code="err:XD0030" features="eager-eval"
         xmlns:err="http://www.w3.org/ns/xproc-error"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>ab-option-057 (strict)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2024-09-28</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Marked test with feature 'eager-eval'.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2021-12-12</t:date>
             <t:author>
