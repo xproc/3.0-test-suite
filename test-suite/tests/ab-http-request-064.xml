@@ -6,6 +6,15 @@
       <t:title>http-request-064 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2024-10-05</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Corrected key 'ident' to 'indent'.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -36,7 +45,7 @@
                          method="post"
                          headers="map{'SERIALIZATION' : 'http://xproc.org/ns/testsuite/3.0'}">
             <p:with-input>
-               <p:inline document-properties="map{'serialization' : map{'ident' : true()}}">
+               <p:inline document-properties="map{'serialization' : map{'indent' : true()}}">
                   <result/>
                </p:inline>
             </p:with-input>
