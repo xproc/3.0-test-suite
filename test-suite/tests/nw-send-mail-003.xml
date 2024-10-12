@@ -4,6 +4,15 @@
       <t:title>p:send-mail-003</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2024-10-12</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Avoid content-type error if clearing the log fails.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2024-05-30</t:date>
             <t:author>
                <t:name>Norm Tovey-Walsh</t:name>
@@ -30,7 +39,11 @@
 
 <!-- Make sure that succeeded -->
 <p:if test=".?code != 'OK'">
-  <p:error code="Q{{http://example.com/}}irrelevant"/>
+  <p:error code="Q{{http://example.com/}}irrelevant">
+    <p:with-input>
+      <p:empty/>
+    </p:with-input>
+  </p:error>
 </p:if>
 
 <p:send-mail parameters="map{'host':'localhost', 'port':1025}"
