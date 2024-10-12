@@ -166,6 +166,9 @@ tasks.register("test_indexes") {
     dependsOn "test_index_setup"
 
     inputs.file "tools/xsl/test-index.xsl"
+    inputs.dir "reports"
+    inputs.dir "test-suite"
+    outputs.dir "build/html"
 
     input("source", "build/indexing.xml")
     output("result", "build/html/" + itype + ".html")
