@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <t:test features="p:http-request"
         expected="fail"
-        code="err:XC0030"
+        code="err:XC0030 err:XD0049"
         xmlns:t="http://xproc.org/ns/testsuite/3.0"
         xmlns:err="http://www.w3.org/ns/xproc-error">
    <t:info>
