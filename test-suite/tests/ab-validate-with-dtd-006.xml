@@ -25,10 +25,10 @@
                       version="3.0"
                       xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result"/>
-         <p:validate-with-dtd serialization="map{'doctype-system' : 'i-do-not-exist'}">
+         <p:validate-with-dtd serialization="map{'doctype-system' : '../documents/address.dtd'}">
             <p:with-input>
                <p:inline document-properties="map{'serialization' : 
-                                                   map{'doctype-system' : '../documents/address.dtd'}
+                                                   map{'doctype-system' : 'i-do-not-exist'}
                                                  }">
                   <address >
                      <first>Douglas</first>
