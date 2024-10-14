@@ -6,6 +6,15 @@
       <t:title>p:document 004</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2024-10-14</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed test, so an existing resource is resolved.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -64,8 +73,8 @@
          <p:output port="result"/>
          <p:identity>
             <p:with-input>
-               <p:document href="about.html"
-                           xml:base="http://xproc.org/"/>
+               <p:document href="test-suite.html"
+                           xml:base="https://xproc.org/"/>
             </p:with-input>
          </p:identity>
          <p:cast-content-type content-type="application/xml">
@@ -85,7 +94,7 @@
             <s:rule context="/">
                <s:assert test="j:map">The document root is not map.</s:assert>
                <s:assert test="starts-with(j:map/j:string[@key='content-type']/text(), 'text/html')">Content type is not text/html.</s:assert>
-               <s:assert test="j:map/j:string[@key='base-uri']/text() = 'http://xproc.org/about.html'">The base-uri property is not correct.</s:assert>
+               <s:assert test="j:map/j:string[@key='base-uri']/text() = 'https://xproc.org/test-suite.html'">The base-uri property is not correct.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
