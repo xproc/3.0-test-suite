@@ -5,6 +5,15 @@
       <t:title>ab-p-document 043 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2024-10-17</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed typo.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2024-10-14</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -32,7 +41,7 @@
             <p:with-input>
                <result>
                   <prop>{p:document-property(., 'base-uri')}</prop>
-                  <base>{fn:base-uri(.)}/</base>
+                  <base>{fn:base-uri(.)}</base>
                </result>
             </p:with-input>
          </p:identity>
