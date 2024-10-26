@@ -5,6 +5,15 @@
       <t:title>p:run-035a</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2024-10-26</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added expand-text=false where necessary.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2024-05-28</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -25,7 +34,7 @@
          <p:output port="result" />
          <p:run>
             <p:with-input>
-               <p:inline>
+               <p:inline expand-text="false">
                   <p:declare-step version="3.0">
                      <p:output port="result" />
                      <p:option name="opt" as="xs:boolean" required="true" />
