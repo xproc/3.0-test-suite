@@ -3,6 +3,15 @@
       <t:title>Option declaration 027</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2024-10-31</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed name of the called function to express the test's point.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-01-26</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -37,7 +46,7 @@
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
             <p:output port="result"/>
-            <p:option name="option" select="known-xpath-function()"/>
+            <p:option name="option" select="unknown-xpath-function()"/>
             
             <p:identity>
                 <p:with-input>
