@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test expected="fail" code="err:XC0163" features="p-validate-with-json-schema"
+<t:test expected="fail" code="err:XC0164" features="p-validate-with-json-schema"
         xmlns:t="http://xproc.org/ns/testsuite/3.0"
         xmlns:err="http://www.w3.org/ns/xproc-error">
    <t:info>
       <t:title>p:validate-with-json-schema 009 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2024-11-01</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed error code.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2022-09-04</t:date>
             <t:author>
