@@ -5,6 +5,15 @@
       <t:title>override-content-types-005 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2024-11-01</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed regular expression from '' to '}'</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2020-04-09</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -23,7 +32,7 @@
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
          <p:output port="result"/>
          
-         <p:archive-manifest override-content-types="[['', 'application/xml']]">
+         <p:archive-manifest override-content-types="[['}', 'application/xml']]">
             <p:with-input href="../documents/archive.zip" />
          </p:archive-manifest>     
       </p:declare-step>
