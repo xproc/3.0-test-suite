@@ -1,8 +1,18 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
-        xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0053">
+   xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0044">
    <t:info>
       <t:title>Import-005 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2024-11-04</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed expected error code: Was XS0053, but this error does no longer
+                  exist in XProc 3.1. So now XS0044 (no visible declaration) is raised.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-02-24</t:date>
             <t:author>
