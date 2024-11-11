@@ -22,11 +22,13 @@
 
 <t:pipeline>
   <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
-    <p:count name="step">
-      <p:with-option name="limit" select="10">
-        <p:pipe step="step" port="result"/>
+    <p:input port="source"/>
+    <p:count name="step-a">
+      <p:with-option name="limit" select="count(/*)">
+        <p:pipe step="step-b" port="result"/>
       </p:with-option>
     </p:count>
+    <p:identity name="step-b"/>
   </p:declare-step>
 </t:pipeline>
 </t:test>
