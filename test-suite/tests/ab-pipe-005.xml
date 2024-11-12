@@ -1,7 +1,16 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0001">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0022">
    <t:info>
       <t:title>pipe-005 (AB)</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2024-11-12</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed expected error code from XS0001.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-05-31</t:date>
             <t:author>
@@ -14,7 +23,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests XS001 is raised if pipe on p:with-option contains loop to same step.</p>
+      <p>Tests XS022 is raised if pipe on p:with-option contains loop to same step.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
