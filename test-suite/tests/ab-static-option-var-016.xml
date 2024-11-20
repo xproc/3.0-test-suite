@@ -1,7 +1,16 @@
-<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0088">
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" xmlns:err="http://www.w3.org/ns/xproc-error" expected="fail" code="err:XS0004 err:XS0088">
     <t:info>
         <t:title>Static variables/option 016</t:title>
         <t:revision-history>
+            <t:revision>
+                <t:date>2024-11-20</t:date>
+                <t:author>
+                    <t:name>Norm Tovey-Walsh</t:name>
+                </t:author>
+                <t:description xmlns="http://www.w3.org/1999/xhtml">
+                    <p>Added <code>err:XS0004</code> as an alternate error code.</p>
+                </t:description>
+            </t:revision>
             <t:revision>
                 <t:date>2021-11-27</t:date>
                 <t:author>
