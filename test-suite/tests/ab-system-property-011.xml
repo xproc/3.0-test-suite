@@ -1,9 +1,18 @@
 <t:test xmlns:t="http://xproc.org/ns/testsuite/3.0" 
         xmlns:err="http://www.w3.org/ns/xproc-error"
-        expected="fail" code="err:XD0015">
+        expected="fail" code="err:XD0015 err:XS0107">
    <t:info>
       <t:title>ab-system-property-011</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2024-12-04</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Allow <code>err:XS0107</code> as an alternative</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2019-07-14</t:date>
             <t:author>
