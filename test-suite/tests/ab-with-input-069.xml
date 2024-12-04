@@ -3,6 +3,15 @@
       <t:title>with-input-069</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2024-12-04</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Adjust the test to avoid a spurious err:XS0044 error.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2020-06-21</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -25,7 +34,11 @@
                <doc/>
             </p:with-input>
             <p:when test="true()">
-               <true />
+              <p:identity>
+                <p:with-input>
+                  <true />
+                </p:with-input>
+              </p:identity>
             </p:when>
          </p:choose>
       </p:declare-step>
