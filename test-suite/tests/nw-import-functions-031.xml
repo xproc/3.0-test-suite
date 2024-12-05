@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="fail" code="err:XS0105" features="xslt-function-import xquery-function-import"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>nw-import-functions-031</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2024-12-05</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Tests for p:import-function; adapted from ab-import-functions-031 but
+               uses an XQuery library module.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests p:import-functions: Laoding function with same name from xquery and xslt.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:test="http://xproc.org/ns/testsuite/3.0/function-test">
+         <p:import-functions href="../documents/xquery-library3.xq" content-type="application/xquery" />
+         <p:import-functions href="../documents/xslt-functions3.xsl" content-type="application/xslt+xml" />
+         <p:output port="result" />
+         
+         <p:identity>
+            <p:with-input><result>{test:function1('arg')}</result></p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
