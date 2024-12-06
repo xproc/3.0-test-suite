@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test expected="fail" code="err:XS0107"
-        xmlns:err="http://www.w3.org/ns/xproc-error"
-        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+<t:test expected="pass" xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
-      <t:title>nw-import-functions-002</t:title>
+      <t:title>nw-import-functions-002b</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2024-12-06</t:date>
@@ -11,7 +9,7 @@
                <t:name>Norm Tovey-Walsh</t:name>
             </t:author>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>This test should fail statically.</p>
+               <p>Adapted so that it can fail dynamically.</p>
             </t:description>
          </t:revision>
          <t:revision>
@@ -31,27 +29,40 @@
    <t:pipeline>
       <p:declare-step version="3.0"
                       xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:xs="http://www.w3.org/2001/XMLSchema"
                       xmlns:test="http://xproc.org/ns/testsuite/3.0/function-test">
          <p:import-functions href="../documents/xquery-library.xq"
                              namespace="http://example.com/1 http://example.com/1"
                              content-type="application/xquery" />
          <p:output port="result" />
 
-         <p:try>
-           <p:identity>
-             <p:with-input>
-               <result>{test:function1()}</result>
-             </p:with-input>
-           </p:identity>
-           <p:catch xmlns:err="http://www.w3.org/ns/xproc-error"
-                    code="err:XS0107">
+         <p:choose>
+           <p:when test="function-lookup(xs:QName('test:function1'), 0)">
+             <p:identity>
+               <p:with-input>
+                 <incorrect/>
+               </p:with-input>
+             </p:identity>
+           </p:when>
+           <p:otherwise>
              <p:identity>
                <p:with-input>
                  <correct/>
                </p:with-input>
              </p:identity>
-           </p:catch>
-         </p:try>
+           </p:otherwise>
+         </p:choose>
       </p:declare-step>
    </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="correct">The document root is not correct.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
 </t:test>
