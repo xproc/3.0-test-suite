@@ -10,6 +10,15 @@
                <t:name>Norm Tovey-Walsh</t:name>
             </t:author>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Removed accidental “double import” the XQuery library.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2024-12-06</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Tests for p:import-functions.</p>
             </t:description>
          </t:revision>
@@ -22,7 +31,6 @@
       <p:declare-step version="3.0"
                       xmlns:p="http://www.w3.org/ns/xproc"
                       xmlns:test="http://xproc.org/ns/testsuite/3.0/function-test">
-         <p:import-functions href="../documents/xquery-library.xq" content-type="application/xquery" />
          <p:import-functions href="../documents/xquery-library.xq" content-type="application/xquery" />
          <p:output port="result" />
          
