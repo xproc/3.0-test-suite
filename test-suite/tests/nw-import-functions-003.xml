@@ -35,7 +35,7 @@
              </p:with-input>
            </p:identity>
            <p:catch xmlns:err="http://www.w3.org/ns/xproc-error"
-                    code="err:XS0107">
+                    code="err:XD0083">
              <p:identity>
                <p:with-input>
                  <correct/>
