@@ -4,6 +4,15 @@
    <t:info>
       <t:title>nw-import-functions-003</t:title>
       <t:revision-history>
+        <t:revision>
+          <t:date>2024-12-06</t:date>
+          <t:author>
+            <t:name>Achim Berndzen</t:name>
+          </t:author>
+          <t:description xmlns="http://www.w3.org/1999/xhtml">
+            <p>Rewrote test using fn:function-lookup()</p>
+          </t:description>
+        </t:revision>
          <t:revision>
             <t:date>2024-12-06</t:date>
             <t:author>
@@ -22,28 +31,26 @@
       <p:declare-step version="3.0"
                       xmlns:p="http://www.w3.org/ns/xproc"
                       xmlns:test="http://xproc.org/ns/testsuite/3.0/function-test"
-                      xmlns:test1="http://xproc.org/ns/testsuite/3.0/function-test1">
+                      xmlns:test1="http://xproc.org/ns/testsuite/3.0/function-test1"
+                      xmlns:xs="http://www.w3.org/2001/XMLSchema">
          <p:import-functions href="../documents/xslt-functions.xsl"
                              namespace="http://xproc.org/ns/testsuite/3.0/function-test1"
                              content-type="application/xslt+xml" />
          <p:output port="result" />
-
-         <p:try>
-           <p:identity>
-             <p:with-input>
-               <result>{test:function1()}</result>
-             </p:with-input>
-           </p:identity>
-           <p:catch xmlns:err="http://www.w3.org/ns/xproc-error"
-                    code="err:XS0107">
+         
+         <p:choose>
+           <p:when test="empty(function-lookup(xs:QName('test:function1'), 0))">
              <p:identity>
-               <p:with-input>
-                 <correct/>
-               </p:with-input>
+               <p:with-input><correct /></p:with-input>
              </p:identity>
-           </p:catch>
-         </p:try>
-
+           </p:when>
+           <p:otherwise>
+             <p:identity>
+               <p:with-input><incorrect /></p:with-input>
+             </p:identity>
+           </p:otherwise>
+         </p:choose>
+         
          <p:insert position="last-child">
            <p:with-input port="insertion">
              <result>{test1:function1()}</result>
