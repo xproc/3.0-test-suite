@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="fail" code="err:XS0088"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>nw-library-004</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2024-12-06</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests that option imports are transitive.</p>
+   </t:description>
+   <t:pipeline>
+     <p:declare-step version="3.0"
+                     xmlns:p="http://www.w3.org/ns/xproc"
+                     xmlns:x="http://test">
+         <p:import href="../pipelines/nw-library-002.xpl"/>
+         <p:output port="result"/>
+
+         <p:option name="option" select="'bzzzt. nope.'"/>
+
+         <p:identity>
+           <p:with-input>
+             <result>
+               <option>{$option}</option>
+             </result>
+           </p:with-input>
+         </p:identity>
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
