@@ -25,7 +25,7 @@
                       xmlns:test1="http://xproc.org/ns/testsuite/3.0/function-test1">
          <p:import-functions href="../documents/xslt-functions.xsl"
                              namespace="http://xproc.org/ns/testsuite/3.0/function-test1"
-                             content-type="application/xslt" />
+                             content-type="application/xslt+xml" />
          <p:output port="result" />
 
          <p:try>
