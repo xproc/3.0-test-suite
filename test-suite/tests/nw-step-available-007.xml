@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+  <t:info>
+    <t:title>nw-step-available-007</t:title>
+    <t:revision-history>
+      <t:revision>
+        <t:date>2024-12-06</t:date>
+        <t:author>
+          <t:name>Norm Tovey-Walsh</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Initial commit</p>
+        </t:description>
+      </t:revision>
+    </t:revision-history>
+  </t:info>
+  <t:description xmlns="http://www.w3.org/1999/xhtml">
+    <p>Tests p:step-available with use-when and a chain of hidden steps.
+    If the use of step-available on p:import is treated as a special case,
+    this ends in failure. But an argument could be made that this contains
+    a deadlock.</p>
+  </t:description>
+  <t:pipeline>
+    <p:declare-step name="main"
+                    version="3.0"
+                    xmlns:p="http://www.w3.org/ns/xproc"
+                    xmlns:imp="http://example.com/steps"
+                    xmlns:ex="http://extension">
+
+      <p:import href="../pipelines/nw-decl1.xpl" use-when="p:step-available('imp:step2')"/>
+      <p:import href="../pipelines/nw-decl2.xpl" use-when="p:step-available('imp:step3')"/>
+      <p:import href="../pipelines/nw-decl3.xpl" use-when="p:step-available('imp:step1')"/>
+
+      <p:output port="result"/>
+      
+      <p:identity>
+        <p:with-input>
+          <result>
+            <test>{p:step-available('imp:step1')}</test>
+          </result>
+        </p:with-input>
+      </p:identity>
+    </p:declare-step>
+  </t:pipeline>
+  <t:schematron>
+    <s:schema queryBinding="xslt2"
+              xmlns:s="http://purl.oclc.org/dsdl/schematron"
+              xmlns="http://www.w3.org/1999/xhtml">
+      <s:pattern>
+        <s:rule context="/">
+          <s:assert test="result">The document root is not “result”.</s:assert>
+          <s:assert test="result/test/text()='false'">p:step-available for 'imp:step1' is wrong.</s:assert>
+        </s:rule>
+      </s:pattern>
+    </s:schema>
+  </t:schematron> 
+</t:test>
