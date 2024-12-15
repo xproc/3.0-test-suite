@@ -10,6 +10,15 @@
                <t:name>Norm Tovey-Walsh</t:name>
             </t:author>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fix argument type and test condition.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2024-12-15</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
                <p>Initial commit.</p>
             </t:description>
          </t:revision>
@@ -22,12 +31,13 @@
    </t:description>
    <t:pipeline>
       <p:declare-step version="3.0"
+                      xmlns:xs="http://www.w3.org/2001/XMLSchema"
                       xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result"/>
          <p:identity>
             <p:with-input>
                <result>
-                  <lookup-xproc>{p:lookup-uri('https://xproc.org/')}</lookup-xproc>
+                  <lookup-xproc>{p:lookup-uri(xs:anyURI('https://xproc.org/'))}</lookup-xproc>
                </result>
             </p:with-input>
          </p:identity>
@@ -35,12 +45,11 @@
    </t:pipeline>
    <t:schematron>
       <s:schema queryBinding="xslt2"
-                xmlns:s="http://purl.oclc.org/dsdl/schematron"
-                xmlns="http://www.w3.org/1999/xhtml">
+                xmlns:s="http://purl.oclc.org/dsdl/schematron">
          <s:pattern>
             <s:rule context="/">
                <s:assert test="result">The document root is not result.</s:assert>
-               <s:assert test="result/lookup-xproc/text() != 'https://xproc.org/'">Lookup URI returned an unexpected result.</s:assert>
+               <s:assert test="result/lookup-xproc/text() = 'https://xproc.org/'">Lookup URI returned an unexpected result.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
