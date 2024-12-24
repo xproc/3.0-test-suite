@@ -2,8 +2,17 @@
 <t:test expected="pass"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
-      <t:title>nw-mport-001</t:title>
+      <t:title>nw-import-001</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2024-12-24</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed a typo in the test’s title.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
