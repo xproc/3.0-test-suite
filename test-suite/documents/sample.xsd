@@ -1,0 +1,81 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:s="http://example.com/sample"
+           targetNamespace="http://example.com/sample"
+	   elementFormDefault="qualified">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace"/>
+   
+  <xs:element name="doc">
+    <xs:complexType>
+      <xs:sequence>
+	<xs:element minOccurs="0" ref="s:title"/>
+        <xs:choice maxOccurs="unbounded">
+	  <xs:element ref="s:p"/>
+	  <xs:element ref="s:div"/>
+	  <xs:element ref="s:note"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="pubdate" type="xs:date"/>
+      <xs:attribute name="validated" type="xs:boolean" default="true"/>
+      <xs:attribute ref="xml:id"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="title" type="xs:string"/>
+
+  <xs:element name="div">
+    <xs:complexType>
+      <xs:sequence>
+	<xs:element minOccurs="0" ref="s:title"/>
+        <xs:choice maxOccurs="unbounded">
+	  <xs:element ref="s:p"/>
+	  <xs:element ref="s:note"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute ref="xml:id"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="note">
+    <xs:complexType>
+      <xs:sequence>
+	<xs:element minOccurs="0" ref="s:title"/>
+	<xs:element maxOccurs="unbounded" ref="s:p"/>
+      </xs:sequence>
+      <xs:attribute ref="xml:id"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="p">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+	<xs:element ref="s:a"/>
+	<xs:element ref="s:img"/>
+	<xs:element ref="s:uri"/>
+      </xs:choice>
+      <xs:attribute ref="xml:id"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="a">
+    <xs:complexType>
+      <xs:simpleContent>
+	<xs:extension base="xs:string">
+	  <xs:attribute name="href" type="xs:anyURI"/>
+	</xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="img">
+    <xs:complexType>
+      <xs:complexContent>
+	<xs:restriction base="xs:anyType">
+	  <xs:attribute name="src" type="xs:anyURI"/>
+          <xs:attribute ref="xml:id"/>
+	</xs:restriction>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="uri" type="xs:anyURI"/>
+</xs:schema>
