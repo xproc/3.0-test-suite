@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test features="p:http-request"
+        expected="fail" code="err:XD0053"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error">
+   <t:info>
+      <t:title>nw-step-timeout-001</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2024-12-26</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Test step timeout on an atomic step.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step exclude-inline-prefixes="c xs"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc"
+                      xmlns:c="http://www.w3.org/ns/xproc-step"
+                      xmlns:xs="http://www.w3.org/2001/XMLSchema">
+         <p:output port="result"/>
+         <p:http-request method="get" timeout="2"
+                         href="http://localhost:8246/service/slow"
+                         assert="true()">
+            <p:with-input>
+               <p:empty/>
+            </p:with-input>
+         </p:http-request>
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
