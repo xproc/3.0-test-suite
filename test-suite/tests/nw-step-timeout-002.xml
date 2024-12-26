@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test features="p:http-request"
+<t:test features="p:http-request timeout-support"
         expected="fail" code="err:XD0053"
         xmlns:t="http://xproc.org/ns/testsuite/3.0"
         xmlns:err="http://www.w3.org/ns/xproc-error">
