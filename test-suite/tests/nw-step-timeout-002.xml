@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test features="p:http-request"
+        expected="fail" code="err:XD0053"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error">
+   <t:info>
+      <t:title>nw-step-timeout-002</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2024-12-26</t:date>
+            <t:author>
+               <t:name>Norman Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <!-- I suppose one could argue for repeating this test for
+        each compound step, but I'm assuming one's enough for now. -->
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Test step timeout on a compound step.</p>
+   </t:description>
+   <t:pipeline>
+     <p:declare-step exclude-inline-prefixes="c xs"
+                     version="3.0"
+                     xmlns:p="http://www.w3.org/ns/xproc"
+                     xmlns:c="http://www.w3.org/ns/xproc-step"
+                     xmlns:xs="http://www.w3.org/2001/XMLSchema">
+       <p:output port="result"/>
+
+       <p:for-each timeout="2">
+         <p:with-input><doc/></p:with-input>
+
+         <p:http-request method="get"
+                         href="http://localhost:8246/service/slow"
+                         assert="true()">
+           <p:with-input>
+             <p:empty/>
+           </p:with-input>
+         </p:http-request>
+
+         <!-- Nothing else should get run, but I can't think
+              of an interoperable way to test that... -->
+         <p:identity/>
+       </p:for-each>
+     </p:declare-step>
+   </t:pipeline>
+</t:test>
