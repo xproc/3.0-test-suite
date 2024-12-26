@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass" 
+        features="psvi-support"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>nw-psvi-001</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2024-12-26</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Proposed test.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests that p:validate-with-xml-schema produces PSVI annotations.</p>
+   </t:description>
+   <t:pipeline>
+     <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0"
+                     xmlns:ex="http://example.com/sample"
+                     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                     psvi-required="true"
+                     exclude-inline-prefixes="#all">
+       <p:output port="result" sequence="true"/>
+
+       <p:load href="../documents/dated-sample.xml"/>
+
+       <p:validate-with-xml-schema>
+         <p:with-input port="schema">
+           <p:document href="../documents/sample.xsd"/>
+         </p:with-input>
+       </p:validate-with-xml-schema>
+
+       <p:identity>
+         <p:with-input><result>{/ex:doc/@pubdate/data() instance of xs:date}</result></p:with-input>
+       </p:identity>
+     </p:declare-step>
+   </t:pipeline>
+
+   <t:schematron>
+     <s:schema queryBinding="xslt2"
+               xmlns:s="http://purl.oclc.org/dsdl/schematron"
+               xmlns="http://www.w3.org/1999/xhtml">
+       <s:ns prefix="fn" uri="http://www.w3.org/2005/xpath-functions"/>
+       <s:pattern>
+         <s:rule context="/">
+           <s:assert test="result">The root element is not result.</s:assert>
+           <s:assert test="string(.) = 'true'">The result is not “true”.</s:assert>
+         </s:rule>
+       </s:pattern>
+     </s:schema>
+   </t:schematron>
+</t:test>
