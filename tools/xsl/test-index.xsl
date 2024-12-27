@@ -198,9 +198,38 @@
         </xsl:for-each>
       </xsl:variable>
 
-      <xsl:variable name="all-spec-elements" as="xs:QName*">
-        <xsl:for-each select="$specs//*[(starts-with(@id, 'p.') or starts-with(@id, 'c.'))
-                                        and not(contains(substring(@id,3), '.'))]/@id">
+      <xsl:variable name="element-ids" as="xs:string+">
+        <xsl:for-each select="$specs//*[starts-with(@id, 'p.') or starts-with(@id, 'c.')]/@id/string()">
+          <xsl:choose>
+            <xsl:when test="contains(substring(., 3), '.')">
+              <!-- no -->
+            </xsl:when>
+            <xsl:when test="starts-with(. , 'c.archive-def-')">
+              <!-- no -->
+            </xsl:when>
+            <xsl:when test="starts-with(. , 'c.compress-def')">
+              <!-- no -->
+            </xsl:when>
+            <xsl:when test="starts-with(. , 'c.http-request-')">
+              <!-- no -->
+            </xsl:when>
+            <xsl:when test="starts-with(. , 'c.http-multipart')">
+              <!-- no -->
+            </xsl:when>
+            <xsl:when test=". = ('p.depends', 'p.library', 'p.message', 'p.timeout',
+                                 'c.param', 'c.param-set', 'p.serialization',
+                                 'p.standard', 'p.subpipeline')">
+              <!-- no -->
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:sequence select="."/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:for-each>
+      </xsl:variable>
+
+       <xsl:variable name="all-spec-elements" as="xs:QName*">
+        <xsl:for-each select="$element-ids">
           <xsl:choose>
             <!-- Ugh, I should fix the c. IDs so that they're consistently for
                  steps and not for a mixture of steps and data elements. -->
