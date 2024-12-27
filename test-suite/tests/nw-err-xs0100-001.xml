@@ -1,0 +1,36 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XS0100">
+<t:info>
+  <t:title>Test nw-err-xs0100-001</t:title>
+  <t:revision-history>
+    <t:revision>
+      <t:date>2024-12-27</t:date>
+      <t:author>
+        <t:name>Norm Tovey-Walsh</t:name>
+      </t:author>
+      <t:description xmlns="http://www.w3.org/1999/xhtml">
+        <p>Initial commit.</p>
+      </t:description>
+    </t:revision>
+  </t:revision-history>
+</t:info>
+<t:description xmlns="http://www.w3.org/1999/xhtml">
+  <p>Tests that <code>err:XS0100</code> is raised if <code>p:import</code> follows
+  a port binding.</p>
+</t:description>
+
+<t:pipeline>
+  <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+                  xmlns:ex="http://test"
+                  version="3.0">
+    <p:output port="result"/>
+
+    <p:import href="../pipelines/err-xs0071.xpl"/>
+
+    <p:identity>
+      <p:with-input><doc/></p:with-input>
+    </p:identity>
+  </p:declare-step>
+</t:pipeline>
+</t:test>
