@@ -1,0 +1,48 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="pass">
+<t:info>
+  <t:title>Test nw-sleep-001</t:title>
+  <t:revision-history>
+    <t:revision>
+      <t:date>2024-12-28</t:date>
+      <t:author>
+        <t:name>Norm Tovey-Walsh</t:name>
+      </t:author>
+      <t:description xmlns="http://www.w3.org/1999/xhtml">
+        <p>Initial commit.</p>
+      </t:description>
+    </t:revision>
+  </t:revision-history>
+</t:info>
+<t:description xmlns="http://www.w3.org/1999/xhtml">
+  <p>Tests that <code>p:sleep</code> works. In point of fact, this test just
+  assures that the step runs, it doesn’t attempt to test that the sleep lasts
+  for the correct duration.</p>
+</t:description>
+
+<t:pipeline>
+  <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+                  xmlns:ex="http://test"
+                  version="3.0">
+    <p:output port="result"/>
+
+    <p:identity>
+      <p:with-input><doc/></p:with-input>
+    </p:identity>
+
+    <p:sleep duration="1000"/>
+
+  </p:declare-step>
+</t:pipeline>
+  <t:schematron>
+    <s:schema queryBinding="xslt2"
+              xmlns:s="http://purl.oclc.org/dsdl/schematron">
+      <s:pattern>
+        <s:rule context="/">
+          <s:assert test="doc">The document root is not correct.</s:assert>
+        </s:rule>
+      </s:pattern>
+    </s:schema>
+  </t:schematron>
+</t:test>
