@@ -1,0 +1,64 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="pass" features="p-css-formatter">
+<t:info>
+  <t:title>Test nw-css-formatter-001</t:title>
+  <t:revision-history>
+    <t:revision>
+      <t:date>2024-12-28</t:date>
+      <t:author>
+        <t:name>Norm Tovey-Walsh</t:name>
+      </t:author>
+      <t:description xmlns="http://www.w3.org/1999/xhtml">
+        <p>Initial commit.</p>
+      </t:description>
+    </t:revision>
+  </t:revision-history>
+</t:info>
+<t:description xmlns="http://www.w3.org/1999/xhtml">
+  <p>Tests that <code>p:css-formatter</code> (appears to) work. There’s
+  no actual attempt to test the result.</p>
+</t:description>
+
+<t:pipeline>
+  <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+                  version="3.0">
+    <p:output port="result"/>
+
+    <p:css-formatter content-type="application/pdf">
+      <p:with-input port="source">
+        <html xmlns="http://www.w3.org/1999/xhtml">
+          <head>
+            <title>Hello, world</title>
+          </head>
+          <body>
+            <p>I can haz PDF?</p>
+          </body>
+        </html>
+      </p:with-input>
+      <p:with-input port="stylesheet">
+        <p:inline content-type="text/css">p {{ color: red; }}</p:inline>
+      </p:with-input>
+    </p:css-formatter>
+
+    <p:identity>
+      <p:with-input select="p:document-properties(.)"/>
+    </p:identity>
+
+    <p:cast-content-type content-type="application/xml"/>
+  </p:declare-step>
+</t:pipeline>
+<t:schematron>
+  <s:schema queryBinding="xslt2"
+            xmlns:s="http://purl.oclc.org/dsdl/schematron">
+    <s:ns prefix="fn" uri="http://www.w3.org/2005/xpath-functions"/>
+    <s:pattern>
+      <s:rule context="/">
+        <s:assert test="fn:map">Root element is not 'map'.</s:assert>
+        <s:assert test="fn:map/fn:string[@key='content-type'] = 'application/pdf'"
+                  >The content type is not application/pdf</s:assert>
+      </s:rule>
+    </s:pattern>
+  </s:schema>
+</t:schematron>
+</t:test>
