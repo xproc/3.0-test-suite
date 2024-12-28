@@ -5,6 +5,15 @@
       <t:title>Document properties 005</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2024-12-28</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed utterly bogus XPath expression.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-11-27</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -60,9 +69,9 @@
          <s:ns prefix="j"
                uri="http://www.w3.org/2005/xpath-functions"/>
          <s:pattern>
-            <s:rule context="/*">
-               <s:assert test="self::j:map">The pipeline root is not 'j:map'.</s:assert>
-               <s:assert test="count(/self::j:map/*)=0">Root j:map shouldnt have child elements.</s:assert>
+            <s:rule context="/">
+               <s:assert test="j:map">The pipeline root is not 'j:map'.</s:assert>
+               <s:assert test="count(j:map/*)=0">Root j:map shouldnt have child elements.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
