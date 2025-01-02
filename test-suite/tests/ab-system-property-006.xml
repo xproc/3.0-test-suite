@@ -5,6 +5,15 @@
       <t:title>ab-system-property-006</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2025-01-02</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed the test, so that version 3.1 does also pass.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -40,9 +49,10 @@
       <p:declare-step version="3.0"
                       xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result"/>
+         <p:variable name="version-string" select="p:system-property('Q{http://www.w3.org/ns/xproc}version')" />
          <p:identity>
             <p:with-input>
-               <result>{contains(p:system-property('Q{http://www.w3.org/ns/xproc}version'), '3.0')}</result>
+               <result>{contains($version-string, '3.0') or contains($version-string, '3.1')}</result>
             </p:with-input>
          </p:identity>
       </p:declare-step>
