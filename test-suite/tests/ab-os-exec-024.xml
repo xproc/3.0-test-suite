@@ -4,6 +4,15 @@
       <t:title>p:os-exec-024</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2025-01-03</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed from option shortcut to p:with-option to represent sequence.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2022-09-23</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -21,10 +30,11 @@
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result" />
          
-         <p:os-exec command="/bin/echo" args="one two three">
+         <p:os-exec command="/bin/echo">
             <p:with-input>
                <p:empty />
             </p:with-input>
+            <p:with-option name="args" select="('one', 'two', 'three')" />
          </p:os-exec>
          <p:wrap-sequence wrapper="result" />
        
