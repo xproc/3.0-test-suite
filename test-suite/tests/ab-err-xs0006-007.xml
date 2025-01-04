@@ -1,0 +1,39 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XS0006">
+<t:info>
+  <t:title>Test ab-err-xs0006-007</t:title>
+  <t:revision-history>
+    <t:revision>
+      <t:date>2025-01-04</t:date>
+      <t:author>
+        <t:name>Achim Berndzen</t:name>
+      </t:author>
+      <t:description xmlns="http://www.w3.org/1999/xhtml">
+        <p>Initial commit.</p>
+      </t:description>
+    </t:revision>
+  </t:revision-history>
+</t:info>
+<t:description xmlns="http://www.w3.org/1999/xhtml">
+  <p>Tests that <code>err:XS0006</code> is raised.</p>
+</t:description>
+
+<t:pipeline>
+  <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+    xmlns:ex="http://test"
+    version="3.0">
+    <p:output port="result"><result /></p:output>
+    
+    <p:identity>
+      <p:with-input><source /></p:with-input>
+    </p:identity>
+    
+    <p:viewport match="*">
+      <p:output port="result" />
+      <p:sink />
+    </p:viewport>
+    
+  </p:declare-step>
+</t:pipeline>
+</t:test>
