@@ -6,6 +6,15 @@
   <t:title>Test nw-sleep-002</t:title>
   <t:revision-history>
     <t:revision>
+      <t:date>2025-01-04</t:date>
+      <t:author>
+        <t:name>Achim Berndzen</t:name>
+      </t:author>
+      <t:description xmlns="http://www.w3.org/1999/xhtml">
+        <p>Moved attribute timeout from step declaration to p:group</p>
+      </t:description>
+    </t:revision>
+    <t:revision>
       <t:date>2024-12-28</t:date>
       <t:author>
         <t:name>Norm Tovey-Walsh</t:name>
@@ -23,15 +32,15 @@
 <t:pipeline>
   <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
                   xmlns:ex="http://test"
-                  timeout="2"
                   version="3.0">
     <p:output port="result"/>
+    <p:group timeout="2">
+      <p:identity>
+        <p:with-input><doc/></p:with-input>
+      </p:identity>
 
-    <p:identity>
-      <p:with-input><doc/></p:with-input>
-    </p:identity>
-
-    <p:sleep duration="5000"/>
+      <p:sleep duration="5000"/>
+    </p:group>
 
   </p:declare-step>
 </t:pipeline>
