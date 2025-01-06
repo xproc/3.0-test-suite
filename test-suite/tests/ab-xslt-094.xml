@@ -6,6 +6,17 @@
       <t:title>AB-xslt-094</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2025-01-05</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Change test to reflect changes adopted in 3.1. It’s no longer possible
+               to distinguish between an absent global context item and explicitly setting
+               it to the empty sequence.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -68,7 +79,7 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="result">The document root is not 'result'.</s:assert>
-               <s:assert test="result/text()='absent'">The text in result is not 'absent'.</s:assert>
+               <s:assert test="result/text()='present'">The text in result is not 'present'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
