@@ -32,11 +32,18 @@
    <span class="stag"><span class="sto">&lt;</span><span class="gi">s:pattern</span><span class="eto">&gt;</span></span>
       <span class="stag"><span class="sto">&lt;</span><span class="gi">s:rule</span> <span class="attr"><span class="aname">context</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">/</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
          <span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result</span><span class="aq">"</span></span><span class="eto">&gt;</span></span><span class="text">The document root is not 'result'.</span><span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span>
-         <span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result/text()='absent'</span><span class="aq">"</span></span><span class="eto">&gt;</span></span><span class="text">The text in result is not 'absent'.</span><span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span>
+         <span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">result/text()='present'</span><span class="aq">"</span></span><span class="eto">&gt;</span></span><span class="text">The text in result is not 'present'.</span><span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span>
       <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:rule</span><span class="etc">&gt;</span></span>
    <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:pattern</span><span class="etc">&gt;</span></span>
 <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:schema</span><span class="etc">&gt;</span></span>
 </code></pre></div><dl class="revision-history"><h2>Revision history</h2>
+         <dt>05 Jan 2025, 
+               <span class="name">Norm Tovey-Walsh</span>
+            </dt><dd><div class="description">
+               <p>Change test to reflect changes adopted in 3.1. It’s no longer possible
+               to distinguish between an absent global context item and explicitly setting
+               it to the empty sequence.</p>
+            </div></dd>
          <dt>10 Jun 2021, 
                <span class="name">Achim Berndzen</span>
             </dt><dd><div class="description">
