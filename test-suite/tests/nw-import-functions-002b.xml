@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test expected="pass" xmlns:t="http://xproc.org/ns/testsuite/3.0">
+<t:test expected="pass" xmlns:t="http://xproc.org/ns/testsuite/3.0"
+   features="xquery-function-import">
    <t:info>
       <t:title>nw-import-functions-002b</t:title>
       <t:revision-history>
+         <t:revision>
+            <t:date>2025-01-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Marked feature on test.</p>
+            </t:description>
+         </t:revision>
          <t:revision>
             <t:date>2024-12-06</t:date>
             <t:author>
