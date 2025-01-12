@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="fail" code="err:XD0030"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>nw-tvt-002</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2025-01-12</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Test insertion of TVTs into XML content.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+
+         <p:identity>
+           <p:with-input><doc name="value"/></p:with-input>
+         </p:identity>
+
+         <p:identity>
+           <p:with-input><copy>{/doc/@name}</copy></p:with-input>
+         </p:identity>
+
+         <p:wrap-sequence wrapper="wrapper"/>
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
