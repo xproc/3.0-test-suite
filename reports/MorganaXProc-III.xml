@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="XProc Test Suite"
-           tests="3095"
+           tests="3163"
            errors="0"
            failures="0"
-           skipped="167"
-           timestamp="2024-11-16T15:27:55">
+           skipped="200"
+           timestamp="2025-01-12T16:53:25">
    <properties>
       <property name="processor" value="MorganaXProc-IIIse"/>
-      <property name="version" value="1.4.4"/>
+      <property name="version" value="1.4.8"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.0"/>
       <property name="xpathVersion" value="3.1"/>
       <property name="psviSupported" value="false"/>
    </properties>
+   <testcase name="ab-XD0064-001.xml"/>
+   <testcase name="ab-XD0064-002.xml"/>
    <testcase name="ab-add-attribute-001.xml"/>
    <testcase name="ab-add-attribute-002.xml"/>
    <testcase name="ab-add-attribute-003.xml"/>
@@ -595,6 +597,15 @@
    <testcase name="ab-err-xs0001-023.xml"/>
    <testcase name="ab-err-xs0001-024.xml"/>
    <testcase name="ab-err-xs0001-025.xml"/>
+   <testcase name="ab-err-xs0006-001.xml"/>
+   <testcase name="ab-err-xs0006-002.xml"/>
+   <testcase name="ab-err-xs0006-003.xml"/>
+   <testcase name="ab-err-xs0006-004.xml"/>
+   <testcase name="ab-err-xs0006-005.xml"/>
+   <testcase name="ab-err-xs0006-006.xml"/>
+   <testcase name="ab-err-xs0006-007.xml"/>
+   <testcase name="ab-err-xs0006-008.xml"/>
+   <testcase name="ab-err-xs0006-009.xml"/>
    <testcase name="ab-err-xs0113-001.xml"/>
    <testcase name="ab-err-xs0113-002.xml"/>
    <testcase name="ab-err-xs0113-003.xml"/>
@@ -805,10 +816,10 @@
    <testcase name="ab-function-library-importable-003.xml"/>
    <testcase name="ab-function-library-importable-004.xml"/>
    <testcase name="ab-function-library-importable-005.xml">
-      <skipped>Feature 'xslt-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xslt-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-function-library-importable-006.xml">
-      <skipped>Feature 'xquery-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-hash-001.xml"/>
    <testcase name="ab-hash-002.xml"/>
@@ -1016,97 +1027,94 @@
    <testcase name="ab-import-028.xml"/>
    <testcase name="ab-import-029.xml"/>
    <testcase name="ab-import-functions-001.xml">
-      <skipped>Feature 'xslt-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xslt-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-002.xml">
-      <skipped>Feature 'xslt-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xslt-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-003.xml">
-      <skipped>Feature 'xslt-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xslt-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-004.xml">
-      <skipped>Feature 'xslt-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xslt-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-005.xml">
-      <skipped>Feature 'xslt-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xslt-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-006.xml">
-      <skipped>Feature 'xslt-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xslt-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-007.xml">
-      <skipped>Feature 'xslt-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xslt-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-008.xml">
-      <skipped>Feature 'xslt-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
-   </testcase>
-   <testcase name="ab-import-functions-009.xml">
-      <skipped>Feature 'xslt-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xslt-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-010.xml">
-      <skipped>Feature 'xslt-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xslt-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-011.xml">
-      <skipped>Feature 'xslt-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xslt-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-012.xml">
-      <skipped>Feature 'xslt-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xslt-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-013.xml">
-      <skipped>Feature 'xslt-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xslt-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-014.xml">
-      <skipped>Feature 'xslt-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xslt-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-015.xml">
-      <skipped>Feature 'xquery-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-016.xml">
-      <skipped>Feature 'xquery-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-017.xml">
-      <skipped>Feature 'xquery-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-018.xml">
-      <skipped>Feature 'xquery-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-019.xml">
-      <skipped>Feature 'xquery-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-020.xml">
-      <skipped>Feature 'xquery-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-021.xml">
-      <skipped>Feature 'xquery-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-022.xml">
-      <skipped>Feature 'xquery-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-023.xml">
-      <skipped>Feature 'xquery-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-024.xml">
-      <skipped>Feature 'xquery-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-025.xml">
-      <skipped>Feature 'xquery-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-026.xml">
-      <skipped>Feature 'xquery-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-027.xml">
-      <skipped>Feature 'xquery-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-028.xml">
-      <skipped>Feature 'xquery-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-029.xml">
-      <skipped>Feature 'xquery-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-030.xml">
-      <skipped>Feature 'xslt-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xslt-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-import-functions-031.xml">
-      <skipped>Feature 'xslt-function-import' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'xslt-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-inline-001.xml"/>
    <testcase name="ab-inline-002.xml"/>
@@ -1370,94 +1378,94 @@
    <testcase name="ab-option-066-strict.xml"/>
    <testcase name="ab-option-066.xml"/>
    <testcase name="ab-os-exec-001.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-002.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-003.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-004.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-005.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-006.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-007.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-008.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-009.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-010.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-011.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-012.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-013.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-014.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-015.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-016.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-017.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-018.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-019.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-020.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-021.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-022.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-023.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-exec-024.xml">
-      <skipped>Feature 'os-exec' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-info-001.xml">
-      <skipped>Feature 'os-info' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-info' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-info-002.xml">
-      <skipped>Feature 'os-info' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-info' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-info-003.xml">
-      <skipped>Feature 'os-info' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-info' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-info-004.xml">
-      <skipped>Feature 'os-info' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-info' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-info-005.xml">
-      <skipped>Feature 'os-info' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-info' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-os-info-006.xml">
-      <skipped>Feature 'os-info' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'os-info' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-output-001.xml"/>
    <testcase name="ab-output-002.xml"/>
@@ -1683,229 +1691,229 @@
    <testcase name="ab-p-pipe-024.xml"/>
    <testcase name="ab-p-pipe-025.xml"/>
    <testcase name="ab-p-run-001.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-002.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-003.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-004.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-005.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-006.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-007.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-008.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-009.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-010.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-011.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-012.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-013.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-014.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-015.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-016.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-017.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-018.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-019.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-020.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-021.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-022.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-023.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-024.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-025.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-026.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-027.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-028.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-029.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-030.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-031.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-032.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-033.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-034.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-035.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-035a.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-036.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-036a.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-037.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-038.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-039.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-040.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-041.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-042.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-043.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-044.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-045.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-046.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-047.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-048.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-049.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-049a.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-049b.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-049c.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-050.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-051.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-052.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-053.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-054.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-055.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-056.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-057.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-058.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-059.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-060.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-061.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-062.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-063.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-064.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-065.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-066.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-067.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-068.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-069.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-p-run-070.xml">
-      <skipped>Feature 'p-run' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-run' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-pack-001.xml"/>
    <testcase name="ab-pack-002.xml"/>
@@ -2417,46 +2425,46 @@
    <testcase name="ab-uuid-011.xml"/>
    <testcase name="ab-uuid-012.xml"/>
    <testcase name="ab-validate-with-dtd-001.xml">
-      <skipped>Feature 'p-validate-with-dtd' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-dtd' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-dtd-002.xml">
-      <skipped>Feature 'p-validate-with-dtd' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-dtd' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-dtd-003.xml">
-      <skipped>Feature 'p-validate-with-dtd' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-dtd' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-dtd-004.xml">
-      <skipped>Feature 'p-validate-with-dtd' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-dtd' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-dtd-005.xml">
-      <skipped>Feature 'p-validate-with-dtd' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-dtd' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-dtd-006.xml">
-      <skipped>Feature 'p-validate-with-dtd' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-dtd' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-dtd-007.xml">
-      <skipped>Feature 'p-validate-with-dtd' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-dtd' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-dtd-008.xml">
-      <skipped>Feature 'p-validate-with-dtd' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-dtd' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-dtd-009.xml">
-      <skipped>Feature 'p-validate-with-dtd' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-dtd' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-dtd-010.xml">
-      <skipped>Feature 'p-validate-with-dtd' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-dtd' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-dtd-011.xml">
-      <skipped>Feature 'p-validate-with-dtd' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-dtd' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-dtd-012.xml">
-      <skipped>Feature 'p-validate-with-dtd' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-dtd' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-dtd-013.xml">
-      <skipped>Feature 'p-validate-with-dtd' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-dtd' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-dtd-014.xml">
-      <skipped>Feature 'p-validate-with-dtd' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-dtd' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-json-schema-001.xml"/>
    <testcase name="ab-validate-with-json-schema-002.xml"/>
@@ -2468,37 +2476,37 @@
    <testcase name="ab-validate-with-json-schema-008.xml"/>
    <testcase name="ab-validate-with-json-schema-009.xml"/>
    <testcase name="ab-validate-with-nvdl-001.xml">
-      <skipped>Feature 'p-validate-with-nvdl' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-nvdl' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-nvdl-002.xml">
-      <skipped>Feature 'p-validate-with-nvdl' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-nvdl' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-nvdl-003.xml">
-      <skipped>Feature 'p-validate-with-nvdl' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-nvdl' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-nvdl-004.xml">
-      <skipped>Feature 'p-validate-with-nvdl' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-nvdl' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-nvdl-005.xml">
-      <skipped>Feature 'p-validate-with-nvdl' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-nvdl' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-nvdl-006.xml">
-      <skipped>Feature 'p-validate-with-nvdl' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-nvdl' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-nvdl-007.xml">
-      <skipped>Feature 'p-validate-with-nvdl' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-nvdl' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-nvdl-008.xml">
-      <skipped>Feature 'p-validate-with-nvdl' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-nvdl' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-nvdl-009.xml">
-      <skipped>Feature 'p-validate-with-nvdl' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-nvdl' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-nvdl-010.xml">
-      <skipped>Feature 'p-validate-with-nvdl' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-nvdl' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-nvdl-011.xml">
-      <skipped>Feature 'p-validate-with-nvdl' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'p-validate-with-nvdl' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="ab-validate-with-relax-ng-001.xml"/>
    <testcase name="ab-validate-with-relax-ng-002.xml"/>
@@ -2855,14 +2863,30 @@
    <testcase name="ab-xquery-024.xml"/>
    <testcase name="ab-xquery-025.xml"/>
    <testcase name="ab-xquery-026.xml"/>
-   <testcase name="ab-xquery-027.xml"/>
-   <testcase name="ab-xquery-028.xml"/>
-   <testcase name="ab-xquery-029.xml"/>
-   <testcase name="ab-xquery-030.xml"/>
-   <testcase name="ab-xquery-031.xml"/>
-   <testcase name="ab-xquery-032.xml"/>
-   <testcase name="ab-xquery-033.xml"/>
-   <testcase name="ab-xquery-034.xml"/>
+   <testcase name="ab-xquery-027.xml">
+      <skipped>XQuery 3.0 not supported by XQuery processor.</skipped>
+   </testcase>
+   <testcase name="ab-xquery-028.xml">
+      <skipped>XQuery 1.0 not supported by XQuery processor.</skipped>
+   </testcase>
+   <testcase name="ab-xquery-029.xml">
+      <skipped>XQuery 3.0 not supported by XQuery processor.</skipped>
+   </testcase>
+   <testcase name="ab-xquery-030.xml">
+      <skipped>XQuery 1.0 not supported by XQuery processor.</skipped>
+   </testcase>
+   <testcase name="ab-xquery-031.xml">
+      <skipped>XQuery 3.0 not supported by XQuery processor.</skipped>
+   </testcase>
+   <testcase name="ab-xquery-032.xml">
+      <skipped>XQuery 1.0 not supported by XQuery processor.</skipped>
+   </testcase>
+   <testcase name="ab-xquery-033.xml">
+      <skipped>XQuery 3.0 not supported by XQuery processor.</skipped>
+   </testcase>
+   <testcase name="ab-xquery-034.xml">
+      <skipped>XQuery 1.0 not supported by XQuery processor.</skipped>
+   </testcase>
    <testcase name="ab-xs-0043-001.xml"/>
    <testcase name="ab-xs-0043-002.xml"/>
    <testcase name="ab-xs-0043-003.xml"/>
@@ -3042,6 +3066,9 @@
    <testcase name="nw-compare-004.xml"/>
    <testcase name="nw-compare-005.xml"/>
    <testcase name="nw-compare-006.xml"/>
+   <testcase name="nw-css-formatter.xml">
+      <skipped>Feature 'p-css-formatter' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
    <testcase name="nw-dup-input-port-001.xml"/>
    <testcase name="nw-dup-input-port-002.xml"/>
    <testcase name="nw-dup-input-port-003.xml"/>
@@ -3053,6 +3080,24 @@
    <testcase name="nw-err-xs0001-008.xml"/>
    <testcase name="nw-err-xs0001-009.xml"/>
    <testcase name="nw-err-xs0001-010.xml"/>
+   <testcase name="nw-err-xs0006-001.xml"/>
+   <testcase name="nw-err-xs0015-001.xml"/>
+   <testcase name="nw-err-xs0015-002.xml"/>
+   <testcase name="nw-err-xs0015-003.xml"/>
+   <testcase name="nw-err-xs0015-004.xml"/>
+   <testcase name="nw-err-xs0015-005.xml"/>
+   <testcase name="nw-err-xs0015-006.xml"/>
+   <testcase name="nw-err-xs0015-007.xml"/>
+   <testcase name="nw-err-xs0015-008.xml"/>
+   <testcase name="nw-err-xs0029-001.xml"/>
+   <testcase name="nw-err-xs0057-001.xml"/>
+   <testcase name="nw-err-xs0057-002.xml"/>
+   <testcase name="nw-err-xs0058-001.xml"/>
+   <testcase name="nw-err-xs0059-001.xml"/>
+   <testcase name="nw-err-xs0066-001.xml"/>
+   <testcase name="nw-err-xs0066-002.xml"/>
+   <testcase name="nw-err-xs0071-001.xml"/>
+   <testcase name="nw-err-xs0100-001.xml"/>
    <testcase name="nw-filter-001.xml"/>
    <testcase name="nw-filter-002.xml"/>
    <testcase name="nw-filter-003.xml"/>
@@ -3064,6 +3109,7 @@
    <testcase name="nw-filter-009.xml"/>
    <testcase name="nw-filter-010.xml"/>
    <testcase name="nw-filter-011.xml"/>
+   <testcase name="nw-filter-012.xml"/>
    <testcase name="nw-http-request-117.xml"/>
    <testcase name="nw-http-request-118.xml"/>
    <testcase name="nw-http-request-119.xml"/>
@@ -3079,7 +3125,70 @@
    <testcase name="nw-http-request-129.xml"/>
    <testcase name="nw-http-request-130.xml"/>
    <testcase name="nw-http-request-131.xml"/>
+   <testcase name="nw-http-request-132.xml"/>
+   <testcase name="nw-http-request-133.xml"/>
    <testcase name="nw-import-001.xml"/>
+   <testcase name="nw-import-002.xml"/>
+   <testcase name="nw-import-functions-001.xml">
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-import-functions-002.xml">
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-import-functions-002b.xml">
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-import-functions-003.xml">
+      <skipped>Feature 'xslt-function-import' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-import-functions-003b.xml">
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-import-functions-015.xml">
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-import-functions-016.xml">
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-import-functions-017.xml">
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-import-functions-018.xml">
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-import-functions-019.xml">
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-import-functions-020.xml">
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-import-functions-021.xml">
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-import-functions-022.xml">
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-import-functions-023.xml">
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-import-functions-024.xml">
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-import-functions-025.xml">
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-import-functions-026.xml">
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-import-functions-027.xml">
+      <skipped>Feature 'xquery-function-import' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-import-functions-030.xml">
+      <skipped>Feature 'xslt-function-import' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-import-functions-031.xml">
+      <skipped>Feature 'xslt-function-import' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
    <testcase name="nw-inline-expand-text-001.xml"/>
    <testcase name="nw-inline-expand-text-002.xml"/>
    <testcase name="nw-inline-expand-text-003.xml"/>
@@ -3087,29 +3196,51 @@
    <testcase name="nw-inline-expand-text-005.xml"/>
    <testcase name="nw-inline-expand-text-006.xml"/>
    <testcase name="nw-inline-expand-text-007.xml"/>
+   <testcase name="nw-library-001.xml"/>
+   <testcase name="nw-library-002.xml"/>
+   <testcase name="nw-library-003.xml"/>
+   <testcase name="nw-library-004.xml"/>
+   <testcase name="nw-lookup-uri-001.xml"/>
    <testcase name="nw-make-absolute-uris-001.xml"/>
    <testcase name="nw-make-absolute-uris-002.xml"/>
    <testcase name="nw-make-absolute-uris-003.xml"/>
    <testcase name="nw-markdown-to-html-001.xml">
-      <skipped>Feature 'markdown-to-html' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'markdown-to-html' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="nw-option-value-001.xml"/>
    <testcase name="nw-optional-port-001.xml"/>
+   <testcase name="nw-psvi-001.xml">
+      <skipped>Feature 'psvi-support' not supported.</skipped>
+   </testcase>
+   <testcase name="nw-psvi-002.xml"/>
    <testcase name="nw-send-mail-001.xml">
-      <skipped>Feature 'send-mail' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'send-mail' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="nw-send-mail-002.xml">
-      <skipped>Feature 'send-mail' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'send-mail' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="nw-send-mail-003.xml">
-      <skipped>Feature 'send-mail' is not supported in MorganaXProc-III's standard edition.</skipped>
+      <skipped>Feature 'send-mail' requires MorganaXProc-IIIee.</skipped>
    </testcase>
    <testcase name="nw-set-attributes-001.xml"/>
    <testcase name="nw-set-attributes-002.xml"/>
+   <testcase name="nw-sleep-001.xml"/>
+   <testcase name="nw-sleep-002.xml">
+      <skipped>Feature 'timeout-support' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
    <testcase name="nw-step-available-001.xml"/>
    <testcase name="nw-step-available-002.xml"/>
    <testcase name="nw-step-available-003.xml"/>
    <testcase name="nw-step-available-004.xml"/>
+   <testcase name="nw-step-available-005.xml"/>
+   <testcase name="nw-step-available-006.xml"/>
+   <testcase name="nw-step-available-007.xml"/>
+   <testcase name="nw-step-timeout-001.xml">
+      <skipped>Feature 'timeout-support' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-step-timeout-002.xml">
+      <skipped>Feature 'timeout-support' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
    <testcase name="nw-text-count-001.xml"/>
    <testcase name="nw-text-count-002.xml"/>
    <testcase name="nw-text-count-003.xml"/>
@@ -3414,6 +3545,9 @@
    <testcase name="nw-viewport-001.xml"/>
    <testcase name="nw-viewport-003.xml"/>
    <testcase name="nw-viewport-004.xml"/>
+   <testcase name="nw-xsl-formatter-001.xml">
+      <skipped>Feature 'p-xsl-formatter' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
    <testcase name="nw-xslt-001.xml"/>
    <testcase name="nw-xslt-002.xml"/>
    <testcase name="opt-drp.xml"/>
