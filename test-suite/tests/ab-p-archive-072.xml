@@ -5,6 +5,15 @@
       <t:title>p:archive 072 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2025-01-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Simplied test by removing connection for 'source': No error is raised for relative URI.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2019-10-18</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -24,9 +33,7 @@
          <p:output port="result"/>        
          
          <p:archive format="zip">
-            <p:with-input port="source">
-               <p:inline document-properties="map{'base-uri' : 'one'}"></p:inline>
-            </p:with-input>
+            <p:with-input port="source"><p:empty /></p:with-input>
             <p:with-input port="manifest">
                <c:archive>
                   <c:entry name="a.xml" href="one" />

@@ -1,0 +1,35 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XD0064">
+   <t:info>
+      <t:title>XD0064 002 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2025-01-10</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>New tests for inlined documents</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests XD0064 is raised if value for 'base-uri' in document-properties is not absolute.</p>
+   </t:description>
+   
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" name="pipeline" version="3.0">
+         <p:output port="result"/>
+         <p:identity>
+            <p:with-input>
+               <p:inline document-properties="map{'base-uri' : 'relative'}">
+                  <doc />
+               </p:inline>
+            </p:with-input>
+         </p:identity>
+      
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
