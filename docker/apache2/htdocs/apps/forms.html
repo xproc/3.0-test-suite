@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<meta charset='UTF-8'/>
+<title>Forms</title>
+</head>
+<body>
+<h1>Forms</h1>
+
+<p id="iknowwhatyoudid">I spy…</p>
+
+<p><button class="but" id="b1">Button</button>,
+<button class="but" id="b2">Button</button>, who’s got the
+<button class="but" id="b3">Button</button>.</p>
+
+<p><input name="i1" placeholder="type here">.</input>
+or <input id="i2" placeholder="here">.</input></p>
+
+<p><textarea id="text" rows="5" cols="64" placeholder="A text box."></textarea></p>
+
+<p><button id="text-update">Update</button></p>
+
+<fieldset>
+  <legend>Radio stations</legend>
+  <span>
+    <input type="radio" id="wlir" name="radio" value="WLIR"/>
+    <label for="wlir">WLIR</label>
+  </span>
+  <span>
+    <input type="radio" id="wkrp" name="radio" value="WKRP"/>
+    <label for="wkrp">WKRP</label>
+  </span>
+  <span>
+    <input type="radio" id="kacl" name="radio" value="KACL"/>
+    <label for="kacl">KACL</label>
+  </span>
+</fieldset>
+
+<p><label for="frog-select">Choose a frog:</label>
+<select name="frog" id="frog-select">
+  <option value="">--Please choose--</option>
+  <option value="common-frog">Common frog</option>
+  <option value="common-toad">Common toad</option>
+  <option value="natterjack">Natterjack toad</option>
+  <option value="northern-pool">Northern Pool Frog</option>
+</select></p>
+
+<div><label for="number-select">Choose some numbers:</label>
+<p><select name="numbers" id="number-select" multiple="multiple">
+  <option>0</option>
+  <option>1</option>
+  <option>2</option>
+  <option>3</option>
+  <option>4</option>
+  <option>5</option>
+  <option>6</option>
+  <option>7</option>
+  <option>8</option>
+  <option>9</option>
+  <option>10</option>
+  <option>π</option>
+</select></p></div>
+
+</body>
+<script src="js/forms.js"></script>
+</html>

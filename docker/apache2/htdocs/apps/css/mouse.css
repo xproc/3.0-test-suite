@@ -1,0 +1,41 @@
+#bigblock {
+  width: 50%;
+  height: 2000px;
+  background-color:#f0f0f0;
+  margin-bottom: 1rem;
+}
+
+.container {
+  margin: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  font-family: Poppins;
+}
+
+#drag, .drop {
+  width: 12rem;
+  height: 15rem;
+  border-radius: 10px;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #fffff8;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.drop {
+  width: 13rem;
+  height: 16rem;
+  background: black;
+  border-radius: 10px;
+}
+
+.dragging {
+  color: white;
+  background-color: black;
+}
