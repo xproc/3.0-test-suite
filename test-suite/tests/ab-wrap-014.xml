@@ -2,7 +2,7 @@
 <t:test expected="pass"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
-      <t:title>p:wrap 013</t:title>
+      <t:title>p:wrap 014</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2025-02-01</t:date>
@@ -16,7 +16,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Testing the new (in 3.1) attributes option on p:wrap</p>
+      <p>Tests that setting an xml:base attribute changes the base URI.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step name="pipeline"
@@ -25,7 +25,7 @@
          <p:output port="result"/>
          <p:wrap match="element"
                  wrapper="wrapper"
-                 attributes="map{'wrapped': true()}">
+                 attributes="map{'wrapped': true(), 'xml:base': 'http://example.com/'}">
             <p:with-input>
                <doc>
                   <not-matched/>
@@ -35,21 +35,28 @@
                </doc>
             </p:with-input>
          </p:wrap>
+         <p:viewport match="wrapper">
+           <p:identity>
+             <p:with-input select="p:document-properties(.)"/>
+           </p:identity>
+           <p:cast-content-type content-type="application/xml"/>
+         </p:viewport>
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
       <s:schema queryBinding="xslt2"
                 xmlns:s="http://purl.oclc.org/dsdl/schematron"
                 xmlns="http://www.w3.org/1999/xhtml">
+        <s:ns prefix="fn" uri="http://www.w3.org/2005/xpath-functions"/>
          <s:pattern>
             <s:rule context="/">
                <s:assert test="doc">Root element is not 'doc'.</s:assert>
-               <s:assert test="doc/*[1]/local-name() = 'not-matched'">First child of 'doc' is not 'not-matched'.</s:assert>
-               <s:assert test="doc/*[2]/local-name() = 'wrapper'">Second child of 'doc' is not 'wrapper'.</s:assert>
-               <s:assert test="doc/*[2]/@wrapped = 'true'">The wrapped attribute is incorrect on first wrapper.</s:assert>
-               <s:assert test="doc/*[3]/local-name() = 'wrapper'">Third child of 'doc' is not 'wrapper'.</s:assert>
-               <s:assert test="doc/*[3]/@wrapped = 'true'">The wrapped attribute is incorrect on second wrapper.</s:assert>
-               <s:assert test="doc/*[4]/local-name() = 'not-matched'">Forth child of 'doc' is not 'not-matched'.</s:assert>
+               <s:assert test="doc/*[2]/self::fn:map">Second child of 'doc' is not 'fn:map'.</s:assert>
+               <s:assert test="doc/*[2]/fn:string[@key='base-uri']
+                               = 'http://example.com/'">The first base URI is incorrect.</s:assert>
+               <s:assert test="doc/*[3]/self::fn:map">Third child of 'doc' is not 'fn:map'.</s:assert>
+               <s:assert test="doc/*[3]/fn:string[@key='base-uri']
+                               = 'http://example.com/'">The second base URI is incorrect.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
