@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="fail" code="err:XC0052"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+  <t:info>
+    <t:title>cast-content-type 034 (AB)</t:title>
+    <t:revision-history>
+      <t:revision>
+        <t:date>2025-02-02</t:date>
+        <t:author>
+          <t:name>Achim Berndzen</t:name>
+        </t:author>
+        <t:description xmlns="http://www.w3.org/1999/xhtml">
+          <p>Test casting from c:data to Text.</p>
+        </t:description>
+      </t:revision>
+    </t:revision-history>
+  </t:info>
+  <t:description xmlns="http://www.w3.org/1999/xhtml">
+    <p>Tests that a c:data document decoding raises error, if encoding is unsupported.</p>
+  </t:description>
+  <t:pipeline>
+    <p:declare-step name="pipeline"
+                    version="3.0"
+                    xmlns:p="http://www.w3.org/ns/xproc">
+      <p:output port="result"/>
+      <p:cast-content-type content-type="text/plain">
+        <p:with-input>
+          <c:data content-type="text/plain" encoding="not-supported"
+            xmlns:c="http://www.w3.org/ns/xproc-step">Q29weSDCqQ==</c:data>
+        </p:with-input>
+      </p:cast-content-type>
+      <p:wrap-sequence wrapper="result" />
+    </p:declare-step>
+  </t:pipeline>
+</t:test>
