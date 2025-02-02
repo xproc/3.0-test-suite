@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>p:encode 003</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2025-02-01</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Test the p:encode step.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:pipeline>
+      <p:declare-step name="pipeline"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:encode name="utf8"
+                   serialization="map{'method': 'text'}">
+           <p:with-input>
+             <p:inline content-type="text/plain">Copy ©</p:inline>
+           </p:with-input>
+         </p:encode>
+         <p:encode name="isolatin1"
+                   serialization="map{'method': 'text',
+                                      'encoding':'ISO-8859-1'}">
+           <p:with-input>
+             <p:inline content-type="text/plain">Copy ©</p:inline>
+           </p:with-input>
+         </p:encode>
+         <p:wrap-sequence wrapper="encoded">
+           <p:with-input pipe="@utf8 @isolatin1"/>
+         </p:wrap-sequence>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+     <s:schema queryBinding="xslt2"
+               xmlns:s="http://purl.oclc.org/dsdl/schematron"
+               xmlns="http://www.w3.org/1999/xhtml">
+       <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
+       <s:pattern>
+         <s:rule context="/">
+           <s:assert test="encoded">Root element is not 'encoded'.</s:assert>
+           <s:assert test="count(encoded/c:data) = 2">Wrong number of c:data children.</s:assert>
+         </s:rule>
+       </s:pattern>
+       <s:pattern>
+         <s:rule context="/encoded/c:data[1]">
+           <s:assert test="@encoding = 'base64'">The c:data[1] encoding is incorrect.</s:assert>
+           <s:assert test="@content-type = 'text/plain'">The c:data[1] content-type is incorrect.</s:assert>
+           <s:assert test="not(@charset) or upper-case(@charset) = 'UTF-8'"
+                     >The c:data[1] charset is incorrect.</s:assert>
+           <s:assert test=". = 'Q29weSDCqQ=='">Encoded c:data[1] data is incorrect.</s:assert>
+         </s:rule>
+         <s:rule context="/encoded/c:data[2]">
+           <s:assert test="@encoding = 'base64'">The c:data[2] encoding is incorrect.</s:assert>
+           <s:assert test="@content-type = 'text/plain'">The c:data[2] content-type is incorrect.</s:assert>
+           <s:assert test="upper-case(@charset) = 'ISO-8859-1'"
+                     >The c:data[2] charset is incorrect.</s:assert>
+           <s:assert test=". = 'Q29weSCp'">Encoded c:data[2] data is incorrect.</s:assert>
+         </s:rule>
+       </s:pattern>
+     </s:schema>
+   </t:schematron>
+</t:test>
