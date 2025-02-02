@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="fail" code="err:XC0052"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>p:encode 004</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2025-02-01</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Test the p:encode step.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:pipeline>
+      <p:declare-step name="pipeline"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+         <p:encode encoding="not-a-valid-encoding">
+           <p:with-input>
+             <doc/>
+           </p:with-input>
+         </p:encode>
+      </p:declare-step>
+   </t:pipeline>
+</t:test>
