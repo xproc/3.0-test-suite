@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>nw-tvt-001b</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2025-02-02</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Demonstrates the use of string() to insert an attribute value in a TVT.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+
+         <p:identity>
+           <p:with-input><doc name="value"/></p:with-input>
+         </p:identity>
+
+         <p:identity>
+           <p:with-input>
+             <p:inline content-type="text/plain">{string(/doc/@name)}</p:inline>
+           </p:with-input>
+         </p:identity>
+
+         <p:wrap-sequence wrapper="wrapper"/>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="wrapper">The root element is not 'wrapper'.</s:assert>
+               <s:assert test="wrapper = 'value'">The value is not ‘value’</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
