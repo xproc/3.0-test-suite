@@ -44,7 +44,7 @@
             <s:rule context="/">
                <s:assert test="wrapper">The root element is not 'wrapper'.</s:assert>
                <s:assert test="empty(wrapper/*)">The wrapper has element children.</s:assert>
-               <s:assert test="wrapper = '&lt;doc name=&quot;value&quot;&gt;test&lt;/doc&gt;'">The value is not correct</s:assert>
+               <s:assert test="wrapper = 'test'">The value is not correct</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>

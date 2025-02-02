@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test expected="fail" code="err:XD0030"
-        xmlns:err="http://www.w3.org/ns/xproc-error"
+<t:test expected="pass"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
       <t:title>nw-tvt-002</t:title>
@@ -17,7 +16,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Test insertion of TVTs into XML content.</p>
+      <p>Test insertion of attribute nodes into XML content with a TVT.</p>
    </t:description>
    <t:pipeline>
       <p:declare-step version="3.0"
@@ -35,4 +34,18 @@
          <p:wrap-sequence wrapper="wrapper"/>
       </p:declare-step>
    </t:pipeline>
+   <t:schematron>
+     <s:schema queryBinding="xslt2"
+               xmlns:s="http://purl.oclc.org/dsdl/schematron"
+               xmlns="http://www.w3.org/1999/xhtml">
+       <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
+       <s:pattern>
+         <s:rule context="/">
+           <s:assert test="wrapper">Root element is not 'wrapper'.</s:assert>
+           <s:assert test="wrapper/copy">There’s no wrapper/copy element.</s:assert>
+           <s:assert test="wrapper/copy/@name='value'">The name attribute on copy is incorrect.</s:assert>
+         </s:rule>
+       </s:pattern>
+     </s:schema>
+   </t:schematron>
 </t:test>
