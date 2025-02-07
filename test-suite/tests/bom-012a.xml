@@ -2,7 +2,7 @@
 <t:test expected="pass"
         xmlns:t="http://xproc.org/ns/testsuite/3.0">
    <t:info>
-      <t:title>bom-012</t:title>
+      <t:title>bom-012a</t:title>
       <t:revision-history>
          <t:revision>
             <t:date>2025-02-07</t:date>
@@ -10,7 +10,7 @@
                <t:name>Achim Berndzen</t:name>
             </t:author>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>Change test by removing charset from content-type. Also see bom-012a</p>
+               <p>Ported from bom12: Overwriting server supplied encoding.</p>
             </t:description>
          </t:revision>
          <t:revision>
@@ -34,14 +34,14 @@
 
          <p:identity>
             <p:with-input>
-              <p:document content-type="text/plain" href="http://localhost:8246/docs/not-a-bom.txt"/>
+              <p:document content-type="text/plain; charset=UTF-8" href="http://localhost:8246/docs/not-a-bom.txt"/>
             </p:with-input>
          </p:identity>
 
          <p:identity>
            <p:with-input>
-             <!-- UTF-8 BOM, but the text is ISO-8859-1 -->
-             <p:inline><result>{starts-with(., 'ï»¿It')}</result></p:inline>
+             <!-- UTF-8 BOM, overwrite ISO-8859-1 from server-->
+              <p:inline><result>{starts-with(., "It's not a BOM.")}</result></p:inline>
            </p:with-input>
          </p:identity>
 
