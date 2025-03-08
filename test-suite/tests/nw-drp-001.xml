@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>nw-drp-001</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2025-03-08</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added test.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Test that a secondary output port binds to the default input, not
+      the default readable port.</p>
+   </t:description>
+   <t:pipeline>
+
+<p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+                xmlns:ex="http://example.com/"
+                name="main" version="3.0">
+  <p:output port="result" pipe="secondary"/>
+
+  <p:declare-step type="ex:test" name="ptest">
+    <p:input port="source" primary="true">
+      <primary-input/>
+    </p:input>
+    <p:input port="alternate">
+      <alternate-input/>
+    </p:input>
+    <p:output port="result" primary="true" pipe="@primary-out"/>
+    <p:output port="secondary" pipe="@secondary-out"/>
+
+    <p:identity name="primary-out">
+      <p:with-input pipe="source@ptest"/>
+    </p:identity>
+
+    <p:identity name="secondary-out">
+      <p:with-input pipe="alternate@ptest"/>
+    </p:identity>
+  </p:declare-step>
+
+  <p:identity>
+    <p:with-input><DRP/></p:with-input>
+  </p:identity>
+
+  <ex:test/>
+
+</p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="alternate-input">The root element is not correct.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
