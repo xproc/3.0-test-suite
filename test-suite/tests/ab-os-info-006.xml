@@ -4,12 +4,21 @@
       <t:title>p:os-info-006</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2025-04-27</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed a cut-and-paste error in the test description.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2022-09-23</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
             </t:author>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
-               <p>Added tests for p:os-exec</p>
+               <p>Added tests for p:os-info</p>
             </t:description>
          </t:revision>
       </t:revision-history>
