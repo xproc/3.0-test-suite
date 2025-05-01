@@ -5,6 +5,15 @@
       <t:title>Import-006 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2025-04-23</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Just corrected typo in schematron message.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -41,7 +50,7 @@
                 xmlns:s="http://purl.oclc.org/dsdl/schematron">
          <s:pattern>
             <s:rule context="/">
-               <s:assert test="success">The document root is not doc.</s:assert>
+               <s:assert test="success">The document root is not success.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
