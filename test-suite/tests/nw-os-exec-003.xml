@@ -3,7 +3,16 @@
    <t:info>
       <t:title>nw-os-exec-003</t:title>
       <t:revision-history>
-         <t:revision>
+        <t:revision>
+            <t:date>2025-05-03</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Removed (bogus) charset option; replaced with charset on content type.</p>
+            </t:description>
+         </t:revision>
+          <t:revision>
             <t:date>2025-05-02</t:date>
             <t:author>
                <t:name>Norm Tovey-Walsh</t:name>
@@ -15,16 +24,14 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-     <p>Tests p:os-exec when the output encoding doesn’t match Java’s encoding.
-     This test uses the not-yet-standard charset option to parse the output
-     correctly.</p>
+     <p>Tests p:os-exec when the output encoding doesn’t match Java’s encoding.</p>
    </t:description>
    <t:pipeline>
      <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc"
                      xmlns:c="http://www.w3.org/ns/xproc-step">
        <p:output port="result" />
          
-       <p:os-exec name="exec" command="java" charset="iso-8859-1">
+       <p:os-exec name="exec" command="java" result-content-type="text/plain; charset=iso-8859-1">
          <p:with-input><p:empty/></p:with-input>
          <p:with-option name="args"
                         select="('-cp', resolve-uri('../lib/stdmsgs.jar', static-base-uri()),
