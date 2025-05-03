@@ -50,7 +50,7 @@
           </s:rule>
           <s:rule context="/c:result">
             <s:assert test="contains(c:stdout, 'Hello from stdout')">Stdout is incorrect.</s:assert>
-            <s:assert test="contains(c:stderr, 'Hello from stdout')">Stderr is incorrect.</s:assert>
+            <s:assert test="contains(c:stderr, 'Hello from stderr')">Stderr is incorrect.</s:assert>
             <s:assert test="c:result = '0'">Return code is incorrect.</s:assert>
             </s:rule>
          </s:pattern>
