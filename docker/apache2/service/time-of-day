@@ -1,0 +1,39 @@
+#!/usr/bin/perl -- # -*- Perl -*-
+
+use strict;
+use English;
+use CGI::Carp qw(fatalsToBrowser);
+use POSIX;
+use CGI;
+
+my $cgi = CGI->new;
+
+# To satisfy Apache, always read the input
+if ($ENV{'REQUEST_METHOD'} eq 'POST') {
+    read(STDIN, $_, $ENV{'CONTENT_LENGTH'});
+}
+
+my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime(time);
+my $tenths = int(($sec + 9) / 10) - 1;
+my $prefix = POSIX::strftime("%a, %d %b %Y %H:%M", localtime());
+my $lastMod = sprintf("%s:%02d GMT", $prefix, $tenths * 10);
+
+print "Content-type: text/plain\n";
+print "Last-Modified: ", $lastMod;
+print "\n\n";
+
+if ($cgi->request_method eq "HEAD") {
+    exit(0);
+}
+
+# Note: there's no attempt to correct for timezones or daylight saving time.
+# The point is that it outputs something that changes approximately every
+# ten seconds.
+
+print "The time is now approximately ", substr(strftime("%T", localtime(time)), 0, -3);
+if ($tenths > 0) {
+   print " and approximately ", $tenths * 10, " seconds.";
+}
+print "\n";
+
+exit(0);
