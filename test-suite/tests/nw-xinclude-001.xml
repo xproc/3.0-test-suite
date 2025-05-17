@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>nw-xinclude-001</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2025-05-17</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests that the base URI is preserved correctly in nested inclusions.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step name="pipeline"
+                      version="3.0"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+        <p:output port="result"/>
+        <p:xinclude fixup-xml-base="false">
+          <p:with-input href="../documents/four.xml"/>
+        </p:xinclude>
+        <p:add-xml-base/>
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="four">Root element is not 'four'.</s:assert>
+               <s:assert test="ends-with(four/@xml:base, '/four.xml')">Four has wrong base uri.</s:assert>
+               <s:assert test="ends-with(four/three/@xml:base, 'three.xml')">Three has wrong base uri.</s:assert>
+               <s:assert test="ends-with(four/three/two/@xml:base, 'two.xml')">Two has wrong base uri.</s:assert>
+               <s:assert test="ends-with(four/three/two/one/@xml:base, 'one.xml')">One has wrong base uri.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
