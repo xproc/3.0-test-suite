@@ -7,6 +7,15 @@
       <t:title>http-request-061 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2025-05-23</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added static options for web server host and port.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -46,8 +55,10 @@
                       xmlns:p="http://www.w3.org/ns/xproc"
                       xmlns:chttp="http://www.w3.org/ns/xproc-http">
          <p:output port="result"/>
+         <p:option name="WHOST" select="'http://localhost:8246'" static="true"/>
+
          <p:http-request name="one"
-                         href="http://localhost:8246/service/echoheaders"
+                         href="{$WHOST}/service/echoheaders"
                          method="post"
                          headers="map{'header' : 'value1'}">
             <p:with-input>
@@ -57,7 +68,7 @@
             </p:with-input>
          </p:http-request>
          <p:http-request name="two"
-                         href="http://localhost:8246/service/echoheaders"
+                         href="{$WHOST}/service/echoheaders"
                          method="post">
             <p:with-input>
                <p:inline document-properties="map{'chttp:HEADER' : 'value2'}">
@@ -66,7 +77,7 @@
             </p:with-input>
          </p:http-request>
          <p:http-request name="three"
-                         href="http://localhost:8246/service/echoheaders"
+                         href="{$WHOST}/service/echoheaders"
                          method="post"
                          headers="map{'header' : 'value1'}">
             <p:with-input>
