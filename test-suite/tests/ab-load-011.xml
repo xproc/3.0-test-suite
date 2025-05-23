@@ -5,6 +5,15 @@
       <t:title>load 011 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2025-05-23</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added static options for web server host and port.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2024-10-17</t:date>
             <t:author>
                <t:name>Norm Tovey-Walsh</t:name>
@@ -32,7 +41,9 @@
                       xmlns:p="http://www.w3.org/ns/xproc"
                       xmlns:fn="http://www.w3.org/2005/xpath-functions">
          <p:output port="result"/>
-         <p:load href="http://localhost:8246/service/this-is-a" />
+         <p:option name="WHOST" select="'http://localhost:8246'" static="true"/>
+
+         <p:load href="{$WHOST}/service/this-is-a" />
          <p:identity>
             <p:with-input>
                <result>
@@ -50,9 +61,9 @@
             <s:rule context="/">
                <s:assert test="result">The document root is not 'result'.</s:assert>
                <s:assert test="result/prop">Document does not have a child element named 'prop'</s:assert>
-               <s:assert test="result/prop/text()='http://localhost:8246/service/this-is-d'">The text in element 'prop' is not right.</s:assert>
+               <s:assert test="ends-with(result/prop, '/service/this-is-d')">The text in element 'prop' is not right.</s:assert>
                <s:assert test="result/base">Document does not have a child element named 'base'</s:assert>
-               <s:assert test="result/base/text()='http://localhost:8246/service/this-is-d'">The text in element 'base' is not right.</s:assert>
+               <s:assert test="ends-with(result/base, '/service/this-is-d')">The text in element 'base' is not right.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>

@@ -8,6 +8,15 @@
       <t:title>http-request-081 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2025-05-23</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added static options for web server host and port.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2020-01-15</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -25,8 +34,10 @@
       <p:declare-step version="3.0"
                       xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result"/>
+         <p:option name="WHOST" select="'http://localhost:8246'" static="true"/>
+
          <p:http-request method="get"
-                         href="http://localhost:8246/docs/basic-auth/"
+                         href="{$WHOST}/docs/basic-auth/"
                          auth="map{'password' : '123456'}">
             <p:with-input>
                <p:empty/>

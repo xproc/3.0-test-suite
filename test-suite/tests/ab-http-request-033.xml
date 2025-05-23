@@ -6,6 +6,15 @@
       <t:title>http-request-033 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2025-05-23</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added static options for web server host and port.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -32,7 +41,9 @@
       <p:declare-step version="3.0"
                       xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result"/>
-         <p:http-request href="http://localhost:8246/service/echo"
+         <p:option name="WHOST" select="'http://localhost:8246'" static="true"/>
+
+         <p:http-request href="{$WHOST}/service/echo"
                          method="post">
             <p:with-input>
                <p:document content-type="image/png"
@@ -55,7 +66,7 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="result">The root element is not 'result'.</s:assert>
-               <s:assert test="result/base-uri='http://localhost:8246/service/echo'">The URI is not right.</s:assert>
+               <s:assert test="ends-with(result/base-uri, '/service/echo')">The URI is not right.</s:assert>
                <s:assert test="result/content-type/text()= 'image/png'">The content type is not right.</s:assert>
             </s:rule>
          </s:pattern>

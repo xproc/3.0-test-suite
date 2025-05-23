@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<t:test features="p:http-request"
-        expected="pass"
+<t:test expected="pass"
         xmlns:t="http://xproc.org/ns/testsuite/3.0"
         xmlns:err="http://www.w3.org/ns/xproc-error">
    <t:info>
       <t:title>p:make-absolute-uris 001 (NW)</t:title>
       <t:revision-history>
+        <t:revision>
+          <t:date>2025-05-23</t:date>
+          <t:author>
+            <t:name>Norman Walsh</t:name>
+          </t:author>
+          <t:description xmlns="http://www.w3.org/1999/xhtml">
+            <p>Removed spurious feature.</p>
+          </t:description>
+        </t:revision>
          <t:revision>
             <t:date>2024-05-15</t:date>
             <t:author>

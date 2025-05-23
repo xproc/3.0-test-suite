@@ -7,6 +7,15 @@
       <t:title>p:http-request 127 (NW)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2025-05-23</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added static options for web server host and port.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-09-09</t:date>
             <t:author>
                <t:name>Norman Walsh</t:name>
@@ -27,7 +36,9 @@
                       xmlns:c="http://www.w3.org/ns/xproc-step"
                       xmlns:xs="http://www.w3.org/2001/XMLSchema">
          <p:output port="result"/>
-         <p:http-request href="http://localhost:8246/service/check-multipart"
+         <p:option name="WHOST" select="'http://localhost:8246'" static="true"/>
+
+         <p:http-request href="{$WHOST}/service/check-multipart"
                          method="post">
             <p:with-input>
                <p:inline document-properties="map{'serialization': map {'encoding': 'iso-8859-1'}}">

@@ -7,6 +7,15 @@
       <t:title>p:http-request 131 (NW)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2025-05-23</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added static options for web server host and port.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-09-10</t:date>
             <t:author>
                <t:name>Norman Walsh</t:name>
@@ -38,8 +47,10 @@ map produced on the report port.</p>
                       xmlns:c="http://www.w3.org/ns/xproc-step"
                       xmlns:xs="http://www.w3.org/2001/XMLSchema">
          <p:output port="result"/>
+         <p:option name="WHOST" select="'http://localhost:8246'" static="true"/>
+
          <p:http-request method="get"
-                         href="http://localhost:8246/service/this-is-a"
+                         href="{$WHOST}/service/this-is-a"
                          parameters="map{'follow-redirect': 2}">
             <p:with-input>
                <p:empty/>
@@ -69,9 +80,9 @@ map produced on the report port.</p>
          <s:pattern>
             <s:rule context="/*">
                <s:assert test="self::wrap">The root is not wrap.</s:assert>
-               <s:assert test="base-uri = 'http://localhost:8246/service/this-is-c'">The base-uri is incorrect.</s:assert>
+               <s:assert test="ends-with(base-uri, '/service/this-is-c')">The base-uri is incorrect.</s:assert>
                <s:assert test="code = 302">The status-code is incorrect.</s:assert>
-               <s:assert test="location = 'http://localhost:8246/service/this-is-d'">The redirect location is incorrect.</s:assert>
+               <s:assert test="ends-with(location, '/service/this-is-d')">The redirect location is incorrect.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>

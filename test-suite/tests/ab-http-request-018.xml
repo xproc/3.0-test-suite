@@ -6,6 +6,15 @@
       <t:title>http-request-018 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2025-05-23</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added static options for web server host and port.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -32,7 +41,9 @@
       <p:declare-step version="3.0"
                       xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result"/>
-         <p:http-request href="http://localhost:8246/service/fixed-alternative">
+         <p:option name="WHOST" select="'http://localhost:8246'" static="true"/>
+
+         <p:http-request href="{$WHOST}/service/fixed-alternative">
             <p:with-input>
                <p:empty/>
             </p:with-input>
@@ -56,7 +67,7 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="result">The root element is not 'result'.</s:assert>
-               <s:assert test="count(result/doc/base-uri[.='http://localhost:8246/service/fixed-alternative'])=4">There are not four docs with the right uri. </s:assert>
+               <s:assert test="count(result/doc/base-uri[ends-with(., '/service/fixed-alternative')])=4">There are not four docs with the right uri. </s:assert>
                <s:assert test="result/doc/content-type = 'text/html'">There is no entry with content-type 'text/html'.</s:assert>
                <s:assert test="result/doc/content-type = 'image/png'">There is no entry with content-type 'image/png'.</s:assert>
                <s:assert test="result/doc/content-type = 'application/xhtml+xml'">There is no entry with content-type 'application/xhtml+xml'.</s:assert>
