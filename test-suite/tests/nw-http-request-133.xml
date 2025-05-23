@@ -7,6 +7,15 @@
       <t:title>p:http-request 133 (NW)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2025-05-23</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added static options for web server host and port.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2024-12-26</t:date>
             <t:author>
                <t:name>Norman Walsh</t:name>
@@ -27,8 +36,10 @@
                       xmlns:c="http://www.w3.org/ns/xproc-step"
                       xmlns:xs="http://www.w3.org/2001/XMLSchema">
          <p:output port="result"/>
+         <p:option name="WHOST" select="'http://localhost:8246'" static="true"/>
+
          <p:http-request method="get"
-                         href="http://localhost:8246/service/slow"
+                         href="{$WHOST}/service/slow"
                          assert="true()"
                          parameters="map{'timeout': 2, 'fail-on-timeout': false()}">
             <p:with-input>

@@ -4,6 +4,15 @@
       <t:title>p:send-mail-003</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2025-05-23</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added static options for SMTP host and ports.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2025-04-21</t:date>
             <t:author>
                <t:name>Norm Tovey-Walsh</t:name>
@@ -39,8 +48,12 @@
       <p:declare-step version="3.0" xmlns:p="http://www.w3.org/ns/xproc">
          <p:output port="result" />
 
+<p:option name="SHOST" select="'localhost'" static="true"/>
+<p:option name="SMTPPORT" select="1025" static="true"/>
+<p:option name="APIPORT" select="1080" static="true"/>
+
 <!-- Clear the Sendria log -->
-<p:http-request href="http://localhost:1080/api/messages/" method="delete">
+<p:http-request href="http://{$SHOST}:{$APIPORT}/api/messages/" method="delete">
   <p:with-input>
     <p:empty/>
   </p:with-input>
@@ -55,7 +68,7 @@
   </p:error>
 </p:if>
 
-<p:send-mail parameters="map{'host':'localhost', 'port':1025}"
+<p:send-mail parameters="map{'host': $SHOST, 'port': $SMTPPORT}"
              auth="map{'username':'username','password':'password'}"
              depends="check-delete">
   <p:with-input>
@@ -98,9 +111,9 @@
 <p:sleep duration="1"/>
 
 <!-- Check the Sendria log -->
-<p:http-request href="http://localhost:1080/api/messages/" method="get"/>
-<p:http-request href="http://localhost:1080/api/messages/" method="get"/>
-<p:http-request href="http://localhost:1080/api/messages/" method="get"/>
+<p:http-request href="http://{$SHOST}:{$APIPORT}/api/messages/" method="get"/>
+<p:http-request href="http://{$SHOST}:{$APIPORT}/api/messages/" method="get"/>
+<p:http-request href="http://{$SHOST}:{$APIPORT}/api/messages/" method="get"/>
 <p:cast-content-type content-type="application/xml"/>
 
       </p:declare-step>
