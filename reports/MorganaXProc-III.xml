@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="XProc Test Suite"
-           tests="3225"
+           tests="3253"
            errors="0"
            failures="0"
-           skipped="200"
-           timestamp="2025-04-11T10:32:41">
+           skipped="203"
+           timestamp="2025-06-14T09:29:51">
    <properties>
-      <property name="processor" value="MorganaXProc-IIIee"/>
-      <property name="version" value="1.6.4"/>
+      <property name="processor" value="MorganaXProc-IIIse"/>
+      <property name="version" value="1.6.10"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.1"/>
@@ -1035,6 +1035,10 @@
    <testcase name="ab-import-027.xml"/>
    <testcase name="ab-import-028.xml"/>
    <testcase name="ab-import-029.xml"/>
+   <testcase name="ab-import-030.xml"/>
+   <testcase name="ab-import-031.xml"/>
+   <testcase name="ab-import-032.xml"/>
+   <testcase name="ab-import-033.xml"/>
    <testcase name="ab-import-functions-001.xml">
       <skipped>Feature 'xslt-function-import' requires MorganaXProc-IIIee.</skipped>
    </testcase>
@@ -2005,6 +2009,12 @@
    <testcase name="ab-replace-008.xml"/>
    <testcase name="ab-replace-009.xml"/>
    <testcase name="ab-replace-010.xml"/>
+   <testcase name="ab-serialization-prop-001.xml"/>
+   <testcase name="ab-serialization-prop-002.xml"/>
+   <testcase name="ab-serialization-prop-003.xml"/>
+   <testcase name="ab-serialization-prop-004.xml"/>
+   <testcase name="ab-serialization-prop-005.xml"/>
+   <testcase name="ab-serialization-prop-006.xml"/>
    <testcase name="ab-set-attributes-001.xml"/>
    <testcase name="ab-set-attributes-002.xml"/>
    <testcase name="ab-set-attributes-003.xml"/>
@@ -3099,6 +3109,7 @@
    <testcase name="nw-compare-004.xml"/>
    <testcase name="nw-compare-005.xml"/>
    <testcase name="nw-compare-006.xml"/>
+   <testcase name="nw-compare-007.xml"/>
    <testcase name="nw-css-formatter.xml">
       <skipped>Feature 'p-css-formatter' requires MorganaXProc-IIIee.</skipped>
    </testcase>
@@ -3249,6 +3260,15 @@
    </testcase>
    <testcase name="nw-option-value-001.xml"/>
    <testcase name="nw-optional-port-001.xml"/>
+   <testcase name="nw-os-exec-001.xml">
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-os-exec-002.xml">
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
+   <testcase name="nw-os-exec-003.xml">
+      <skipped>Feature 'os-exec' requires MorganaXProc-IIIee.</skipped>
+   </testcase>
    <testcase name="nw-psvi-001.xml">
       <skipped>Feature 'psvi-support' not supported.</skipped>
    </testcase>
@@ -3293,6 +3313,14 @@
    <testcase name="nw-tvt-005.xml"/>
    <testcase name="nw-tvt-005b.xml"/>
    <testcase name="nw-tvt-006.xml"/>
+   <testcase name="nw-urify-any-001.xml"/>
+   <testcase name="nw-urify-any-002.xml"/>
+   <testcase name="nw-urify-any-003.xml"/>
+   <testcase name="nw-urify-any-004.xml"/>
+   <testcase name="nw-urify-any-005.xml"/>
+   <testcase name="nw-urify-any-006.xml"/>
+   <testcase name="nw-urify-any-007.xml"/>
+   <testcase name="nw-urify-any-008.xml"/>
    <testcase name="nw-urify-non-windows-001.xml"/>
    <testcase name="nw-urify-non-windows-002.xml"/>
    <testcase name="nw-urify-non-windows-003.xml"/>
@@ -3415,6 +3443,9 @@
    <testcase name="nw-urify-non-windows-120.xml"/>
    <testcase name="nw-urify-non-windows-bs-001.xml"/>
    <testcase name="nw-urify-non-windows-bs-002.xml"/>
+   <testcase name="nw-urify-path-001.xml"/>
+   <testcase name="nw-urify-path-002.xml"/>
+   <testcase name="nw-urify-path-003.xml"/>
    <testcase name="nw-urify-windows-001.xml"/>
    <testcase name="nw-urify-windows-002.xml"/>
    <testcase name="nw-urify-windows-003.xml"/>
@@ -3603,6 +3634,9 @@
    <testcase name="nw-viewport-001.xml"/>
    <testcase name="nw-viewport-003.xml"/>
    <testcase name="nw-viewport-004.xml"/>
+   <testcase name="nw-xinclude-001.xml"/>
+   <testcase name="nw-xinclude-002.xml"/>
+   <testcase name="nw-xinclude-003.xml"/>
    <testcase name="nw-xsl-formatter-001.xml">
       <skipped>Feature 'p-xsl-formatter' requires MorganaXProc-IIIee.</skipped>
    </testcase>
