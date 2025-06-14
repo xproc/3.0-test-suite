@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>Static option 001 (NW)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2025-06-14</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial test</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>This test demonstrates that a static option that doesn’t have
+      an initializer can be used in a nested p:declare-step. Added because
+      this combination revealed a bug in XML Calabash.</p>
+   </t:description>
+<t:option name="opt" static="true" select="'external value'"/>
+   <t:pipeline>
+<p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+                xmlns:s="http://example.com/ns/steps"
+                name="main" version="3.1"
+                exclude-inline-prefixes="#all">
+  <p:option name="opt" as="xs:string?" static="true"/>
+  <p:output port="result"/>
+
+  <p:declare-step type="s:inner-step">
+    <p:output port="result"/>
+    <p:identity>
+      <p:with-input><value>{$opt}</value></p:with-input>
+    </p:identity>
+  </p:declare-step>
+
+  <s:inner-step/>
+    
+</p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="value">The pipeline root is not “value”.</s:assert>
+               <s:assert test="value/text() = 'external value'">The result is incorrect.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
