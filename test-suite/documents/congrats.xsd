@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  
+  <xs:include schemaLocation="included.xsd"/>
+  
+  <xs:element name="CONGRATULATIONS" type="xs:string"/>
+  
+  <xs:element name="TEST">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="CONGRATULATIONS"/>
+        <xs:element ref="INCLUDED"/>
+        <xs:element ref="DEEPLY_INCLUDED"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
