@@ -5,6 +5,15 @@
       <t:title>AB use-when-002</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2025-06-17</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Reworked test to produce a single result document.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2022-01-22</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -48,6 +57,7 @@
                </p:inline>
             </p:with-input>
          </p:identity>
+         <p:wrap-sequence wrapper="wrapper"/>
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
@@ -58,7 +68,8 @@
                prefix="p"/>
          <s:pattern>
             <s:rule context="/">
-               <s:assert test="count(/*) = 0">Document root should not have a child element.</s:assert>
+               <s:assert test="wrapper">The document element isn’t wrapper.</s:assert>
+               <s:assert test="empty(wrapper/*)">Wrapper should not have a child element.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
