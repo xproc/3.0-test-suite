@@ -6,6 +6,15 @@
       <t:title>AB-xslt-135</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2025-06-17</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Reworked test to produce a single result document.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2023-01-04</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -39,6 +48,7 @@
                </xsl:stylesheet>
             </p:with-input>
          </p:xslt>
+         <p:wrap-sequence wrapper="wrapper"/>
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
@@ -47,8 +57,10 @@
                 xmlns="http://www.w3.org/1999/xhtml">
          <s:pattern>
             <s:rule context="/">
-               <s:assert test="/result">The document root is not 'result'.</s:assert>
-               <s:assert test="/result/text()='true'">Test for required node identity fails.</s:assert>
+               <s:assert test="/wrapper">The document root is not 'wrapper'.</s:assert>
+               <s:assert test="count(/wrapper/result) = 2">Wrong number of results.</s:assert>
+               <s:assert test="empty(/wrapper/result[. = 'false'])"
+                         >Test for required node identity fails.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
