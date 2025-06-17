@@ -6,6 +6,16 @@
       <t:title>AB-xslt-062</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2025-06-17</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Reworked test to check for the initial context node more
+               directly and to produce a single result document.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -41,12 +51,11 @@
             <p:with-input port="stylesheet">
                <xsl:stylesheet version="2.0"
                                xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                 <xsl:variable name="root" select="."/>
                   <xsl:template match="doc1">
-                     <xsl:copy-of select="."/>
+                     <xsl:copy-of select="$root"/>
                   </xsl:template>
-                  <xsl:template match="*">
-                     <xsl:copy-of select="."/>
-                  </xsl:template>
+                  <xsl:template match="*"/>
                </xsl:stylesheet>
             </p:with-input>
          </p:xslt>

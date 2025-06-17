@@ -16,7 +16,7 @@
    <span class="stag"><span class="sto">&lt;</span><span class="gi">s:ns</span> <span class="attr"><span class="aname">uri</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">http://test.com</span><span class="aq">"</span></span> <span class="attr"><span class="aname">prefix</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">x</span><span class="aq">"</span></span><span class="eto">/&gt;</span></span>
    <span class="stag"><span class="sto">&lt;</span><span class="gi">s:pattern</span><span class="eto">&gt;</span></span>
       <span class="stag"><span class="sto">&lt;</span><span class="gi">s:rule</span> <span class="attr"><span class="aname">context</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">/</span><span class="aq">"</span></span><span class="eto">&gt;</span></span>
-         <span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">doc</span><span class="aq">"</span></span><span class="eto">&gt;</span></span><span class="text">The root element is not 'Q{http://foo.com}doc'.</span><span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span>
+         <span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">doc</span><span class="aq">"</span></span><span class="eto">&gt;</span></span><span class="text">The root element is not Q{}doc'.</span><span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span>
          <span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">*/@x:attr2</span><span class="aq">"</span></span><span class="eto">&gt;</span></span><span class="text">Root does not have an attribute Q{http://test.com}attr2.</span><span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span>
          <span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">*/@attr1</span><span class="aq">"</span></span><span class="eto">&gt;</span></span><span class="text">Root does not have an attribute Q{}attr1.</span><span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span>
          <span class="stag"><span class="sto">&lt;</span><span class="gi">s:assert</span> <span class="attr"><span class="aname">test</span><span class="aeq">=</span><span class="aq">"</span><span class="avalue">count(doc/p)=2</span><span class="aq">"</span></span><span class="eto">&gt;</span></span><span class="text">Root does not have two children 'p'.</span><span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:assert</span><span class="etc">&gt;</span></span>
@@ -24,6 +24,11 @@
    <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:pattern</span><span class="etc">&gt;</span></span>
 <span class="etag"><span class="eto">&lt;/</span><span class="gi endgi">s:schema</span><span class="etc">&gt;</span></span>
 </code></pre></div><dl class="revision-history"><h2>Revision history</h2>
+         <dt>17 Jun 2025, 
+               <span class="name">Norm Tovey-Walsh</span>
+            </dt><dd><div class="description">
+               <p>Fixed cut-and-paste error in Schematron message.</p>
+            </div></dd>
          <dt>10 Jun 2021, 
                <span class="name">Achim Berndzen</span>
             </dt><dd><div class="description">

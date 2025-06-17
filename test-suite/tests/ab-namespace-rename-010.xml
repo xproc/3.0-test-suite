@@ -5,6 +5,15 @@
       <t:title>p:namespace-rename-010 (AB)</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2025-06-17</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Fixed cut-and-paste error in Schematron message.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -53,7 +62,7 @@
                prefix="x"/>
          <s:pattern>
             <s:rule context="/">
-               <s:assert test="doc">The root element is not 'Q{http://foo.com}doc'.</s:assert>
+               <s:assert test="doc">The root element is not Q{}doc'.</s:assert>
                <s:assert test="*/@x:attr2">Root does not have an attribute Q{http://test.com}attr2.</s:assert>
                <s:assert test="*/@attr1">Root does not have an attribute Q{}attr1.</s:assert>
                <s:assert test="count(doc/p)=2">Root does not have two children 'p'.</s:assert>

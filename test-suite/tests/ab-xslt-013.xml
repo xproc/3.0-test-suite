@@ -6,6 +6,15 @@
       <t:title>AB-xslt-013</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2025-06-17</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Reworked test to produce a single result document.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2021-06-10</t:date>
             <t:author>
                <t:name>Achim Berndzen</t:name>
@@ -47,6 +56,7 @@
                </xsl:stylesheet>
             </p:with-input>
          </p:xslt>
+         <p:wrap-sequence wrapper="wrapper"/>
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
@@ -55,9 +65,10 @@
                 xmlns="http://www.w3.org/1999/xhtml">
          <s:pattern>
             <s:rule context="/">
-               <s:assert test="/a">The document root has no child element 'a'.</s:assert>
-               <s:assert test="/b">The document root has no child element 'b'.</s:assert>
-               <s:assert test="/c">The document root has no child element 'c'.</s:assert>
+               <s:assert test="/wrapper">The document element ins’t wrapper.</s:assert>
+               <s:assert test="/wrapper/a">The wrapper has no child element 'a'.</s:assert>
+               <s:assert test="/wrapper/b">The wrapper  has no child element 'b'.</s:assert>
+               <s:assert test="/wrapper/c">The wrapper has no child element 'c'.</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
