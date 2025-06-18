@@ -8,6 +8,15 @@
          <t:revision>
             <t:date>2025-06-17</t:date>
             <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Changed expected result: Element "wrapper" should one have one "result" child.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
+            <t:date>2025-06-17</t:date>
+            <t:author>
                <t:name>Norm Tovey-Walsh</t:name>
             </t:author>
             <t:description xmlns="http://www.w3.org/1999/xhtml">
@@ -58,7 +67,7 @@
          <s:pattern>
             <s:rule context="/">
                <s:assert test="/wrapper">The document root is not 'wrapper'.</s:assert>
-               <s:assert test="count(/wrapper/result) = 2">Wrong number of results.</s:assert>
+               <s:assert test="count(/wrapper/result) = 1">Wrong number of results.</s:assert>
                <s:assert test="empty(/wrapper/result[. = 'false'])"
                          >Test for required node identity fails.</s:assert>
             </s:rule>
