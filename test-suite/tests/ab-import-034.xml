@@ -14,7 +14,7 @@
       </t:revision-history>
    </t:info>
    <t:description xmlns="http://www.w3.org/1999/xhtml">
-      <p>Tests p:import: Testing re-entrant import does not raise a static error for shadowing static options (XS0088).</p>
+      <p>Tests p:import: Tests re-entrant import does not raise a static error for shadowing static options (XS0088).</p>
    </t:description>
    
    
