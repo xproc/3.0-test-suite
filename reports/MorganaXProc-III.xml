@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="XProc Test Suite"
-           tests="3256"
+           tests="3259"
            errors="0"
            failures="0"
            skipped="203"
-           timestamp="2025-07-13T11:32:41">
+           timestamp="2025-08-15T12:36:25">
    <properties>
       <property name="processor" value="MorganaXProc-IIIse"/>
-      <property name="version" value="1.6.12"/>
+      <property name="version" value="1.6.15"/>
       <property name="vendor" value="&lt;xml-project /&gt;"/>
       <property name="vendorURI" value="https://www.xml-project.com"/>
       <property name="xprocVersion" value="3.1"/>
@@ -1997,6 +1997,7 @@
    <testcase name="ab-rename-012.xml"/>
    <testcase name="ab-rename-013.xml"/>
    <testcase name="ab-rename-014.xml"/>
+   <testcase name="ab-rename-015.xml"/>
    <testcase name="ab-replace-001.xml"/>
    <testcase name="ab-replace-002.xml"/>
    <testcase name="ab-replace-003.xml"/>
@@ -3645,6 +3646,7 @@
    </testcase>
    <testcase name="nw-xslt-001.xml"/>
    <testcase name="nw-xslt-002.xml"/>
+   <testcase name="nw-xslt-003.xml"/>
    <testcase name="opt-drp.xml"/>
    <testcase name="p-count-001.xml"/>
    <testcase name="p-count-002.xml"/>
@@ -3672,6 +3674,7 @@
    <testcase name="try-catch-006.xml"/>
    <testcase name="try-catch-007.xml"/>
    <testcase name="try-catch-008.xml"/>
+   <testcase name="try-catch-009.xml"/>
    <testcase name="with-input-select-001.xml"/>
    <testcase name="with-input-select-002.xml"/>
    <testcase name="with-input-select-003.xml"/>
