@@ -1,0 +1,38 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+   xmlns:err="http://www.w3.org/ns/xproc-error"
+   expected="fail" code="err:XS0008">
+   <t:info>
+      <t:title>Message attribute 003 (AB)</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2025-08-25</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Added new tests for message attribute.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests @message on p:catch is not allowed.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"  xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result" />
+         
+         <p:identity>
+            <p:with-input><test/></p:with-input>
+         </p:identity>
+         
+         <p:try>
+            <p:error code="Q{{}}error"/>
+            <p:catch message="Message not allowed here!">
+               <p:identity/>
+            </p:catch>
+         </p:try>
+         
+      </p:declare-step>
+   </t:pipeline>   
+</t:test>
