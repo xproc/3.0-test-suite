@@ -1,0 +1,14 @@
+namespace a="http://relaxng.org/ns/compatibility/annotations/1.0"
+
+start = document
+
+document = element document {
+               [a:defaultValue="draft"]
+               attribute status { text }?,
+               para+
+}
+
+para = element para {
+           attribute xml:id { text }?,
+           text
+       }
