@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>nw-empty-input-001</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2025-12-05</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>This test demonstrates and edge case. The user-defined step accepts
+      zero or more documents on the source port, but has no default value
+      called in a loop.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step version="3.0"
+                      xmlns:ex="http://example.com/ns/steps"
+                      xmlns:p="http://www.w3.org/ns/xproc">
+         <p:output port="result"/>
+
+         <p:declare-step type="ex:accepts-nothing">
+           <p:input port="source" primary="true" sequence="true"/>
+           <p:input port="stylesheet"/>
+           <p:output port="result"/>
+
+           <p:xslt template-name="main">
+             <p:with-input port="stylesheet" pipe="stylesheet"/>
+           </p:xslt>
+         </p:declare-step>
+
+         <p:for-each>
+           <p:with-input>
+             <p:inline><doc1/></p:inline>
+             <p:inline><doc2/></p:inline>
+           </p:with-input>
+
+           <ex:accepts-nothing>
+             <p:with-input port="source">
+               <p:empty/>
+             </p:with-input>
+             <p:with-input port="stylesheet">
+               <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                               version="3.0">
+                 <xsl:template name="main">
+                   <doc/>
+                 </xsl:template>
+               </xsl:stylesheet>
+             </p:with-input>
+           </ex:accepts-nothing>
+         </p:for-each>
+
+         <p:wrap-sequence wrapper="wrapper"/>
+
+      </p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="wrapper">The root element is not 'wrapper'.</s:assert>
+               <s:assert test="count(wrapper/doc) = 2">Wrapper doesn’t contain two documents.</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
