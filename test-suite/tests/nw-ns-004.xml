@@ -5,6 +5,15 @@
       <t:title>nw-ns-004</t:title>
       <t:revision-history>
          <t:revision>
+            <t:date>2025-12-23</t:date>
+            <t:author>
+               <t:name>Achim Berndzen</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Made relative URI in namespace declaration absolute.</p>
+            </t:description>
+         </t:revision>
+         <t:revision>
             <t:date>2025-12-22</t:date>
             <t:author>
                <t:name>Norm Tovey-Walsh</t:name>
@@ -26,13 +35,13 @@
 
          <p:declare-step type="my:step">
            <p:output port="result"/>
-           <p:option xmlns:my="my-ns" name="my:opt1" select="'fail'"/>
-           <p:identity xmlns:m="my-ns">
+           <p:option xmlns:my="http://my-ns" name="my:opt1" select="'fail'"/>
+           <p:identity xmlns:m="http://my-ns">
              <p:with-input><result>{$m:opt1}</result></p:with-input>
            </p:identity>
          </p:declare-step>
          
-         <my:step xmlns:m="my-ns" m:opt1="success"/>
+         <my:step xmlns:m="http://my-ns" m:opt1="success"/>
       </p:declare-step>
    </t:pipeline>
    <t:schematron>
