@@ -1,0 +1,59 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        expected="pass">
+   <t:info>
+      <t:title>Collection 004</t:title>
+        <t:revision-history>
+          <t:revision>
+            <t:date>2025-12-31</t:date>
+            <t:author initials="ndw">
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit.</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests that a <code>p:with-option</code> can be passed a collection.</p>
+   </t:description>
+   <t:pipeline>
+      <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" 
+                      xmlns:ex="http://example.com/ns"
+                      exclude-inline-prefixes="ex"
+                      version="3.1">
+        <p:output port="result"/>
+
+        <p:declare-step type="ex:option-size">
+          <p:output port="result"/>
+          <p:option name="documents"/>
+          <p:identity>
+            <p:with-input>
+              <p:inline><size>{count($documents)}</size></p:inline>
+            </p:with-input>
+          </p:identity>
+        </p:declare-step>
+
+  <ex:option-size>
+    <p:with-option name="documents" collection="true" select="collection()">
+      <p:inline><doc1/></p:inline>
+      <p:inline><doc2/></p:inline>
+    </p:with-option>
+  </ex:option-size>
+      </p:declare-step>
+   </t:pipeline>
+
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="size=2">The size is wrong</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+
+</t:test>
+
