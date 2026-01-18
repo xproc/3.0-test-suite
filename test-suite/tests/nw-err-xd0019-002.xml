@@ -1,0 +1,34 @@
+<t:test xmlns:t="http://xproc.org/ns/testsuite/3.0"
+        xmlns:err="http://www.w3.org/ns/xproc-error"
+        expected="fail" code="err:XD0019">
+<t:info>
+  <t:title>Test nw-err-xd0019-002</t:title>
+  <t:revision-history>
+    <t:revision>
+      <t:date>2026-01-18</t:date>
+      <t:author>
+        <t:name>Norm Tovey-Walsh</t:name>
+      </t:author>
+      <t:description xmlns="http://www.w3.org/1999/xhtml">
+        <p>Initial commit</p>
+      </t:description>
+    </t:revision>
+  </t:revision-history>
+</t:info>
+<t:description xmlns="http://www.w3.org/1999/xhtml">
+  <p>Tests that <code>err:XD0019</code> is raised if a user-defined
+  option has enumerated values and a provided value isn’t one of the
+  enumerated values. (Without a sequence type this time.)</p>
+</t:description>
+
+<t:pipeline>
+  <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.0">
+    <p:output port="result" />
+    <p:option name="choice" values="('no', 'yes')" select="'no'"/>
+    <p:identity name="step">
+      <p:with-input><doc choice="{$choice}"/></p:with-input>
+    </p:identity>
+  </p:declare-step>
+</t:pipeline>
+<t:option name="choice" select="'maybe'"/>
+</t:test>
