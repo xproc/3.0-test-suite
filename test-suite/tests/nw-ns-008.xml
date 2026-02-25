@@ -30,7 +30,7 @@
         <p:error>
             <!-- Note: The with-option element re-binds the 'p' prefix
             to a namespace different from the standard XProc one. -->
-            <p-alias:with-option name="code" select="'p:my-error-code'" xmlns:p="my-ns"
+            <p-alias:with-option name="code" select="'p:my-error-code'" xmlns:p="http://my-ns"
                 xmlns:p-alias="http://www.w3.org/ns/xproc"/>
             <p:with-input>
                 <error-document>An error occurred.</error-document>
@@ -57,7 +57,7 @@
          <s:pattern>
             <s:rule context="c:error">
                <s:assert test="namespace-uri-from-QName(resolve-QName(@code, .))
-                               = 'my-ns'">Error code is in wrong namespace</s:assert>
+                               = 'http://my-ns'">Error code is in wrong namespace</s:assert>
             </s:rule>
          </s:pattern>
       </s:schema>
