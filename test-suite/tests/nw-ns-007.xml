@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="fail" code="xyz:my-error-code"
+        xmlns:xyz="http://example.com/p"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>nw-ns-007</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2026-02-25</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests for a non-XProc binding for p:.
+<a href="https://codeberg.org/xmlcalabash/xmlcalabash3/issues/561">h/t Amanda Galtman</a>.
+</p>
+   </t:description>
+   <t:pipeline>
+<abc:declare-step xmlns:abc="http://www.w3.org/ns/xproc" version="3.1">
+    <!-- Note: The error element binds the 'p' prefix to
+        a namespace different from the standard XProc one. -->
+    <abc:error xmlns:p="http://example.com/p" code="p:my-error-code">
+        <abc:with-input>
+            <error-document>An error occurred.</error-document>
+        </abc:with-input>
+    </abc:error>
+</abc:declare-step>
+   </t:pipeline>
+</t:test>

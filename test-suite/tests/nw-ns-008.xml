@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:test expected="pass"
+        xmlns:t="http://xproc.org/ns/testsuite/3.0">
+   <t:info>
+      <t:title>nw-ns-008</t:title>
+      <t:revision-history>
+         <t:revision>
+            <t:date>2026-02-25</t:date>
+            <t:author>
+               <t:name>Norm Tovey-Walsh</t:name>
+            </t:author>
+            <t:description xmlns="http://www.w3.org/1999/xhtml">
+               <p>Initial commit</p>
+            </t:description>
+         </t:revision>
+      </t:revision-history>
+   </t:info>
+   <t:description xmlns="http://www.w3.org/1999/xhtml">
+      <p>Tests for a non-XProc binding for p:.
+<a href="https://codeberg.org/xmlcalabash/xmlcalabash3/issues/561">h/t Amanda Galtman</a>.
+</p>
+   </t:description>
+   <t:pipeline>
+<p:declare-step xmlns:p="http://www.w3.org/ns/xproc" version="3.1">
+    <p:input port="source">
+        <p:inline>1</p:inline>
+    </p:input>
+    <p:output port="result"/>
+    <p:try>
+        <p:error>
+            <!-- Note: The with-option element re-binds the 'p' prefix
+            to a namespace different from the standard XProc one. -->
+            <p-alias:with-option name="code" select="'p:my-error-code'" xmlns:p="my-ns"
+                xmlns:p-alias="http://www.w3.org/ns/xproc"/>
+            <p:with-input>
+                <error-document>An error occurred.</error-document>
+            </p:with-input>
+        </p:error>
+        <p:catch>
+            <p:identity/>
+        </p:catch>
+    </p:try>
+</p:declare-step>
+   </t:pipeline>
+   <t:schematron>
+      <s:schema queryBinding="xslt2"
+                xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                xmlns="http://www.w3.org/1999/xhtml">
+        <s:ns prefix="c" uri="http://www.w3.org/ns/xproc-step"/>
+        <s:ns prefix="err" uri="my-ns"/>
+         <s:pattern>
+            <s:rule context="/">
+               <s:assert test="c:errors">Not an error document</s:assert>
+               <s:assert test="count(c:errors/c:error) = 1">Incorrect number of errors reported</s:assert>
+            </s:rule>
+         </s:pattern>
+         <s:pattern>
+            <s:rule context="c:error">
+               <s:assert test="namespace-uri-from-QName(resolve-QName(@code, .))
+                               = 'my-ns'">Error code is in wrong namespace</s:assert>
+            </s:rule>
+         </s:pattern>
+      </s:schema>
+   </t:schematron>
+</t:test>
